@@ -1,0 +1,25 @@
+{
+  "checked_at_utc": "2026-10-15T12:27:21.008560+00:00",
+  "candidate": "TRAME-P1D-candidate-0.2",
+  "prior_revision_preserved_against_original_archive": {
+    "protocol_candidate.json": "0a2c58fa931f997f8b2098fd9646d706293b3af38c885da45d1c69a91e7cdb8d",
+    "notes_p1d_candidat_20261015.md": "a7e01230fe86fb06204440575768870ffba7938da240815ad861feae7a2bf598"
+  },
+  "published_archive_21_unchanged_sha256": "74b0e98d47966ae176c736a873f32cd90ad231b6d8d5aba50cef6d1ccc10444f",
+  "published_pdfs_unchanged_against_archive": true,
+  "poc0_frozen_hashes_verified": true,
+  "protected_months_absent": true,
+  "ecb_source_sha256_verified": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de",
+  "worldbank_source_sha256_verified": "ea1c350827878ea3bbe30e3cda16a13fd3bd5b409b8458940dc94a36b5a33154",
+  "arithmetic_report_verified": true,
+  "notes_and_index_local_links_verified": true,
+  "new_market_price_measurements": false,
+  "predictor_implemented": false,
+  "predictor_trained": false,
+  "notes_word_counts": {
+    "notes_p1d_candidat_20261015.md": 2355,
+    "notes_ancres_causalite_dpcm_20261015.md": 1322,
+    "notes_alphabet_information_egale_20261015.md": 3046,
+    "notes_temoins_p1d_20261015.md": 1229
+  }
+}

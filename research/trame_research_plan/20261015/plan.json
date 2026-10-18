@@ -1,0 +1,64 @@
+{
+  "id": "TRAME-research-plan-20261015",
+  "requested_by_user": true,
+  "scope": "scientific conception; no model development/training yet",
+  "steps": [
+    {
+      "id": 1,
+      "name": "close representation comparison",
+      "status": "started",
+      "deliverable": "P1-D candidate 0.4"
+    },
+    {
+      "id": 2,
+      "name": "causal generative price-code model",
+      "status": "started",
+      "deliverable": "P1-B0 candidate 0.1"
+    },
+    {
+      "id": 3,
+      "name": "qualify real multi-market corpus",
+      "status": "planned"
+    },
+    {
+      "id": 4,
+      "name": "independent evaluation and registration",
+      "status": "planned"
+    },
+    {
+      "id": 5,
+      "name": "implement and run POC in future development phase",
+      "status": "not_started"
+    },
+    {
+      "id": 6,
+      "name": "scaling and reliability",
+      "status": "planned"
+    }
+  ],
+  "personas": [
+    "Lea information theory",
+    "Malik GPT",
+    "Nadia statistics",
+    "Camille numerical analysis",
+    "Ines data",
+    "Sara reproducibility",
+    "Elodie project reader"
+  ],
+  "personas_simulated": true,
+  "independent_review": false,
+  "agent_status": "existing auxiliary agents errored on service usage limit, confirmed via list_agents",
+  "reasoning_cycles": [
+    10,
+    11
+  ],
+  "market_data_downloaded_this_iteration": false,
+  "new_predictive_results": false,
+  "artifacts": [
+    "11_plan_recherche_et_personas.md",
+    "12_controles_numeriques_et_generation_causale.md",
+    "protocol_candidate.json",
+    "p1b0_candidate.json",
+    "design_checks.json"
+  ]
+}

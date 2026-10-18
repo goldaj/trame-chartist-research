@@ -1,0 +1,139 @@
+{
+  "computed_at_utc": "2026-10-16T03:00:34.632595+00:00",
+  "script_sha256": "dff6c663d33fb28db65e1e9b82427d3d572494f6a76008c46462606e857f721c",
+  "candidate_sha256": "eba95c653977ba1ec39d3dba83cd1d6a93e55deacab13650c532285a1171456b",
+  "runtime_python": "3.12.14",
+  "market_data_read": false,
+  "model_implemented": false,
+  "normalizer_or_sampler_implemented": false,
+  "rational_transitions_checked": 3609,
+  "allocated_module_counts": [
+    {
+      "L": 4,
+      "d": 128,
+      "modules": {
+        "qkv": 198144,
+        "attention_out": 66048,
+        "mlp_up": 264192,
+        "mlp_down": 262656,
+        "block_layernorms": 2048,
+        "numeric_affine": 256,
+        "asset_embeddings": 768,
+        "metadata_affine": 640,
+        "final_layernorm": 256,
+        "type_embeddings": 384
+      },
+      "total": {
+        "BASE": 795650,
+        "FLAT": 1324034,
+        "HIER": 862472
+      }
+    },
+    {
+      "L": 6,
+      "d": 256,
+      "modules": {
+        "qkv": 1184256,
+        "attention_out": 394752,
+        "mlp_up": 1579008,
+        "mlp_down": 1574400,
+        "block_layernorms": 6144,
+        "numeric_affine": 512,
+        "asset_embeddings": 1536,
+        "metadata_affine": 1280,
+        "final_layernorm": 512,
+        "type_embeddings": 768
+      },
+      "total": {
+        "BASE": 4743682,
+        "FLAT": 5796354,
+        "HIER": 4876808
+      }
+    },
+    {
+      "L": 8,
+      "d": 512,
+      "modules": {
+        "qkv": 6303744,
+        "attention_out": 2101248,
+        "mlp_up": 8404992,
+        "mlp_down": 8392704,
+        "block_layernorms": 16384,
+        "numeric_affine": 1024,
+        "asset_embeddings": 3072,
+        "metadata_affine": 2560,
+        "final_layernorm": 1024,
+        "type_embeddings": 1536
+      },
+      "total": {
+        "BASE": 25229314,
+        "FLAT": 27330562,
+        "HIER": 25495048
+      }
+    }
+  ],
+  "cdf_illustrations": [
+    {
+      "standard_normal_interval": [
+        0,
+        1
+      ],
+      "naive_cdf_difference": 0.3413447460685428,
+      "erfc_difference": 0.3413447460685429,
+      "log_mass_via_erfc": -1.0748623268620714,
+      "scope": "finite selected inputs only, no general stability or derivative guarantee"
+    },
+    {
+      "standard_normal_interval": [
+        8,
+        9
+      ],
+      "naive_cdf_difference": 6.661338147750939e-16,
+      "erfc_difference": 6.219831985865866e-16,
+      "log_mass_via_erfc": -35.013618593437144,
+      "scope": "finite selected inputs only, no general stability or derivative guarantee"
+    },
+    {
+      "standard_normal_interval": [
+        10,
+        11
+      ],
+      "naive_cdf_difference": 0.0,
+      "erfc_difference": 7.619661958203145e-24,
+      "log_mass_via_erfc": -53.231310225583115,
+      "scope": "finite selected inputs only, no general stability or derivative guarantee"
+    },
+    {
+      "standard_normal_interval": [
+        28,
+        29
+      ],
+      "naive_cdf_difference": 0.0,
+      "erfc_difference": 8.123869469656128e-173,
+      "log_mass_via_erfc": -396.25241451163146,
+      "scope": "finite selected inputs only, no general stability or derivative guarantee"
+    }
+  ],
+  "analytic_tail_bound_numerical_values": [
+    {
+      "M": 256,
+      "S": 64,
+      "A": 4,
+      "outside_core_probability_upper_bound": 9.084325205794334e-171,
+      "log10_upper_bound": -170.04170732705535,
+      "reason": "outside weight=1 and Z>=exp(-A); each Gaussian tail maximized separately, so a conservative common bound"
+    },
+    {
+      "M": 256,
+      "S": 256,
+      "A": 4,
+      "outside_core_probability_upper_bound": 1.397641125292058e-10,
+      "log10_upper_bound": -9.854604328814597,
+      "reason": "outside weight=1 and Z>=exp(-A); each Gaussian tail maximized separately, so a conservative common bound"
+    }
+  ],
+  "limitations": [
+    "math.erfc returns zero for sufficiently large arguments; examples are not a log-CDF implementation",
+    "No gradients, Monte Carlo, normalization stress test, training, forecasting or price scoring tested"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "TRAME-P1D-preflight-01-followup-scale",
+  "status": "Exploratory follow-up declared after reading the original descriptive audit, not an independent confirmation",
+  "motivation_already_observed": "195 escape exposures in 40 CHF development contexts, no train escapes, development CHF minimum k -3708",
+  "fixed_selection": "Only CHF, the existing 2010-2014 development cohort, unchanged 256-price contexts and quantizer",
+  "outputs": [
+    "First and last origin with an escape, and exact origin/date/price/scale of minimum normalized historical coordinate",
+    "Independent scalar calculation of the 64-return population standard deviation and normalization at that minimum",
+    "Population standard deviation of 255 increments in that same context, for interpretation only"
+  ],
+  "not_allowed": [
+    "Changing normalization or quantizer based on this diagnostic",
+    "Fitting or evaluating a predictor",
+    "Claiming the selected point is an independent test or a discovered market prediction pattern"
+  ],
+  "existing_source_sha256": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de"
+}

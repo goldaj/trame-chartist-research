@@ -1,0 +1,1724 @@
+{
+  "started_from": {
+    "protocol_sha256": "8d57001eb26df3a2258ba424abafcafbb5ef9cfdd42577a40715f30a5bb14e07",
+    "analysis_sha256": "a89861c3cba24105bc9811cd01bd7ba5057dd93b63d49e5ae99d2c152e3b830e",
+    "frozen_at_utc": "2026-10-14T09:37:59.694771+00:00",
+    "amends": {
+      "protocol_sha256": "1a7b12399759c5e9c4ecfa2db0743bbf9ec50d292a42c84b14c550239cba217c",
+      "analysis_sha256": "094e0c2a669766b4baf609f649270b16f4857eb7ca84afff2c3bff3dea89bae3",
+      "frozen_at_utc": "2026-10-14T07:54:43.274719+00:00"
+    },
+    "reason": "Acquisition stopped on early-close candle; no representation measurements available; scientific scope unchanged."
+  },
+  "generated_at_utc": "2026-10-14T09:38:41.670216+00:00",
+  "archives": [
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-01.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-01.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T07:54:45.253982+00:00",
+      "sha256": "a2fa12bec12d942e58dbc7fb223973bd2173dfccf8e09edc501bda40b3c3638e",
+      "bytes": 45988,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:33:59 GMT",
+      "etag": "\"f8b15a06f4de06c473cbea4e2c51896e\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-02.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-02.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T07:54:46.125789+00:00",
+      "sha256": "8cd20f5058dc7585cfa874a3ab0e5fd0096f369c182d8fda80dc16495050e018",
+      "bytes": 41575,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:33:59 GMT",
+      "etag": "\"a196fc5d292df6534e9913066fe82f3f\"",
+      "source_observations": 671,
+      "observations": 670,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-02-11T03:00:00+00:00",
+          "duration_ms": 2454774
+        }
+      ],
+      "calendar_slots": 672,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-02-11T04:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-03.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-03.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T07:54:46.422662+00:00",
+      "sha256": "748783e9715835dd334fbc0cbbff0518962ebbcbe0430acb65f2f506193bad2d",
+      "bytes": 45712,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:33:59 GMT",
+      "etag": "\"6e84d1508b263f5d0483b44c60d61982\"",
+      "source_observations": 743,
+      "observations": 743,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-03-06T02:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-04.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-04.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T07:54:47.454932+00:00",
+      "sha256": "e5a33803814e6771c4c85e8f2e28e90e46d40f14ca3180a8c10c305cf07fab74",
+      "bytes": 43918,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:33:59 GMT",
+      "etag": "\"802a8f19adc87176912c2269a9aa3269\"",
+      "source_observations": 715,
+      "observations": 714,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-04-25T04:00:00+00:00",
+          "duration_ms": 58147
+        }
+      ],
+      "calendar_slots": 720,
+      "missing_hours": 5,
+      "missing_open_times_utc": [
+        "2021-04-20T02:00:00+00:00",
+        "2021-04-20T03:00:00+00:00",
+        "2021-04-25T05:00:00+00:00",
+        "2021-04-25T06:00:00+00:00",
+        "2021-04-25T07:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-05.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-05.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:03.228758+00:00",
+      "sha256": "728503d417904afff17b403e66f74c18ed0067d3f8e4215130c8a97180c9fccc",
+      "bytes": 46221,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:33:59 GMT",
+      "etag": "\"5ad5a77a05be471da18891f07ba42d81\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-06.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-06.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:03.673513+00:00",
+      "sha256": "9ea9585cf2c938044d2d1b613f451ff9482bd7d2a38da2c9d22cf0c9f00f65ac",
+      "bytes": 44232,
+      "status": 200,
+      "last_modified": "Thu, 01 Jul 2021 06:58:12 GMT",
+      "etag": "\"46332530d1c8806c72ffe21da7e63b01\"",
+      "source_observations": 720,
+      "observations": 720,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-07",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-07.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-07.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:04.244459+00:00",
+      "sha256": "993a88728e31b4c4e6f3b28442ab251de5ee434fe06865e1b57063a4f91fc8d9",
+      "bytes": 45217,
+      "status": 200,
+      "last_modified": "Mon, 02 Aug 2021 05:04:43 GMT",
+      "etag": "\"b9699a910f65af3c440873ec829f681b\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-08",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-08.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-08.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:04.727825+00:00",
+      "sha256": "5cadb462255761842326a2c4b5fe2a91c8a2135c3ba6dd5f0969877f0722f4be",
+      "bytes": 44883,
+      "status": 200,
+      "last_modified": "Sat, 04 Sep 2021 12:32:29 GMT",
+      "etag": "\"5efdc571ec14b44510ad5813a3468d6b\"",
+      "source_observations": 740,
+      "observations": 739,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-08-13T01:00:00+00:00",
+          "duration_ms": 3599001
+        }
+      ],
+      "calendar_slots": 744,
+      "missing_hours": 4,
+      "missing_open_times_utc": [
+        "2021-08-13T02:00:00+00:00",
+        "2021-08-13T03:00:00+00:00",
+        "2021-08-13T04:00:00+00:00",
+        "2021-08-13T05:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-09",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-09.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-09.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:05.154159+00:00",
+      "sha256": "0d344f8ab39d910c148b89fada91256afcb3e8b20eb812ebc158ac8ac527ea07",
+      "bytes": 42473,
+      "status": 200,
+      "last_modified": "Fri, 01 Oct 2021 03:51:48 GMT",
+      "etag": "\"f294103c5ec6a200855bc88d389a2341\"",
+      "source_observations": 718,
+      "observations": 718,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 2,
+      "missing_open_times_utc": [
+        "2021-09-29T07:00:00+00:00",
+        "2021-09-29T08:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BTCUSDT",
+      "month": "2021-10",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-10.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2021-10.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:05.646271+00:00",
+      "sha256": "8065fe2ddd9992398b49fb76e83a60e51392e1ecd4b46c438c075d3e5f6e2291",
+      "bytes": 44164,
+      "status": 200,
+      "last_modified": "Tue, 16 Nov 2021 02:05:18 GMT",
+      "etag": "\"d1669fe46e3e60b18fac64820afa8907\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-01.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-01.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:05.738375+00:00",
+      "sha256": "01d6bb8175fb847a256ca1cc14dce06194a86c740d7edc951a5d2835aba9b577",
+      "bytes": 43823,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "etag": "\"2ee92ebac18e2d7efd926ea81a53b39e\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-02.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-02.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:06.233623+00:00",
+      "sha256": "f2e871ec862f36045bfa06a05210832d6b772a101a62b18bc7acddf906083b44",
+      "bytes": 39318,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "etag": "\"e887109b9303c929dc5db3be8f4e9143\"",
+      "source_observations": 671,
+      "observations": 670,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-02-11T03:00:00+00:00",
+          "duration_ms": 2455830
+        }
+      ],
+      "calendar_slots": 672,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-02-11T04:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-03.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-03.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:06.363256+00:00",
+      "sha256": "64d15bc69f1788ccfa775cea47bf2f614a2ccb4eccf66257f512c8cd99d497ad",
+      "bytes": 43093,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "etag": "\"3120971f4c7e331a4b62d5c7feeb8b75\"",
+      "source_observations": 743,
+      "observations": 743,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-03-06T02:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-04.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-04.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:07.026833+00:00",
+      "sha256": "299b928009158743a92860a66c75ba898243ecbdfa8ef9b346c0a7fd553bcbff",
+      "bytes": 41907,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:35:01 GMT",
+      "etag": "\"98775ea59545e394687f0736f632fd02\"",
+      "source_observations": 715,
+      "observations": 714,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-04-25T04:00:00+00:00",
+          "duration_ms": 59272
+        }
+      ],
+      "calendar_slots": 720,
+      "missing_hours": 5,
+      "missing_open_times_utc": [
+        "2021-04-20T02:00:00+00:00",
+        "2021-04-20T03:00:00+00:00",
+        "2021-04-25T05:00:00+00:00",
+        "2021-04-25T06:00:00+00:00",
+        "2021-04-25T07:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-05.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-05.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:06.953544+00:00",
+      "sha256": "56707e7dbceacc194a6ecd31ea2b2a75a5c5f428182e63055217188c7e47c89d",
+      "bytes": 44688,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 11:35:01 GMT",
+      "etag": "\"e4a6d24df742a2da61929cefb8db9168\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-06.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-06.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:08.226868+00:00",
+      "sha256": "e5244f5f095543d47d24a617c67292cf5daf95cc403407f5fff2fbd394580512",
+      "bytes": 42407,
+      "status": 200,
+      "last_modified": "Thu, 01 Jul 2021 06:58:14 GMT",
+      "etag": "\"a000d3d00f642068b6a9626a73eeebec\"",
+      "source_observations": 720,
+      "observations": 720,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-07",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-07.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-07.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:07.828454+00:00",
+      "sha256": "7048eb9eec2a091a3550f16870b93165eb21885ba6e217dac28682aebf248241",
+      "bytes": 43318,
+      "status": 200,
+      "last_modified": "Mon, 02 Aug 2021 05:04:45 GMT",
+      "etag": "\"222b7d1616d7962f6d57e591c59445ab\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-08",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-08.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-08.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:09.078031+00:00",
+      "sha256": "9e390848fe76625e72b8f4eac86d405ed33c79ca9d79d9af14266c54d9d215af",
+      "bytes": 43105,
+      "status": 200,
+      "last_modified": "Sat, 04 Sep 2021 12:32:31 GMT",
+      "etag": "\"163b75bedc32e8a4b1873bffffa35d76\"",
+      "source_observations": 740,
+      "observations": 739,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-08-13T01:00:00+00:00",
+          "duration_ms": 3599001
+        }
+      ],
+      "calendar_slots": 744,
+      "missing_hours": 4,
+      "missing_open_times_utc": [
+        "2021-08-13T02:00:00+00:00",
+        "2021-08-13T03:00:00+00:00",
+        "2021-08-13T04:00:00+00:00",
+        "2021-08-13T05:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-09",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-09.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-09.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:09.876909+00:00",
+      "sha256": "c10a61248a5c92280e35beadcfdf33220fdc0561ab1973893a4fe5a3335d3b78",
+      "bytes": 40803,
+      "status": 200,
+      "last_modified": "Fri, 01 Oct 2021 03:51:51 GMT",
+      "etag": "\"0caa9fea7757c5a66e10049751d13b08\"",
+      "source_observations": 718,
+      "observations": 718,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 2,
+      "missing_open_times_utc": [
+        "2021-09-29T07:00:00+00:00",
+        "2021-09-29T08:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ETHUSDT",
+      "month": "2021-10",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-10.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-10.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:10.327159+00:00",
+      "sha256": "332cdaac0de88dd2452c0ed2561f86e99ebba6f89d9db69b35aa9f52acafe805",
+      "bytes": 42076,
+      "status": 200,
+      "last_modified": "Tue, 16 Nov 2021 02:05:22 GMT",
+      "etag": "\"d22763b2a83f119860d67d5e2726fbfe\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-01.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-01.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:11.566692+00:00",
+      "sha256": "5cdf6cb04631af89dcf108fb7cb8f5c0a5d23ee6c7a5ab9fbd3db3086637e694",
+      "bytes": 41325,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 12:45:02 GMT",
+      "etag": "\"30cb4a49f43effa8b817c26582629523\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-02.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-02.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:10.902707+00:00",
+      "sha256": "43b7f41f3f21631ff10bd8773dc15b51fad7e34e71781abe44e293d783be2215",
+      "bytes": 39636,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 12:45:02 GMT",
+      "etag": "\"62e265b3b7cb3126d7e82703e359420a\"",
+      "source_observations": 671,
+      "observations": 670,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-02-11T03:00:00+00:00",
+          "duration_ms": 2454578
+        }
+      ],
+      "calendar_slots": 672,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-02-11T04:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-03.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-03.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:12.133954+00:00",
+      "sha256": "3b91972b1b96f3744ac6cd176ce805a2205ca0e04695ca86c0cda5d2adcb600a",
+      "bytes": 43542,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 12:45:02 GMT",
+      "etag": "\"d6572d8526407d402b9caf1006ad8713\"",
+      "source_observations": 743,
+      "observations": 743,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-03-06T02:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-04.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-04.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:12.362044+00:00",
+      "sha256": "7a7c1d9b77747355826fcc8bfafa02881baacda993dd6aa552229697b7809864",
+      "bytes": 42489,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 12:45:02 GMT",
+      "etag": "\"dd0a8343be6ffa23be79f1f65a562b51\"",
+      "source_observations": 715,
+      "observations": 714,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-04-25T04:00:00+00:00",
+          "duration_ms": 57982
+        }
+      ],
+      "calendar_slots": 720,
+      "missing_hours": 5,
+      "missing_open_times_utc": [
+        "2021-04-20T02:00:00+00:00",
+        "2021-04-20T03:00:00+00:00",
+        "2021-04-25T05:00:00+00:00",
+        "2021-04-25T06:00:00+00:00",
+        "2021-04-25T07:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-05.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-05.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:13.378025+00:00",
+      "sha256": "487847e1fb70123743a58793305629d327d6cd4515e059d40e4017a9e120fe01",
+      "bytes": 41887,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 12:45:02 GMT",
+      "etag": "\"2fa978f3da220a6d79eb9b3b91b04bf4\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-06.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-06.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:13.403276+00:00",
+      "sha256": "6778ed4eacf42e5c8fe3ae44cfbc932fff6c690db59cfa93b096010628441f99",
+      "bytes": 39809,
+      "status": 200,
+      "last_modified": "Thu, 01 Jul 2021 07:01:02 GMT",
+      "etag": "\"1ed9d710310bb9d90c740f05251903b5\"",
+      "source_observations": 720,
+      "observations": 720,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-07",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-07.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-07.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:14.619150+00:00",
+      "sha256": "ca4060e5f13413a1b861483641d4dd9d3fe81c7a612caba21b565b4e20346934",
+      "bytes": 40166,
+      "status": 200,
+      "last_modified": "Mon, 02 Aug 2021 05:06:28 GMT",
+      "etag": "\"dc26d2f116b586553a0c7b0a3198a261\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-08",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-08.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-08.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:15.083645+00:00",
+      "sha256": "40c898781fa5eb29fa76b4fd6950a119fdf743c2305b99d2727e96d8730c52a5",
+      "bytes": 39664,
+      "status": 200,
+      "last_modified": "Sat, 04 Sep 2021 12:34:15 GMT",
+      "etag": "\"ff1f3ec6924e30d601792e432ce9b661\"",
+      "source_observations": 740,
+      "observations": 739,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-08-13T01:00:00+00:00",
+          "duration_ms": 3599001
+        }
+      ],
+      "calendar_slots": 744,
+      "missing_hours": 4,
+      "missing_open_times_utc": [
+        "2021-08-13T02:00:00+00:00",
+        "2021-08-13T03:00:00+00:00",
+        "2021-08-13T04:00:00+00:00",
+        "2021-08-13T05:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-09",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-09.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-09.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:15.614321+00:00",
+      "sha256": "2aaf3c5358b46ef7d59d7013fd3dacf2a9ecf27037929f061611c028d205abe1",
+      "bytes": 35105,
+      "status": 200,
+      "last_modified": "Fri, 01 Oct 2021 03:54:29 GMT",
+      "etag": "\"acd49a2a4cc4e922ff95b368311cadcb\"",
+      "source_observations": 718,
+      "observations": 718,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 2,
+      "missing_open_times_utc": [
+        "2021-09-29T07:00:00+00:00",
+        "2021-09-29T08:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "BNBUSDT",
+      "month": "2021-10",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-10.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-10.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:15.673683+00:00",
+      "sha256": "dc2acb054fdcea05d7c8cb4511376b20954d034f6ddfd4d5cd07cb405886c082",
+      "bytes": 36370,
+      "status": 200,
+      "last_modified": "Tue, 16 Nov 2021 02:08:53 GMT",
+      "etag": "\"88393f672272ac40249d32c0d7df3649\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-01.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-01.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:16.860381+00:00",
+      "sha256": "8ba6a868956a0b55f5fbc92203729d3e4553e76585bad441332d8e10ed7abf64",
+      "bytes": 39876,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:00:10 GMT",
+      "etag": "\"68aa1f5efeb62390d1c3620bdac85d5b\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-02.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-02.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:16.253186+00:00",
+      "sha256": "7286c0f1b6f92242aba1efd80eec2603214bb117966d071f094e38359177c2d4",
+      "bytes": 37304,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:00:10 GMT",
+      "etag": "\"5cef6bb094dcf19ca0f92bccd697cd4c\"",
+      "source_observations": 671,
+      "observations": 670,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-02-11T03:00:00+00:00",
+          "duration_ms": 2453903
+        }
+      ],
+      "calendar_slots": 672,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-02-11T04:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-03.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-03.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:16.843767+00:00",
+      "sha256": "84b6f60b57a2b657d6c3f50a5c01853c86a438a90710b65b81a79699380d5228",
+      "bytes": 40472,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:00:10 GMT",
+      "etag": "\"abcd7d388f4455ba6a21cf374e9852db\"",
+      "source_observations": 743,
+      "observations": 743,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-03-06T02:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-04.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-04.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:17.441330+00:00",
+      "sha256": "0e03b241a778acd66c49d249f72fe70eb1dd23a36f6ac5249b458a6a765ba699",
+      "bytes": 38946,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:00:10 GMT",
+      "etag": "\"cd90866b4d0c53063615c3816d77e385\"",
+      "source_observations": 715,
+      "observations": 714,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-04-25T04:00:00+00:00",
+          "duration_ms": 57225
+        }
+      ],
+      "calendar_slots": 720,
+      "missing_hours": 5,
+      "missing_open_times_utc": [
+        "2021-04-20T02:00:00+00:00",
+        "2021-04-20T03:00:00+00:00",
+        "2021-04-25T05:00:00+00:00",
+        "2021-04-25T06:00:00+00:00",
+        "2021-04-25T07:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-05.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-05.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:17.503616+00:00",
+      "sha256": "b822b4405248efc04edb922d7fac1906ac2af489015106b699ab03e7d7c7d41f",
+      "bytes": 41173,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:00:10 GMT",
+      "etag": "\"d830d016f680727ad43046619201db7b\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-06.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-06.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:19.091777+00:00",
+      "sha256": "0ea44e0598d9dbfef51f090e9f012069fb1d71e452872f19856c9b7b22d1429f",
+      "bytes": 38785,
+      "status": 200,
+      "last_modified": "Thu, 01 Jul 2021 07:05:46 GMT",
+      "etag": "\"91adfc57a389a3f4d35b66c1a6ee0d58\"",
+      "source_observations": 720,
+      "observations": 720,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-07",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-07.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-07.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:18.299627+00:00",
+      "sha256": "7fea41e63f46c95138660731665a57b16a95f0e6c349b727f67f0fc40efbcdba",
+      "bytes": 39139,
+      "status": 200,
+      "last_modified": "Mon, 02 Aug 2021 05:09:21 GMT",
+      "etag": "\"6adee27b3d5ca809051da2cdcc8923a2\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-08",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-08.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-08.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:19.263554+00:00",
+      "sha256": "6f058df86fcf20e2ba68a404490cdddf92a1e3d0cadf274a6fcec4990bf1122a",
+      "bytes": 39559,
+      "status": 200,
+      "last_modified": "Sat, 04 Sep 2021 12:37:08 GMT",
+      "etag": "\"88bc480fa56525046e67b8162864d317\"",
+      "source_observations": 740,
+      "observations": 739,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-08-13T01:00:00+00:00",
+          "duration_ms": 3599001
+        }
+      ],
+      "calendar_slots": 744,
+      "missing_hours": 4,
+      "missing_open_times_utc": [
+        "2021-08-13T02:00:00+00:00",
+        "2021-08-13T03:00:00+00:00",
+        "2021-08-13T04:00:00+00:00",
+        "2021-08-13T05:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-09",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-09.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-09.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:20.118806+00:00",
+      "sha256": "04da47b70dbbb17958b98d959237b03dde80af3230e1b8f2693aa7ba6dea815f",
+      "bytes": 34789,
+      "status": 200,
+      "last_modified": "Fri, 01 Oct 2021 03:58:45 GMT",
+      "etag": "\"47604985b332e47ce0c0345c709f7984\"",
+      "source_observations": 718,
+      "observations": 718,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 2,
+      "missing_open_times_utc": [
+        "2021-09-29T07:00:00+00:00",
+        "2021-09-29T08:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "ADAUSDT",
+      "month": "2021-10",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-10.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/ADAUSDT/1h/ADAUSDT-1h-2021-10.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:20.145440+00:00",
+      "sha256": "db2113e5d46c8643fc46083266df5e4e0a497593c1fbd9998e2e7528a07232b6",
+      "bytes": 34742,
+      "status": 200,
+      "last_modified": "Tue, 16 Nov 2021 02:14:23 GMT",
+      "etag": "\"8a0f41e6d7df73fee249ee29bbfbe21f\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-01.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-01.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:20.696613+00:00",
+      "sha256": "547a7c359666086072f24b6af2056aa08b1fd2a2450476c9f56d31c55b139d18",
+      "bytes": 40051,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:06:10 GMT",
+      "etag": "\"2b5f4020a92c9bf62e87cb47e5d5b02e\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-02.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-02.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:21.595091+00:00",
+      "sha256": "998bf641c713c800807bcf50c84e0fc74eb4c7c2a2ad5df6d66fca7174aa1f77",
+      "bytes": 36893,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:06:10 GMT",
+      "etag": "\"bfd20c4bc77ad8de8df1bc1af353458c\"",
+      "source_observations": 671,
+      "observations": 670,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-02-11T03:00:00+00:00",
+          "duration_ms": 2459082
+        }
+      ],
+      "calendar_slots": 672,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-02-11T04:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-03.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-03.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:21.273394+00:00",
+      "sha256": "bdf9fb6687fb1044e5c560c4a37147ac9d09dbecd14b03a54c5c546e7b695a5c",
+      "bytes": 39739,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:06:10 GMT",
+      "etag": "\"0456ef59380fa8d87a2dae0d56c9ead3\"",
+      "source_observations": 743,
+      "observations": 743,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-03-06T02:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-04.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-04.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:22.506333+00:00",
+      "sha256": "0a5f1ce7d9724726e75a8da116bf2adda123a8e78530f7e309d3f6633865b5f9",
+      "bytes": 40504,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:06:10 GMT",
+      "etag": "\"caa946abddd90856dd5a5baed22bf1d9\"",
+      "source_observations": 715,
+      "observations": 714,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-04-25T04:00:00+00:00",
+          "duration_ms": 62803
+        }
+      ],
+      "calendar_slots": 720,
+      "missing_hours": 5,
+      "missing_open_times_utc": [
+        "2021-04-20T02:00:00+00:00",
+        "2021-04-20T03:00:00+00:00",
+        "2021-04-25T05:00:00+00:00",
+        "2021-04-25T06:00:00+00:00",
+        "2021-04-25T07:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-05.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-05.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:22.183517+00:00",
+      "sha256": "6aae8ca0411fb079bd97b6a2928420fd2314d6937a659af46043e9651e86a44d",
+      "bytes": 41275,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:06:10 GMT",
+      "etag": "\"1d0e6a20c59a8a0d43b0b50825a98c6b\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-06.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-06.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:22.998801+00:00",
+      "sha256": "97bf1c3547d34cea80e8f6267265cce36bede0b760476e9e215f96704302f197",
+      "bytes": 38635,
+      "status": 200,
+      "last_modified": "Thu, 01 Jul 2021 07:05:59 GMT",
+      "etag": "\"aff399aeca9f9e64833fbe2168c7c3bb\"",
+      "source_observations": 720,
+      "observations": 720,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-07",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-07.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-07.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:24.183739+00:00",
+      "sha256": "18f1db3600b8ac5bce58aa525a56512b0c62eb4679a3052abbfe6a41fbf76f79",
+      "bytes": 39071,
+      "status": 200,
+      "last_modified": "Mon, 02 Aug 2021 05:09:29 GMT",
+      "etag": "\"62ea675d8e52237a1cfd7c0356fcddda\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-08",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-08.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-08.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:24.670569+00:00",
+      "sha256": "023f48b1cc5cd2934817ca4c32d6c49ce7436eb9a767cdca5e65c3aa206ae8eb",
+      "bytes": 39341,
+      "status": 200,
+      "last_modified": "Sat, 04 Sep 2021 12:37:16 GMT",
+      "etag": "\"9d30b4c52d0b23bd25dc7fe09bac7a55\"",
+      "source_observations": 740,
+      "observations": 739,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-08-13T01:00:00+00:00",
+          "duration_ms": 3599001
+        }
+      ],
+      "calendar_slots": 744,
+      "missing_hours": 4,
+      "missing_open_times_utc": [
+        "2021-08-13T02:00:00+00:00",
+        "2021-08-13T03:00:00+00:00",
+        "2021-08-13T04:00:00+00:00",
+        "2021-08-13T05:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-09",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-09.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-09.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:25.828027+00:00",
+      "sha256": "1bf6a19694019605f3d8914d01ba4d26b7735fd0e5bb001cac6947fc6b5471a8",
+      "bytes": 34964,
+      "status": 200,
+      "last_modified": "Fri, 01 Oct 2021 03:58:57 GMT",
+      "etag": "\"d8218b539bf8410997eeaac7ed8f3e8b\"",
+      "source_observations": 718,
+      "observations": 718,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 2,
+      "missing_open_times_utc": [
+        "2021-09-29T07:00:00+00:00",
+        "2021-09-29T08:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "XRPUSDT",
+      "month": "2021-10",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-10.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/XRPUSDT/1h/XRPUSDT-1h-2021-10.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:25.263494+00:00",
+      "sha256": "7203e4bfed4dfcc86823eb18ef2e5494813b091ce173e86f9292f4e17d4848fd",
+      "bytes": 35859,
+      "status": 200,
+      "last_modified": "Tue, 16 Nov 2021 02:14:39 GMT",
+      "etag": "\"23d1a808ec72be5b2da981955ea8c57a\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-01.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-01.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:26.038698+00:00",
+      "sha256": "642062570108e0548d04e8a7919f4a77df5f8eb5d645b70b5f890ef6d7aa4294",
+      "bytes": 41429,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 13:45:58 GMT",
+      "etag": "\"1d3f8de15e1070269185f062b64287ac\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-02.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-02.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:26.420451+00:00",
+      "sha256": "b2c9f8eec684488469d7c01110ab314f029782739b8555c41119f4f9db209011",
+      "bytes": 37699,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 13:45:58 GMT",
+      "etag": "\"be33f9afd21c4dfc07917c1fdbd00309\"",
+      "source_observations": 671,
+      "observations": 670,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-02-11T03:00:00+00:00",
+          "duration_ms": 2456800
+        }
+      ],
+      "calendar_slots": 672,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-02-11T04:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-03.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-03.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:27.294783+00:00",
+      "sha256": "f61dea2032da0f79b1ac43ccc4670d92a95dfbd8423ade291e954cb555dad743",
+      "bytes": 40919,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 13:45:58 GMT",
+      "etag": "\"f6b771806675431b3a2381fd62fdc4cd\"",
+      "source_observations": 743,
+      "observations": 743,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-03-06T02:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-04.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-04.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:27.227232+00:00",
+      "sha256": "0e2a358866f150f414c36a8a9ec316a45d8c0e849018792038f64d3dc652d85a",
+      "bytes": 40222,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 13:45:58 GMT",
+      "etag": "\"79c93935acd1e64f94ac9f78eae8dff7\"",
+      "source_observations": 715,
+      "observations": 714,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-04-25T04:00:00+00:00",
+          "duration_ms": 60279
+        }
+      ],
+      "calendar_slots": 720,
+      "missing_hours": 5,
+      "missing_open_times_utc": [
+        "2021-04-20T02:00:00+00:00",
+        "2021-04-20T03:00:00+00:00",
+        "2021-04-25T05:00:00+00:00",
+        "2021-04-25T06:00:00+00:00",
+        "2021-04-25T07:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-05.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-05.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:27.860451+00:00",
+      "sha256": "1aa462b92b56938fb2acb8bbb74c36196adcfa53e7c7284d53a62e9f45bbc698",
+      "bytes": 42386,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 13:45:58 GMT",
+      "etag": "\"f4c9963c096130ec2e7ff6cd48cfce78\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-06.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-06.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:28.332213+00:00",
+      "sha256": "be8bddedd584a84edfe39ec5f6fee138a424853827a056ea0a57162af190e24e",
+      "bytes": 39404,
+      "status": 200,
+      "last_modified": "Thu, 01 Jul 2021 07:03:02 GMT",
+      "etag": "\"e60f7a4606774e20252b489667fd9c70\"",
+      "source_observations": 720,
+      "observations": 720,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-07",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-07.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-07.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:29.513615+00:00",
+      "sha256": "52d5957a5435ac5f7778f93d3bf0a912ad0301f343e1416606125494c2f4f2ef",
+      "bytes": 39732,
+      "status": 200,
+      "last_modified": "Mon, 02 Aug 2021 05:07:41 GMT",
+      "etag": "\"c23aa28d3ea488beccded5f773d07f2a\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-08",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-08.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-08.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:29.543768+00:00",
+      "sha256": "496b4d45cfa44246d21520028f50bc976b554eaf31602e330600e90648fdbd8f",
+      "bytes": 39277,
+      "status": 200,
+      "last_modified": "Sat, 04 Sep 2021 12:35:29 GMT",
+      "etag": "\"2d62a2df094c8a30de9a0e3b4905adac\"",
+      "source_observations": 740,
+      "observations": 739,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-08-13T01:00:00+00:00",
+          "duration_ms": 3599001
+        }
+      ],
+      "calendar_slots": 744,
+      "missing_hours": 4,
+      "missing_open_times_utc": [
+        "2021-08-13T02:00:00+00:00",
+        "2021-08-13T03:00:00+00:00",
+        "2021-08-13T04:00:00+00:00",
+        "2021-08-13T05:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-09",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-09.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-09.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:30.308910+00:00",
+      "sha256": "49a78fe70f766ca2963601b0ad5cb4d28e7da0837fd8b7b3fa7d74e61cfee5e9",
+      "bytes": 34106,
+      "status": 200,
+      "last_modified": "Fri, 01 Oct 2021 03:56:19 GMT",
+      "etag": "\"db01d88425bdeb86b627a7852029ec33\"",
+      "source_observations": 718,
+      "observations": 718,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 2,
+      "missing_open_times_utc": [
+        "2021-09-29T07:00:00+00:00",
+        "2021-09-29T08:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "LTCUSDT",
+      "month": "2021-10",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-10.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/LTCUSDT/1h/LTCUSDT-1h-2021-10.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:30.348902+00:00",
+      "sha256": "8b7a5b9b5f4521240a8660ec0791246f72d3524ae4ad3aef16b13f1f93ae3125",
+      "bytes": 34716,
+      "status": 200,
+      "last_modified": "Tue, 16 Nov 2021 02:11:16 GMT",
+      "etag": "\"3d86c30e418125e939967e0431e6a068\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-01.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-01.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:30.908490+00:00",
+      "sha256": "c84c047645ae52879a2fdc44acdf6036747ca66ba4dd8ea3dce0e57f96e83430",
+      "bytes": 38800,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:15:18 GMT",
+      "etag": "\"727e18554f504d8d39833c22d845b9b1\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-02.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-02.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:30.925098+00:00",
+      "sha256": "edaddf1ca394a3496c223c52cce4201def030d3f3fa18e0ade39d4df42db5046",
+      "bytes": 36089,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:15:18 GMT",
+      "etag": "\"3f01a5bba4aab90c98c7abfad75ba372\"",
+      "source_observations": 671,
+      "observations": 670,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-02-11T03:00:00+00:00",
+          "duration_ms": 2455701
+        }
+      ],
+      "calendar_slots": 672,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-02-11T04:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-03.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-03.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:31.485131+00:00",
+      "sha256": "8b7fe8b1284f251cee57b80192223cd70d14e65f1167f75eb0f9ee6675b2f644",
+      "bytes": 38842,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:15:18 GMT",
+      "etag": "\"dee54dd93bddb09252d11067572062c4\"",
+      "source_observations": 743,
+      "observations": 743,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-03-06T02:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-04.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-04.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:32.613613+00:00",
+      "sha256": "abfd641b24da7c8132294f104a736941202dd940a1fe8dffac608f5961bbd4ab",
+      "bytes": 39022,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:15:18 GMT",
+      "etag": "\"43aef8655c24b0d383b26a0119b1053b\"",
+      "source_observations": 715,
+      "observations": 714,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-04-25T04:00:00+00:00",
+          "duration_ms": 59141
+        }
+      ],
+      "calendar_slots": 720,
+      "missing_hours": 5,
+      "missing_open_times_utc": [
+        "2021-04-20T02:00:00+00:00",
+        "2021-04-20T03:00:00+00:00",
+        "2021-04-25T05:00:00+00:00",
+        "2021-04-25T06:00:00+00:00",
+        "2021-04-25T07:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-05.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-05.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:32.293708+00:00",
+      "sha256": "e7b04fb1031d25576aeb2ea9ac33752876d465865f37d9f066cd3ae848a590cb",
+      "bytes": 41401,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:15:18 GMT",
+      "etag": "\"a572e55408010d993a1bada245ff1e09\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-06.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-06.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:32.893868+00:00",
+      "sha256": "fd119a0946fc32bb70df100d6aa0f8ec1a57d895ba4c2a5e6d2380ff4cf4c06b",
+      "bytes": 38064,
+      "status": 200,
+      "last_modified": "Thu, 01 Jul 2021 07:06:26 GMT",
+      "etag": "\"e510aa521c77417d584a83cd887c9478\"",
+      "source_observations": 720,
+      "observations": 720,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-07",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-07.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-07.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:34.101177+00:00",
+      "sha256": "992dd14e2e6d944b80e3bc589058d22d12cd568b3dbe1b8c747e5c32120cfb29",
+      "bytes": 38583,
+      "status": 200,
+      "last_modified": "Mon, 02 Aug 2021 05:09:45 GMT",
+      "etag": "\"05ba07b27c9d025450f1a14044df8261\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-08",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-08.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-08.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:34.135327+00:00",
+      "sha256": "ce14d6202dcafa8926e6a0c2a45f277259d4465058b1a5d89f34fcd8fe8b1fd0",
+      "bytes": 38296,
+      "status": 200,
+      "last_modified": "Sat, 04 Sep 2021 12:37:33 GMT",
+      "etag": "\"3564322589967251c8b0f58d5ac72f68\"",
+      "source_observations": 740,
+      "observations": 739,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-08-13T01:00:00+00:00",
+          "duration_ms": 3599001
+        }
+      ],
+      "calendar_slots": 744,
+      "missing_hours": 4,
+      "missing_open_times_utc": [
+        "2021-08-13T02:00:00+00:00",
+        "2021-08-13T03:00:00+00:00",
+        "2021-08-13T04:00:00+00:00",
+        "2021-08-13T05:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-09",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-09.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-09.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:35.496509+00:00",
+      "sha256": "8e6158432ea90cb5ddb8fb60d915218fbc984f92c9acb0539198da7faedf72aa",
+      "bytes": 33882,
+      "status": 200,
+      "last_modified": "Fri, 01 Oct 2021 03:59:24 GMT",
+      "etag": "\"155c44605f9d5af74ff220e3b497a43a\"",
+      "source_observations": 718,
+      "observations": 718,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 2,
+      "missing_open_times_utc": [
+        "2021-09-29T07:00:00+00:00",
+        "2021-09-29T08:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "EOSUSDT",
+      "month": "2021-10",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-10.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/EOSUSDT/1h/EOSUSDT-1h-2021-10.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:35.153796+00:00",
+      "sha256": "961397f362eb4d857ba7339c64ee9266729218a46468d0aedc351f47dd0d8038",
+      "bytes": 34290,
+      "status": 200,
+      "last_modified": "Tue, 16 Nov 2021 02:15:14 GMT",
+      "etag": "\"bf084956473b539fdce71a62d4051fbe\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-01",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-01.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-01.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:36.423631+00:00",
+      "sha256": "64688b9088a3da1c3c07ac2c0a3d1a449840b9510f6378df24e84c086ef64989",
+      "bytes": 37765,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:34:35 GMT",
+      "etag": "\"905d27626993ff9a8e832ef710ab3c02\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-02",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-02.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-02.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:36.073661+00:00",
+      "sha256": "956149f8d57154f9f8697862f0a4bfcbbaa1150e685042e8f9b2c4623be99853",
+      "bytes": 35000,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:34:35 GMT",
+      "etag": "\"2997ae8af2f8d95d45bc58441ad30ece\"",
+      "source_observations": 671,
+      "observations": 670,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-02-11T03:00:00+00:00",
+          "duration_ms": 2458432
+        }
+      ],
+      "calendar_slots": 672,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-02-11T04:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-03",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-03.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-03.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:37.110580+00:00",
+      "sha256": "d6b74e984ab37819883277a89a479dd30b084333e8d644a48b3653d5d1cae86a",
+      "bytes": 38296,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:34:35 GMT",
+      "etag": "\"f091b2b85633ebfe59bc26434d023e60\"",
+      "source_observations": 743,
+      "observations": 743,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 1,
+      "missing_open_times_utc": [
+        "2021-03-06T02:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-04",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-04.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-04.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:37.639339+00:00",
+      "sha256": "b06a93598a3616ddc6d5eb0e4d16ce71bb0127b31a3367f705d542e3881eea9d",
+      "bytes": 38864,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:34:35 GMT",
+      "etag": "\"8f49d730876a9a416f4f717c9f9c23fc\"",
+      "source_observations": 715,
+      "observations": 714,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-04-25T04:00:00+00:00",
+          "duration_ms": 62103
+        }
+      ],
+      "calendar_slots": 720,
+      "missing_hours": 5,
+      "missing_open_times_utc": [
+        "2021-04-20T02:00:00+00:00",
+        "2021-04-20T03:00:00+00:00",
+        "2021-04-25T05:00:00+00:00",
+        "2021-04-25T06:00:00+00:00",
+        "2021-04-25T07:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-05",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-05.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-05.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:38.354203+00:00",
+      "sha256": "e75c00e3eab8d97c260327fa73c50b216c575ded81b08175b335e993af8838cc",
+      "bytes": 39930,
+      "status": 200,
+      "last_modified": "Tue, 22 Jun 2021 15:34:35 GMT",
+      "etag": "\"52a63a89415f8ca633a8d4bd27a5d6d1\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-06",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-06.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-06.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:38.883932+00:00",
+      "sha256": "a0a4248458be4ab854e6c3d21a35d5744d8a9f05eff8442b1dbdeab311f22204",
+      "bytes": 37027,
+      "status": 200,
+      "last_modified": "Thu, 01 Jul 2021 07:07:28 GMT",
+      "etag": "\"8d8fa29547f30c03f74e74899ab8ee31\"",
+      "source_observations": 720,
+      "observations": 720,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-07",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-07.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-07.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:39.654029+00:00",
+      "sha256": "634b9da6c8b027f2933265af4acf26c0c8d4719772e8ff55993c033259f52c46",
+      "bytes": 37343,
+      "status": 200,
+      "last_modified": "Mon, 02 Aug 2021 05:10:21 GMT",
+      "etag": "\"30387f6ef92e3e997e8e4f260b5e22b8\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-08",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-08.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-08.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:39.638816+00:00",
+      "sha256": "eb113a8acefb366132585005786b845bdfa75eeb2a75da8e77a69a849cd2f490",
+      "bytes": 37909,
+      "status": 200,
+      "last_modified": "Sat, 04 Sep 2021 12:38:10 GMT",
+      "etag": "\"1f97aea2548c054a31c6927ce2a9d46f\"",
+      "source_observations": 740,
+      "observations": 739,
+      "early_close_excluded": [
+        {
+          "open_time_utc": "2021-08-13T01:00:00+00:00",
+          "duration_ms": 3599001
+        }
+      ],
+      "calendar_slots": 744,
+      "missing_hours": 4,
+      "missing_open_times_utc": [
+        "2021-08-13T02:00:00+00:00",
+        "2021-08-13T03:00:00+00:00",
+        "2021-08-13T04:00:00+00:00",
+        "2021-08-13T05:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-09",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-09.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-09.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:41.664216+00:00",
+      "sha256": "9150b53f3dda95b66197c20c0f4cb96f0e379b09c0d51ff9808a137f52e47a8e",
+      "bytes": 37747,
+      "status": 200,
+      "last_modified": "Fri, 01 Oct 2021 04:00:25 GMT",
+      "etag": "\"02fb191cd7b3d149dc5d37ba6c7dd7dd\"",
+      "source_observations": 718,
+      "observations": 718,
+      "early_close_excluded": [],
+      "calendar_slots": 720,
+      "missing_hours": 2,
+      "missing_open_times_utc": [
+        "2021-09-29T07:00:00+00:00",
+        "2021-09-29T08:00:00+00:00"
+      ]
+    },
+    {
+      "asset": "TRXUSDT",
+      "month": "2021-10",
+      "url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-10.zip",
+      "checksum_url": "https://data.binance.vision/data/spot/monthly/klines/TRXUSDT/1h/TRXUSDT-1h-2021-10.zip.CHECKSUM",
+      "retrieved_at_utc": "2026-10-14T09:38:40.483762+00:00",
+      "sha256": "8f77f8bcac4ff138930daaf6706db3c4555b732ab7e331bc7b4b616f1ebc52f2",
+      "bytes": 38669,
+      "status": 200,
+      "last_modified": "Tue, 16 Nov 2021 02:16:38 GMT",
+      "etag": "\"2c5bd77ac5f4e3cdbaba48557d11329a\"",
+      "source_observations": 744,
+      "observations": 744,
+      "early_close_excluded": [],
+      "calendar_slots": 744,
+      "missing_hours": 0,
+      "missing_open_times_utc": []
+    }
+  ],
+  "observations": 58240,
+  "source_observations": 58264,
+  "early_close_excluded": 24,
+  "missing_hours": 104
+}

@@ -1,0 +1,26 @@
+{
+  "checked_at_utc": "2026-10-15T20:22:25.157110+00:00",
+  "reproduced_results": false,
+  "sources": [
+    {
+      "title": "On Embeddings for Numerical Features in Tabular Deep Learning",
+      "url": "https://papers.nips.cc/paper/2022/file/9e9f0ffc3d836836ca96cbf8fe14b105-Paper-Conference.pdf",
+      "reading": "prior sections 3-4 plus abstract/method recheck",
+      "use": "motivation for numerical controls; our residual forms are design choices, not a replication",
+      "financial_validation": false
+    },
+    {
+      "title": "Decoupled Weight Decay Regularization",
+      "url": "https://arxiv.org/abs/1711.05101",
+      "reading": "abstract and PDF opened, no reproduction",
+      "use": "decoupled decay is not Adam L2; no source claim for chosen market hyperparameters"
+    },
+    {
+      "title": "PixelCNN++",
+      "url": "https://arxiv.org/pdf/1701.05517",
+      "reading": "section 2.1 and equations on pages 1-2",
+      "use": "prior art for CDF-difference masses; bounded logistic pixel model differs from unbounded Gaussian price-code candidate",
+      "financial_validation": false
+    }
+  ]
+}

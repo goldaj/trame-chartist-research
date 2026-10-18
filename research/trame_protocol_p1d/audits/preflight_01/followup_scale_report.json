@@ -1,0 +1,34 @@
+{
+  "id": "TRAME-P1D-preflight-01-followup-scale",
+  "provenance": {
+    "declared_before_followup_calculation_utc": "2026-10-15T14:41:55.042683+00:00",
+    "post_original_audit": true,
+    "plan_sha256": "0cb3d25caa0dcba0e6c3785eb73bce9e4e21d8a7945db570e15ce1c1301f76ea",
+    "script_sha256": "85a8175dc25a7474eacbbb5d2a33cee15d317e8da87526e4bdffc78965610ace"
+  },
+  "source_sha256": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de",
+  "selection_is_posthoc_exploratory": true,
+  "first_escape_origin": "2012-06-15",
+  "last_escape_origin": "2012-08-09",
+  "escape_exposures": 195,
+  "escape_origins": 40,
+  "minimum": {
+    "origin_date": "2012-08-01",
+    "historical_input_date": "2011-08-10",
+    "current_price_chf_per_eur": 1.2013,
+    "historical_price_chf_per_eur": 1.0451,
+    "log_price_ratio": -0.13929172912687146,
+    "scale_64": 0.00030053105699532023,
+    "scale_255_context_only": 0.0075289986084371985,
+    "scale_255_over_scale_64": 25.05231467160626,
+    "x64": -463.4853067083861,
+    "x32": -463.4853210449219,
+    "k": -3708,
+    "scalar_scale_64": 0.00030053105699532023,
+    "scalar_x64": -463.4853067083861
+  },
+  "scalar_crosscheck_passed": true,
+  "normalization_changed": false,
+  "model_fitted": false,
+  "forecast_scores": null
+}

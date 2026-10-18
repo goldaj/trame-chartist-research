@@ -1,0 +1,164 @@
+{
+  "id": "TRAME-P1B0-candidate-0.2",
+  "date": "2026-10-16",
+  "status": "theoretical specification; locally sealed before descriptive target audit; no model implementation, training or registration",
+  "information": "H_i contains only history available at origin i; no historical next-token loss on origin-normalized context",
+  "future_steps": 20,
+  "anchor": "u_hat[0]=log(P[i])",
+  "step": "delta=s[i]/8 fixed at origin",
+  "target_code": "n[h]=floor((log(P[i+h])-log(P[i]))/delta+1/2); k[h]=n[h]-n[h-1]; n[0]=0",
+  "state_update": "exact integer n[h]=n[h-1]+k[h]; u_hat[h]=log(P[i])+delta*n[h]",
+  "rounding_ties": "toward positive infinity",
+  "training": "teacher forcing with true prior codes only",
+  "generation": "use generated codes only; no unknown true future price/state",
+  "joint": "product over h=1..20 of p(k[h] | H_i,k[1],...,k[h-1])",
+  "base_mass": "q(k)=Phi((k+1/2-mu)/sigma)-Phi((k-1/2-mu)/sigma), k in all integers, sigma>0",
+  "core": [
+    -2048,
+    2047
+  ],
+  "weight": "exp(a_k) in core; 1 outside",
+  "normalizer": "q(outside core)+sum_core q(k)*exp(a_k)",
+  "probability": "p(k)=q(k)*weight(k)/Z",
+  "sampling": "central cells plus two tail categories, then rounded truncated Gaussian within selected tail",
+  "reconstruction_bound": "abs(u_hat[h]-log(P[i+h])) <= delta/2 in exact arithmetic, synchronized true-code states",
+  "forecast_bound": null,
+  "sufficient_joint_first_moment_conditions": {
+    "mu": "abs(mu)<=M uniformly in generated states",
+    "sigma": "0<sigma<=S uniformly",
+    "log_corrections": "abs(a_k)<=A uniformly",
+    "constants": "M=256,S=64,A=4 proposed; S=256 sensitivity; sigma_min=.25; not fitted",
+    "C": "exp(2*A+delta/2+delta*M+delta^2*S^2/2)",
+    "bound": "E[generated_price_h | H_i] <= P_i*C^h"
+  },
+  "open": [
+    "Stable log interval probabilities, derivatives, normalizer and tail sampler; no network or full head numerical audit",
+    "Finite arithmetic range for cumulative codes, embeddings and exp(price)",
+    "Head expressiveness, possible Gaussian tail misspecification and bounded-parameter saturation",
+    "Optimization budget, compute-balanced controls and tests of gradients",
+    "Native-price scoring with Monte Carlo diagnostics and independent multi-market evaluation"
+  ],
+  "predictor_implemented": false,
+  "trained": false,
+  "market_results": null,
+  "arithmetic_recurrence_check": "design_checks.json; constructed rational examples only",
+  "parent_sha256": "e990a499dbf58349d8981858cb3796f60c376beba46d60559f65eead15f6fcbf",
+  "recurrence_equivalence": "Identical to closed-loop DPCM in exact arithmetic; floating recurrence compared in separate audit",
+  "base_parameters_receive_proposed_loss_on_all_target_types": true,
+  "bounds_proposal": {
+    "M": 256,
+    "S": 64,
+    "sigma_min": 0.25,
+    "A": 4,
+    "rationale": "Provisional fixed design: one k unit is s_i/8, so mean bound 32*s_i and sd bound 8*s_i; not empirically validated.",
+    "mu": "M*tanh(g_mu/M)",
+    "sigma": "sigma_min+(S-sigma_min)*sigmoid(g_sigma)",
+    "correction": "A*tanh(g_k/A)",
+    "initial_values": {
+      "mu": 0,
+      "sigma": 8,
+      "all_corrections": 0
+    },
+    "parameter_initialization": "output matrices zero; g_mu and correction biases zero; g_sigma bias log((8-.25)/(64-8))",
+    "predeclared_scale_sensitivity_S": [
+      64,
+      256
+    ],
+    "sensitivity_status": "hypotheses only; no tuning or predictive comparison executed",
+    "support": "all integer codes, not clipped",
+    "uniform_joint_moment_bound": "conditional on origin and fixed finite delta; not uniform across all possible origins"
+  },
+  "architecture": {
+    "shared_input_across_heads": "Q affine past encoder from P1-D 0.4; no simultaneous comparison of past encoders",
+    "past_tokens": 256,
+    "bos_tokens": 1,
+    "previous_future_tokens": 19,
+    "teacher_forced_sequence_length": 276,
+    "loss_positions": "BOS predicts k1; token n[h]/8 predicts k[h+1], h=1..19; no history loss",
+    "future_numeric_value": "n[h]/8, derived only from previous true codes in teacher forcing, own sampled codes in generation",
+    "future_calendar_gap": "zero sentinel meaning unknown, distinguished by FUTURE type; no true future calendar information",
+    "future_metadata": "log(P_i), log(s_i), log1p(0), indicator n[h] outside [-2048,2047]",
+    "bos_metadata": "same origin constants, gap=0, escape=0; numeric value=0; BOS type",
+    "past_metadata": "P1-D four fields; history gap and escape of the past Q code",
+    "shared_modules": "P1-D blocks, fixed sinusoidal positions, numeric affine 2d, asset embeddings 6d, four-feature affine 5d, final layernorm 2d, three type embeddings 3d",
+    "common_parameter_formula": "12*L*d*d+13*L*d+18*d",
+    "arms": {
+      "BASE": {
+        "head_outputs": 2,
+        "meaning": "mu,sigma; q only, normalizer 1"
+      },
+      "FLAT": {
+        "head_outputs": 4098,
+        "meaning": "mu,sigma and 4096 independent central correction logits"
+      },
+      "HIER": {
+        "head_outputs": 520,
+        "meaning": "mu,sigma,512 coarse outputs and 3 pairs of bit outputs; g_k=g_q+sum(g_bit); q=floor(k/8), three remainder bits"
+      }
+    },
+    "correction_gauge": "HIER additive component parameters not identifiable; counts are allocated weights, not independent function dimensions",
+    "heads_not_information_equivalent": "same conditioning data and base; distinct function classes and capacities",
+    "exact_normalizer_core_terms_each_step": 4096,
+    "head_matrix_flops_per_origin": "2*20*d*r, r in {2,4098,520}; excludes nonlinearities, 4096 cell weights/CDFs and normalization",
+    "block_forward_flops_per_origin": "L*(24*n*d*d+4*n*n*d), n=276, dense attention; excludes softmax/LN/activations and backward",
+    "precision": "future integer state exact in mathematical contract; finite-range and float32 embedding conversion must be audited before implementation; no universal machine-precision guarantee",
+    "unseen_output_codes": "normalizer creates gradients for codes not observed as positive targets; do not apply frozen-unvisited-input-table policy to output heads"
+  },
+  "parameter_counts": [
+    {
+      "L": 4,
+      "d": 128,
+      "common": 795392,
+      "total": {
+        "BASE": 795650,
+        "FLAT": 1324034,
+        "HIER": 862472
+      },
+      "dense_block_forward_flops": 590118912,
+      "head_forward_matrix_flops": {
+        "BASE": 10240,
+        "FLAT": 20981760,
+        "HIER": 2662400
+      }
+    },
+    {
+      "L": 6,
+      "d": 256,
+      "common": 4743168,
+      "total": {
+        "BASE": 4743682,
+        "FLAT": 5796354,
+        "HIER": 4876808
+      },
+      "dense_block_forward_flops": 3072688128,
+      "head_forward_matrix_flops": {
+        "BASE": 20480,
+        "FLAT": 41963520,
+        "HIER": 5324800
+      }
+    },
+    {
+      "L": 8,
+      "d": 512,
+      "common": 25228288,
+      "total": {
+        "BASE": 25229314,
+        "FLAT": 27330562,
+        "HIER": 25495048
+      },
+      "dense_block_forward_flops": 15139602432,
+      "head_forward_matrix_flops": {
+        "BASE": 40960,
+        "FLAT": 83927040,
+        "HIER": 10649600
+      }
+    }
+  ],
+  "scoring": {
+    "proposed_training": "mean negative log conditional code mass over 20 future steps",
+    "interpretation": "proper likelihood for this fixed discretized path law, not a price-density likelihood",
+    "quantizer_comparison": "NLL across different delta or rounding rules not directly comparable",
+    "price_evaluation": "native-price pinball and calibration versus P1-D baseline; MC accuracy protocol still open",
+    "within_cell_price_law": "not specified; decoded lattice prices are a discrete forecast law, not a calibrated law of all real prices"
+  }
+}

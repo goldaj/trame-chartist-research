@@ -1,0 +1,9 @@
+{
+  "frozen_at_utc": "2026-10-15T14:38:46.849488+00:00",
+  "scope": "Freeze of descriptive preflight analysis only, not registration or freezing of P1-D predictive protocol",
+  "protocol_sha256": "64cd0b05f581052347d3d1de30991d4c33246848671e38fe8b17e20429f3b9a1",
+  "audit_sha256": "1be9019bd455e5d20d78a1aff7b5fcf5e79a286b0a263fd571796b0490e5b823",
+  "candidate_sha256": "51f61ef6c59b5ab5cc4aba786c125a99c3c87b98203fca572f8a78a9f853be56",
+  "market_data_read_by_this_freeze": false,
+  "report_existed_before_freeze": false
+}

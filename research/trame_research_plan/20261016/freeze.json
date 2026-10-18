@@ -1,0 +1,10 @@
+{
+  "sealed_at_utc": "2026-10-16T02:59:37.000990+00:00",
+  "scope": "local integrity seal before target analysis, not external preregistration",
+  "files_sha256": {
+    "p1b0_candidate.json": "eba95c653977ba1ec39d3dba83cd1d6a93e55deacab13650c532285a1171456b",
+    "audit_protocol.json": "8eff4596427bbcd10d9e7abfe7ef83535f009d248a9dfae97992089eeb90fa7d",
+    "audit_targets.py": "1a085a1e38c552c6f970c9dabdcad4fde18ee2e4509d0411864083ab88aa43bb",
+    "prepare_qualification.py": "f28241cb608a3b8831c9db4c761c19bcd011d587e4b9fd7aadfb4c2e95306b5c"
+  }
+}

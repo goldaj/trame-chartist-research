@@ -1,0 +1,499 @@
+{
+  "source": "ECB statistics",
+  "raw_file": "raw\\ecb_exr_daily_six_1999_2020_20261014T094250Z_b8a684b6331d.csv",
+  "raw_sha256": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de",
+  "audit_generated_utc": "2026-10-14T09:45:07.153428+00:00",
+  "scope": "Exploratory data acquisition and quality audit only; no fitted model, no performance evaluation",
+  "requested_period": [
+    "1999-01-01",
+    "2020-12-31"
+  ],
+  "total_rows": 34164,
+  "valid_rows": 33792,
+  "columns": [
+    "KEY",
+    "FREQ",
+    "CURRENCY",
+    "CURRENCY_DENOM",
+    "EXR_TYPE",
+    "EXR_SUFFIX",
+    "TIME_PERIOD",
+    "OBS_VALUE",
+    "OBS_STATUS",
+    "OBS_CONF",
+    "OBS_PRE_BREAK",
+    "OBS_COM",
+    "TIME_FORMAT",
+    "BREAKS",
+    "COLLECTION",
+    "COMPILING_ORG",
+    "DISS_ORG",
+    "DOM_SER_IDS",
+    "PUBL_ECB",
+    "PUBL_MU",
+    "PUBL_PUBLIC",
+    "UNIT_INDEX_BASE",
+    "COMPILATION",
+    "COVERAGE",
+    "DECIMALS",
+    "NAT_TITLE",
+    "SOURCE_AGENCY",
+    "SOURCE_PUB",
+    "TITLE",
+    "TITLE_COMPL",
+    "UNIT",
+    "UNIT_MULT"
+  ],
+  "distinct_series": [
+    "EXR.D.AUD.EUR.SP00.A",
+    "EXR.D.CAD.EUR.SP00.A",
+    "EXR.D.CHF.EUR.SP00.A",
+    "EXR.D.GBP.EUR.SP00.A",
+    "EXR.D.JPY.EUR.SP00.A",
+    "EXR.D.USD.EUR.SP00.A"
+  ],
+  "duplicate_series_date_keys": 0,
+  "invalid_rows": [],
+  "explicit_missing_values_count": 372,
+  "explicit_missing_values_status_counts": {
+    "H": 372
+  },
+  "explicit_missing_dates": [
+    "1999-12-31",
+    "2000-04-21",
+    "2000-04-24",
+    "2000-05-01",
+    "2000-12-25",
+    "2000-12-26",
+    "2001-01-01",
+    "2001-04-13",
+    "2001-04-16",
+    "2001-05-01",
+    "2001-12-25",
+    "2001-12-26",
+    "2001-12-31",
+    "2002-01-01",
+    "2002-03-29",
+    "2002-04-01",
+    "2002-05-01",
+    "2002-12-25",
+    "2002-12-26",
+    "2003-01-01",
+    "2003-04-18",
+    "2003-04-21",
+    "2003-05-01",
+    "2003-12-25",
+    "2003-12-26",
+    "2004-01-01",
+    "2004-04-09",
+    "2004-04-12",
+    "2005-03-25",
+    "2005-03-28",
+    "2005-12-26",
+    "2006-04-14",
+    "2006-04-17",
+    "2006-05-01",
+    "2006-12-25",
+    "2006-12-26",
+    "2007-01-01",
+    "2007-04-06",
+    "2007-04-09",
+    "2007-05-01",
+    "2007-12-25",
+    "2007-12-26",
+    "2008-01-01",
+    "2008-03-21",
+    "2008-03-24",
+    "2008-05-01",
+    "2008-12-25",
+    "2008-12-26",
+    "2009-01-01",
+    "2009-04-10",
+    "2009-04-13",
+    "2009-05-01",
+    "2009-12-25",
+    "2010-01-01",
+    "2010-04-02",
+    "2010-04-05",
+    "2011-04-22",
+    "2011-04-25",
+    "2011-12-26",
+    "2012-04-06",
+    "2012-04-09",
+    "2012-05-01"
+  ],
+  "observation_status_counts_all_rows": {
+    "A": 33792,
+    "H": 372
+  },
+  "union_date_count": 5632,
+  "intersection_date_count": 5632,
+  "calendar_day_count": 8036,
+  "weekday_count": 5740,
+  "weekdays_without_any_observation_count": 108,
+  "weekdays_without_any_observation": [
+    "1999-01-01",
+    "1999-12-31",
+    "2000-04-21",
+    "2000-04-24",
+    "2000-05-01",
+    "2000-12-25",
+    "2000-12-26",
+    "2001-01-01",
+    "2001-04-13",
+    "2001-04-16",
+    "2001-05-01",
+    "2001-12-25",
+    "2001-12-26",
+    "2001-12-31",
+    "2002-01-01",
+    "2002-03-29",
+    "2002-04-01",
+    "2002-05-01",
+    "2002-12-25",
+    "2002-12-26",
+    "2003-01-01",
+    "2003-04-18",
+    "2003-04-21",
+    "2003-05-01",
+    "2003-12-25",
+    "2003-12-26",
+    "2004-01-01",
+    "2004-04-09",
+    "2004-04-12",
+    "2005-03-25",
+    "2005-03-28",
+    "2005-12-26",
+    "2006-04-14",
+    "2006-04-17",
+    "2006-05-01",
+    "2006-12-25",
+    "2006-12-26",
+    "2007-01-01",
+    "2007-04-06",
+    "2007-04-09",
+    "2007-05-01",
+    "2007-12-25",
+    "2007-12-26",
+    "2008-01-01",
+    "2008-03-21",
+    "2008-03-24",
+    "2008-05-01",
+    "2008-12-25",
+    "2008-12-26",
+    "2009-01-01",
+    "2009-04-10",
+    "2009-04-13",
+    "2009-05-01",
+    "2009-12-25",
+    "2010-01-01",
+    "2010-04-02",
+    "2010-04-05",
+    "2011-04-22",
+    "2011-04-25",
+    "2011-12-26",
+    "2012-04-06",
+    "2012-04-09",
+    "2012-05-01",
+    "2012-12-25",
+    "2012-12-26",
+    "2013-01-01",
+    "2013-03-29",
+    "2013-04-01",
+    "2013-05-01",
+    "2013-12-25",
+    "2013-12-26",
+    "2014-01-01",
+    "2014-04-18",
+    "2014-04-21",
+    "2014-05-01",
+    "2014-12-25",
+    "2014-12-26",
+    "2015-01-01",
+    "2015-04-03",
+    "2015-04-06",
+    "2015-05-01",
+    "2015-12-25",
+    "2016-01-01",
+    "2016-03-25",
+    "2016-03-28",
+    "2016-12-26",
+    "2017-04-14",
+    "2017-04-17",
+    "2017-05-01",
+    "2017-12-25",
+    "2017-12-26",
+    "2018-01-01",
+    "2018-03-30",
+    "2018-04-02",
+    "2018-05-01",
+    "2018-12-25",
+    "2018-12-26",
+    "2019-01-01",
+    "2019-04-19",
+    "2019-04-22",
+    "2019-05-01",
+    "2019-12-25",
+    "2019-12-26",
+    "2020-01-01",
+    "2020-04-10",
+    "2020-04-13",
+    "2020-05-01",
+    "2020-12-25"
+  ],
+  "missing_weekday_interpretation": "Not automatically data defects: ECB publication calendar includes TARGET closures; no external calendar equivalence asserted.",
+  "currency_summary": {
+    "USD": {
+      "rows": 5632,
+      "unique_dates": 5632,
+      "raw_rows": 5694,
+      "explicit_missing_values": 62,
+      "first_date": "1999-01-04",
+      "last_date": "2020-12-31",
+      "missing_vs_union_dates": [],
+      "weekend_observations": 0,
+      "calendar_day_gap_counts": {
+        "1": 4458,
+        "2": 19,
+        "3": 1108,
+        "4": 18,
+        "5": 28
+      },
+      "min_value": 0.8252,
+      "max_value": 1.599,
+      "first_value": "1.1789",
+      "last_value": "1.2271",
+      "OBS_STATUS": {
+        "A": 5632
+      },
+      "OBS_CONF": {
+        "": 4819,
+        "F": 813
+      },
+      "TITLE": [
+        "US dollar/Euro ECB reference exchange rate"
+      ],
+      "TITLE_COMPL": [
+        "ECB reference exchange rate, US dollar/Euro, 2.15 pm (C.E.T.)"
+      ],
+      "UNIT": [
+        "USD"
+      ],
+      "UNIT_MULT": [
+        "0"
+      ]
+    },
+    "JPY": {
+      "rows": 5632,
+      "unique_dates": 5632,
+      "raw_rows": 5694,
+      "explicit_missing_values": 62,
+      "first_date": "1999-01-04",
+      "last_date": "2020-12-31",
+      "missing_vs_union_dates": [],
+      "weekend_observations": 0,
+      "calendar_day_gap_counts": {
+        "1": 4458,
+        "2": 19,
+        "3": 1108,
+        "4": 18,
+        "5": 28
+      },
+      "min_value": 89.3,
+      "max_value": 169.75,
+      "first_value": "133.73",
+      "last_value": "126.49",
+      "OBS_STATUS": {
+        "A": 5632
+      },
+      "OBS_CONF": {
+        "": 4819,
+        "F": 813
+      },
+      "TITLE": [
+        "Japanese yen/Euro ECB reference exchange rate"
+      ],
+      "TITLE_COMPL": [
+        "ECB reference exchange rate, Japanese yen/Euro, 2.15 pm (C.E.T.)"
+      ],
+      "UNIT": [
+        "JPY"
+      ],
+      "UNIT_MULT": [
+        "0"
+      ]
+    },
+    "GBP": {
+      "rows": 5632,
+      "unique_dates": 5632,
+      "raw_rows": 5694,
+      "explicit_missing_values": 62,
+      "first_date": "1999-01-04",
+      "last_date": "2020-12-31",
+      "missing_vs_union_dates": [],
+      "weekend_observations": 0,
+      "calendar_day_gap_counts": {
+        "1": 4458,
+        "2": 19,
+        "3": 1108,
+        "4": 18,
+        "5": 28
+      },
+      "min_value": 0.5711,
+      "max_value": 0.97855,
+      "first_value": "0.7111",
+      "last_value": "0.89903",
+      "OBS_STATUS": {
+        "A": 5632
+      },
+      "OBS_CONF": {
+        "": 4819,
+        "F": 813
+      },
+      "TITLE": [
+        "Pound sterling/Euro ECB reference exchange rate"
+      ],
+      "TITLE_COMPL": [
+        "ECB reference exchange rate, Pound sterling/Euro, 2.15 pm (C.E.T.)"
+      ],
+      "UNIT": [
+        "GBP"
+      ],
+      "UNIT_MULT": [
+        "0"
+      ]
+    },
+    "CHF": {
+      "rows": 5632,
+      "unique_dates": 5632,
+      "raw_rows": 5694,
+      "explicit_missing_values": 62,
+      "first_date": "1999-01-04",
+      "last_date": "2020-12-31",
+      "missing_vs_union_dates": [],
+      "weekend_observations": 0,
+      "calendar_day_gap_counts": {
+        "1": 4458,
+        "2": 19,
+        "3": 1108,
+        "4": 18,
+        "5": 28
+      },
+      "min_value": 0.9816,
+      "max_value": 1.6803,
+      "first_value": "1.6168",
+      "last_value": "1.0802",
+      "OBS_STATUS": {
+        "A": 5632
+      },
+      "OBS_CONF": {
+        "": 4819,
+        "F": 813
+      },
+      "TITLE": [
+        "Swiss franc/Euro ECB reference exchange rate"
+      ],
+      "TITLE_COMPL": [
+        "ECB reference exchange rate, Swiss franc/Euro, 2.15 pm (C.E.T.)"
+      ],
+      "UNIT": [
+        "CHF"
+      ],
+      "UNIT_MULT": [
+        "0"
+      ]
+    },
+    "CAD": {
+      "rows": 5632,
+      "unique_dates": 5632,
+      "raw_rows": 5694,
+      "explicit_missing_values": 62,
+      "first_date": "1999-01-04",
+      "last_date": "2020-12-31",
+      "missing_vs_union_dates": [],
+      "weekend_observations": 0,
+      "calendar_day_gap_counts": {
+        "1": 4458,
+        "2": 19,
+        "3": 1108,
+        "4": 18,
+        "5": 28
+      },
+      "min_value": 1.2139,
+      "max_value": 1.8123,
+      "first_value": "1.8004",
+      "last_value": "1.5633",
+      "OBS_STATUS": {
+        "A": 5632
+      },
+      "OBS_CONF": {
+        "": 4819,
+        "F": 813
+      },
+      "TITLE": [
+        "Canadian dollar/Euro ECB reference exchange rate"
+      ],
+      "TITLE_COMPL": [
+        "ECB reference exchange rate, Canadian dollar/Euro, 2.15 pm (C.E.T.)"
+      ],
+      "UNIT": [
+        "CAD"
+      ],
+      "UNIT_MULT": [
+        "0"
+      ]
+    },
+    "AUD": {
+      "rows": 5632,
+      "unique_dates": 5632,
+      "raw_rows": 5694,
+      "explicit_missing_values": 62,
+      "first_date": "1999-01-04",
+      "last_date": "2020-12-31",
+      "missing_vs_union_dates": [],
+      "weekend_observations": 0,
+      "calendar_day_gap_counts": {
+        "1": 4458,
+        "2": 19,
+        "3": 1108,
+        "4": 18,
+        "5": 28
+      },
+      "min_value": 1.1639,
+      "max_value": 2.0735,
+      "first_value": "1.91",
+      "last_value": "1.5896",
+      "OBS_STATUS": {
+        "A": 5632
+      },
+      "OBS_CONF": {
+        "": 4819,
+        "F": 813
+      },
+      "TITLE": [
+        "Australian dollar/Euro ECB reference exchange rate"
+      ],
+      "TITLE_COMPL": [
+        "ECB reference exchange rate, Australian dollar/Euro, 2.15 pm (C.E.T.)"
+      ],
+      "UNIT": [
+        "AUD"
+      ],
+      "UNIT_MULT": [
+        "0"
+      ]
+    }
+  },
+  "point_in_time_limit": "Current downloaded vintage of historical values; source TIME_PERIOD is not a proven original release timestamp.",
+  "data_not_included": [
+    "open",
+    "high",
+    "low",
+    "close of exchange session",
+    "volume",
+    "bid",
+    "ask",
+    "intraday path"
+  ],
+  "reserved_crypto_data_accessed": false
+}

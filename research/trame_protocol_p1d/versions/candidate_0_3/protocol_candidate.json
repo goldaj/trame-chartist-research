@@ -1,0 +1,343 @@
+{
+  "id": "TRAME-P1D-candidate-0.3",
+  "date": "2026-10-15",
+  "status": "documentary candidate 0.3 after descriptive input audit; not frozen, registered, implemented or trained",
+  "scope": "Retrospective comparison of price-history representations for a GPT-like forecaster; scientific raw reference prices only",
+  "data": {
+    "source": "ECB EXR",
+    "existing_raw_sha256": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de",
+    "currencies": [
+      "USD",
+      "JPY",
+      "GBP",
+      "CHF",
+      "CAD",
+      "AUD"
+    ],
+    "denominator": "EUR",
+    "units": "currency units per one EUR",
+    "vintage": "downloaded 2026-10-14; historical initial releases not verified",
+    "use": "exploratory; no claim of untouched confirmatory test",
+    "point_in_time_scope": "conditional on the revised snapshot; not a certified real-time replay",
+    "intraday_timestamp": null,
+    "current_framework_not_backdated": true
+  },
+  "sampling": {
+    "context_observations": 256,
+    "horizons_in_valid_publications": [
+      1,
+      5,
+      20
+    ],
+    "primary_horizon": 1,
+    "common_cohort_across_horizons": true,
+    "train": [
+      "1999-01-01",
+      "2009-12-31"
+    ],
+    "development": [
+      "2010-01-01",
+      "2014-12-31"
+    ],
+    "retrospective_pseudo_test": [
+      "2015-01-01",
+      "2020-12-31"
+    ],
+    "target_must_remain_inside_split": true,
+    "historical_context_can_precede_split": true,
+    "missing_prices_imputed": false,
+    "future_observed_gap_as_input": false
+  },
+  "information_contract_p1a": {
+    "context_at_origin_i": "P[i-255:i+1] and past publication dates only",
+    "normalization": "x64[j;i] = log(P[j]/P[i]) / s[i], calculated in float64; x32 = float32(x64)",
+    "scale": "s[i] = max(population_std of the last 64 observed log increments ending at i, 1e-6)",
+    "common_side_information": [
+      "one exact P[i] per asset and origin",
+      "one s[i] per asset and origin",
+      "currency identity",
+      "native unit",
+      "known past calendar gaps",
+      "observation type"
+    ],
+    "forbidden_side_channels": [
+      "exact anchor for every historical observation",
+      "true future residual",
+      "normalization over target or full dataset",
+      "per-observation continuous scale that is not part of the declared input"
+    ],
+    "loss_positions": "only targets strictly after origin i",
+    "not_prefix_causal_inside_context": true,
+    "causal_at_forecast_origin": true,
+    "multi_position_next_token_loss_on_recentered_history": false,
+    "common_numeric_parent": "C receives x32; all quantized codes are calculated from the same x32 promoted exactly to float64",
+    "derived_metadata": [
+      "escape flag derived from k",
+      "past publication calendar gap in days"
+    ],
+    "first_source_date_gap_sentinel": "0 means no predecessor; not an observed zero-day interval"
+  },
+  "representations": {
+    "C": "continuous x32; two-parameter-per-dimension affine scalar encoder",
+    "Q": "k=floor(8*float64(x32)), m=(2*k+1)/16, exact float32 midpoint under declared k bound; affine scalar encoder",
+    "F": "Raw flat cell code; F+ learned encoder N(m)+T[k] in core, N(m) outside; symbolic corrections initialized zero",
+    "H": "Raw coarse-plus-three-bits code; H+ learned encoder N(m)+A[q]+sum(Bj[bj]) in core, N(m) outside; symbolic corrections initialized zero",
+    "mathematical_same_information": [
+      "Q",
+      "F",
+      "H"
+    ],
+    "precision_and_serialization_equivalence_must_be_verified": true,
+    "primary_contrast": [
+      "Q",
+      "H+"
+    ],
+    "secondary_contrasts": [
+      [
+        "C",
+        "Q"
+      ],
+      [
+        "F+",
+        "H+"
+      ]
+    ],
+    "main_p1a_context_token_count": "one fused local representation per observation; local encoder cost is counted",
+    "quantizer_grid_unchanged_from_01": true,
+    "quantizer_parent_precision_clarified_in_02": true,
+    "integer_division": "floor division, including for negative integers",
+    "flat_core_k": [
+      -2048,
+      2047
+    ],
+    "hierarchical_core_q": [
+      -256,
+      255
+    ],
+    "hierarchical_formula": "q=floor(k/8); r=k-8*q; k=8*q+4*b2+2*b1+b0",
+    "canonical_escape_serialization": "ESC, mandatory sign, decimal absolute integer without leading zeros, END; no negative zero",
+    "escape_model_treatment": "P1-A local decoding to midpoint; same within-model affine N(m) on EVERY observation, with no symbolic correction outside core; models do not share trained weights",
+    "not_a_symbolic_tail_generation_test": true,
+    "sufficient_exact_float32_midpoint_k_bound": [
+      -8388608,
+      8388607
+    ],
+    "out_of_bound_policy": "Stop and amend precision before scoring; no silent clipping or row removal",
+    "real_context_bound_audit_completed": true,
+    "same_information_scope": "Raw canonical Q/F/H codes plus common metadata, conditional on precision audit; no injectivity guarantee after learned embeddings",
+    "input_parameter_counts": {
+      "C": "2*d",
+      "Q": "2*d",
+      "F": "4098*d",
+      "H": "520*d"
+    },
+    "nonlinear_numeric_controls_required": true,
+    "numerical_control_hyperparameters_frozen": false,
+    "learned_encoder_labels": {
+      "C": "C",
+      "Q": "Q",
+      "F": "F+",
+      "H": "H+"
+    },
+    "hybrid_is_not_a_pure_symbolic_test": true,
+    "numerical_base_uses_quantized_midpoint_not_continuous_x": true,
+    "symbolic_correction_initialization": "All rows of T/A/B exactly zero; never-visited rows must remain zero under chosen optimizer",
+    "paired_initialization_requirement": "Within a seed, Q/F+/H+ share initial numeric-base and backbone values, not trained parameters",
+    "parameter_counts_unchanged_from_02": true,
+    "local_compute_not_unchanged": "Numerical base now evaluated in core too for F+/H+; measure actual compute later",
+    "pure_symbolic_02_status": "Archived design; not universally rejected, but separate escape branch cannot be treated as trained"
+  },
+  "outputs": {
+    "quantiles": [
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.95
+    ],
+    "physical_target": "future ECB reference price in original unit",
+    "common_head": "21 affine outputs from the last context state; per horizon z1 free, successive z values add softplus(raw); q=P[i]*exp(s[i]*sqrt(h)*z)",
+    "secondary": [
+      "native-price MAE of median",
+      "native pinball",
+      "coverage and width at 50, 80, 90 percent",
+      "horizons 5 and 20"
+    ],
+    "not_full_distribution_strict_propriety": true,
+    "not_joint_trajectory_distribution": true,
+    "primary_evaluation_loss": "mean pinball over seven quantiles, horizon 1, per-origin division by P[i]*s[i], then equal asset weight",
+    "candidate_training_loss": "Equal mean over three horizons and seven quantiles, each pinball divided by P[i]*s[i]*sqrt(h); equal asset weight"
+  },
+  "comparisons": {
+    "representation_first": "shared parameters, target asset history only",
+    "H1": "local versus globally shared; report both equal total compute and equal target exposure",
+    "H2": "same multivariate architecture separately trained with observed other assets or their mask",
+    "raw_asset_shuffle_as_valid_null": false,
+    "numeraire_cross_rates_as_new_independent_data": false,
+    "pretrained_checkpoint_used": false,
+    "equal_total_parameter_count_claimed": false,
+    "dummy_unused_parameter_padding_allowed": false,
+    "decoded_input_identity_control_required": true
+  },
+  "capacity_candidates": [
+    {
+      "layers": 4,
+      "width": 128,
+      "heads": 4,
+      "approx_block_parameters": 786432,
+      "exact_minimal_candidate_total_parameters": {
+        "C_Q": 797717,
+        "H": 864021,
+        "F": 1322005
+      }
+    },
+    {
+      "layers": 6,
+      "width": 256,
+      "heads": 8,
+      "approx_block_parameters": 4718592,
+      "exact_minimal_candidate_total_parameters": {
+        "C_Q": 4747797,
+        "H": 4880405,
+        "F": 5796373
+      }
+    },
+    {
+      "layers": 8,
+      "width": 512,
+      "heads": 8,
+      "approx_block_parameters": 25165824,
+      "exact_minimal_candidate_total_parameters": {
+        "C_Q": 25237525,
+        "H": 25502741,
+        "F": 27334677
+      }
+    }
+  ],
+  "capacity_note": "Approximate block counts retained for history; exact totals are conditional on the documentary minimal architecture and encoder above. Same backbone does not mean equal total parameters or compute. Revision 0.3 reuses the former escape affine as the always-used numerical base, preserving counts but changing computation.",
+  "candidate_seed_count_per_retained_configuration": 5,
+  "inference": {
+    "unit": "paired per-origin loss vector across all six assets",
+    "bootstrap_block_lengths_publications": [
+      20,
+      60,
+      120
+    ],
+    "primary_block_length": 60,
+    "candidate_resamples": 2000,
+    "time_dependence_and_nonstationarity_require_sensitivity": true,
+    "training_seeds_not_independent_market_histories": true,
+    "no_confirmatory_p_value_claim_for_exploratory_pseudo_test": true
+  },
+  "open_before_freeze": [
+    "Exact nonlinear/periodic numeric control and non-additive hierarchical sensitivity",
+    "Optimizer, initial numeric-base/backbone scheme, tuning budget, compute/exposure stopping and convergence diagnostics",
+    "Future implementation checks of zero unvisited symbol rows, nonfinite outputs and actual local computation",
+    "Historical methodology/vintage qualification and prospective or independent final test",
+    "Scaling continuation rule and family holdout inventory",
+    "Independent critical review when service becomes available"
+  ],
+  "implemented": false,
+  "trained": false,
+  "forecast_results": null,
+  "amended_at_utc": "2026-10-15T14:46:11.822930+00:00",
+  "prior_candidate_sha256": "51f61ef6c59b5ab5cc4aba786c125a99c3c87b98203fca572f8a78a9f853be56",
+  "amendment_reason": "Descriptive real-data audit found no training escapes but 195 development escapes in 40 CHF contexts: separate F/H escape modules would receive no task-data gradient. Use the numerical affine base for all values and zero-initialized symbolic corrections. No forecast scores informed this amendment.",
+  "minimal_architecture": {
+    "scope": "Shared-parameter single-asset-context P1-A only; cross-asset H2 architecture not specified here",
+    "core": "Pre-norm causal dense Transformer; standard biased Q/K/V and output projections; biased d->4d->d GELU MLP; two affine LayerNorms per block",
+    "position": "fixed sinusoidal, no trained positional parameters",
+    "asset_embeddings": "6*d parameters",
+    "metadata_projection": "affine four-to-d: log current price, log current scale, log1p past calendar gap, escape flag; 5*d parameters",
+    "final_normalization": "affine LayerNorm, 2*d parameters",
+    "output_head": "affine d-to-21, 21*d+21 parameters",
+    "per_block_parameters": "12*d*d+13*d",
+    "common_without_value_encoder": "12*L*d*d+13*L*d+34*d+21",
+    "counts_are_algebraic_not_instantiated": true,
+    "optimizer_and_initialization_not_frozen": true,
+    "zero_symbolic_corrections_specified": true,
+    "initial_numeric_base_and_backbone_scheme_still_open": true
+  },
+  "baselines": {
+    "status": "documentary definitions only; not implemented or fitted",
+    "information": "Unquantized own history for B0/B1/B1m/B2/B3-own; six histories for B3-cross in H2 only",
+    "B0": "All price quantiles equal P[i]",
+    "B1": "P[i]*exp(s[i]*sqrt(h)*Phi_inverse(tau)); zero log drift, not price martingale",
+    "B1m": "P[i]*exp(-0.5*h*s[i]^2+s[i]*sqrt(h)*Phi_inverse(tau)); price-mean-preserving sensitivity under assumed law",
+    "B2": {
+      "increments": "log(P[j]/P[j-h]) for j=i-255+h,...,i; 256-h overlapping increments",
+      "candidates": "P[i]*exp(historical increment)",
+      "quantile": "linear interpolation with index (n-1)*tau in terminal-price space, not log space"
+    },
+    "B3": {
+      "variants": [
+        "own",
+        "cross"
+      ],
+      "features_per_available_asset": "last 20 log increments divided by current s plus log(current s)",
+      "feature_counts": {
+        "own": 21,
+        "cross": 126
+      },
+      "target": "log(P[a,i+h]/P[a,i])/(s[a,i]*sqrt(h))",
+      "fit": "separate target asset and horizon; mean squared error + alpha*sum(beta^2); intercept unpenalized",
+      "scaling": "fit-only column mean and population std; zero-variance column set to zero with scale 1",
+      "alpha_grid": [
+        0.0001,
+        0.01,
+        1,
+        100
+      ],
+      "residual_years": [
+        2005,
+        2006,
+        2007,
+        2008,
+        2009
+      ],
+      "residual_fit_cutoff": "For year y use fitting origins whose h target date is strictly before Jan 1 of y; predict common-cohort origins whose target stays in year y",
+      "residual_quantiles": "pool chronological out-of-fit residuals separately by asset/horizon/alpha/own-cross; linear interpolation in standardized residual space",
+      "final_fit": "all admissible 1999-2009 training origins, retaining chronological residual quantiles",
+      "prediction": "P[i]*exp(s[i]*sqrt(h)*(predicted_z+residual_quantile))",
+      "alpha_selection": "mean primary h1 development score, equal assets; one alpha per own-cross variant for all assets/horizons; largest alpha for exact tie",
+      "pseudo_test_policy": "freeze coefficients, scalers, alpha and residual quantiles before pseudo-test; no refitting on its targets",
+      "calendar_blocks_verified": true,
+      "uniform_coverage_guarantee": false,
+      "calendar_residual_counts_per_asset_by_horizon": {
+        "1": 1255,
+        "5": 1239,
+        "20": 1179
+      },
+      "residual_values_computed": false
+    }
+  },
+  "arithmetic_verification": {
+    "path": "design_arithmetic_checks.json",
+    "scope": "Documentary arithmetic verification only; constructed examples; no market dataset read",
+    "passed": true,
+    "predictor_instantiated": false
+  },
+  "amendment_is_post_descriptive_data_inspection": true,
+  "pseudo_test_representation_has_been_inspected": true,
+  "descriptive_input_audit": {
+    "id": "TRAME-P1D-preflight-01",
+    "directory": "audits/preflight_01",
+    "report_sha256": "2eaae8b6cb2c8b45a5b1d9efc0edf39a608fd144896d004b2aa6b07f8342be2f",
+    "freeze": {
+      "frozen_at_utc": "2026-10-15T14:38:46.849488+00:00",
+      "scope": "Freeze of descriptive preflight analysis only, not registration or freezing of P1-D predictive protocol",
+      "protocol_sha256": "64cd0b05f581052347d3d1de30991d4c33246848671e38fe8b17e20429f3b9a1",
+      "audit_sha256": "1be9019bd455e5d20d78a1aff7b5fcf5e79a286b0a263fd571796b0490e5b823",
+      "candidate_sha256": "51f61ef6c59b5ab5cc4aba786c125a99c3c87b98203fca572f8a78a9f853be56",
+      "market_data_read_by_this_freeze": false,
+      "report_existed_before_freeze": false
+    },
+    "numeric_preconditions_passed": true,
+    "total_repeated_input_exposures": 8166912,
+    "unique_underlying_input_prices": 33672,
+    "forecast_scores": null,
+    "followup_scale_diagnostic_is_posthoc": true
+  }
+}

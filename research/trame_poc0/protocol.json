@@ -1,0 +1,33 @@
+{
+  "id": "TRAME-POC0-reconstruction-v1.1",
+  "date": "2026-10-14",
+  "purpose": "Descriptive representation research on real observations; no forecasting labels, trading, or neural training",
+  "assets": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "ADAUSDT", "XRPUSDT", "LTCUSDT", "EOSUSDT", "TRXUSDT"],
+  "months_download_allowed": ["2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10"],
+  "calibration": ["2021-01-01", "2021-09-01"],
+  "development": ["2021-09-01", "2021-11-01"],
+  "holdout_not_downloaded": ["2021-11", "2021-12"],
+  "source": "https://data.binance.vision/data/spot/monthly/klines/",
+  "usage": "Personal non-production research; Binance attribution and terms apply; no production rights presumed",
+  "raw_interval": "1h",
+  "derived_interval_hours": 4,
+  "timestamp_unit": "ms for this 2021 corpus",
+  "missing": "No imputation; reset context after gaps; H4 requires four complete UTC-aligned H1 parents; v1.1 excludes and separately audits early-closing source candles from fixed-H1 comparison",
+  "amendment": "Initial acquisition stopped on 2021-02-11 03:00 UTC BTCUSDT candle closing before the hour. No representation metrics computed. v1 preserved. v1.1 excludes early-close candles without imputation and reports them separately; timestamps outside their stated hour still fail. Also derives split dates from protocol and validates reconstructed finiteness.",
+  "geometry": ["g=ln(O/C_previous)", "b=ln(C/O)", "u=ln(H/max(O,C))", "d=ln(min(O,C)/L)", "v=ln(1+V/V_reference)"],
+  "sigma": "Population standard deviation of last 64 fully past close-to-close log returns; 65 previous contiguous bars required; floor 0.000001",
+  "volume_reference": "Median of 64 strictly previous contiguous base-asset volumes; floor 0.000000000001",
+  "common_side_information": ["previous true close for local reconstruction", "past sigma", "past volume reference", "bar duration", "asset and timestamp"],
+  "codecs": {
+    "continuous": "float64 geometry, numerical control",
+    "fixed": "Nearest-even rounding: step 0.001 for g,b,u,d and 0.05 for v; unbounded integer symbols",
+    "quantile64": "Per-field zero symbol plus at most 63 quantile bins on nonzero calibration values pooled over assets, separately per timeframe; unique internal quantile boundaries; calibration median per occupied bin; open exterior bins; out-of-range support audited",
+    "signs": "g,b signs and u,d,v zero/nonzero presence; calibration median of each nonzero category",
+    "adaptive": "Nearest-even rounding: step 0.1 past sigma for g,b,u,d and 0.05 for v; observed past sigma supplied as side information; unbounded integer symbols"
+  },
+  "metrics": ["local OHLC absolute log error in basis points, mean/p50/p95/p99/max", "close error", "volume absolute ln(1+V/Vref) error", "absolute relative volume error when V>0; zero case separately", "invalid OHLC counts", "tail error for absolute body above training 99th percentile", "quantile beyond-calibration-support share", "symbol occupancy and unseen tuple share as description only", "cumulative conditional codec drift with true anchor only at development segment start and observed side information"],
+  "events": "Separate close-only level diagnostic: delta=0.005 log, one aggregated crossing per observed close, signed integer steps, duration, residual; no intrabar path; segment-end no-event time right-censored",
+  "selection": "No winning language or predictive performance declared by reconstruction alone; no repeated tuning of this frozen comparison",
+  "statistical_scope": "Eight correlated crypto pairs at one venue, convenience sample, no confidence claim of cross-market universality; H1 and H4 share parents",
+  "future": "Neural VQ, forecasting, calibration of probabilities, multi-market transfer, net-of-cost execution and final holdout evaluation are not performed in POC0"
+}

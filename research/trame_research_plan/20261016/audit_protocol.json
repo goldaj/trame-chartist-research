@@ -1,0 +1,38 @@
+{
+  "id": "TRAME-P1B-target-audit-01",
+  "scope": "Descriptive known training labels only, not forecasting or fitting",
+  "source": "research/trame_poc0/ecb_exploratory/raw/ecb_exr_daily_six_1999_2020_20261014T094250Z_b8a684b6331d.csv",
+  "source_sha256": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de",
+  "currencies": [
+    "USD",
+    "JPY",
+    "GBP",
+    "CHF",
+    "CAD",
+    "AUD"
+  ],
+  "date_filter_before_price_parsing": [
+    "1999-01-01",
+    "2009-12-31"
+  ],
+  "whole_file_hash_reads_bytes_only": true,
+  "context": 256,
+  "future_steps": 20,
+  "expected_origins_per_asset": 2541,
+  "scale": "population std of last64 log(P[j]/P[j-1]) ending at origin, floor1e-6; delta=s/8",
+  "primary_codec": "canonical integer cumulative n[h]=floor((log(P[i+h])-log(P_i))/delta+.5); k=diff n",
+  "comparison_codec": "float64 recursive u_hat += delta*floor((u_target-u_hat)/delta+.5)",
+  "metrics": [
+    "counts, min/max, zero fraction, abs-code quantiles .5/.9/.99/.999/1, distinct codes, core escapes",
+    "unique source target dates vs overlapping label presentations",
+    "recurrence code mismatches",
+    "canonical error in delta units, closest half-boundary distance, scale floor count",
+    "max-abs-k example per currency, ties resolved by first origin then horizon"
+  ],
+  "floating_error_allowance": "64*float64_eps*(1+abs(log_anchor)+abs(log_target)+abs(delta*n)) in log-price units; engineering diagnostic, not a proven forward-error bound",
+  "failure_policy": "report all mismatches or bound violations; no silent repair/exclusion; never replace this audit report",
+  "data_status": "revised2026 snapshot; historical training partition already explored; not point-in-time or untouched evidence",
+  "predictive_training": false,
+  "development_or_pseudo_test_values_parsed": false,
+  "declaration_time_utc": "2026-10-16T02:59:29.484880+00:00"
+}

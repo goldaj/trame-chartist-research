@@ -1,0 +1,106 @@
+{
+  "checked_at_utc": "2026-10-15T20:22:25.840422+00:00",
+  "scope": "integer, rational and scalar design arithmetic only; no market inputs; no predictive implementation",
+  "inputs_sha256": {
+    "research\\trame_protocol_p1d\\protocol_candidate.json": "38a46b5e907b3db94807215d995067d292fba67f10d3a6de0ffef0fc867d6c88",
+    "research\\trame_research_plan\\20261015\\p1b0_candidate.json": "e990a499dbf58349d8981858cb3796f60c376beba46d60559f65eead15f6fcbf",
+    "research\\trame_research_plan\\20261015\\plan.json": "88e15c56e2a17f59062db5345b31bf3cbca75f24de2ebfd70409d85544b0c6cc"
+  },
+  "script_sha256": "e0209146404739255d9beefea7df1259ddc395ffd054766abd6f5f3416972b33",
+  "parameter_counts": [
+    {
+      "L": 4,
+      "d": 128,
+      "affine": 797717,
+      "periodic": 799765,
+      "mlp": 799797,
+      "H+": 864021,
+      "F+": 1322005
+    },
+    {
+      "L": 6,
+      "d": 256,
+      "affine": 4747797,
+      "periodic": 4751893,
+      "mlp": 4751925,
+      "H+": 4880405,
+      "F+": 5796373
+    },
+    {
+      "L": 8,
+      "d": 512,
+      "affine": 25237525,
+      "periodic": 25245717,
+      "mlp": 25245749,
+      "H+": 25502741,
+      "F+": 27334677
+    }
+  ],
+  "budget": {
+    "runs": 88,
+    "tuning_runs": 48,
+    "repeat_runs": 40,
+    "updates_per_run": 2400,
+    "examples_per_run": 457380,
+    "campaign_updates": 211200,
+    "campaign_examples": 40249440,
+    "campaign_context_vectors": 10303856640,
+    "three_sizes_runs": 264,
+    "three_sizes_two_budgets_runs": 528
+  },
+  "recurrence": {
+    "constructed_log_values": [
+      "0",
+      "1/16",
+      "-1/16",
+      "17/16",
+      "-35/16",
+      "0",
+      "1/1000"
+    ],
+    "delta": "1/8",
+    "example": {
+      "k": [
+        0,
+        1,
+        -1,
+        9,
+        -26,
+        17,
+        0
+      ],
+      "states": [
+        "0",
+        "1/8",
+        "0",
+        "9/8",
+        "-17/8",
+        "0",
+        "0"
+      ],
+      "errors": [
+        "0",
+        "1/16",
+        "1/16",
+        "1/16",
+        "1/16",
+        "0",
+        "-1/1000"
+      ]
+    },
+    "extra_constructed_transitions": 387,
+    "bound_passed": true,
+    "prefix_unchanged_by_future_suffix": true
+  },
+  "normalizer_algebra": {
+    "finite_rational_example_only": true,
+    "Z": "19/10",
+    "mass_exactly_one": true,
+    "gaussian_implementation_tested": false
+  },
+  "head_bias_inverse_softplus_check": true,
+  "model_instantiated": false,
+  "trained": false,
+  "market_performance": null,
+  "joint_moment_bound": "analytical derivation in document 12; not established by numeric examples"
+}

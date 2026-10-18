@@ -1,0 +1,13 @@
+# Source historique Banque mondiale, audit exploratoire
+
+Classeur officiel reçu le 15 octobre 2026 à 07:09:25 UTC, inchangé. La provenance et le SHA-256 sont dans acquisition_manifest.json. audit_workbook.py lit uniquement ce classeur et écrit audit.json. Aucun modèle, aucune prévision, aucune imputation ni modification du classeur.
+
+Source : World Bank Prospects Group, World Bank Commodity Price Data (Pink Sheet), mise à jour indiquée au 2 octobre 2026. [Page officielle](https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/world-bank-commodities-price-data-the-pink-sheet). Le [catalogue](https://datacatalog.worldbank.org/search/dataset/0038238/commodity-prices-history-and-projections) déclare l'ensemble public sous CC BY 4.0. L'audit et la documentation TRAME sont des transformations distinctes des observations originales. Ne pas attribuer les conclusions TRAME à la Banque mondiale.
+
+La plage Monthly Prices!B7:BT807 contient 71 séries et 801 mois. Le comptage relève 50 451 valeurs numériques, 6 416 absences et quatre cellules d'erreur Excel #VALUE! dans Rice, Thai 25%, aux adresses AH350, AH360, AH372, AH584. Le premier audit s'est arrêté sur les ellipses Unicode U+2026 et ces erreurs ; le parseur distingue maintenant ces états, sans convertir les erreurs en nombres. Le classeur possède également une feuille Mismatch Details : comparaison interne du fournisseur, conservée et non appliquée comme une correction.
+
+Les six séries retenues pour qualifier la profondeur 1960-2020 sont Gold, Silver, Copper, Crude oil Brent, Maize, Wheat US HRW. Elles comportent chacune 732 valeurs numériques positives sans absence. Cela ne certifie pas une définition économique stable depuis 1960 : prolongements historiques, changements de source et proxies doivent encore être documentés. La description de Gold signale un changement à partir de juin 2025. Les moyennes mensuelles ne sont pas des bougies OHLCV. La version reçue en 2026 ne constitue pas une archive des données effectivement publiées à chaque date.
+
+Le fichier entier a été téléchargé et sa couverture inspectée : aucune partie ne doit être qualifiée de test final jamais examiné. Les historiques 2021-2026 ne sont pas utilisés ici pour calculer une performance. Les indices composites ne sont pas des marchés indépendants de leurs composantes.
+
+Reproduction : exécuter audit_workbook.py avec Python 3.12 et openpyxl 3.1.5. L'empreinte de la source, la continuité des mois, l'unicité des dates, le bilan des cellules et la complétude des six séries choisies sont contrôlés. Ces contrôles ne vérifient pas chaque valeur contre un second fournisseur.

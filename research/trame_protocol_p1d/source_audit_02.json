@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-15",
+  "sources": [
+    {
+      "title": "xVal, version 2, 2024-12-15",
+      "url": "https://arxiv.org/html/2310.02989v2",
+      "read": "Methods 2.1/2.2 and experiments 3/3.1; abstract/version metadata",
+      "limit": "Scientific temperature/orbit tasks; not a financial forecasting reproduction"
+    },
+    {
+      "title": "On Embeddings for Numerical Features in Tabular Deep Learning, NeurIPS 2022",
+      "url": "https://papers.nips.cc/paper/2022/file/9e9f0ffc3d836836ca96cbf8fe14b105-Paper-Conference.pdf",
+      "read": "Sections 3 and 4, especially PLE and periodic embeddings; not complete appendix review",
+      "limit": "Tabular benchmarks; no TRAME performance implication"
+    },
+    {
+      "title": "Number Cookbook, version 2",
+      "url": "https://arxiv.org/html/2411.03766v2",
+      "read": "Section 3.1 and appendix A.4.1/A.4.2",
+      "limit": "Arithmetic tasks, no financial evaluation; model-current statements dated to paper"
+    },
+    {
+      "title": "NumPy 2.3 quantile manual",
+      "url": "https://numpy.org/doc/2.3/reference/generated/numpy.quantile.html",
+      "read": "method parameter and linear interpolation definition",
+      "limit": "Defines numerical convention, not a forecast validity result"
+    }
+  ],
+  "not_read": [
+    "xVal v3 URL returned 404; v2 is the verified version"
+  ]
+}

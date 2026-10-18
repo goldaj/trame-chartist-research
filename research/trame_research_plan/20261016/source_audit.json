@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-10-16T03:09:50.061470+00:00",
+  "reproduced_publication_results": false,
+  "sources": [
+    {
+      "title": "SciPy log_ndtr",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.log_ndtr.html",
+      "read": "definition, notes, examples; page displayed SciPy1.18.0",
+      "use": "log CDF numerical cancellation; no financial validation",
+      "library_executed": false
+    },
+    {
+      "title": "SciPy logsumexp",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html",
+      "read": "API definition, notes, examples",
+      "use": "stable reduction for proposed normalizer; no implementation tested",
+      "library_executed": false
+    },
+    {
+      "title": "PixelCNN++",
+      "url": "https://arxiv.org/abs/1701.05517",
+      "read": "abstract rechecked; section2.1 previously read for edition2.3",
+      "use": "prior CDF-difference likelihood; bounded logistic pixel setting differs from unbounded Gaussian price codes"
+    }
+  ],
+  "own_derivations": [
+    "DPCM integer lattice equivalence",
+    "head counts",
+    "normalizer output-gradient identity",
+    "uniform tail upper bound",
+    "differenced quantization error mechanism under explicitly additional iid-uniform approximation"
+  ],
+  "runtime_limitations": "SciPy and mpmath absent; four standard-library illustrations only, no high-precision reference or derivatives"
+}

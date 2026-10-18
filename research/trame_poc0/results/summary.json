@@ -1,0 +1,102 @@
+[
+  {
+    "timeframe": "1h",
+    "codec": "continuous",
+    "bars": 11176,
+    "mean": 4.506307440458005e-13,
+    "max": 4.440892098500627e-12,
+    "tail_n": 37,
+    "tail_mean": 5.101024707737206e-13,
+    "invalid": 0
+  },
+  {
+    "timeframe": "1h",
+    "codec": "fixed",
+    "bars": 11176,
+    "mean": 2.5678628369594025,
+    "max": 14.740121760276942,
+    "tail_n": 37,
+    "tail_mean": 2.9819726588643296,
+    "invalid": 0
+  },
+  {
+    "timeframe": "1h",
+    "codec": "quantile64",
+    "bars": 11176,
+    "mean": 2.281868559895253,
+    "max": 2456.123775904045,
+    "tail_n": 37,
+    "tail_mean": 199.9713917353299,
+    "invalid": 0
+  },
+  {
+    "timeframe": "1h",
+    "codec": "signs",
+    "bars": 11176,
+    "mean": 33.141932046264664,
+    "max": 3113.384806127341,
+    "tail_n": 37,
+    "tail_mean": 425.5187050631875,
+    "invalid": 0
+  },
+  {
+    "timeframe": "1h",
+    "codec": "adaptive",
+    "bars": 11176,
+    "mean": 2.421230062860964,
+    "max": 41.32366314112645,
+    "tail_n": 37,
+    "tail_mean": 3.415375855059842,
+    "invalid": 0
+  },
+  {
+    "timeframe": "4h",
+    "codec": "continuous",
+    "bars": 2392,
+    "mean": 4.519563838748939e-13,
+    "max": 4.440892098500627e-12,
+    "tail_n": 7,
+    "tail_mean": 3.1720657846433036e-13,
+    "invalid": 0
+  },
+  {
+    "timeframe": "4h",
+    "codec": "fixed",
+    "bars": 2392,
+    "mean": 2.576144433874649,
+    "max": 13.887374520995927,
+    "tail_n": 7,
+    "tail_mean": 2.7443477500756215,
+    "invalid": 0
+  },
+  {
+    "timeframe": "4h",
+    "codec": "quantile64",
+    "bars": 2392,
+    "mean": 4.0039195059000745,
+    "max": 2347.713276803906,
+    "tail_n": 7,
+    "tail_mean": 270.9477168725009,
+    "invalid": 0
+  },
+  {
+    "timeframe": "4h",
+    "codec": "signs",
+    "bars": 2392,
+    "mean": 67.57167593270293,
+    "max": 2931.5300673017146,
+    "tail_n": 7,
+    "tail_mean": 833.556948902593,
+    "invalid": 0
+  },
+  {
+    "timeframe": "4h",
+    "codec": "adaptive",
+    "bars": 2392,
+    "mean": 4.209515661246047,
+    "max": 31.452259068284107,
+    "tail_n": 7,
+    "tail_mean": 3.838920363759833,
+    "invalid": 0
+  }
+]

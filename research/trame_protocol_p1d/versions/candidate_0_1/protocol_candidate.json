@@ -1,0 +1,97 @@
+{
+  "id": "TRAME-P1D-candidate-0.1",
+  "date": "2026-10-15",
+  "status": "documentary candidate, not frozen, registered, implemented or executed",
+  "scope": "Retrospective comparison of price-history representations for a GPT-like forecaster; scientific raw reference prices only",
+  "data": {
+    "source": "ECB EXR",
+    "existing_raw_sha256": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de",
+    "currencies": ["USD", "JPY", "GBP", "CHF", "CAD", "AUD"],
+    "denominator": "EUR",
+    "units": "currency units per one EUR",
+    "vintage": "downloaded 2026-10-14; historical initial releases not verified",
+    "use": "exploratory; no claim of untouched confirmatory test",
+    "point_in_time_scope": "conditional on the revised snapshot; not a certified real-time replay",
+    "intraday_timestamp": null,
+    "current_framework_not_backdated": true
+  },
+  "sampling": {
+    "context_observations": 256,
+    "horizons_in_valid_publications": [1, 5, 20],
+    "primary_horizon": 1,
+    "common_cohort_across_horizons": true,
+    "train": ["1999-01-01", "2009-12-31"],
+    "development": ["2010-01-01", "2014-12-31"],
+    "retrospective_pseudo_test": ["2015-01-01", "2020-12-31"],
+    "target_must_remain_inside_split": true,
+    "historical_context_can_precede_split": true,
+    "missing_prices_imputed": false,
+    "future_observed_gap_as_input": false
+  },
+  "information_contract_p1a": {
+    "context_at_origin_i": "P[i-255:i+1] and past publication dates only",
+    "normalization": "x[j;i] = log(P[j]/P[i]) / s[i]",
+    "scale": "s[i] = max(population_std of the last 64 observed log increments ending at i, 1e-6)",
+    "common_side_information": ["one exact P[i] per asset and origin", "one s[i] per asset and origin", "currency identity", "native unit", "known past calendar gaps", "observation type"],
+    "forbidden_side_channels": ["exact anchor for every historical observation", "true future residual", "normalization over target or full dataset", "per-observation continuous scale that is not part of the declared input"],
+    "loss_positions": "only targets strictly after origin i",
+    "not_prefix_causal_inside_context": true,
+    "causal_at_forecast_origin": true,
+    "multi_position_next_token_loss_on_recentered_history": false
+  },
+  "representations": {
+    "C": "continuous float32 normalized historical levels",
+    "Q": "midpoints of cells of width 1/8, supplied numerically",
+    "F": "flat symbolic index of exactly the same cells as Q, with non-clipping escape for large integers",
+    "H": "hierarchical coarse integer plus three binary refinements, in bijection with the same cell index as Q/F",
+    "mathematical_same_information": ["Q", "F", "H"],
+    "precision_and_serialization_equivalence_must_be_verified": true,
+    "primary_contrast": ["Q", "H"],
+    "secondary_contrasts": [["C", "Q"], ["F", "H"]],
+    "main_p1a_context_token_count": "one fused local representation per observation; local encoder cost is counted"
+  },
+  "outputs": {
+    "quantiles": [0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95],
+    "physical_target": "future ECB reference price in original unit",
+    "common_head": "positive nondecreasing native-price quantiles with the same readout architecture",
+    "primary_loss": "mean pinball over seven quantiles, horizon 1, per-origin division by P[i]*s[i], then equal asset weight",
+    "secondary": ["native-price MAE of median", "native pinball", "coverage and width at 50, 80, 90 percent", "horizons 5 and 20"],
+    "not_full_distribution_strict_propriety": true,
+    "not_joint_trajectory_distribution": true
+  },
+  "comparisons": {
+    "representation_first": "shared parameters, target asset history only",
+    "H1": "local versus globally shared; report both equal total compute and equal target exposure",
+    "H2": "same multivariate architecture separately trained with observed other assets or their mask",
+    "raw_asset_shuffle_as_valid_null": false,
+    "numeraire_cross_rates_as_new_independent_data": false,
+    "pretrained_checkpoint_used": false
+  },
+  "capacity_candidates": [
+    {"layers": 4, "width": 128, "heads": 4, "approx_block_parameters": 786432},
+    {"layers": 6, "width": 256, "heads": 8, "approx_block_parameters": 4718592},
+    {"layers": 8, "width": 512, "heads": 8, "approx_block_parameters": 25165824}
+  ],
+  "capacity_note": "12*layers*width^2 only; embeddings, readout, norms, biases and adapters extra. No implementation or hardware estimate.",
+  "candidate_seed_count_per_retained_configuration": 5,
+  "inference": {
+    "unit": "paired per-origin loss vector across all six assets",
+    "bootstrap_block_lengths_publications": [20, 60, 120],
+    "primary_block_length": 60,
+    "candidate_resamples": 2000,
+    "time_dependence_and_nonstationarity_require_sensitivity": true,
+    "training_seeds_not_independent_market_histories": true,
+    "no_confirmatory_p_value_claim_for_exploratory_pseudo_test": true
+  },
+  "open_before_freeze": [
+    "Exact encoder and escape serialization including total parameter counts",
+    "Optimizer, tuning budget, equal-compute stopping and convergence diagnostics",
+    "Exact baseline definitions and quantile interpolation",
+    "Historical methodology/vintage qualification and prospective or independent final test",
+    "Scaling continuation rule and family holdout inventory",
+    "Independent critical review when service becomes available"
+  ],
+  "implemented": false,
+  "trained": false,
+  "forecast_results": null
+}

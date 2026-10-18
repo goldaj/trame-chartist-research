@@ -1,0 +1,56 @@
+{
+  "id": "TRAME-P1D-preflight-01",
+  "date": "2026-10-15",
+  "scope": "Read-only descriptive audit of existing real ECB contexts; no prediction, fitting, learned tokenizer or source acquisition",
+  "candidate": "TRAME-P1D-candidate-0.2",
+  "source_sha256": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de",
+  "currencies": ["USD", "JPY", "GBP", "CHF", "CAD", "AUD"],
+  "corpus_status": "Already acquired and explored revised 2026 snapshot, not a point-in-time or untouched test corpus",
+  "context_prices": 256,
+  "horizons_publications": [1, 5, 20],
+  "splits": {
+    "train": ["1999-01-01", "2009-12-31"],
+    "development": ["2010-01-01", "2014-12-31"],
+    "retrospective_pseudo_test": ["2015-01-01", "2020-12-31"]
+  },
+  "origins": "At least 256 prices; origin date in split; target at horizon 20 remains in split; shared origins for all horizons",
+  "numeric_contract": {
+    "returns": "float64 log(P[t]/P[t-1])",
+    "scale": "population standard deviation of the 64 increments ending at origin i, floor 1e-6",
+    "x64": "float64 log(P[j]/P[i])/s[i] for j=i-255,...,i",
+    "x32": "round x64 once to float32, common parent for C/Q/F/H",
+    "k": "floor(8*float64(x32))",
+    "midpoint": "(2*k+1)/16",
+    "flat_core_range": [-2048, 2047],
+    "hierarchical_coarse_range": [-256, 255],
+    "sufficient_float32_exact_midpoint_k_range": [-8388608, 8388607],
+    "bounds_failure": "Stop before any model work; retain diagnostics and amend rather than clip or silently drop origins"
+  },
+  "descriptive_outputs_declared_before_execution": [
+    "Per split/currency origin counts, repeated scalar input counts, unique underlying input dates",
+    "Ranges of x32, k and scales; scale-floor activation count",
+    "Number of numerical-bound breaches, nonfinite inputs, nonexact midpoint round trips and hierarchical decode failures",
+    "Escape counts and affected origin counts, for fixed vocabulary only",
+    "Distinct core flat and coarse codes; train-pooled core support for shared encoders",
+    "Development and pseudo-test core cells not seen in pooled training, and coarse components not seen; exposure and origin counts",
+    "Count of cells whose code would differ if quantized from x64 rather than the common x32",
+    "Maximum absolute x64-to-x32 rounding and x32-to-midpoint quantization errors",
+    "Date-only counts for B3 residual years 2005-2009, each horizon, respecting chronological label cutoffs"
+  ],
+  "interpretation": {
+    "overlapping_windows_are_not_independent_samples": true,
+    "no_entropy_estimator_or_predictive_information_measure": true,
+    "no_forecast_scores": true,
+    "no_hyperparameter_selection_from_results": true,
+    "symbol_support_does_not_prove_generalization": true,
+    "future_target_values_not_used_in_statistics": true,
+    "any_broadening_requires_documented_amendment": true
+  },
+  "baseline_calendar": {
+    "training_origins": "Original train common cohort only",
+    "residual_years": [2005, 2006, 2007, 2008, 2009],
+    "fit": "For year y and horizon h, original train origins with h-target strictly before Jan 1 y",
+    "residual": "Original train origins in year y with h-target remaining in year y",
+    "no_regression_or_residual_values_computed": true
+  }
+}

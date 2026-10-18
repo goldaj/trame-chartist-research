@@ -1,0 +1,46 @@
+{
+  "id": "TRAME-P1B0-candidate-0.1",
+  "date": "2026-10-15",
+  "status": "theoretical candidate only; no predictive implementation or training",
+  "information": "H_i contains only history available at origin i; no historical next-token loss on origin-normalized context",
+  "future_steps": 20,
+  "anchor": "u_hat[0]=log(P[i])",
+  "step": "delta=s[i]/8 fixed at origin",
+  "target_code": "floor((log(P[i+h])-u_hat[h-1])/delta+1/2)",
+  "state_update": "u_hat[h]=u_hat[h-1]+delta*k[h]",
+  "rounding_ties": "toward positive infinity",
+  "training": "teacher forcing with true prior codes only",
+  "generation": "use generated codes only; no unknown true future price/state",
+  "joint": "product p(k[h] | H_i,k[1:h]) with exclusive h endpoint in conditioning",
+  "base_mass": "q(k)=Phi((k+1/2-mu)/sigma)-Phi((k-1/2-mu)/sigma), k in all integers, sigma>0",
+  "core": [
+    -2048,
+    2047
+  ],
+  "weight": "exp(a_k) in core; 1 outside",
+  "normalizer": "q(outside core)+sum_core q(k)*exp(a_k)",
+  "probability": "p(k)=q(k)*weight(k)/Z",
+  "tail_parameters_trained_on_ordinary_targets": true,
+  "sampling": "central cells plus two tail categories, then rounded truncated Gaussian within selected tail",
+  "reconstruction_bound": "abs(u_hat[h]-log(P[i+h])) <= delta/2 in exact arithmetic, synchronized true-code states",
+  "forecast_bound": null,
+  "sufficient_joint_first_moment_conditions": {
+    "mu": "abs(mu)<=M uniformly in generated states",
+    "sigma": "0<sigma<=S uniformly",
+    "log_corrections": "abs(a_k)<=A uniformly",
+    "constants": "M,S,A finite; values not chosen yet",
+    "C": "exp(2*A+delta/2+delta*M+delta^2*S^2/2)",
+    "bound": "E[generated_price_h | H_i] <= P_i*C^h"
+  },
+  "open": [
+    "Full GPT output parameterization and its parameter/FLOP counts",
+    "Finite bounds M,S,A and sigma floor",
+    "Stable log-CDF differences, normalization and exact-tail sampling",
+    "Scoring measure, quantization effect and Monte-Carlo diagnostics",
+    "Independent data and optimization budget"
+  ],
+  "predictor_implemented": false,
+  "trained": false,
+  "market_results": null,
+  "arithmetic_recurrence_check": "design_checks.json; constructed rational examples only"
+}

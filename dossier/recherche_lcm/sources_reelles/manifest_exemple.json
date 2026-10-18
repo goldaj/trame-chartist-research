@@ -1,0 +1,32 @@
+{
+  "source": "https://data.binance.vision/data/spot/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2020-03.zip",
+  "sha256": "cc36c481c31ef93115d96b5a7045ec2ef737e5339546d6688cb1f677526c6787",
+  "checksum_match": true,
+  "rows": 743,
+  "unique_open_times": 743,
+  "hour_gaps": 1,
+  "date_example": "2020-03-12T12:00:00Z",
+  "previous_close": 6067.01,
+  "raw_row": [
+    "1584014400000",
+    "6064.27000000",
+    "6307.59000000",
+    "5900.00000000",
+    "6028.10000000",
+    "18013.68913000",
+    "1584017999999",
+    "109638434.04779811",
+    "137478",
+    "8751.51634000",
+    "53305592.87920226",
+    "0"
+  ],
+  "representation": {
+    "gap": -0.00045172480506467977,
+    "body": -0.005982302538007447,
+    "up": 0.039339497744161206,
+    "down": 0.021479518965141147,
+    "log_volume": 9.798942766857895
+  },
+  "purpose": "Illustration documentaire sur donnees historiques reelles, aucun entrainement ni backtest. Archive recue en octobre2026, disponibilite historique a la reception non attestee."
+}

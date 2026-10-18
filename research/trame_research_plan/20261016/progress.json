@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-16",
+  "parent_plan": "../20261015/plan.json",
+  "active_candidate": "p1b0_candidate.json",
+  "P1D_candidate": "../../trame_protocol_p1d/protocol_candidate.json",
+  "stages": {
+    "1": "started",
+    "2": "started, specified and target codec audited; qualification incomplete",
+    "3": "planned, prior source inventories exist",
+    "4": "planned",
+    "5": "not started",
+    "6": "planned"
+  },
+  "new_persona_cycle": 12,
+  "personas_simulated": true,
+  "independent_review": false,
+  "agent_status": "previously known service limits; no new independent-agent review claimed",
+  "next": [
+    "Specify common native-price scores and Monte Carlo error control",
+    "Challenge bounds and conditional distribution on a declared multi-market matrix",
+    "Qualify differentiable numerical primitives and gradients in future technical phase",
+    "Set P1B optimization and compute-balanced controls"
+  ],
+  "no_models_or_training": true,
+  "no_new_market_download": true,
+  "future_test_not_opened": true
+}

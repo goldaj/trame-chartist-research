@@ -1,0 +1,97 @@
+{
+  "computed_at_utc": "2026-10-15T12:22:14.869054+00:00",
+  "scope": "Documentary arithmetic verification only; constructed examples; no market dataset read",
+  "script_sha256": "6ab02f33b2b375d030365925088d4085c915e7b3bdc7117563b9337ffcda450d",
+  "all_assertions_passed": true,
+  "parameter_counts": [
+    {
+      "layers": 4,
+      "width": 128,
+      "heads": 4,
+      "common": 797461,
+      "C_Q": 797717,
+      "H": 864021,
+      "F": 1322005,
+      "F_minus_H": 457984
+    },
+    {
+      "layers": 6,
+      "width": 256,
+      "heads": 8,
+      "common": 4747285,
+      "C_Q": 4747797,
+      "H": 4880405,
+      "F": 5796373,
+      "F_minus_H": 915968
+    },
+    {
+      "layers": 8,
+      "width": 512,
+      "heads": 8,
+      "common": 25236501,
+      "C_Q": 25237525,
+      "H": 25502741,
+      "F": 27334677,
+      "F_minus_H": 1831936
+    }
+  ],
+  "core_integer_bijections_checked": 4096,
+  "float32_exact_midpoint_boundary_witnesses": [
+    {
+      "k": -8388608,
+      "midpoint": -1048575.9375
+    },
+    {
+      "k": -8388607,
+      "midpoint": -1048575.8125
+    },
+    {
+      "k": -1,
+      "midpoint": -0.0625
+    },
+    {
+      "k": 0,
+      "midpoint": 0.0625
+    },
+    {
+      "k": 8388606,
+      "midpoint": 1048575.8125
+    },
+    {
+      "k": 8388607,
+      "midpoint": 1048575.9375
+    }
+  ],
+  "float32_failure_witness": {
+    "k": 8388608,
+    "exact_midpoint": 1048576.0625,
+    "float32_midpoint": 1048576.0
+  },
+  "rounding_order_counterexample": {
+    "float64_values": [
+      0.12499999999999999,
+      0.125
+    ],
+    "common_float32": 0.125,
+    "quantize_float64_before_cast": [
+      0,
+      1
+    ],
+    "quantize_common_float32": [
+      1,
+      1
+    ]
+  },
+  "interpolation_example_not_market_data": {
+    "prices": [
+      1,
+      9
+    ],
+    "price_space_median": 5.0,
+    "exp_log_space_median": 3.0000000000000004
+  },
+  "real_data_range_audited": false,
+  "predictor_implemented": false,
+  "predictor_trained": false,
+  "forecast_results": null
+}

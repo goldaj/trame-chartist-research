@@ -1,0 +1,63 @@
+{
+  "kind": "calendar-only design audit, not a forecast evaluation",
+  "computed_at_utc": "2026-10-15T09:52:16.748478+00:00",
+  "source_sha256": "b8a684b6331d3cf0310a1838efdce806495906ead99d672671642c3bf24130de",
+  "currency_count": 6,
+  "date_count": 5632,
+  "context_prices": 256,
+  "horizons_publications": [
+    1,
+    5,
+    20
+  ],
+  "common_origins_for_all_horizons": true,
+  "historical_context_may_precede_split": true,
+  "no_proven_point_in_time_vintages": true,
+  "splits": {
+    "train": {
+      "calendar_range": [
+        "1999-01-01",
+        "2009-12-31"
+      ],
+      "dates": 2816,
+      "origins": 2541,
+      "warmup_origins_excluded": 255,
+      "boundary_origins_excluded": 20,
+      "first_origin": "1999-12-27",
+      "last_origin": "2009-12-02",
+      "asset_origins": 15246,
+      "target_cells_three_horizons": 45738,
+      "maximum_target_date": "2009-12-31"
+    },
+    "development": {
+      "calendar_range": [
+        "2010-01-01",
+        "2014-12-31"
+      ],
+      "dates": 1281,
+      "origins": 1261,
+      "warmup_origins_excluded": 0,
+      "boundary_origins_excluded": 20,
+      "first_origin": "2010-01-04",
+      "last_origin": "2014-12-01",
+      "asset_origins": 7566,
+      "target_cells_three_horizons": 22698,
+      "maximum_target_date": "2014-12-31"
+    },
+    "retrospective_pseudo_test": {
+      "calendar_range": [
+        "2015-01-01",
+        "2020-12-31"
+      ],
+      "dates": 1535,
+      "origins": 1515,
+      "warmup_origins_excluded": 0,
+      "boundary_origins_excluded": 20,
+      "first_origin": "2015-01-02",
+      "last_origin": "2020-12-02",
+      "asset_origins": 9090,
+      "target_cells_three_horizons": 27270,
+      "maximum_target_date": "2020-12-31"
+    }
+  }
+}

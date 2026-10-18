@@ -1,0 +1,30 @@
+{
+  "url": "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx",
+  "retrieved_at_utc": "2026-10-15T07:09:25.210166+00:00",
+  "sha256": "ea1c350827878ea3bbe30e3cda16a13fd3bd5b409b8458940dc94a36b5a33154",
+  "bytes": 586099,
+  "path": "research\\trame_corpus\\worldbank\\CMO-Historical-Data-Monthly_ea1c35082787.xlsx",
+  "response_headers": {
+    "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "Content-Length": "586099",
+    "Connection": "close",
+    "Server": "Apache",
+    "X-Dispatcher": "dispatcher3useast1",
+    "X-Vhost": "publish",
+    "Strict-Transport-Security": "max-age=63072000; includeSubdomains;",
+    "X-XSS-Protection": "1; mode=block;",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "Last-Modified": "Fri, 02 Oct 2026 18:57:55 GMT",
+    "Accept-Ranges": "bytes",
+    "Date": "Thu, 15 Oct 2026 04:16:29 GMT",
+    "Vary": "Accept-Encoding",
+    "X-Cache": "Hit from cloudfront",
+    "Via": "1.1 0c8581ec0e7d8065247f356673f571fa.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Pop": "CDG50-P6",
+    "Alt-Svc": "h3=\":443\"; ma=86400",
+    "X-Amz-Cf-Id": "y4CsA07VwIonNFBd5EMyJUxLpCXe4vskubRzgVLWfBQ075YO5ik_xQ==",
+    "Age": "10375"
+  },
+  "status": "exploratory snapshot, not point-in-time vintage"
+}
