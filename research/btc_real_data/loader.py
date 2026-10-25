@@ -118,10 +118,12 @@ def create_cases(history: tuple[DailyBTC, ...], *, context: int = 20) -> dict[st
     for a,b in zip(history,history[1:]):
         if b.day != a.day + timedelta(days=1):
             raise ValueError("non-contiguous BTC history")
-    codes=[quantize_return(a.close,b.close) for a,b in zip(history,history[1:])]
+    # Deliberately do not even quantize the January-June 2026 labels.
+    usable = tuple(q for q in history if q.day <= DEVELOPMENT_END)
+    codes=[quantize_return(a.close,b.close) for a,b in zip(usable,usable[1:])]
     grouped: dict[str,list[ForecastCase]] = {"train":[],"development":[]}
     for i in range(context,len(codes)):
-        origin, future = history[i], history[i+1]
+        origin, future = usable[i], usable[i+1]
         if future.day <= TRAIN_END:
             target_group="train"
         elif future.day <= DEVELOPMENT_END:
