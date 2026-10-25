@@ -19,10 +19,10 @@ des secrets non fournis ou de fusionner implicitement les PR.
 | --- | --- | --- |
 | A3c budget équitable | 1. Protocole ; 2. profil opérations/CPU ; 3. extensions contexte ; 4. pilote apparié à budget proxy ; 5. rapport et critères d'équité | 1–5 livrés en mode exploratoire ; **No-Go** pour vraie égalité des FLOPs, mémoire GPU et tuning |
 | A4 Mamba | 1. Versions/API officielles ; 2. isolation matériel/dépendances ; 3. backbones réels ; 4. causalité et gradients ; 5. benchmark multi-seed | Recherche préalable ; GPU/test de Mamba-3 à effectuer |
-| A5 hybrides | 1. hypothèses ; 2. bras d'architecture ; 3. ablations ; 4. équité/rapport | À faire |
-| A6 fondations temporelles | 1. versions/licences ; 2. contamination ; 3. adapteurs ; 4. test zéro-shot ; 5. comparaison | À faire |
-| A7 données réelles | 1. reprise cache BTC ; 2. horizons/splits ; 3. témoins ; 4. campagne multibras ; 5. évaluation robuste ; 6. gel hors-échantillon ; 7. extension multi-actifs | Infrastructure de la release BTC prête ; campagne réelle non exécutée |
-| A8 Research Lab | 1. export résultats ; 2. visualisation ; 3. traçabilité ; 4. qualité/packaging ; 5. évaluation utilisabilité | Démonstrateur synthétique préexistant ; ajouts à faire |
+| A5 hybrides | 1. hypothèses ; 2. bras d'architecture ; 3. ablations ; 4. équité/rapport | A5 témoin attention+GRU achevé PR #12 ; véritables SSM hybrides non exécutés |
+| A6 fondations temporelles | 1. versions/licences ; 2. contamination ; 3. adapteurs ; 4. test zéro-shot ; 5. comparaison | A6.1–3 implémentés PR #13 ; A6.4–5 sans poids ni audit contamination |
+| A7 données réelles | 1. reprise cache BTC ; 2. horizons/splits ; 3. témoins ; 4. campagne multibras ; 5. évaluation robuste ; 6. gel hors-échantillon ; 7. extension multi-actifs | A7.1–3 disponibles PR #14 ; campagnes BTC réelles et test indépendant non exécutés |
+| A8 Research Lab | 1. export résultats ; 2. visualisation ; 3. traçabilité ; 4. qualité/packaging ; 5. évaluation utilisabilité | Rapport HTML/JSON de preuves synthétiques PR #15 ; rendu financier et produit à faire |
 | P1 modèles | 1. sélection justifiée ; 2. représentations ; 3. entraînement/tuning ; 4. checkpoints | À faire |
 | P2 robustesse | 1. stress ; 2. calibration ; 3. dérive ; 4. test indépendant ; 5. limites et Go/No-Go | À faire |
 | P3 économie | 1. contrat de simulation ; 2. frais/spread/slippage ; 3. comparateurs ; 4. intervalles ; 5. analyse de risque | À faire |
@@ -100,3 +100,27 @@ artefacts JSON du run #40219261965 sont la preuve reproductible.
 La recherche multi-architectures se poursuit par A4 sous statut
 exploratoire, **sans** classement de modèle, FLOPs réels alignés
 ou campagne sur historiques BTC.
+
+
+## Synthèse d'intégration : branches PARALLÈLES et PR draft
+
+| PR | Domaine | Base | Évidence | État scientifique |
+| --- | --- | --- | --- | --- |
+| [#10](https://github.com/goldaj/trame-chartist-research/pull/10) | A3c coûts/proxy | #9 | Actions #40219261965, deux JSON | tests CPU verts, **No-Go compute-fair intégral** |
+| [#11](https://github.com/goldaj/trame-chartist-research/pull/11) | A4 Mamba2/3 adaptateurs | branche #10 | Actions #40220143641 | gardes CPU verts, kernels CUDA **non testés** |
+| [#12](https://github.com/goldaj/trame-chartist-research/pull/12) | A5 hybride attention+GRU | branche #10 | Actions #40220598879 | micro-synthétique négatif ; hybride SSM non testé |
+| [#13](https://github.com/goldaj/trame-chartist-research/pull/13) | A6 fondations temporelles | branche #10 | Actions #40221061337 | licences/horodatages testés ; zéro-shot non exécuté |
+| [#14](https://github.com/goldaj/trame-chartist-research/pull/14) | A7 baselines BTC | branche #10 | Actions #40221411599 | fixtures vertes ; **aucun résultat BTC réel** |
+| [#15](https://github.com/goldaj/trame-chartist-research/pull/15) | A8 digests HTML/JSON | branche #10 | Actions #40222019571 | export de preuves synthétiques ; produit non livré |
+
+**IMPORTANT pour Codex : #11 à #15 sont des branches soeurs, pas une
+chaîne linéaire.** Leur ordre de merge/rebase devra être déterminé
+lors d'une revue des diffs, pas présumé. Dans cette conversation,
+les commits de chacune de ces branches n'ont jamais été fusionnés
+à la branche #10, à #9, à #8 ou à `main`.
+
+Les runs mentionnés correspondent aux derniers commits de **code**
+testés ; des commits uniquement documentaires `[skip ci]` sont
+ensuite intervenus, ne pas affirmer qu'un HEAD de docs est revalidé
+sans contrôle effectif. Les empreintes d'artefacts s'appuient sur
+les runs cités.
