@@ -1,8 +1,7 @@
-"""Streaming BTC/USD historical OHLCV H1/M1 reader, no source re-audit.
+"""Streaming BTC/USD OHLCV H1/M1 reader from pinned private GitHub Release.
 
-The owner has accepted the Bitstamp ZIP artifact contents as-is.
-Files are copied unchanged from the Hyperliquid bot's successful Action.
-This module reads them locally; it never downloads, opens wallets or trades.
+Owner accepts the historical data as-is. Files reside unchanged in a local
+cache, not the TRAME Git repository. This reader is offline and never trades.
 """
 from __future__ import annotations
 
@@ -10,19 +9,19 @@ from collections import deque
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+from research.btc_h1_m1.release_store import DEFAULT_CACHE, H1_FILES, M1_FILES, ensure_assets
 import csv
 import gzip
 import math
 
 
-ROOT = Path(__file__).resolve().parent / "raw"
+ROOT = DEFAULT_CACHE
 CUTOFF = datetime(2026, 7, 1, tzinfo=timezone.utc)
 TRAIN_END_EXCLUSIVE = datetime(2022, 1, 1, tzinfo=timezone.utc)
 DEVELOPMENT_END_EXCLUSIVE = datetime(2026, 1, 1, tzinfo=timezone.utc)
 INTERVALS = {"H1": 3600, "M1": 60}
 COLUMNS = ("datetime_utc", "open", "high", "low", "close", "volume")
-H1_FILE = "BTCUSD_bitstamp_hourly_2012-2026.csv.gz"
-M1_FILES = tuple(f"BTCUSD_bitstamp_1min_{year}.csv.gz" for year in range(2012, 2027))
+H1_FILE = H1_FILES[0]
 FIXED_SCALE = 1000.0  # fixed log-return encoder, not fit from test/future
 
 
@@ -55,15 +54,8 @@ class Case:
 
 
 def files_for(interval: str, folder: Path = ROOT) -> tuple[Path, ...]:
-    if interval not in INTERVALS:
-        raise ValueError("interval must be H1 or M1")
-    root = Path(folder)
-    names = (H1_FILE,) if interval == "H1" else M1_FILES
-    paths = tuple(root / name for name in names)
-    for p in paths:
-        if not p.is_file() or p.is_symlink():
-            raise FileNotFoundError(f"missing historical archive {p.name}")
-    return paths
+    """Resolve a pinned private Release's local cache; no implicit network."""
+    return ensure_assets(interval, directory=folder)
 
 
 def read_bars(interval: str, folder: Path = ROOT):
