@@ -89,7 +89,7 @@ et son registre avant chaque choix d'architecture, acquisition,
 entraînement, validation, benchmark ou présentation de résultat.
 Tout travail futur doit nommer ses bras inclus, les bras différés,
 les contrôles et le statut de leur équité. Les comparaisons
-inégales en FLOPs/capacité demeurent exploratoires. Mamba-2,
+inégales en FLOPs/capacité demeurent exploratoires. Mamba-2, Mamba-3,
 hybrides, TimesFM-3, Chronos-2, Moirai-2 sont des candidats,
 **non implémentés** dans le premier laboratoire. Ne jamais confondre
 GRU avec Mamba ni une miniature GPT-style aléatoirement initialisée
@@ -117,3 +117,14 @@ synthétique ne sont **pas** des FLOPs, des latences trading,
 ni des métriques de performance financière. L'étude de coût
 inférence longue séquence, mémoire et égalité de FLOPs
 reste à développer.
+
+
+## Qualification externe obligatoire
+
+Consulter `research/architecture_comparison/EXTERNAL_MODELS_ADMISSIBILITY_20261025.md`
+avant d'installer un nouveau backbone ou des poids externes.
+Mamba-3 (2026) rejoint Mamba-2. Les poids TimesFM 3.0 sont
+**non commerciaux et non production** selon les conditions
+vérifiées le 25/10/2026, distinctes de la licence du code.
+Pas de package GPU dans la CI CPU commune et pas de sélection
+d'un modèle zero-shot comme s'il avait été entraîné from scratch.
