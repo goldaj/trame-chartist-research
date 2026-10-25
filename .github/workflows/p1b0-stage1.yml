@@ -22,8 +22,12 @@ jobs:
         run: python -m unittest discover -s research/p1b0_numerics -p 'test_*.py' -v
       - name: Run numerical stress
         run: python research/p1b0_numerics/preflight.py > preflight-stage1.json
+      - name: Measure CPU full-normalizer costs
+        run: python research/p1b0_numerics/benchmark_stage1.py > p1b0_cpu_timings.json
       - name: Upload pure synthetic results
         uses: actions/upload-artifact@v4
         with:
           name: p1b0-stage1-preflight
-          path: preflight-stage1.json
+          path: |
+            preflight-stage1.json
+            p1b0_cpu_timings.json
