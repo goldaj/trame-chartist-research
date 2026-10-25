@@ -123,3 +123,35 @@ plus haut, sans nouvelle demande de fusion ou d'exécution de trading.
   aucune source qualifiée; étapes 5–7 sont explicitement No-Go.
 - Ébauche autorisée d'un outil offline research-only étape 8,
   pas de produit financier prétendument prédictif.
+
+## 2026-10-25 — Reprise après interruption de conversation
+
+**Utilisateur (verbatim, heure locale non certifiée)** :
+> la conversation Avancement_projets_codex_2_discussion_trop_longue a planté, sûrement parce que trop longue.
+> J'aimerais que tu continues là où tu t'étais arrêté dans cette conversation.
+> Fait moi un résumé de la consigne et un second résumé de là où tu en es,
+> puis enchaîne tout de suite sur continuer.
+
+**Assistant (résumé non verbatim)** : après recherche du contexte,
+contrôle des branches et PR GitHub, confirme une version offline
+`chatgpt/trame-research-lab-v01-20261025`. Branches d'étapes
+1–4 présentes ; blocage confirmé de la qualification réelle des
+sources point-in-time et des étapes financières 5–7. Continue par
+une branche distincte `chatgpt/trame-lab-hardening-20261025`.
+
+**Sous-étapes d'implémentation (vérifiables dans Git)** :
+- 8.2a : affichage sémantique et textuel des NLL parallèlement au
+  graphique SVG décoratif, lien clavier de contournement, tests HTML.
+- 8.6a : plage 1–200 strictement validée avant entraînement,
+  métriques artificielles finies, quantiles ordonnés, CRPS positif
+  ou nul et mention obligatoire du benchmark fabriqué.
+- Une note `research/trame_lab/HARDENING_NOTE_20261025.md` décrit
+  le périmètre, l'absence d'audit navigateur réel et le risque de
+  paire HTML/JSON non atomique.
+- Aucun changement de modèle, de données, de partition, de marché,
+  de déploiement ou de transaction.
+
+**Attention** : ce journal reste un registre partiel. Les anciennes
+réponses complètes et certains horaires ne sont pas disponibles ;
+ne pas les inventer. Les checks CI doivent être contrôlés avant
+que cette branche soit déclarée entièrement testée.
