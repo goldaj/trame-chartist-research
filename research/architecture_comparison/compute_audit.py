@@ -3,6 +3,7 @@
 Not FLOPs parity. torch.profiler with_flops counts a subset of operators
 (matrix multiplications/convolutions); unaccounted ops are UNKNOWN, not free.
 No historical market data, reserved test or development labels are loaded.
+Artificial random-walk-like paths are created exclusively for cost timing.
 """
 from __future__ import annotations
 
@@ -12,15 +13,15 @@ import platform
 import statistics
 import time
 
+import numpy as np
 import torch
 from torch.profiler import ProfilerActivity, profile
 
 from research.architecture_comparison.experiment import ARMS
-from research.mini_gpt_synthetic.data import get_split, previous_codes
 
 
 SUPPORTED_WIDTHS = (8, 12, 16, 20, 24, 28, 32)
-SUPPORTED_CONTEXTS = (8, 16, 20)
+SUPPORTED_CONTEXTS = (8, 16, 20, 32, 64, 128)
 
 
 def _unique_choices(values, allowed, field):
@@ -56,7 +57,7 @@ def _profiler_summary(model, x, y, *, backward):
             "flops_coverage_complete": False}
 
 
-def compute_audit(*, widths=(8, 16), contexts=(8, 16, 20),
+def compute_audit(*, widths=(8, 16), contexts=(8, 16, 20, 32, 64),
                   repeats=3, seed=20261025, batch_size=8):
     """Measure a compact, explicitly non-confirmatory synthetic CPU workload."""
     _unique_choices(widths, SUPPORTED_WIDTHS, "widths")
@@ -68,13 +69,22 @@ def compute_audit(*, widths=(8, 16), contexts=(8, 16, 20),
     if type(batch_size) is not int or not 2 <= batch_size <= 16:
         raise ValueError("batch_size must be 2..16")
     torch.set_num_threads(1)
-    samples = get_split("train")
+    # New, explicitly artificial cost-only workload. Never open any held-out
+    # stream or use financial data. The prefix is identical for each context.
+    rng = np.random.default_rng(seed)
+    length = max(contexts)
+    target = np.zeros((batch_size, length), dtype=np.int64)
+    state = np.zeros(batch_size, dtype=np.int64)
+    for t in range(length):
+        state = np.floor(.75 * state + rng.normal(size=batch_size) * 3 + .5).astype(np.int64)
+        target[:, t] = state
+    prior = np.zeros_like(target)
+    prior[:, 1:] = target[:, :-1]
     results = []
     for width in widths:
         for context in contexts:
-            toy = samples[:batch_size, :context]
-            x = torch.as_tensor(previous_codes(toy), dtype=torch.float64)
-            y = torch.as_tensor(toy, dtype=torch.float64)
+            x = torch.as_tensor(prior[:, :context].copy(), dtype=torch.float64)
+            y = torch.as_tensor(target[:, :context].copy(), dtype=torch.float64)
             for name, factory in ARMS.items():
                 torch.manual_seed(seed)
                 model = factory(width=width, length=context)
@@ -120,8 +130,9 @@ def compute_audit(*, widths=(8, 16), contexts=(8, 16, 20),
                     "same_inputs_across_architectures": True})
     return {
         "experiment": "TRAME_A3c_partial_compute_accounting_v0.1",
-        "data_origin": "ARTIFICIAL_TRAIN_ONLY",
-        "train_only": True, "reserved_synthetic_test_opened": False,
+        "data_origin": "ARTIFICIAL_COST_ONLY",
+        "train_only": False, "reserved_synthetic_test_opened": False,
+        "cost_only_inputs_generated_from_seed": True,
         "financial_holdout_opened": False, "source_is_real_finance": False,
         "compute_matched": False, "flops_matched": False,
         "flops_coverage_complete": False,
