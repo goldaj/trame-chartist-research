@@ -71,3 +71,34 @@ et le tableau de bord central
 numérique P3 sont des livrables d'ingénierie, la
 validation scientifique financière et TRAME Predictive v1
 restent non terminées.**
+
+## Compléments testés à la reprise
+
+- `checkpoint_contract.py` : contrats P1, tag de release BTC fixé,
+  champ `independent_test_opened=False`, identité SHA-256 de fichiers
+  `.safetensors` sans jamais les exécuter ou les désérialiser.
+  Une empreinte correspondante **n'atteste pas l'entraînement ou la
+  qualité du modèle** ; le résultat interdit explicitement un feu vert.
+- `development_diagnostics.py` : contrôles P2, dates UTC,
+  prévisions disponibles au moment de la décision,
+  pas de cibles 2026, score de couverture 80 %/pinball,
+  abstention préalable en cas de trou ou hors domaine.
+  Les drapeaux d'origine restent des déclarations du producteur.
+- `transaction_sandbox.py` : P3 contrôle désormais les temps
+  de chaque cible et la continuité des marques de prix ;
+  `--sensitivity` ajoute trois scénarios de coûts, un témoin cash et
+  un témoin buy-and-hold **entièrement artificiels**.
+- Workflow `trame-product-safety.yml` : tests sur CPU Ubuntu ;
+  contrôles P1/P2 aussi sur Windows Python 3.12.
+  [run vert #40223108047](https://github.com/goldaj/trame-chartist-research/actions/runs/40223108047)
+  pour les protections produit et les sensibilités de coûts.
+
+```powershell
+python -m unittest research.predictive_product.test_manifest_diagnostics -v
+python -m unittest research.predictive_product.test_safety -v
+python -m research.predictive_product.transaction_sandbox --sensitivity
+```
+
+**Statut : améliorations d'outillage terminées, produit toujours NO-GO.**
+Une validation externe, un test indépendant et de vrais checkpoints restent
+absents. Aucun modèle n'a été choisi, déployé ou relié à un compte.
