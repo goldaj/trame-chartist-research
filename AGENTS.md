@@ -96,3 +96,14 @@ GRU avec Mamba ni une miniature GPT-style aléatoirement initialisée
 avec un LLM actuel pré-entraîné. Préserver le holdout synthétique
 et toutes les limites point-in-time du projet. Branche de travail :
 `chatgpt/trame-multi-architecture-20261025`.
+
+
+## A3a — nuance capacité vs coût
+
+`research/architecture_comparison/experiment.py::choose_widths`
+rapproche les comptes de paramètres de la référence, mais n'égalise
+pas les FLOPs, les opérations GPU ni la latence. Les comparaisons
+restent développement **artificiel**. Avant publication d'une
+conclusion comparative, achever A3b (budget computationnel),
+examiner plusieurs graines et valider sur des marchés admis
+avec évaluation indépendante.
