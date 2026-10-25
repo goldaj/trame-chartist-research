@@ -209,3 +209,16 @@ bloquant les présentations mensongères de données réelles ou d'équité
 de calcul ; tests du rendu et des garde-fous. L'entraînement reste
 CPU synthétique, sans marché. Les runs GitHub Actions du HEAD exact
 doivent être vérifiés avant de conclure que l'intégration est verte.
+
+
+## 2026-10-25 — Étape A3a, contrôle du nombre de paramètres
+
+**Assistant (résumé non verbatim)** : ajoute `choose_widths`
+pour choisir les largeurs des trois bras à proximité de
+2 610 paramètres (référence Transformer). Des tests locaux
+sur le POC artificiel démontrent le choix de largeur 16
+pour les deux attention et 20 pour GRU. Les nombres
+2 610 / 2 418 / 2 602 apparaissent dans les sorties,
+sans prétendre une égalisation de FLOPs, de puissance,
+ni une préférence financière. Le rapport HTML expose aussi la largeur.
+La CI du dernier commit reste la source de vérité pour les tests GitHub.
