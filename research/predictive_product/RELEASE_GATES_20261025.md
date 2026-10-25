@@ -137,3 +137,21 @@ Docs Codex de référence :
 `research/architecture_comparison/A3C_RESULTS_20261025.md`,
 `research/btc_h1_m1/A7_STATUS_20261025.md`
 sur leurs branches respectives.
+
+## Implémentations complémentaires de la reprise
+
+Le contrôle P1.2–P1.4 de l'identité technique est dans
+`checkpoint_contract.py`, sans ouverture de modèles sérialisés
+arbitraires et sans prétendre certifier la qualité d'entraînement.
+Les diagnostics P2 de causalité, abstention et calibration descriptive
+de développement sont dans `development_diagnostics.py`, avec tests
+adversariaux pour 2026, horizons mélangés et signaux disponibles trop tard.
+
+P3 impose la chronologie et la continuité des marques de prix ;
+trois niveaux hypothétiques de coûts sont comparés aux témoins cash
+et buy-and-hold. La simulation reste fondée sur des prix **inventés**
+et n'est pas une reconstruction de transactions Hyperliquid.
+
+Les jeux de tests P1/P2 ont passé Linux et Windows ;
+la CI de P3/P4 a passé Ubuntu. Ces validations **n'altèrent pas**
+les états P1.5, P2.5, P3.5, P4.6 tous ouverts et **NO-GO**.
