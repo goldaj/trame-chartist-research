@@ -102,7 +102,8 @@ def render_html(report):
             or comparison.get('reserved_synthetic_test_opened') is not False
             or comparison.get('financial_holdout_opened') is not False
             or comparison.get('compute_matched') is not False
-            or comparison.get('parameter_matched') is not False):
+            or comparison.get('parameter_matched') is not False
+            or comparison.get('approx_parameter_matched_10pct') is not True):
         raise ValueError('architecture comparison must remain exploratory and artificial')
     expected={'legacy_causal_transformer','modern_gpt_style_mini','recurrent_gru_control'}
     records=comparison.get('results',[])
@@ -111,7 +112,8 @@ def render_html(report):
     seen=set()
     for r in records:
         key=(r['architecture'],r['seed'])
-        if key in seen or type(r['parameter_count']) is not int or r['parameter_count']<1:
+        if (key in seen or type(r['parameter_count']) is not int or r['parameter_count']<1
+                or type(r['width']) is not int or r['width']<4):
             raise ValueError('invalid architecture record')
         seen.add(key)
         if type(r['end_development_nll']) not in (float,int) or not math.isfinite(r['end_development_nll']) or r['end_development_nll']<=0:
@@ -119,8 +121,8 @@ def render_html(report):
     if len({r['seed'] for r in records})!=3:
         raise ValueError('three distinct paired seeds required')
     archrows='\n'.join(
-        '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{:.4f}</td></tr>'.format(
-            html.escape(r['architecture']),int(r['seed']),int(r['parameter_count']),r['end_development_nll']
+        '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{}</td><td>{:.4f}</td></tr>'.format(
+            html.escape(r['architecture']),int(r['seed']),int(r['width']),int(r['parameter_count']),r['end_development_nll']
         ) for r in sorted(records,key=lambda x:(x['architecture'],x['seed']))
     )
     maxv=max(v for _,v in nll)*1.15
@@ -195,10 +197,11 @@ paramètres, {int(exp['development_paths'])} chemins de développement.</small><
 <section><h2>Trois architectures comparées en parallèle</h2>
 <p class="muted">Transformer classique, mini décodeur GPT-style et GRU.
 Trois graines sur les mêmes données de développement artificielles, même nombre
-de mises à jour, mais <strong>paramètres et FLOPs inégaux</strong>.
+de mises à jour. Les nombres de paramètres sont rapprochés à 10 % près,
+mais <strong>FLOPs et latences restent inégaux</strong>.
 Ce tableau ne classe pas les méthodes sur les marchés réels.</p>
 <table><caption>NLL de développement artificiel par bras et par graine</caption>
-<thead><tr><th scope="col">Architecture</th><th scope="col">Graine</th><th scope="col">Paramètres</th>
+<thead><tr><th scope="col">Architecture</th><th scope="col">Graine</th><th scope="col">Largeur</th><th scope="col">Paramètres</th>
 <th scope="col">NLL</th></tr></thead><tbody>{archrows}</tbody></table></section>
 <section><h2>Test logiciel de comparaison appariée</h2>
 <p>Gain fabriqué volontairement en faveur du modèle :
