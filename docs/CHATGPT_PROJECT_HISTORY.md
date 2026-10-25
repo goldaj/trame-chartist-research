@@ -327,3 +327,23 @@ branche dépendante de la PR #9 et ouvre la PR #10 (draft).
 **Prochain démarrage scientifique : A4** Mamba-2/Mamba-3 sur
 vraies implémentations GPU isolées, après qualification officielle.
 Les PR #8/#9/#10 restent en draft, aucune fusion automatique.
+
+## 2026-10-25 — Reprise après interruption au démarrage d'A8
+
+**Utilisateur (verbatim, heure locale non enregistrée)** :
+> ca a planté en cours de route. Reprends.
+
+**Assistant (résumé non verbatim)** : reprend à partir de la
+branche A8 créée immédiatement avant l'interruption.
+Retrouve sur cette branche une première vue `evidence_report.py`
+déjà présente, puis ajoute `evidence.py` pour les mesures
+exploratoires A3c/A5/BTC avec empreintes des octets et
+garde-fous anti-fausse preuve. La PR #15 reste en draft,
+basée sur #10. Exécute une nouvelle matrice GitHub Actions
+sur Windows/Linux. Le premier run échoue sur un **test**
+qui essayait de créer un fichier contenant `<` et `>`
+sur Windows ; le test est corrigé pour injecter
+les métadonnées hostiles après lecture sans utiliser
+un nom de fichier interdit. Run #40222427770 vert.
+Le navigateur réel, l'accessibilité et toute valeur
+prédictive restent non validés.
