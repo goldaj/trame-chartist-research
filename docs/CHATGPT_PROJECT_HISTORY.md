@@ -198,3 +198,14 @@ une atomicité complète de deux chemins distincts : panne entre les
   et les licences le permettent.
 - Aucune modification des expériences scellées ni du bot Hyperliquid ;
   CI de la branche à vérifier avant toute affirmation de succès GitHub.
+
+
+## 2026-10-25 — Intégration de la comparaison à TRAME Research Lab
+
+**Assistant (résumé non verbatim)** : ajoute `architecture_comparison`
+au JSON émis par `run_lab` et un tableau HTML avec chaque architecture,
+seed, paramètres et NLL de développement artificiel. Contrôles
+bloquant les présentations mensongères de données réelles ou d'équité
+de calcul ; tests du rendu et des garde-fous. L'entraînement reste
+CPU synthétique, sans marché. Les runs GitHub Actions du HEAD exact
+doivent être vérifiés avant de conclure que l'intégration est verte.
