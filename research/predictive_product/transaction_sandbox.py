@@ -9,7 +9,7 @@ import argparse
 from datetime import datetime, timedelta
 import json
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 
 @dataclass(frozen=True)
@@ -146,12 +146,57 @@ def fabricated_fixture():
     ]
 
 
+def sensitivity_report(steps):
+    """Compare unchanged toy signals with cash and toy buy-and-hold controls.
+
+    This is NOT a real-world execution simulation or proof of edge.
+    """
+    if not isinstance(steps, (list, tuple)) or len(steps) < 2:
+        raise ValueError("at least two synthetic periods required")
+    cases=(
+        ("frictionless",0.,0.,0.,0.),
+        ("base",5.,3.,2.,0.),
+        ("stress",15.,10.,10.,3.),
+    )
+    result=[]
+    for name,fee,spread,slippage,funding in cases:
+        common=dict(fee_bps=fee,spread_bps=spread,
+                    slippage_bps=slippage,funding_bps_per_step=funding)
+        strategy=simulate(steps,**common)
+        cash=simulate([replace(step,position=0) for step in steps],**common)
+        passive=simulate([replace(step,position=1) for step in steps],**common)
+        result.append({
+            "scenario":name,
+            "cost_assumptions_bps":common,
+            "strategy_net_return":strategy["net_simple_return"],
+            "cash_net_return":cash["net_simple_return"],
+            "synthetic_buy_hold_net_return":passive["net_simple_return"],
+            "strategy_max_drawdown":strategy["max_drawdown_fraction"],
+            "strategy_turnover_units":strategy["total_turnover_units"],
+        })
+    return {
+        "experiment":"P3_SYNTHETIC_COST_SENSITIVITY_V1",
+        "source_is_artificial_only_caller_declaration":True,
+        "origin_and_market_data_independently_verified":False,
+        "replicates_real_exchange_fills":False,
+        "model_has_financial_edge":False,
+        "allowed_for_live_trading":False,
+        "scenarios":result,
+    }
+
+
 def main(argv=None):
     parser=argparse.ArgumentParser(description="Synthetic only offline risk arithmetic")
     parser.add_argument("--fee-bps",type=float,default=5.0)
     parser.add_argument("--spread-bps",type=float,default=3.0)
     parser.add_argument("--slippage-bps",type=float,default=2.0)
+    parser.add_argument("--sensitivity",action="store_true",
+                        help="compare cost assumptions with synthetic cash/buy-hold")
     args=parser.parse_args(argv)
+    if args.sensitivity:
+        print(json.dumps(sensitivity_report(fabricated_fixture()),
+                         indent=2,allow_nan=False))
+        return
     out=simulate(fabricated_fixture(),fee_bps=args.fee_bps,
                  spread_bps=args.spread_bps,slippage_bps=args.slippage_bps)
     print(json.dumps(out,indent=2,allow_nan=False))
