@@ -71,3 +71,11 @@ contient un modèle `as-of` et un encodage P1-D causal testés sur
 fixtures artificielles. **Toutes les sources réelles restent bloquées**
 faute de garanties vérifiées pour les droits et millésimes : pas de
 rétroqualification artificielle d'un ancien CSV en test indépendant.
+
+## Étape 4 : comparaison appariée et bootstrap
+
+La [note étape 4](research/benchmark_synthetic/STAGE4_REPORT_20261025.md)
+décrit les comparaisons de prix natifs **sur fixtures synthétiques**,
+avec bootstrap par blocs et séparation stricte actif/horizon.
+**Go** pour un atelier de recherche offline ; **No-Go** pour
+les étapes financières réelles 5–7 sans source, benchmark et holdout qualifiés.
