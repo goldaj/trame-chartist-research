@@ -1,0 +1,36 @@
+{
+  "status": "candidate_only_no_source_approved",
+  "data_not_acquired": true,
+  "sources": [
+    {
+      "source_id": "ECB_EXR",
+      "description": "ECB EXR public reference exchange-rate data; candidate already explored with revised snapshot, historical vintages unverified",
+      "rights_status": "unverified",
+      "synthetic": false,
+      "rights_evidence_url": null,
+      "available_at_method": null,
+      "download_provenance": null,
+      "decision": "BLOCKED_REAL_RESEARCH_INTAKE"
+    },
+    {
+      "source_id": "FRED_ALFRED",
+      "description": "ALFRED real-time economic vintages, series-specific copyright and API terms must be checked before use",
+      "rights_status": "unverified",
+      "synthetic": false,
+      "rights_evidence_url": "https://fred.stlouisfed.org/docs/api/terms_of_use.html",
+      "available_at_method": "ALFRED vintage date may be day-granular and need actual publication-time evidence",
+      "download_provenance": null,
+      "decision": "BLOCKED_REAL_RESEARCH_INTAKE"
+    },
+    {
+      "source_id": "CRYPTO_SPOT",
+      "description": "Crypto spot OHLCV, venue and API terms not yet selected, timestamp of bar closure must be explicit",
+      "rights_status": "unverified",
+      "synthetic": false,
+      "rights_evidence_url": null,
+      "available_at_method": null,
+      "download_provenance": null,
+      "decision": "BLOCKED_REAL_RESEARCH_INTAKE"
+    }
+  ]
+}
