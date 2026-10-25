@@ -244,3 +244,26 @@ GPU et les différences entre licence du code et des poids.
 TimesFM 3.0 est identifié comme **non commercial/non production**
 pour les poids publiés par Google à cette date. Rien n'a été
 téléchargé, installé ni évalué sur de vrais cours.
+
+
+## 2026-10-25 — Référentiel Bitcoin privé dédié : décision courante
+
+**Utilisateur (verbatim, sans horodatage intra-journalier fiable)** :
+> en fait j'ai rechangé d'idée. À la place on va utiliser un repo privé dédié à l'exposition des données bitcoin. C'est ça que tu va référencer à partir de maintenant. Si besoin tu peux les télécharger et les copier dans ton propre repo, mais si pas besoin c'est peut être mieux de juste les lire directement depuis le repo privé à chaque fois, pour ne pas alourdir le repo de recherche inutilement.
+> Normalement le repo privé est déjà créé, tu devrais pouvoir t'en servir en l'état. C'est dans une release dédiée normalement. Même consigne qu'avant, ne regarde pas la provenance, utilise en l'état, on fait confiance à ces données.
+
+**Assistant (résumé non verbatim)** :
+- Confirme que goldaj/btc-historical-data est privé et dispose de la
+  release btcusd-bitstamp-2010-2026-reference-v1, publiée le 25/10.
+- 21 assets (3 fichiers de D1, 16 gzip H1/M1, manifeste, SHA256).
+  Cette release n'est pas limitée à 90 jours comme les artifacts Actions.
+- Arrête la piste « copier les prix du repo bot dans TRAME ».
+  TRAME conserve l'intégralité des codes et tests ; les prix réels
+  restent dans la bibliothèque dédiée, avec acquisition explicite
+  dans le cache utilisateur authentifié par GitHub CLI.
+- Le tag de release est fixé pour la répétabilité ; ne jamais
+  utiliser implicitement la dernière version d'un fichier.
+- Les expériences continuent à respecter les partitions temporelles,
+  gaps et volumes nuls. Aucun audit de provenance effectué ni demandé.
+- Consignes détaillées pour Codex dans research/btc_h1_m1/README.md
+  et AGENTS.md ; CI avec archives fictives, sans accès au repo privé.
