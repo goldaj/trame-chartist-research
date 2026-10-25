@@ -42,3 +42,14 @@ ouvrir `reserved_synthetic_test` pour régler l'architecture. Ne
 pas annoncer un gain de prédiction financière à partir de cette
 expérience. La comparaison BASE/HIER/FLAT n'est **pas** égalisée
 en capacité ou FLOPs ; mesurer avant d'en tirer une conclusion.
+
+## Contrat de sources/versions historiques TRAME
+
+Lire `research/market_data_contract/STAGE3_REPORT_20261025.md`.
+La branche `chatgpt/point-in-time-data-contract-20261025` est
+une étape de contrôle *avant* ingestion de marchés. Toutes les
+sources réelles candidates sont volontairement `unverified` ; ne
+pas changer cet état sans preuve d'utilisation/licence, d'horodatage
+point-in-time et de provenance de téléchargement. Les fixtures
+sont 100 % construites, sans prix réel. Ne pas confondre
+`observed_at` et `available_at`.
