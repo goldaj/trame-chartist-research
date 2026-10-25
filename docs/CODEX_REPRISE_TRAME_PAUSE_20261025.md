@@ -7,7 +7,7 @@ Ne pas reprendre les expériences, entraîner, télécharger de modèles/donnée
 ## 1. Résumé exécutable en une minute
 
 La parenthèse sur les données BTC est terminée : une release versionnée dans le dépôt privé
-\`goldaj/btc-historical-data\` fournit les sources D1/H1/M1. TRAME public possède un
+`goldaj/btc-historical-data` fournit les sources D1/H1/M1. TRAME public possède un
 adaptateur/cache, **aucune copie des archives de prix**. La prochaine tâche scientifique
 à reprendre est **A3c : achever une comparaison de coûts/compute réellement équitable**
 entre les trois premières familles déjà câblées, puis **A4 : intégrer de véritables
@@ -19,24 +19,24 @@ vrais cours, la robustesse et la valeur économique viendront après, avec témo
 partitions contrôlées. Aucun modèle gagnant financier ni bot de production n'existe.
 
 **Sources à lire dans cet ordre** :
-1. \`AGENTS.md\` (règles permanentes) ;
+1. `AGENTS.md` (règles permanentes) ;
 2. **ce document** (pause, état, ordre de reprise, critères de sortie) ;
-3. \`docs/CHATGPT_PROJECT_HISTORY.md\` (décisions utilisateur et historique partiel) ;
-4. \`research/architecture_comparison/README.md\` et
-   \`EXTERNAL_MODELS_ADMISSIBILITY_20261025.md\` (protocole et candidats) ;
-5. \`research/btc_h1_m1/README.md\` (release privée, cache et précautions) ;
-6. \`research/market_data_contract/STAGE3_REPORT_20261025.md\`,
-   \`research/benchmark_synthetic/STAGE4_REPORT_20261025.md\` et
-   \`research/trame_lab/README.md\` (portes scientifiques/produit).
+3. `docs/CHATGPT_PROJECT_HISTORY.md` (décisions utilisateur et historique partiel) ;
+4. `research/architecture_comparison/README.md` et
+   `EXTERNAL_MODELS_ADMISSIBILITY_20261025.md` (protocole et candidats) ;
+5. `research/btc_h1_m1/README.md` (release privée, cache et précautions) ;
+6. `research/market_data_contract/STAGE3_REPORT_20261025.md`,
+   `research/benchmark_synthetic/STAGE4_REPORT_20261025.md` et
+   `research/trame_lab/README.md` (portes scientifiques/produit).
 
 ## 2. État observé au point d'arrêt
 
 | Chantier | État au 25/10/2026 | Preuve / limitation |
 | --- | --- | --- |
-| A1 : registre multibras, invariants causaux | Fait pour le laboratoire synthétique | \`research/architecture_comparison/README.md\` |
-| A2 : comparateur Transformer / GPT-style / GRU | Fait pour données fabriquées | \`experiment.py\`, tests, 3 seeds, tableau Research Lab ; pas de marché |
+| A1 : registre multibras, invariants causaux | Fait pour le laboratoire synthétique | `research/architecture_comparison/README.md` |
+| A2 : comparateur Transformer / GPT-style / GRU | Fait pour données fabriquées | `experiment.py`, tests, 3 seeds, tableau Research Lab ; pas de marché |
 | A3a : alignement approximatif des paramètres | Fait, diagnostic limité | ~2 610 / 2 418 / 2 602 paramètres ; pas de FLOPs alignés |
-| A3b : profils de coûts CPU | Premier diagnostic fait | \`cost_audit.py\`, largeurs 8/16/32, forward et backward ; machine spécifique |
+| A3b : profils de coûts CPU | Premier diagnostic fait | `cost_audit.py`, largeurs 8/16/32, forward et backward ; machine spécifique |
 | **A3c : budgets compute-fair** | **NON COMMENCÉ / À REPRENDRE** | FLOPs/MACs, pic mémoire, latence, séquences longues, budgets d'entraînement |
 | A4 : Mamba-2 + Mamba-3 réels | Non implémenté | GRU n'est ni Mamba ni SSM sélectif |
 | A5 : hybrides attention/SSM et décodeurs | Non implémenté | Aucun équivalent industriel revendiqué |
@@ -46,16 +46,16 @@ partitions contrôlées. Aucun modèle gagnant financier ni bot de production n'
 | TRAME Predictive v1 | **Non livré** | Recherche prédictive, évaluation et packaging restant à faire |
 
 **Git / chaîne de travail** :
-- PR #8 (draft), \`chatgpt/trame-multi-architecture-20261025\` :
+- PR #8 (draft), `chatgpt/trame-multi-architecture-20261025` :
   https://github.com/goldaj/trame-chartist-research/pull/8
-- PR #9 (draft), \`chatgpt/btc-h1-m1-20261025\`, **basée sur la PR #8** :
+- PR #9 (draft), `chatgpt/btc-h1-m1-20261025`, **basée sur la PR #8** :
   https://github.com/goldaj/trame-chartist-research/pull/9
 - Les PR antérieures forment elles aussi une chaîne de dépendances. **Pas de merge
   automatique, de changement de base improvisé ni de réouverture des audits scellés.**
-- La branche historique \`chatgpt/btc-history-bridge-20261025\` a été abandonnée :
+- La branche historique `chatgpt/btc-history-bridge-20261025` a été abandonnée :
   ne pas utiliser son chargeur D1 comme nouveau point de départ.
 - Ce document est ajouté sur la branche supérieure #9 pour être présent dans
-  la passation accumulée. Ne pas supposer qu'il est déjà sur \`main\`.
+  la passation accumulée. Ne pas supposer qu'il est déjà sur `main`.
 
 ## 3. Ordre de reprise prévu (ne PAS exécuter durant la pause)
 
@@ -113,7 +113,7 @@ Aucun classement de prévision de marché ne découle d'A3c seul.
    préentraînement, coût et éventuelle contamination des périodes testées.
 2. Adapter les inférences aux tâches, unités, contextes, horizons et
    protocoles de disponibilité temporelle de TRAME.
-3. Rapporter séparément \`zero-shot/pretrained\` et \`from_scratch\` :
+3. Rapporter séparément `zero-shot/pretrained` et `from_scratch` :
    il est impossible de rendre identique le compute de préentraînement
    historique de modèles tiers. Exclure les poids non éligibles à la
    commercialisation du périmètre produit.
@@ -125,7 +125,7 @@ Aucun classement de prévision de marché ne découle d'A3c seul.
    confirmer les contrats et résultats sur des runs effectivement
    exécutés ; ne jamais déduire un score réel d'une CI fictive.
 2. Maintenir train/développement/test, ordres temporels et
-   \`available_at\` sans look-ahead. La partition 2026 des premiers
+   `available_at` sans look-ahead. La partition 2026 des premiers
    essais H1/M1 est **réservée**, non à explorer pour choisir des modèles.
    Toute évolution des partitions doit être documentée avant usage.
 3. Conserver baselines (persistance, AR/Ridge, volatilité/quantiles),
@@ -136,7 +136,7 @@ Aucun classement de prévision de marché ne découle d'A3c seul.
    d'accepter les fichiers BTC sans réauditer leur provenance **n'est
    pas** une démonstration de disponibilité historique exacte,
    d'indépendance des tests ou de droits sur d'autres marchés. La
-   qualification générale \`stage 3.6\` multi-actifs et la validation
+   qualification générale `stage 3.6` multi-actifs et la validation
    confirmatoire demeurent une porte séparée. Pas de pseudo-holdout.
 5. Évaluer la robustesse aux régimes extrêmes, au transfert inter-actifs
    lorsque des sources sont disponibles, aux horizons et au coût. Puis
@@ -173,11 +173,11 @@ historiques numérotées 1–8 de TRAME ; ne pas confondre les nomenclatures.
 
 ## 4. Contrat des historiques BTC, sans relancer leur chantier
 
-- Dépôt privé unique : \`goldaj/btc-historical-data\`.
-- Tag fixé : \`btcusd-bitstamp-2010-2026-reference-v1\`.
+- Dépôt privé unique : `goldaj/btc-historical-data`.
+- Tag fixé : `btcusd-bitstamp-2010-2026-reference-v1`.
 - 21 assets : trois D1, un H1, quinze M1, manifeste et sommes SHA256.
 - Pas d'archives committées dans TRAME public ; acquisition authentifiée
-  **explicite** avec \`gh\` et cache **hors du clone**.
+  **explicite** avec `gh` et cache **hors du clone**.
 - Conserver les formats, les trous, les volumes nuls et la chronologie ;
   ne pas confondre les closes indicatifs anciens avec des OHLCV observés.
 - **Instruction utilisateur : utiliser les fichiers en l'état, sans
@@ -186,7 +186,7 @@ historiques numérotées 1–8 de TRAME ; ne pas confondre les nomenclatures.
   conditions d'exécution des perpétuels Hyperliquid.
 - CI publique sans token privé et sans archive de cours réels.
 
-Voir \`research/btc_h1_m1/README.md\` pour les commandes déjà câblées.
+Voir `research/btc_h1_m1/README.md` pour les commandes déjà câblées.
 Durant la pause, **ne lancer aucune de ces commandes**.
 
 ## 5. Mode opératoire pour Codex après autorisation de reprise
@@ -201,8 +201,8 @@ Durant la pause, **ne lancer aucune de ces commandes**.
    d'autres agents. Préserver l'historique exact de dépendances.
 4. Pour chaque modification : tests adaptés, reproductibilité, liens vers
    preuves, résultats authentiques vs fictifs, Go/No-Go, limitations et
-   prochaines sous-étapes ; mettre à jour \`AGENTS.md\`, le registre,
-   ce handoff et \`docs/CHATGPT_PROJECT_HISTORY.md\` si pertinent.
+   prochaines sous-étapes ; mettre à jour `AGENTS.md`, le registre,
+   ce handoff et `docs/CHATGPT_PROJECT_HISTORY.md` si pertinent.
 5. Ne jamais modifier le bot Hyperliquid, ouvrir le holdout réservé,
    envoyer d'ordres, divulguer de secrets, prétendre avoir testé des
    données réelles sans exécution ou rapprocher des métriques
