@@ -47,8 +47,8 @@ def validate_and_score(rows):
             target,
             abs(forecast - actual),
             abs(anchor - actual),
-            abs(math.log(forecast / actual)),
-            abs(math.log(anchor / actual)),
+            abs(math.log(forecast) - math.log(actual)),
+            abs(math.log(anchor) - math.log(actual)),
             (forecast - actual) ** 2,
             (anchor - actual) ** 2,
         ))
