@@ -134,3 +134,15 @@ Consulter [la note d'audit, ses tests et ses limites](HARDENING_NOTE_20261025.md
 **Le contrôle navigateur réel 8.2b et l'atomicité de la paire de
 fichiers restent ouverts**, et les étapes prédictives 5–7 sont toujours
 bloquées. Aucune conclusion financière supplémentaire.
+
+
+## Politique multi-architectures désormais obligatoire
+
+TRAME n'est plus gouverné par l'hypothèse que le Transformer de l'étape 2
+serait l'architecture finale. Le [registre et protocole de comparaison](../architecture_comparison/README.md)
+définit des bras causaux identiques en cibles et données, leurs statuts,
+les contrôles statistiques et les familles futures (SSM, hybride,
+modèles de séries temporelles). La première comparaison automatique
+entre ancien Transformer, mini décodeur GPT-style et GRU est
+**purement synthétique, de développement et non compute-fair**.
+Elle ne fournit aucun résultat de marché ni classement final.
