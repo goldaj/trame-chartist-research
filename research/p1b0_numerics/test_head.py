@@ -175,3 +175,15 @@ class CausalPathTests(unittest.TestCase):
             empirical_crps([float('nan')],100.)
         with self.assertRaises(ValueError):
             empirical_crps([],100.)
+
+
+class RareLabelTests(unittest.TestCase):
+    def test_sparse_out_of_core_labels_do_not_break_train_or_get_clipped(self):
+        try:
+            from synthetic_fit import train_arm, nll
+        except ImportError:
+            from .synthetic_fit import train_arm, nll
+        targets=np.array([-4000, -1, 0, 1, 4000])
+        h=train_arm(targets,'FLAT',iterations=2)
+        self.assertTrue(math.isfinite(nll(h,targets)))
+        self.assertTrue(math.isfinite(h.log_prob(4000)))
