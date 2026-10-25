@@ -14,18 +14,18 @@ d'expériences **réellement exécutées** en un rapport HTML/JSON
   `ARTIFICIAL_ONLY` / `ARTIFICIAL_TRAIN_AND_DEVELOPMENT`,
   seeds, paramètres et ses avertissements ; il n'y a jamais de
   classement inter-protocoles.
-- [ ] **A8.2 — Adaptation contrôlée** : validation stricte de
+- [x] **A8.2 — Adaptation contrôlée** : validation stricte de
   provenance, schéma, JSON fini, résultats non dupliqués,
   garde-fous contre revendications `compute_matched`
   ou `reserved_synthetic_test_opened`.
-- [ ] **A8.3 — Présentation autonome** : HTML sémantique et
+- [x] **A8.3 — Présentation autonome** : HTML sémantique et
   JSON companion avec titre, corps de preuve, tableau lisible,
   liens de reproduction, limites, aucune donnée du portefeuille
   ni interprétation commerciale.
-- [ ] **A8.4 — Tests et CI** : fixtures JSON *fabriquées*,
+- [x] **A8.4 — Tests et CI** : fixtures JSON *fabriquées*,
   injection HTML hostile, source mal formée, duplicate seed,
   double-output, overwrite, état de preuve trompeur ; test CLI.
-- [ ] **A8.5 — Livraison/documentation** : commandes,
+- [x] **A8.5 — Livraison/documentation** : commandes,
   renvois vers PR/Actions, critères d'admissibilité, bilan.
   Ne pas présenter une comparaison compute-fair complète.
 
@@ -47,3 +47,51 @@ cryptographique n'est effectuée par cette v0.1.
 Les anciens rapports v0.1 `research/trame_lab/cli.py` ne sont
 pas réécrits ; ce générateur est un *module complémentaire*.
 Il fonctionne hors ligne sans GPU ni BTC privé.
+
+## Utilisation des résultats `A3c` et `A5`
+
+Extraire **les véritables fichiers JSON** des artéfacts GitHub Actions
+à partir des runs dont le commit a été conservé :
+
+- [A3c run #40219261965](https://github.com/goldaj/trame-chartist-research/actions/runs/40219261965) :
+  `synthetic_a3c_proxy_budget.json`, pilote apparié à budgets
+  d'opérations *partiellement comptées*.
+- [A5 run #40220598879](https://github.com/goldaj/trame-chartist-research/actions/runs/40220598879) :
+  `a5_synthetic_hybrid.json`, comparaison à même nombre de pas.
+
+Après extraction des JSON dans un même répertoire local,
+exécuter depuis la racine du projet (Python 3.12 uniquement ;
+aucun paquet supplémentaire n'est requis) :
+
+```powershell
+python -m research.trame_lab.evidence_report --input synthetic_a3c_proxy_budget.json --input a5_synthetic_hybrid.json --output trame_evidence.html
+```
+
+Le programme écrit `trame_evidence.html` et
+`trame_evidence.json` sans écraser un fichier préexistant ;
+ouvrir le HTML directement dans un navigateur. Un SHA-256 est
+**calculé sur les octets du JSON d'entrée** pour reproduire le rapport,
+mais **il ne prouve pas l'authenticité de sa provenance**.
+La création des deux sorties n'est pas une transaction atomique
+en cas d'arrêt brutal entre les écritures.
+
+Pour lancer seulement les tests :
+
+```powershell
+python -m unittest research.trame_lab.test_evidence_report -v
+```
+
+CI GitHub Actions : `.github/workflows/trame-a8-evidence.yml`,
+[run vert #40222019571](https://github.com/goldaj/trame-chartist-research/actions/runs/40222019571).
+
+## Statut
+
+**A8.1 à A8.5 livrées pour un rapport de preuves synthétiques
+exploratoires**. L'importation de métriques financières,
+le contrôle navigateur/lecteur d'écran, la validation
+cryptographique des sources, l'intégration dans un produit
+complet et une évaluation utilisateurs **restent ouverts**.
+
+Ce module ne classe jamais entre eux des modèles exécutés
+sous les différents protocoles A3c et A5. Il complète le
+Research Lab existant, sans prétendre être la version P4.
