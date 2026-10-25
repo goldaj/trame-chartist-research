@@ -90,3 +90,21 @@ Première étude de câblage : Transformer causal, GPT-style miniature,
 GRU, mêmes données synthétiques et mêmes mini-lots ; **aucun bras
 Mamba/LLM pré-entraîné** encore exécuté. Les conclusions restent
 strictement exploratoires et hors finance réelle.
+
+
+## Référentiel de données financières (25 octobre 2026)
+
+TRAME utilise désormais comme source Bitcoin de référence la
+[release versionnée du dépôt privé btc-historical-data](https://github.com/goldaj/btc-historical-data/releases/tag/btcusd-bitstamp-2010-2026-reference-v1),
+avec D1 dès juillet 2010, H1 et M1 à partir de 2012.
+
+Le code ne recopie pas les prix dans ce dépôt public. Le composant
+[BTC Release Store](research/btc_h1_m1/README.md) télécharge
+uniquement les assets nécessaires vers le cache local de
+l'utilisateur authentifié via GitHub CLI, puis les relit en streaming.
+La CI publique ne touche jamais au dépôt privé.
+
+Cette source remplace les snapshots du bot Hyperliquid et ses
+artéfacts temporaires. Les données sont acceptées en l'état par
+le propriétaire : pas de nouvel audit de provenance. Les
+résultats exploratoires ne valent pas validation de trading.
