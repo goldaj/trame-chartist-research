@@ -299,3 +299,31 @@ ou opération sur le bot n'est effectué à cette occasion.
 feuille de route comme une autorisation de continuer. Attendre
 une demande explicite de reprise, puis commencer par **A3c.1**
 avec garde-fous et compte rendu de chaque baby step.
+
+## 2026-10-25 — Reprise autonome de TRAME après la pause (dernier ordre)
+
+**Utilisateur (verbatim ; heure précise non enregistrée dans le journal)** :
+> continue en tant que chercheur, avec une composante ingénieur. Tu liste l'ensemble des tâches à réaliser de façon assez détaillées, puis à chaque fois de commencer une tâche tu listes ses sous-tâches.
+> Ensuite tu me préviens à la réalisation de chaque nouvelle sous tâche. Tu ne t'arrêtes pas tant que tu n'as pas intégralement fini toutes les tâches, et donc toutes leurs sous tâches aussi.
+
+**Assistant (résumé non verbatim)** : considère cet ordre comme la levée
+explicite de la pause précédente et crée le tableau de bord actif
+`docs/CODEX_EXECUTION_BOARD_20261025.md`. Il commence A3c sur une
+branche dépendante de la PR #9 et ouvre la PR #10 (draft).
+
+**A3c.1–A3c.5 (résumé non verbatim, artefacts vérifiables)** :
+- Protocole enregistré, instrumentation `torch.profiler` CPU, tests
+  synthétiques, extension optionnelle des trois modèles à 128 tokens,
+  invariance causale/gradient vérifiée à 64 tokens.
+- Pilote à trois graines et budget *d'opérations partiellement
+  comptées*, avec plan de pas appariés, sans test réservé.
+- GitHub Actions #40219261965 : succès avec deux JSON archivés ;
+  résultats chiffrés et limites dans
+  `research/architecture_comparison/A3C_RESULTS_20261025.md`.
+- **GO** pour les recherches exploratoires suivantes ; **NO-GO**
+  pour une quelconque affirmation de parité compute complète,
+  modèle gagnant, avantage financier ou produit prêt.
+
+**Prochain démarrage scientifique : A4** Mamba-2/Mamba-3 sur
+vraies implémentations GPU isolées, après qualification officielle.
+Les PR #8/#9/#10 restent en draft, aucune fusion automatique.
