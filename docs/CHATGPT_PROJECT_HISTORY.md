@@ -193,7 +193,7 @@ une atomicité complète de deux chemins distincts : panne entre les
 - Tests causaux, backprop, même mini-lots par seed, même sortie gaussienne
   et métrique NLL de développement ; **pas** de FLOPs/capacités égales,
   ni entraînement d'un LLM réel, ni Mamba.
-- Prévoit Mamba-2, hybrides, modèles de fondation chronologiques
+- Prévoit Mamba-2 (et désormais Mamba-3), hybrides, modèles de fondation chronologiques
   et comparaisons compute-fair dès que le périmètre de recherche
   et les licences le permettent.
 - Aucune modification des expériences scellées ni du bot Hyperliquid ;
@@ -233,3 +233,14 @@ entrée artificielle, trois familles × trois largeurs.
 Les JSON sont archivés par GitHub Actions dans le même artéfact
 que l'étude NLL, avec vérification synthétique explicite.
 Aucune déclaration de FLOPs équivalents ou de prévision réelle.
+
+
+## 2026-10-25 — Mise à jour Mamba-3 et licences
+
+**Assistant (résumé non verbatim)** : vérifie les sources officielles
+et découvre Mamba-3 (mars 2026), à inclure au même titre que Mamba-2.
+La fiche d'admissibilité des modèles externes documente les besoins
+GPU et les différences entre licence du code et des poids.
+TimesFM 3.0 est identifié comme **non commercial/non production**
+pour les poids publiés par Google à cette date. Rien n'a été
+téléchargé, installé ni évalué sur de vrais cours.
