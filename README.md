@@ -2,18 +2,20 @@
 
 Projet scientifique indépendant du bot BTC-PERP Hyperliquid. TRAME étudie comment représenter des courbes de marché comme un langage causal, puis comparer des architectures génératives de type GPT sur la prédiction de prix bruts. L'étude concerne plusieurs marchés et ne constitue pas une stratégie de trading déployée.
 
-## État de reprise au 25 octobre 2026 : travail suspendu
+## Reprise scientifique du 25 octobre 2026
 
-**La recherche est temporairement en pause sur décision de l'utilisateur.**
-[Passation pour Codex : point d'arrêt, backlog A3c–A8 et phases P1–P4](docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md).
-À la reprise, terminer les comparaisons de coûts équitables (**A3c**),
-puis intégrer réellement Mamba-2/Mamba-3 (**A4**). Les comparaisons
-précédentes entre Transformer, mini GPT-style et GRU sont synthétiques ;
-les historiques BTC sont référencés dans une release privée sans copie
-publique. Aucune phase suivante n'est autorisée tant que l'utilisateur
-n'a pas explicitement levé la pause. Les rubriques datées plus bas
-conservent leurs constats historiques ; ne pas les lire comme l'état
-le plus récent.
+**Exécution reprise sur instruction explicite de l'utilisateur.**
+[Tableau de bord actif pour Codex](docs/CODEX_EXECUTION_BOARD_20261025.md),
+[protocole A3c](research/architecture_comparison/A3C_PROTOCOL_20261025.md),
+[PR #10](https://github.com/goldaj/trame-chartist-research/pull/10).
+
+Priorité A3c : mesurer les coûts, étendre les contextes et comparer des
+budgets *sans prétendre que les FLOPs partiels couvrent toutes les
+opérations*. Puis A4 Mamba-2/Mamba-3, A5 hybrides, A6 modèles
+temporels, A7 essais BTC, A8 Research Lab et phases produit P1–P4.
+Aucune preuve financière ni produit Predictive v1 n'est encore livrée.
+Le document de pause d'origine est conservé comme archive
+chronologique et n'est plus l'instruction active.
 
 ## État réel au 16 octobre 2026
 
