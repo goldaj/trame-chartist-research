@@ -1,0 +1,33 @@
+name: TRAME A5 honest hybrid CPU research
+on:
+  push:
+    branches:
+      - chatgpt/trame-hybrid-controls-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  synthetic-hybrid:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned synthetic-only CPU packages
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify causal hybrid and future-leak guards
+        run: python -m unittest research.hybrid_controls.test_hybrid -v
+      - name: Paired CPU synthetic exploratory four-arm run
+        run: |
+          python -m research.hybrid_controls.experiment --steps 12 --seeds 20261025 20261026 20261027 > a5_synthetic_hybrid.json
+      - name: Enforce evidence labels
+        run: |
+          python -c "import json;d=json.load(open('a5_synthetic_hybrid.json'));assert d['data_origin']=='ARTIFICIAL_ONLY'; assert d['hybrid_is_selective_ssm'] is False; assert d['reserved_synthetic_test_opened'] is False; assert d['compute_matched'] is False; assert len(d['results'])==12"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-a5-synthetic-attention-gru-hybrid
+          path: a5_synthetic_hybrid.json
