@@ -84,3 +84,24 @@ continuer sans attendre à chaque jalon, documenter pour Codex.
   `research/mini_gpt_synthetic/README.md` ; corpus réel qualifié absent.
 - Pas de trading, d'API payante, de holdout ouvert ni de revendication
   de prévision financière.
+
+## 2026-10-25 — Étape 3 point-in-time, arrêt scientifique motivé
+
+**Utilisateur** : instruction de continuation autonome citée intégralement
+plus haut, sans nouvelle demande de fusion ou d'exécution de trading.
+
+**Assistant, résumé non verbatim :**
+- Branche `chatgpt/point-in-time-data-contract-20261025`, dépendante
+  de la branche `chatgpt/mini-transformer-synthetic-20261025`.
+- Schéma à disponibilité UTC et révisions `asof.py`, refus des fournisseurs
+  sans preuves de droits et provenance, tests adversariaux de
+  fuite par révisions et valeurs impossibles.
+- Codec P1-D `p1d_features.py` sur les 256 dernières observations
+  disponibles, échelle sur 64 rendements passés uniquement,
+  préservation du contrat float32/float64, tests sur 260 cours fictifs.
+- Sources candidates BCE, FRED/ALFRED, crypto : non qualifiées;
+  aucune nouvelle valeur de marché acquise.
+- No-Go sur acquisition et entraînement réels, Go sur l'instrumentation
+  méthodologique d'un benchmark synthétique.
+- Prochaines sous-étapes 4.1–4.7 détaillées dans
+  `research/market_data_contract/STAGE3_REPORT_20261025.md`.
