@@ -77,3 +77,22 @@ Contrôler 1 <= train_steps <= 200 et les métriques finies sans
 changer les expériences synthétiques. Deux sorties HTML/JSON ne
 sont pas encore garanties atomiques. Ne pas fusionner les branches
 sans relire leurs bases, ne pas déverrouiller les sources réelles.
+
+
+## Nouvelle règle permanente : comparaison multi-architectures (2026-10-25)
+
+L'utilisateur a explicitement demandé que **toutes les évolutions à venir**
+de TRAME comparent aussi les architectures des LLM récents et d'autres
+familles pertinentes, plutôt que d'assumer que le Transformer est optimal.
+Lire obligatoirement `research/architecture_comparison/README.md`
+et son registre avant chaque choix d'architecture, acquisition,
+entraînement, validation, benchmark ou présentation de résultat.
+Tout travail futur doit nommer ses bras inclus, les bras différés,
+les contrôles et le statut de leur équité. Les comparaisons
+inégales en FLOPs/capacité demeurent exploratoires. Mamba-2,
+hybrides, TimesFM-3, Chronos-2, Moirai-2 sont des candidats,
+**non implémentés** dans le premier laboratoire. Ne jamais confondre
+GRU avec Mamba ni une miniature GPT-style aléatoirement initialisée
+avec un LLM actuel pré-entraîné. Préserver le holdout synthétique
+et toutes les limites point-in-time du projet. Branche de travail :
+`chatgpt/trame-multi-architecture-20261025`.
