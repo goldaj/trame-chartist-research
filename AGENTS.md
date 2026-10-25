@@ -29,3 +29,16 @@ pas une preuve d'un sampler inconditionnel fidèle et le gradient nul
 près d'une saturation de bornes est connu. **Ne pas fusionner cette PR
 avant sa base**, réécrire des protocoles gelés, ou vendre des gains de
 prévision avec les exemples artificiels.
+
+## Etape 2 : mini-GPT synthétique (25 octobre 2026)
+
+Lire `research/mini_gpt_synthetic/README.md`,
+`research/mini_gpt_synthetic/data.py` et
+`research/mini_gpt_synthetic/experiment.py` avant de modifier.
+Branche dépendante `chatgpt/mini-transformer-synthetic-20261025`
+reposant sur `chatgpt/p1b0-stage1-validation-20261025`.
+Préserver la séparation stricte train/dev/test réservé. Ne **jamais**
+ouvrir `reserved_synthetic_test` pour régler l'architecture. Ne
+pas annoncer un gain de prédiction financière à partir de cette
+expérience. La comparaison BASE/HIER/FLAT n'est **pas** égalisée
+en capacité ou FLOPs ; mesurer avant d'en tirer une conclusion.
