@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 from collections import defaultdict
 from html import escape
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -50,7 +51,7 @@ def read_report(path):
     if not isinstance(raw, dict):
         raise ValueError("JSON experiment object required")
     kind = raw.get("experiment")
-    if kind not in SPECS:
+    if not isinstance(kind, str) or kind not in SPECS:
         raise ValueError("unknown or unapproved experiment type")
     spec = SPECS[kind]
     if raw.get("data_origin") != spec["origin"]:
@@ -75,7 +76,7 @@ def read_report(path):
         if not isinstance(row, dict):
             raise ValueError("result object required")
         name, seed = row.get("architecture"), row.get("seed")
-        if name not in spec["arms"] or type(seed) is not int:
+        if not isinstance(name, str) or name not in spec["arms"] or type(seed) is not int:
             raise ValueError("unknown arm or invalid seed")
         pair = (name, seed)
         if pair in seen:
@@ -97,6 +98,7 @@ def read_report(path):
         "experiment": kind,
         "data_origin": spec["origin"],
         "origin_file": path.name,
+        "source_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         "independent_financial_evidence": False,
         "full_compute_fairness_proven": False,
         "source_integrity_verified": False,
@@ -135,7 +137,7 @@ def render(inputs):
         sections.append(
             "<section><h2>" + title + "</h2><p>"
             + escape(panel["warnings"]) + "</p><p>Source input: "
-            + escape(panel["origin_file"]) + " (not cryptographically verified). "
+            + escape(panel["origin_file"]) + " (SHA-256 fingerprint recorded, origin unverified). "
             + "Artificial training/development data only.</p>"
             + "<table><caption>Within-protocol exploratory development NLL; "
             + "lower is not proof of generalization</caption>"
