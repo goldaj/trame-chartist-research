@@ -327,3 +327,39 @@ branche dépendante de la PR #9 et ouvre la PR #10 (draft).
 **Prochain démarrage scientifique : A4** Mamba-2/Mamba-3 sur
 vraies implémentations GPU isolées, après qualification officielle.
 Les PR #8/#9/#10 restent en draft, aucune fusion automatique.
+
+## 2026-10-25 — Bilan courant de la reprise, phases A3c–P4
+
+**Assistant (résumé non verbatim, preuves dans GitHub)** :
+- PR #10 A3c : protocole, audit CPU, contextes élargis
+  et pilote 3 graines ; comptage partiel, No-Go compute-fair complet.
+- PR #11 A4 : adaptations Mamba2/Mamba3 officielles,
+  garde-fous CPU passés ; vrai GPU CUDA/bf16 non exécuté.
+- PR #12 A5 : témoin attention+GRU, comparateur
+  4 architectures/3 graines et rapport de résultat négatif,
+  pas un Mamba ni une preuve financière.
+- PR #13 A6 : licences de checkpoints, inconnues de
+  contamination et contrat temporel ; pas de zero-shot réel.
+- PR #14 A7 : témoins persistance/Ridge et intervalles
+  construits/testés sur fixtures ; **cours privés jamais
+  téléchargés ni exécutés dans cette session**.
+- PR #15 A8 : deux formats de rapport synthétique
+  hors ligne, essais CI Linux/Windows et documentation ;
+  aucun modèle financier réel utilisé.
+- PR #16 P1–P4 : critères de livraison, simulation
+  artificielle de frais/risques, préflight
+  `ready_for_launch=False` ; aucun produit commercial prêt.
+
+**Décision scientifique à transmettre sans la déformer** :
+les phases d'ingénierie se sont poursuivies dans les
+limites des accès disponibles, mais **A4.4/A4.5,
+A6.4/A6.5, A7.4–A7.7, P1.5, P2.5, P3.5, P4.6 et
+l'équité compute complète restent ouvertes**.
+L'utilisateur avait demandé de ne pas s'arrêter,
+ce qui n'autorise pas à inventer une exécution
+sur matériel ou données indisponibles.
+Aucune branche fusionnée, aucun ordre de trading.
+
+Les heures intrajournalières des échanges ne sont
+pas archivées ici de façon certifiée. Voir les
+commits, PR et Actions pour les horodatages fiables.
