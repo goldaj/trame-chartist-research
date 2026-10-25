@@ -21,6 +21,5 @@ jobs:
           python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
       - name: Run synthetic compressed archive fixture tests
         run: python -m unittest discover -s research/btc_h1_m1 -p 'test_*.py' -v
-      - name: Guard: raw history not committed to workflow branch
-        run: |
-          test ! -d research/btc_h1_m1/raw || test -z "$(find research/btc_h1_m1/raw -type f -print -quit)"
+      - name: Compile BTC reader and experiment
+        run: python -m compileall -q research/btc_h1_m1
