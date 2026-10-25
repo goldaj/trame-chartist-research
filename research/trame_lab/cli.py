@@ -14,9 +14,10 @@ from tempfile import NamedTemporaryFile
 from research.mini_gpt_synthetic.experiment import run as run_gpt
 from research.p1b0_numerics.rollout_study import run as run_rollout
 from research.benchmark_synthetic.bootstrap import paired_group_report,moving_block_interval
+from research.architecture_comparison.experiment import compare as compare_architectures
 
 
-REQUIRED_RESULTS=('model','toy_forecast','paired_benchmark')
+REQUIRED_RESULTS=('model','toy_forecast','paired_benchmark','architecture_comparison')
 
 
 def make_example_benchmark():
@@ -58,6 +59,7 @@ def run_lab(*,train_steps=40):
         'model':run_gpt(steps=train_steps),
         'toy_forecast':run_rollout(),
         'paired_benchmark':make_example_benchmark(),
+        'architecture_comparison':compare_architectures(steps=train_steps, seeds=(20261025,20261026,20261027)),
     }
 
 
@@ -95,6 +97,32 @@ def render_html(report):
             raise ValueError('invalid fabricated benchmark result')
     if len(b['toy_ci_block95']) != 2 or b['toy_ci_block95'][0] > b['toy_ci_block95'][1]:
         raise ValueError('invalid interval order')
+    comparison=report['architecture_comparison']
+    if (comparison.get('data_origin')!='ARTIFICIAL_ONLY'
+            or comparison.get('reserved_synthetic_test_opened') is not False
+            or comparison.get('financial_holdout_opened') is not False
+            or comparison.get('compute_matched') is not False
+            or comparison.get('parameter_matched') is not False):
+        raise ValueError('architecture comparison must remain exploratory and artificial')
+    expected={'legacy_causal_transformer','modern_gpt_style_mini','recurrent_gru_control'}
+    records=comparison.get('results',[])
+    if len(records)!=9 or {r['architecture'] for r in records}!=expected:
+        raise ValueError('three-arm, three-seed comparison required')
+    seen=set()
+    for r in records:
+        key=(r['architecture'],r['seed'])
+        if key in seen or type(r['parameter_count']) is not int or r['parameter_count']<1:
+            raise ValueError('invalid architecture record')
+        seen.add(key)
+        if type(r['end_development_nll']) not in (float,int) or not math.isfinite(r['end_development_nll']) or r['end_development_nll']<=0:
+            raise ValueError('invalid architecture development NLL')
+    if len({r['seed'] for r in records})!=3:
+        raise ValueError('three distinct paired seeds required')
+    archrows='\n'.join(
+        '<tr><th scope="row">{}</th><td>{}</td><td>{:.4f}</td></tr>'.format(
+            html.escape(r['architecture']),int(r['parameter_count']),r['end_development_nll']
+        ) for r in sorted(records,key=lambda x:(x['architecture'],x['seed']))
+    )
     maxv=max(v for _,v in nll)*1.15
     lines=[]
     for label,value in nll:
@@ -164,6 +192,14 @@ paramètres, {int(exp['development_paths'])} chemins de développement.</small><
 <div class="stat">{decimal(sim['empirical_CRPS_price_units'])}</div></div>
 <div><span class="muted">Origine fictive</span>
 <div class="stat">100</div></div></div></section>
+<section><h2>Trois architectures comparées en parallèle</h2>
+<p class="muted">Transformer classique, mini décodeur GPT-style et GRU.
+Trois graines sur les mêmes données de développement artificielles, même nombre
+de mises à jour, mais <strong>paramètres et FLOPs inégaux</strong>.
+Ce tableau ne classe pas les méthodes sur les marchés réels.</p>
+<table><caption>NLL de développement artificiel par bras et par graine</caption>
+<thead><tr><th scope="col">Architecture</th><th scope="col">Paramètres</th>
+<th scope="col">NLL</th></tr></thead><tbody>{archrows}</tbody></table></section>
 <section><h2>Test logiciel de comparaison appariée</h2>
 <p>Gain fabriqué volontairement en faveur du modèle :
 <strong>{decimal(b['toy_gain_native'])}</strong> unité fictive.</p>
