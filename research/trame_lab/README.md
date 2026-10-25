@@ -156,3 +156,13 @@ La commande existante `python -m research.trame_lab.cli --steps 20
 sous `architecture_comparison`. Ces nombres sont uniquement
 des NLL de développement d'un processus AR(1) fabriqué ;
 l'écart de taille/compute est signalé dans le rapport.
+
+
+### Vérification de capacité A3a (exploratoire)
+
+Un nouveau choix de largeurs minimise l'écart de nombres de paramètres
+autour du Transformer largeur 16, et rapproche le total à moins de
+10 % par architecture sur la grille proposée. Le rapport affiche
+explicitement le nombre de paramètres et la largeur de chaque bras.
+**Le coût réel d'entraînement, le budget de recherche et les FLOPs
+restent différents ; aucun classement compute-fair n'est revendiqué.**
