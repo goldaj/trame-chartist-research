@@ -20,6 +20,22 @@ ARMS = {'legacy_causal_transformer': MiniTRAME,
         'recurrent_gru_control': GRUMini}
 
 
+def choose_widths(*, reference_width=16):
+    """Nearest-parameter capacity control; NOT FLOPs/compute matching."""
+    candidates = (8, 12, 16, 20, 24, 28, 32)
+    reference = sum(p.numel() for p in MiniTRAME(width=reference_width).parameters())
+    selected = {}
+    for name, factory in ARMS.items():
+        counts = [(width, sum(p.numel() for p in factory(width=width).parameters()))
+                  for width in candidates]
+        width, count = min(counts, key=lambda item: (abs(item[1]-reference), item[0]))
+        selected[name] = {'width':width, 'parameter_count':count,
+                          'relative_gap':abs(count-reference)/reference}
+    return {'target_params':reference, 'selected':selected,
+            'all_within_10_percent':all(x['relative_gap']<=.10 for x in selected.values()),
+            'compute_matched':False}
+
+
 def compare(*, steps=20, seeds=(20261025,)):
     if type(steps) is not int or not 1 <= steps <= 200:
         raise ValueError('steps must be an integer between 1 and 200')
@@ -31,6 +47,7 @@ def compare(*, steps=20, seeds=(20261025,)):
     ytrain = torch.as_tensor(train, dtype=torch.float64)
     xdev = torch.as_tensor(previous_codes(development), dtype=torch.float64)
     ydev = torch.as_tensor(development, dtype=torch.float64)
+    capacity = choose_widths()
     output = []
     for seed in seeds:
         # Draw minibatches ONCE for all architecture families under this seed.
@@ -38,7 +55,7 @@ def compare(*, steps=20, seeds=(20261025,)):
         batches = [rng.integers(0, len(train), size=16) for _ in range(steps)]
         for name, factory in ARMS.items():
             torch.manual_seed(seed)
-            model = factory(width=16).train()
+            model = factory(width=capacity['selected'][name]['width']).train()
             optimizer = torch.optim.AdamW(model.parameters(), lr=.003, weight_decay=.001)
             model.eval()
             with torch.no_grad():
@@ -61,6 +78,7 @@ def compare(*, steps=20, seeds=(20261025,)):
                 final = float(model.nll(xdev, ydev))
                 training = float(model.nll(xtrain, ytrain))
             output.append({'architecture': name, 'seed': seed,
+                           'width': capacity['selected'][name]['width'],
                            'parameter_count': sum(p.numel() for p in model.parameters()),
                            'start_development_nll': initial,
                            'end_development_nll': final,
@@ -79,6 +97,8 @@ def compare(*, steps=20, seeds=(20261025,)):
             'precision': 'torch.float64 CPU',
             'same_batches_per_seed': True,
             'parameter_matched': False, 'compute_matched': False,
+            'approx_parameter_matched_10pct':capacity['all_within_10_percent'],
+            'capacity_audit':capacity,
             'times_are_hardware_specific': True,
             'not_modern_llm_or_mamba_benchmark': True,
             'torch_version': torch.__version__, 'python_version': platform.python_version(),
