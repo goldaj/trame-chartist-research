@@ -6,7 +6,7 @@ from datetime import timedelta
 
 from research.predictive_product.release_preflight import GATES, assess
 from research.predictive_product.transaction_sandbox import (
-    Step, fabricated_fixture, simulate,
+    Step, fabricated_fixture, simulate, sensitivity_report,
 )
 
 
@@ -65,6 +65,33 @@ class ResearchToProductSafetyTests(unittest.TestCase):
             simulate(data[:1])
         with self.assertRaises(ValueError):
             simulate([data[0],data[0],*data[2:]])
+
+    def test_mark_calendar_and_target_continuity(self):
+        data = fabricated_fixture()
+        self.assertTrue(simulate(data)["calendar_and_mark_continuity_checked"])
+        malformed = [
+            [replace(data[0], target_utc=data[0].origin_utc), *data[1:]],
+            [data[0], replace(data[1], origin_utc=data[1].origin_utc
+                              + timedelta(seconds=1)), *data[2:]],
+            [replace(data[0], next_observed_price=999.0), *data[1:]],
+        ]
+        for series in malformed:
+            with self.subTest(series=series), self.assertRaises(ValueError):
+                simulate(series)
+
+    def test_synthetic_sensitivity_cash_control(self):
+        report = sensitivity_report(fabricated_fixture())
+        self.assertFalse(report["model_has_financial_edge"])
+        self.assertFalse(report["allowed_for_live_trading"])
+        self.assertFalse(report["origin_and_market_data_independently_verified"])
+        scenarios=report["scenarios"]
+        self.assertEqual([x["scenario"] for x in scenarios],
+                         ["frictionless", "base", "stress"])
+        self.assertTrue(all(abs(x["cash_net_return"]) < 1e-12 for x in scenarios))
+        self.assertGreaterEqual(scenarios[0]["strategy_net_return"],
+                                scenarios[1]["strategy_net_return"])
+        self.assertGreaterEqual(scenarios[1]["strategy_net_return"],
+                                scenarios[2]["strategy_net_return"])
 
     def test_market_paths_not_loaded_automatically(self):
         report = simulate(fabricated_fixture())
