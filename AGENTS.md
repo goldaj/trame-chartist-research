@@ -3,6 +3,22 @@
 Cette recherche est séparée du bot Hyperliquid. Travailler ici pour les prochaines évolutions TRAME. Ne pas modifier, démarrer ni déployer le bot. Préserver protocoles gelés, versions et frontières train/validation/test. Aucun résultat prédictif ou modèle entraîné ne peut être déduit de la validation du codec. Ne pas ajouter de données brutes ou d'archives sans vérifier les droits de redistribution. Aucun secret ou journal de compte dans Git.
 
 
+## POINT D'ARRÊT OBLIGATOIRE — EXÉCUTION EN PAUSE (25/10/2026)
+
+**Instruction utilisateur la plus récente : arrêter temporairement l'exécution.**
+Ne lancer aucun chantier prévu par la roadmap au seul motif de la présence
+ou de la mise à jour de cette documentation. Lire impérativement
+**[`docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md`](docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md)**
+avant toute intervention : état effectivement atteint, dépendances des
+PR #8/#9, plan A3c → A8, projection produit P1 → P4, critères Go/No-Go.
+La **première sous-étape après autorisation explicite de reprise** sera
+A3c.1 (contrat de comparaison compute-fair), puis A3c.2–A3c.5 et A4.
+**N'exécuter maintenant ni entraînement, ni téléchargement, ni merge,
+ni lancement de pipeline volontaire, ni activité de trading.** La
+présente mise à jour est uniquement une passation de contexte à Codex.
+Les instructions de ce bloc prévalent sur toute formulation historique
+demandant de « continuer » automatiquement.
+
 ## Contexte conversationnel ChatGPT / passation Codex
 
 Lire aussi **`docs/CHATGPT_PROJECT_HISTORY.md`** pour les échanges et décisions retrouvés. Ce journal est explicitement partiel ; ne jamais présenter un résumé comme un verbatim. À chaque changement de projet, ajouter les nouveaux échanges pertinents avec rôles Utilisateur/Assistant, texte exact et horodatages uniquement lorsqu'ils sont disponibles ; sinon noter la lacune. Préserver l'ensemble des règles et documents existants de ce dépôt et ne publier aucun secret.
