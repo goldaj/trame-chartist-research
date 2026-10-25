@@ -1,10 +1,11 @@
 """HTML and JSON output contract; constructed payload, no API or actual market."""
+import copy
 import json
 from pathlib import Path
 import tempfile
 import unittest
 
-from research.trame_lab.cli import render_html,write_reports
+from research.trame_lab.cli import render_html,write_reports,run_lab,main
 
 
 def toy():
@@ -33,6 +34,11 @@ class DemoTests(unittest.TestCase):
         self.assertIn('Oracle synthétique connu',html)
         self.assertIn('aucune prédiction financière',html)
         self.assertIn('CRPS',html)
+        self.assertIn('<table>',html)
+        self.assertIn('<caption>NLL de développement sur données artificielles',html)
+        self.assertIn('<th scope="row">TRAME mini-Transformer</th><td>2.8000</td>',html)
+        self.assertIn('aria-hidden="true"',html)
+        self.assertIn('href="#results"',html)
 
     def test_pair_of_files_and_no_unintentional_overwrite(self):
         with tempfile.TemporaryDirectory() as td:
@@ -44,6 +50,30 @@ class DemoTests(unittest.TestCase):
             with self.assertRaises(FileExistsError):
                 write_reports(toy(),dest)
             write_reports(toy(),dest,overwrite=True)
+
+    def test_reject_invalid_steps_without_training(self):
+        for steps in (-1,0,201,1.5,True):
+            with self.subTest(steps=steps),self.assertRaises(ValueError):
+                run_lab(train_steps=steps)
+        with self.assertRaises(SystemExit) as invalid_cli:
+            main(['--steps','0'])
+        self.assertEqual(invalid_cli.exception.code,2)
+
+    def test_reject_invalid_artificial_metrics(self):
+        cases=[
+            (('model','end_development_nll'),float('nan')),
+            (('model','model_parameters'),0),
+            (('toy_forecast','price_q10'),120),
+            (('toy_forecast','empirical_CRPS_price_units'),-1),
+            (('paired_benchmark','toy_ci_block95'),[2,1]),
+            (('paired_benchmark','manufactured_gain_by_construction'),False),
+        ]
+        for keys,invalid in cases:
+            with self.subTest(keys=keys):
+                payload=copy.deepcopy(toy())
+                payload[keys[0]][keys[1]]=invalid
+                with self.assertRaises(ValueError):
+                    render_html(payload)
 
     def test_reject_misleading_output_and_missing_data(self):
         with tempfile.TemporaryDirectory() as td:
