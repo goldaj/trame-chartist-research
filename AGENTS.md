@@ -3,21 +3,24 @@
 Cette recherche est séparée du bot Hyperliquid. Travailler ici pour les prochaines évolutions TRAME. Ne pas modifier, démarrer ni déployer le bot. Préserver protocoles gelés, versions et frontières train/validation/test. Aucun résultat prédictif ou modèle entraîné ne peut être déduit de la validation du codec. Ne pas ajouter de données brutes ou d'archives sans vérifier les droits de redistribution. Aucun secret ou journal de compte dans Git.
 
 
-## POINT D'ARRÊT OBLIGATOIRE — EXÉCUTION EN PAUSE (25/10/2026)
+## REPRISE AUTORISÉE — dernière consigne utilisateur (25/10/2026)
 
-**Instruction utilisateur la plus récente : arrêter temporairement l'exécution.**
-Ne lancer aucun chantier prévu par la roadmap au seul motif de la présence
-ou de la mise à jour de cette documentation. Lire impérativement
-**[`docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md`](docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md)**
-avant toute intervention : état effectivement atteint, dépendances des
-PR #8/#9, plan A3c → A8, projection produit P1 → P4, critères Go/No-Go.
-La **première sous-étape après autorisation explicite de reprise** sera
-A3c.1 (contrat de comparaison compute-fair), puis A3c.2–A3c.5 et A4.
-**N'exécuter maintenant ni entraînement, ni téléchargement, ni merge,
-ni lancement de pipeline volontaire, ni activité de trading.** La
-présente mise à jour est uniquement une passation de contexte à Codex.
-Les instructions de ce bloc prévalent sur toute formulation historique
-demandant de « continuer » automatiquement.
+L'utilisateur a **levé la pause précédente** et demandé la reprise autonome
+de TRAME comme programme de recherche et d'ingénierie, sous-tâche
+par sous-tâche, avec information à chaque livraison. Le bloc
+de pause historique du 25/10 est **supersédé** sur cette branche.
+
+**Lire en premier [le tableau de bord actif](docs/CODEX_EXECUTION_BOARD_20261025.md)**
+et [le protocole A3c](research/architecture_comparison/A3C_PROTOCOL_20261025.md).
+Le document `docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md` est conservé pour
+l'historique, **pas** comme ordre d'arrêt actuel.
+
+Première phase : A3c.1 à A3c.5, puis A4 Mamba-2/Mamba-3 ; feuille
+de route A5–A8 et P1–P4 dans le tableau actif. Chaque sous-étape doit
+avoir hypothèse, code, tests, preuves et limites. Ne jamais
+déclarer « tout fini » lorsque des campagnes matérielles ou financières
+n'ont pas réellement été exécutées. Pas de merge automatique,
+pas d'ordre, pas d'accès aux secrets ni de modification du bot.
 
 ## Contexte conversationnel ChatGPT / passation Codex
 
