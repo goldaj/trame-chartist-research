@@ -19,6 +19,7 @@ class Step:
     observed_price: float
     next_observed_price: float
     position: int
+    target_utc: datetime
 
 
 def _valid_utc(value):
@@ -49,6 +50,8 @@ def simulate(steps, *, fee_bps=5.0, spread_bps=3.0, slippage_bps=2.0,
     cumulative_cost=0.0
     previous_position=0
     previous_origin=None
+    previous_target=None
+    previous_next_price=None
     ledger=[]
     defaulted=False
     for step in steps:
@@ -56,10 +59,19 @@ def simulate(steps, *, fee_bps=5.0, spread_bps=3.0, slippage_bps=2.0,
             raise TypeError("Step required")
         _valid_utc(step.origin_utc)
         _valid_utc(step.signal_available_utc)
+        _valid_utc(step.target_utc)
         if step.signal_available_utc > step.origin_utc:
             raise ValueError("signal published after decision origin")
+        if step.target_utc <= step.origin_utc:
+            raise ValueError("target must occur after decision origin")
         if previous_origin is not None and step.origin_utc <= previous_origin:
             raise ValueError("origins must be strictly increasing")
+        if previous_target is not None and step.origin_utc != previous_target:
+            raise ValueError("unrepresented calendar gap or overlapping target")
+        if (previous_next_price is not None
+                and not math.isclose(step.observed_price, previous_next_price,
+                                     rel_tol=1e-12, abs_tol=0.0)):
+            raise ValueError("next mark and subsequent entry price inconsistent")
         if type(step.position) is not int or step.position not in (-1,0,1):
             raise ValueError("positions limited to unlevered -1, 0, 1")
         if (any(type(x) not in (float,int) or not math.isfinite(x) or x <= 0
@@ -79,6 +91,7 @@ def simulate(steps, *, fee_bps=5.0, spread_bps=3.0, slippage_bps=2.0,
         max_drawdown=max(max_drawdown,1.0-equity/high)
         ledger.append({
             "origin_utc":step.origin_utc.isoformat(),
+            "target_utc":step.target_utc.isoformat(),
             "position":step.position,
             "turnover_units":turnover,
             "gross_simple_return":gross,
@@ -87,6 +100,8 @@ def simulate(steps, *, fee_bps=5.0, spread_bps=3.0, slippage_bps=2.0,
         })
         previous_position=step.position
         previous_origin=step.origin_utc
+        previous_target=step.target_utc
+        previous_next_price=step.next_observed_price
         if defaulted:
             break
     if not defaulted:
@@ -98,6 +113,8 @@ def simulate(steps, *, fee_bps=5.0, spread_bps=3.0, slippage_bps=2.0,
     return {
         "experiment":"p3_offline_synthetic_transaction_cost_sandbox_v0.1",
         "input_provenance":"ARTIFICIAL_ONLY",
+        "provenance_independently_verified":False,
+        "calendar_and_mark_continuity_checked":True,
         "real_execution_validated":False,
         "hyperliquid_funding_history_used":False,
         "approved_for_live_trading":False,
@@ -123,7 +140,8 @@ def fabricated_fixture():
     positions=(1,1,0,-1,-1)
     return [
         Step(start+timedelta(hours=i),start+timedelta(hours=i),
-             prices[i],prices[i+1],positions[i])
+             prices[i],prices[i+1],positions[i],
+             start+timedelta(hours=i+1))
         for i in range(len(positions))
     ]
 
