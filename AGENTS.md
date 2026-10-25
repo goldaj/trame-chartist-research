@@ -64,3 +64,16 @@ Un gain apparié synthétique ou son intervalle bootstrap
 fusionner des prix en devises différentes ni choisir un modèle
 après consultation d'un holdout. Conserver le projet comme
 laboratoire d'études tant que sources réelles non approuvées.
+
+## Reprise TRAME Research Lab hardening (25 octobre 2026)
+
+Branche `chatgpt/trame-lab-hardening-20261025` empilée sur
+`chatgpt/trame-research-lab-v01-20261025` ; lire
+`research/trame_lab/HARDENING_NOTE_20261025.md` et
+`research/trame_lab/test_cli.py`. Les scores NLL sont également
+affichés dans un tableau sémantique ; tests statiques seulement,
+pas de validation lecteur d'écran ni de certification WCAG.
+Contrôler 1 <= train_steps <= 200 et les métriques finies sans
+changer les expériences synthétiques. Deux sorties HTML/JSON ne
+sont pas encore garanties atomiques. Ne pas fusionner les branches
+sans relire leurs bases, ne pas déverrouiller les sources réelles.
