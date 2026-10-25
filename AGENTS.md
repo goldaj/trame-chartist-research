@@ -17,3 +17,15 @@ retoucher les calculs figés de 2026-10-14/16, ouvrir les holdouts
 ou les présenter comme mesures prédictives. Le score CRPS fourni
 porte sur des **prix fictifs** ; la tête numérique n'est pas un GPT
 entraîné et la précision des queues sous-fluées reste une limite.
+
+## Branche de qualification P1-B0 2026-10-25
+
+Travail expérimental dépendant de la branche de PR #2 :
+`chatgpt/p1b0-stage1-validation-20261025`.
+La décision, les tests et les limitations sont dans
+`research/p1b0_numerics/STAGE1_DECISION_20261025.md`.
+En particulier, les tirages extrêmes **conditionnels** ne constituent
+pas une preuve d'un sampler inconditionnel fidèle et le gradient nul
+près d'une saturation de bornes est connu. **Ne pas fusionner cette PR
+avant sa base**, réécrire des protocoles gelés, ou vendre des gains de
+prévision avec les exemples artificiels.
