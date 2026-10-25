@@ -63,3 +63,11 @@ La branche `chatgpt/mini-transformer-synthetic-20261025` contient
 avec oracle exact, témoin linéaire entraîné sur train seulement,
 masque causal et ablations initiales BASE/HIER/FLAT.
 **Aucune prévision de marché ni classement de modèles financier.**
+
+## Étape 3 : contrat de données historiques
+
+Le [rapport de l'étape 3](research/market_data_contract/STAGE3_REPORT_20261025.md)
+contient un modèle `as-of` et un encodage P1-D causal testés sur
+fixtures artificielles. **Toutes les sources réelles restent bloquées**
+faute de garanties vérifiées pour les droits et millésimes : pas de
+rétroqualification artificielle d'un ancien CSV en test indépendant.
