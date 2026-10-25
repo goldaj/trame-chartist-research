@@ -51,6 +51,13 @@ def _rows_from_payload(data):
             raise ValueError("cannot import claimed compute-matched result")
         if data.get("flops_coverage_complete", False) is not False:
             raise ValueError("partial cost instrument may not claim complete FLOPs")
+        if data.get("true_compute_matched", False) is not False:
+            raise ValueError("true compute parity was not demonstrated")
+        if data.get("tuning_compute_equalized", False) is not False:
+            raise ValueError("tuning compute was not equalized")
+        if (kind == "synthetic_hybrid_control" and
+                data.get("hybrid_is_selective_ssm") is not False):
+            raise ValueError("GRU control may not be reported as selective SSM")
         results = data.get("results")
         if not isinstance(results, list) or not results or len(results) > 500:
             raise ValueError("research results must contain 1..500 records")
