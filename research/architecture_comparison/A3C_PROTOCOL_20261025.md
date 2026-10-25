@@ -19,11 +19,11 @@ la même tâche et une comptabilité transparente du coût.
   thread ; contrôler les graines, nombres de paramètres, contextes
   et budget. Les chronomètres et le profiler sont des instruments,
   pas une métrique de qualité prédictive.
-- [ ] **A3c.2 : instrumentation** des opérations, allocations et temps ;
+- [x] **A3c.2 : instrumentation** des opérations, allocations et temps ;
   comptage explicite de la couverture des FLOPs. Des FLOPs omis ne
   valent pas zéro. Les périodes profilées excluent téléchargement,
   entraînement préalable et préparation des données.
-- [ ] **A3c.3 : diversité de tailles/contextes** ; mesurer des contextes
+- [x] **A3c.3 : diversité de tailles/contextes** ; mesurer des contextes
   courts à la limite actuelle 20. Une séquence plus longue nécessite
   d'abord une évolution des trois implémentations et tests causaux.
 - [ ] **A3c.4 : budgets équivalents** sur plusieurs graines, choix de
