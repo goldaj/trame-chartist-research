@@ -42,3 +42,23 @@ Les conversations complètes, toutes les réponses exactes de l'assistant et les
 - Les résultats numériques ont été exécutés localement sur fixtures
   artificielles. La CI GitHub sur branche vérifie et archive les
   rapports ; vérifier son verdict pour le HEAD avant fusion.
+
+## 2026-10-25 — Demande de continuité autonome, étape 1 P1-B0
+
+**Utilisateur, verbatim (heure locale non documentée) :**
+> vas-y, avance sous étape par sous étape. Tu m'écrieras quand t'en finiras une, mais tu ne t'arrêteras pas pour autant. De la même façon, tu détailleras les sous étapes de la prochaine étape lorsque tu auras fini la première, puis tu commenceras la première sous étape de l'étape suivante. Etc... À chaque fois tu me préviens quand tu termines quelque chose, mais tu ne t'arrêtes jamais. Tu continueras jusqu'à avoir terminé toutes les étapes au complet, du mieux que tu puisses.
+
+**Assistant, synthèse non verbatim et vérifiable dans les commits :**
+- Branche superposée `chatgpt/p1b0-stage1-validation-20261025` basée sur
+  `chatgpt/p1b0-numerical-lab-20261025`, sans fusion.
+- 1.1 : P1-B0 différentiable en PyTorch CPU f64, croisements SciPy
+  par différences finies et comparaisons sur corrections.
+- 1.2 : mapping tanh / sigmoid borné, gradients saturés documentés.
+- 1.3 : queue log-space et sampler conditionnel de stress via ndtri_exp ;
+  tirage inconditionnel rare non certifié.
+- 1.4 : replay causal 20 pas, état entier, teacher forcing ordonné.
+- 1.5 : quantiles, couverture, CRPS prix et incertitude MC séparée.
+- 1.6 : programme CPU incluant normalisateur ; coûts dépendants du matériel.
+- 1.7 : décision de passage limité vers étape 2 **synthétique**, jamais marché réel.
+- Aucune donnée financière réelle nouvelle, aucun réseau métier, compte ou transaction.
+- Relever les runs CI de la branche avant d'affirmer qu'un commit particulier est vert.
