@@ -222,3 +222,14 @@ pour les deux attention et 20 pour GRU. Les nombres
 sans prétendre une égalisation de FLOPs, de puissance,
 ni une préférence financière. Le rapport HTML expose aussi la largeur.
 La CI du dernier commit reste la source de vérité pour les tests GitHub.
+
+
+## 2026-10-25 — Étape A3b : diagnostic CPU complémentaire
+
+**Assistant (résumé non verbatim)** : ajoute
+`research/architecture_comparison/cost_audit.py` et ses
+tests, avec temps médians forward et forward+backward sur
+entrée artificielle, trois familles × trois largeurs.
+Les JSON sont archivés par GitHub Actions dans le même artéfact
+que l'étude NLL, avec vérification synthétique explicite.
+Aucune déclaration de FLOPs équivalents ou de prévision réelle.
