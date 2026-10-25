@@ -27,3 +27,19 @@ Tests du premier appareil de mesure : depuis `research/trame_poc0`, exécuter `p
 [hyperliquid-btc-pilot](https://github.com/goldaj/hyperliquid-btc-pilot) reste un projet distinct. Aucune intégration au bot, aucun déploiement ni aucune transaction ne découle de cette publication.
 
 Les fichiers d'origine sont conservés dans leur ancien dossier pour préserver les liens des conversations existantes. Pour la suite, utiliser ce dépôt comme source de vérité TRAME ; ne pas développer les deux copies en parallèle.
+
+## Évaluation prospective candidate (branche `chatgpt/review-20261024`)
+
+Le [protocole de score indépendant](research/evaluation_sandbox/RESEARCH_PROTOCOL.md)
+définit le futur comparatif causal en **prix natifs**, les baseline
+de persistance, la séparation par marché/horizon et les limites des
+observations recouvrantes. Le script `score_points.py` sait vérifier
+un fichier JSONL de prévisions déjà produites et calculer des scores
+appariés sans télécharger de données ni entraîner un modèle :
+
+```bash
+python -m unittest discover -s research/evaluation_sandbox -p 'test_*.py' -v
+```
+
+**Statut** : outil et protocole exploratoires, tests uniquement sur
+exemples construits ; aucun holdout ouvert, aucun avantage prédictif.
