@@ -18,7 +18,7 @@ des secrets non fournis ou de fusionner implicitement les PR.
 | Phase | Sous-tâches livrables | Statut documenté |
 | --- | --- | --- |
 | A3c budget équitable | 1. Protocole ; 2. profil opérations/CPU ; 3. extensions contexte ; 4. pilote apparié à budget proxy ; 5. rapport et critères d'équité | 1–5 livrés en mode exploratoire ; **No-Go** pour vraie égalité des FLOPs, mémoire GPU et tuning |
-| A4 Mamba | 1. Versions/API officielles ; 2. isolation matériel/dépendances ; 3. backbones réels ; 4. causalité et gradients ; 5. benchmark multi-seed | Recherche préalable ; GPU/test de Mamba-3 à effectuer |
+| A4 Mamba | 1. Versions/API officielles ; 2. isolation matériel/dépendances ; 3. backbones réels ; 4. causalité et gradients ; 5. benchmark multi-seed | A4.1–A4.3 implémentés ; A4.4/5 NO-GO sans CUDA/Mamba officiels |
 | A5 hybrides | 1. hypothèses ; 2. bras d'architecture ; 3. ablations ; 4. équité/rapport | À faire |
 | A6 fondations temporelles | 1. versions/licences ; 2. contamination ; 3. adapteurs ; 4. test zéro-shot ; 5. comparaison | À faire |
 | A7 données réelles | 1. reprise cache BTC ; 2. horizons/splits ; 3. témoins ; 4. campagne multibras ; 5. évaluation robuste ; 6. gel hors-échantillon ; 7. extension multi-actifs | Infrastructure de la release BTC prête ; campagne réelle non exécutée |
@@ -100,3 +100,14 @@ artefacts JSON du run #40219261965 sont la preuve reproductible.
 La recherche multi-architectures se poursuit par A4 sous statut
 exploratoire, **sans** classement de modèle, FLOPs réels alignés
 ou campagne sur historiques BTC.
+
+
+## Passage A4 : intégration optionnelle, GPU non validé
+
+La [PR #11](https://github.com/goldaj/trame-chartist-research/pull/11)
+est empilée sur #10. Le paquet Mamba2/Mamba3 est appelé par
+`research/mamba_candidates/official_adapter.py`, avec import tardif,
+garde CUDA/bf16, et `gpu_smoke.py` qui **refuse** le CPU. Le runner
+CPU vérifie les gardes, mais **aucune exécution GPU réelle n'existe** :
+A4.4–A4.5 demeurent No-Go. Les expériences A5/A6 indépendantes
+peuvent être explorées sans prétendre avoir évalué Mamba.
