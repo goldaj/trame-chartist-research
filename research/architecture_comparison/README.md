@@ -149,3 +149,23 @@ de diagnostic (mini modèle original et nouvelle comparaison à trois
 graines) sont **indépendants** : ne pas interpréter les différences
 de NLL par rapport au premier panneau comme un effet pur d'architecture
 sans aligner précisément seeds/budgets.
+
+
+## A3a — audit de capacité partiellement effectué
+
+`choose_widths` recherche par grille finie (8,12,16,20,24,28,32)
+la largeur dont le nombre de paramètres est le plus proche du
+Transformer de référence largeur 16 (2 610 paramètres).
+Il sélectionne un mini GPT-style largeur 16 (2 418 paramètres,
+écart 7,36 %) et un GRU largeur 20 (2 602 paramètres,
+écart 0,31 %). Le JSON conserve les valeurs exactes et
+`approx_parameter_matched_10pct=True`.
+
+Le titre de ce contrôle est **rapprochement de capacité seulement**.
+Ce n'est ni une égalisation des FLOPs, ni du wall-clock
+multi-plateforme, ni des paramètres actifs, ni de l'historique
+d'entraînement d'un modèle pré-entraîné. Le rapport HTML montre
+les largeurs, les paramètres et les trois graines. Le caractère
+strictement exploratoire persiste ; A3b sera une étude
+de coût et sensibilité aux budgets, indépendante des chiffres
+financiers.
