@@ -17,7 +17,7 @@ des secrets non fournis ou de fusionner implicitement les PR.
 
 | Phase | Sous-tâches livrables | Statut documenté |
 | --- | --- | --- |
-| A3c budget équitable | 1. Protocole ; 2. profil opérations/CPU ; 3. extensions contexte ; 4. pilote apparié à budget proxy ; 5. rapport et critères d'équité | 1, 2, 3 implémentés/testés en CI ; 4 codé/tests à vérifier ; 5 à finaliser |
+| A3c budget équitable | 1. Protocole ; 2. profil opérations/CPU ; 3. extensions contexte ; 4. pilote apparié à budget proxy ; 5. rapport et critères d'équité | 1–5 livrés en mode exploratoire ; **No-Go** pour vraie égalité des FLOPs, mémoire GPU et tuning |
 | A4 Mamba | 1. Versions/API officielles ; 2. isolation matériel/dépendances ; 3. backbones réels ; 4. causalité et gradients ; 5. benchmark multi-seed | Recherche préalable ; GPU/test de Mamba-3 à effectuer |
 | A5 hybrides | 1. hypothèses ; 2. bras d'architecture ; 3. ablations ; 4. équité/rapport | À faire |
 | A6 fondations temporelles | 1. versions/licences ; 2. contamination ; 3. adapteurs ; 4. test zéro-shot ; 5. comparaison | À faire |
@@ -89,3 +89,14 @@ de validation sur le matériel ni sur les données.
 
 Cette feuille de route s'applique **après** l'ordre utilisateur de
 reprise. Elle ne déclare pas toutes les phases achevées.
+
+
+## Résultat du jalon A3c (confirmé par Actions)
+
+[A3C_RESULTS_20261025.md](../research/architecture_comparison/A3C_RESULTS_20261025.md)
+consigne un audit CPU à 8/20/64 tokens, un pilote trois graines et
+un budget rapproché **sur compteurs partiels uniquement**. Les deux
+artefacts JSON du run #40219261965 sont la preuve reproductible.
+La recherche multi-architectures se poursuit par A4 sous statut
+exploratoire, **sans** classement de modèle, FLOPs réels alignés
+ou campagne sur historiques BTC.
