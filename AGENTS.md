@@ -130,33 +130,49 @@ Pas de package GPU dans la CI CPU commune et pas de sélection
 d'un modèle zero-shot comme s'il avait été entraîné from scratch.
 
 
-## BTC H1/M1 : nouvelle référence imposée par l'utilisateur (25/10/2026)
+## BTC historique : source privée UNIQUE, versionnée (25/10/2026)
 
-Lire research/btc_h1_m1/README.md avant tout travail de données BTC.
-Le corpus de référence est désormais Bitstamp BTC/USD H1 et M1
-(2012–juin2026), sous deux artefacts du run GitHub Actions
-40208291215 du bot Hyperliquid. Il remplace le projet d'adaptateur
-D1 précédent, branche chatgpt/btc-history-bridge-20261025, qui
-n'est PAS à fusionner ici. Aucune série réelle n'est encore
-transférée dans TRAME : seule l'interface offline a été codée.
+**Dernière décision de l'utilisateur : elle remplace les précédentes.**
 
-L'utilisateur accepte les archives telles quelles pour ses travaux
-et ne demande pas un nouvel audit de provenance. Conserver leurs
-octets, leurs noms et leurs attributions existantes. La plateforme
-a bloqué les tentatives de copie directe d'un dépôt privé vers un
-dépôt public. L'utilisateur peut copier les deux artefacts
-manuellement, sans modifier les .csv.gz.
+Le référentiel commun à TRAME et au bot est désormais le dépôt PRIVÉ
+goldaj/btc-historical-data, release tag exactement
+btcusd-bitstamp-2010-2026-reference-v1 :
+https://github.com/goldaj/btc-historical-data/releases/tag/btcusd-bitstamp-2010-2026-reference-v1
 
-La nouvelle expérimentation utilise les données en streaming,
-ignore les bougies à volume nul et les ruptures temporelles,
-préserve la quarantaine 2026 et compare exactement les mêmes cas
-pour Transformer causal, mini-GPT-style et GRU. Il faut toujours
-bien distinguer le forecast à une minute du forecast à une heure.
-Ne pas entraîner une seule architecture puis prétendre que la
-comparaison multi-modèles demandée est faite. Mamba-2/Mamba-3
-et fondations chronologiques restent prévus mais non implémentés.
+Contenu : 3 D1 (2010–2026), 1 H1 et 15 M1 (2012–2026),
+MANIFEST.json et SHA256SUMS.txt, 21 release assets.
+Les précédentes copies à partir du dépôt du bot Hyperliquid,
+ou des deux artefacts temporaires GitHub Actions, sont abandonnées.
+**Ne jamais committer les historiques de prix dans TRAME public.**
+Il n'y a aucun accès automatique privé depuis la CI publique.
 
-Le CSV synthétique de CI ne compte pas comme une vraie donnée.
-Ne pas annoncer des scores financiers réels avant la copie
-effective et une campagne exécutée sur les archives. Aucun
-déploiement ni lien au moteur de trading Hyperliquid.
+Lire research/btc_h1_m1/README.md puis release_store.py.
+Utiliser l'authentification gh existante et l'acquisition explicite,
+à la demande, de la release depuis le dépôt privé :
+python -m research.btc_h1_m1.release_store --resolution H1 --download
+(également M1, D1 ou ALL). Le cache versionné par tag se trouve
+hors du clone Git, dans le dossier personnel/.cache/trame/bitcoin/.
+Les octets téléchargés restent identiques aux assets de la release.
+En présence d'un cache complet, ne PAS retélécharger à chaque lecture.
+Éviter l'utilisation de jetons privés dans le dépôt, les logs ou les
+GitHub Actions publics.
+
+L'utilisateur a demandé de faire confiance aux données en l'état :
+**pas de nouvelle vérification de provenance**. On conserve les
+seules règles techniques nécessaires aux expériences : chronologie
+causale, ruptures temporelles, bougies à volume nul, splits et gel.
+Les résolutions D1/H1/M1 doivent être distinguées, et les premiers
+prix indicatifs D1 ne sont pas de fausses bougies OHLCV.
+Les données de marché BTC spot ne reproduisent pas les conditions
+historiques d'exécution Hyperliquid.
+
+Les trois backbones de TRAME restent des candidats de recherche et non
+des gagnants démontrés. Mamba/SSM/fondations chronologiques doivent
+être évalués selon le protocole multibras à terme. Aucune métrique
+sur cours réel n'est déclarée tant qu'un run de recherche réel
+n'est pas effectivement exécuté. Aucun ordre/live/trading.
+
+La branche chatgpt/btc-h1-m1-20261025 succède à la branche D1
+chatgpt/btc-history-bridge-20261025 abandonnée ; elle est empilée
+sur la PR #8 multi-architectures. Ne pas merger aveuglément
+les branches des expérimentations historiques.
