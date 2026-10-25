@@ -123,3 +123,14 @@ puis ce document et \`cli.py\`.
 Branche \`chatgpt/trame-research-lab-v01-20261025\`,
 empilée sur la branche de benchmark de la PR #6 :
 pas de fusion indépendante des bases sans revue.
+
+## Consolidation expérimentale du 25 octobre 2026
+
+La branche dépendante `chatgpt/trame-lab-hardening-20261025`
+introduit les sous-étapes **8.2a** (tableau NLL accessible aux
+technologies d'assistance, lien clavier) et **8.6a** (contrôles
+de paramètres et métriques avant publication).
+Consulter [la note d'audit, ses tests et ses limites](HARDENING_NOTE_20261025.md).
+**Le contrôle navigateur réel 8.2b et l'atomicité de la paire de
+fichiers restent ouverts**, et les étapes prédictives 5–7 sont toujours
+bloquées. Aucune conclusion financière supplémentaire.
