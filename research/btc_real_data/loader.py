@@ -45,7 +45,8 @@ class DailyBTC:
 class ForecastCase:
     origin: date
     target: date
-    available_at_utc: datetime
+    decision_at_utc: datetime
+    label_available_at_utc: datetime
     prior_codes: tuple[int, ...]
     target_code: int
     anchor_usd: float
@@ -130,7 +131,8 @@ def create_cases(history: tuple[DailyBTC, ...], *, context: int = 20) -> dict[st
             continue
         grouped[target_group].append(ForecastCase(
             origin=origin.day, target=future.day,
-            available_at_utc=datetime.combine(future.day,time.min,tzinfo=timezone.utc),
+            decision_at_utc=datetime.combine(future.day,time.min,tzinfo=timezone.utc),
+            label_available_at_utc=datetime.combine(future.day + timedelta(days=1),time.min,tzinfo=timezone.utc),
             prior_codes=tuple(codes[i-context:i]),
             target_code=codes[i],
             anchor_usd=origin.close, target_usd=future.close,
