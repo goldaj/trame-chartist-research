@@ -114,3 +114,17 @@ class HeadNumericsTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class ConstructedTrainingFixtureTests(unittest.TestCase):
+    def test_corrections_fit_declared_bimodal_fixture(self):
+        try:
+            from synthetic_fit import run
+        except ImportError:
+            from .synthetic_fit import run
+        report=run()
+        scores=report['scores']
+        self.assertLess(scores['FLAT']['test_nll'], scores['BASE']['test_nll'])
+        self.assertLess(scores['HIER']['test_nll'], scores['BASE']['test_nll'])
+        self.assertFalse(report['market_data_read'])
+        self.assertFalse(report['trained_gpt'])
