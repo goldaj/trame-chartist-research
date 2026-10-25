@@ -25,8 +25,12 @@ jobs:
       - name: Summarize developer-only results
         run: |
           python -c "import json; d=json.load(open('stage2_development.json')); print('start development NLL',d['start_development_nll']); print('end development NLL',d['end_development_nll']); print('oracle',d['controls_development']['oracle_known_generator_nll']); print('linear',d['controls_development']['linear_train_only_nll']); print('reserved untouched',d['reserved_test_not_opened'])"
+      - name: Run small equal-step head ablation on development only
+        run: python -m research.mini_gpt_synthetic.ablation > stage2_ablation.json
       - name: Save artifact without test labels
         uses: actions/upload-artifact@v4
         with:
           name: trame-stage2-synthetic-development
-          path: stage2_development.json
+          path: |
+            stage2_development.json
+            stage2_ablation.json
