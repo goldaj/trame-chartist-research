@@ -155,3 +155,12 @@ une branche distincte `chatgpt/trame-lab-hardening-20261025`.
 réponses complètes et certains horaires ne sont pas disponibles ;
 ne pas les inventer. Les checks CI doivent être contrôlés avant
 que cette branche soit déclarée entièrement testée.
+
+## 2026-10-25 — Suite du durcissement Research Lab
+
+**Assistant (résumé non verbatim)** : étape 8.6b sur la même branche,
+préparation de deux fichiers temporaires dans le dossier cible avant
+remplacement, nettoyage systématique et test d'injection d'erreur
+pré-publication qui protège la paire préexistante. Ne pas annoncer
+une atomicité complète de deux chemins distincts : panne entre les
+`replace`, exécution concurrente et `fsync` restent ouverts.
