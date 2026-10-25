@@ -1,99 +1,130 @@
-# TRAME BTC/USD Bitstamp H1 & M1 - nouveau référentiel
+# BTC/USD historique : bibliothèque privée commune à TRAME
 
-Décision utilisateur du 25 octobre 2026 : abandonner la précédente
-tentative de copie des trois snapshots D1. Les nouveaux historiques de
-référence sont les archives Bitstamp H1/M1 de 2012 à juin 2026.
-Les accepter telles quelles pour la recherche sans audit supplémentaire
-de provenance, et préserver strictement leurs octets d'origine.
+**Décision définitive courante : 25 octobre 2026.**
 
-## Liens des fichiers exacts
+L'unique source de vérité est la **release versionnée du dépôt privé
+goldaj/btc-historical-data**. Ni le dépôt du bot Hyperliquid ni ses
+artefacts Actions éphémères ne doivent être utilisés comme référence
+primaire. TRAME public contient seulement le lecteur et les résultats,
+**pas les archives de prix**.
 
-Dépôt privé goldaj/hyperliquid-btc-pilot, GitHub Actions run
-40208291215 (succès du 25 octobre 2026).
+- Dépôt : https://github.com/goldaj/btc-historical-data
+- Release : https://github.com/goldaj/btc-historical-data/releases/tag/btcusd-bitstamp-2010-2026-reference-v1
+- Tag exact : btcusd-bitstamp-2010-2026-reference-v1
+- 21 assets publiés : 3 CSV journaliers, 1 gzip H1, 15 gzip M1, un
+  MANIFEST.json et un SHA256SUMS.txt.
+- Référence immuable par tag, jusqu'à publication explicite d'une
+  nouvelle version. Ne pas suivre la dernière release sans accord.
 
-- H1, environ 2,7 Mo, artifact ID 12604202171 :
-  https://github.com/goldaj/hyperliquid-btc-pilot/actions/runs/40208291215/artifacts/12604202171
-- M1, environ 110 Mo, artifact ID 12604092598 :
-  https://github.com/goldaj/hyperliquid-btc-pilot/actions/runs/40208291215/artifacts/12604092598
+## Consigne du propriétaire
 
-Les artifacts sont conservés jusqu'au 23 janvier 2027 selon GitHub.
-Leur copie directe entre dépôts privé/public par connecteur n'est
-pas permise ici. Aucun fichier de prix réel n'est présent dans cette
-branche TRAME. Copier les deux ZIP manuellement, puis décompresser
-UNIQUEMENT l'enveloppe ZIP, sans modifier les fichiers gzip.
+Utiliser ces historiques **tels quels**, sans réexaminer
+leur provenance ni solliciter une nouvelle validation. Les conserver
+sous leur format et leur nom d'origine. Les opérations de recherche
+continuent à respecter les plages temporelles réservées, les trous,
+les volumes nuls et les limites liées à la résolution des bougies.
+La provenance n'est pas requalifiée ici.
 
-Répertoire de destination : research/btc_h1_m1/raw/
+## Accéder aux données sans alourdir TRAME
 
-Contenu attendu :
-- BTCUSD_bitstamp_hourly_2012-2026.csv.gz
-- BTCUSD_bitstamp_1min_2012.csv.gz
-- ... un fichier par année jusqu'à ...
-- BTCUSD_bitstamp_1min_2026.csv.gz
+Le dépôt privé nécessite l'authentification GitHub pour
+accéder à ses assets. Une lecture distante octet par octet serait
+inutilement coûteuse ; le lecteur passe par **un cache local**,
+à l'extérieur du clone Git TRAME :
 
-## Copie PowerShell rapide
+- Par défaut : dossier personnel/.cache/trame/bitcoin/
+  btcusd-bitstamp-2010-2026-reference-v1/
+- Personnalisable avec la variable TRAME_BTC_CACHE_DIR.
+- Aucune copie dans TRAME ou dans un commit public.
+- Les octets gzip restent inchangés. Aucun recalcul préalable.
+- Les téléchargements suivants sont ignorés si les fichiers
+  attendus sont déjà présents avec leur taille prévue.
+- La commande refuse les fichiers incomplets ou les symlinks ;
+  elle ne réécrit pas silencieusement un asset.
 
-Depuis la racine du dépôt TRAME local et après avoir téléchargé les
-archives dans votre dossier Téléchargements :
+Installer GitHub CLI une fois, puis se connecter :
 
 ~~~powershell
-$dest = "research\btc_h1_m1\raw"
-New-Item -ItemType Directory -Force $dest | Out-Null
-Expand-Archive -Path "$env:USERPROFILE\Downloads\bitstamp-2012-2026-hourly-pinned.zip" -DestinationPath $dest
-Expand-Archive -Path "$env:USERPROFILE\Downloads\bitstamp-2012-2026-minute-pinned.zip" -DestinationPath $dest
+gh auth login
+gh auth status
 ~~~
 
-Adapter les noms des ZIP si GitHub les a renommés. Le lecteur attend
-les seize fichiers gzip directement dans raw/. Ne pas extraire .csv.gz.
+Depuis la racine d'un clone TRAME, la commande télécharge
+uniquement les archives requises, **directement depuis la release
+privée** :
 
-## Utiliser le nouveau référentiel
+~~~powershell
+python -m research.btc_h1_m1.release_store --resolution H1 --download
+python -m research.btc_h1_m1.release_store --resolution M1 --download
+python -m research.btc_h1_m1.release_store --resolution D1 --download
+~~~
 
-Dans un environnement Python 3.12 + NumPy/SciPy/PyTorch du Research Lab :
+Le mode ALL récupère tous les dix-neuf fichiers de prix :
+
+~~~powershell
+python -m research.btc_h1_m1.release_store --resolution ALL --download
+~~~
+
+L'accès ne fonctionne que sur les machines authentifiées disposant
+d'un droit de lecture du dépôt privé. La CI publique de TRAME ne
+reçoit aucun token privé et travaille uniquement avec des archives
+fictives générées en mémoire/disque temporaire.
+
+## Utilisation pour TRAME
+
+Après récupération locale, aperçu sans nouveau téléchargement :
 
 ~~~powershell
 python -c "from research.btc_h1_m1.stream import limited_preview; print(limited_preview('H1'))"
 python -c "from research.btc_h1_m1.stream import limited_preview; print(limited_preview('M1'))"
+~~~
+
+Campagnes exploratoires (Python 3.12, NumPy, SciPy, PyTorch CPU) :
+
+~~~powershell
 python -m research.btc_h1_m1.experiment --interval H1 --steps 40 --output btc_h1_dev.json
 python -m research.btc_h1_m1.experiment --interval M1 --steps 40 --output btc_m1_dev.json
 ~~~
 
-Les fichiers sont lus en streaming sans tout charger en mémoire.
-L'échantillonnage déterministe retient jusqu'à 4096 observations train
-et 1024 de développement par granularité, puis compare trois
-architectures sur les mêmes exemples et les mêmes mini-lots.
+Les fichiers H1/M1 sont lus **en streaming**, sans tout
+décompresser en mémoire. Les partitions exploratoires utilisent
+l'entraînement avant 2022 et le développement sur 2022–2025.
+Les cibles 2026 ne sont pas utilisées dans ces expériences.
+Une bougie zéro volume ou une discontinuité du calendrier rompt
+le contexte d'entraînement.
 
-H1 et M1 prédisent des horizons différents (prochaine heure contre
-prochaine minute) : leurs scores NLL ne sont pas directement équivalents.
+**Attention** : des fenêtres H1 (prochaine heure) et M1
+(prochaine minute) prédisent des horizons différents. Aucune
+comparaison brute de NLL entre les deux n'est recevable.
+Les trois architectures sont encore des prototypes de recherche
+non égalisés en budget de calcul. Aucun backtest économique et
+aucune preuve de performance réelle n'ont été produits ici.
 
-## Règles de recherche
+Le corpus D1 remonte au 18 juillet 2010 ; les archives H1 et M1
+commencent en 2012. Le téléchargeur gère également D1 pour
+les analyses ultérieures des cycles de plus longue durée.
+Ces prix historiques BTC/USD spot/indicatifs ne représentent
+pas les conditions d'exécution sur les perpétuels Hyperliquid.
 
-- train : prix dont la cible clôture avant le 1er janvier 2022 UTC ;
-- développement : cibles de 2022 à fin 2025 ;
-- 2026 : quarantaine, aucune cible utilisée pour entraîner ou mesurer ;
-- bougies à volume nul et ruptures de chronologie : exclues du
-  contexte, sans imputation silencieuse ;
-- trois bras : Transformer classique, mini-GPT modernisé, GRU ;
-  comparaison exploratoire et non égalisée en FLOPs ;
-- persistance comme témoin sur prix natifs ;
-- pas d'exécution de trading, ni financement/perp Hyperliquid,
-  ni accès API, ni ordres ;
-- les données réelles n'ont PAS été copiées et les scores réels
-  n'ont donc PAS été exécutés par l'assistant à cette étape.
+## Livraisons / passation Codex
 
-## Passation Codex
-
-Lire AGENTS.md et docs/CHATGPT_PROJECT_HISTORY.md puis stream.py,
-experiment.py et test_history.py.
-
-Branche : chatgpt/btc-h1-m1-20261025, sur la branche
+Branche : chatgpt/btc-h1-m1-20261025, créée sur
 chatgpt/trame-multi-architecture-20261025 (PR #8).
-L'ancienne branche D1 chatgpt/btc-history-bridge-20261025 n'est
-pas intégrée dans cette nouvelle branche ; ne pas la merger
-par erreur. Les trois CSV D1 qu'elle prévoyait ne sont pas livrés.
+L'ancienne branche chatgpt/btc-history-bridge-20261025
+est abandonnée et n'entre pas dans cette chaîne.
 
-Tests CI sur petites archives gzip fabriquées, sans aucun prix réel.
-Dès la copie locale des 16 fichiers, faire tourner la comparaison
-réelle H1 et M1 et archiver les JSON hors des protocoles gelés.
+- release_store.py : inventaire exact de la release et acquisition
+  à la demande par gh avec cache local, sans accès réseau implicite.
+- stream.py : lecture séquentielle des archives H1/M1.
+- experiment.py : comparaison exploratoire de trois backbones.
+- test_release_store.py / test_history.py : tests sur fausses
+  archives gzip et appels CLI simulés ; aucun prix réel utilisé.
+- .github/workflows/trame-btc-h1-m1.yml : CI sans données privées.
 
-Le propriétaire accepte les archives pour ses recherches sans nouvel
-audit de provenance ; cette préférence ne constitue pas une preuve
-de droits de redistribution consentis par tous les tiers éventuels.
+Avant tout travail, lire AGENTS.md et docs/CHATGPT_PROJECT_HISTORY.md,
+puis ce document. Toujours préserver la séparation des temps et
+l'inventaire de la release. Aucune action de trading ou sur le bot.
+
+L'usage recherche par l'utilisateur ne préjuge pas à lui seul de
+droits externes ; aucune validation nouvelle de provenance n'est
+demandée pour ce travail.
