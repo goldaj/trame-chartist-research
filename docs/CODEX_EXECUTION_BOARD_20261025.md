@@ -124,3 +124,67 @@ testés ; des commits uniquement documentaires `[skip ci]` sont
 ensuite intervenus, ne pas affirmer qu'un HEAD de docs est revalidé
 sans contrôle effectif. Les empreintes d'artefacts s'appuient sur
 les runs cités.
+
+
+## Étape produit P1–P4 : code de sécurité et No-Go explicite
+
+Nouvelle [PR #16](https://github.com/goldaj/trame-chartist-research/pull/16)
+(`chatgpt/trame-predictive-delivery-gates-20261025`), branche soeur
+des PR #11 à #15, basée sur PR #10 :
+
+- P1.1–P1.4 : critères et manifeste d'entraînement/checkpoints
+  **définis**, mais aucune sélection confirmatoire n'a eu lieu
+  (P1.5 **NON FAITE**).
+- P2.1–P2.4 : protocole et catalogue de tests de robustesse
+  **définis**, tests financiers indépendants P2.5 **NON FAITS**.
+- P3.1–P3.4 : code `transaction_sandbox.py` vérifié sur
+  **prix inventés**, décisions connues avant l'origine, coûts
+  et drawdown ; P3.5 test économique réel **NON FAIT**.
+- P4.1 : `release_preflight.py` interdit le feu vert
+  automatique ; P4.2–P4.5 seulement contrats et outillage
+  partiel ; P4.6 Predictive v1 **NON LIVRÉ**.
+- CI [#40222500744](https://github.com/goldaj/trame-chartist-research/actions/runs/40222500744)
+  réussie pour la dernière version de **code** P3/P4 ;
+  les modifications documentaires ultérieures ne
+  revendiquent pas de revalidation.
+
+### Liste ordonnée des dépendances objectives restantes
+
+1. **Matériel** : machine CUDA/bf16 compatible pour
+   installation/tests réels `mamba_ssm.Mamba2/Mamba3`.
+   Ne jamais remplacer par un résultat GRU CPU.
+2. **Données** : exécution sur ordinateur disposant du cache
+   release privé BTC versionné et de l'authentification
+   GitHub requise. Ne pas committer les prix dans TRAME.
+3. **Science** : régimes et multiples horizons, baselines,
+   vraie couverture des coûts de calcul, budget de tuning,
+   préenregistrement et gel d'un test indépendant.
+4. **Poids préentraînés** : versions figées, audit de
+   contamination et conformité des licences ;
+   TimesFM-3 et Moirai-2 non commerciaux hors produit.
+5. **Produit** : checkpoints effectifs, API/UI de prévision,
+   installation Windows/Linux vérifiée, sécurité,
+   accessibilité et revue humaine avant tout Go.
+
+**Impossible de déclarer toutes les tâches « terminées » tant
+que ces cinq dépendances restent ouvertes.** Les tests
+synthétiques réussis ne constituent pas de telles preuves.
+
+### Actualisation A8
+
+La PR #15 a également livré un visualiseur complémentaire
+`research/trame_lab/evidence.py` avec imports A3c/A5/A7,
+empreintes des JSON, tests CI Linux/Windows
+[run #40222427770](https://github.com/goldaj/trame-chartist-research/actions/runs/40222427770).
+Le document `research/trame_lab/A8_EVIDENCE_20261025.md` porte
+les instructions détaillées. Il n'y a toujours aucune
+certification WCAG navigateur/lecteur d'écran et aucune
+démonstration financière réelle.
+
+### État d'intégration de Git
+
+Les PR #8–#16 demeurent en **draft**, sans merge.
+Surtout ne pas considérer les PR #11–#16 comme des
+commits empilés les uns sur les autres : ce sont des
+branches sœurs, et chaque intégration nécessitera une
+revue de conflit/de tests avec PR #10 comme parent.
