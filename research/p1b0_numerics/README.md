@@ -46,7 +46,11 @@ un futur vraiment indépendant ?
   avec S dans {64, 256}, aucune réduction du dictionnaire.
 - HIER : q=floor(k/8), reste modulo 8 pour construire
   le score brut depuis 512 composantes grossières et 3 paires binaires.
-- Le gradient calculé est **uniquement** celui des 4096 corrections brutes :
+- Un contrôle supplémentaire empêche les cibles rares hors dictionnaire
+de casser la boucle de descente du gradient : elles participent à la
+normalisation sans être écrasées dans une fausse cellule centrale.
+
+Le gradient calculé est **uniquement** celui des 4096 corrections brutes :
   (p(j)-1_{j=cible})*(1-tanh²(g_j/4)), y compris lorsque la cible est
   hors I. Le gradient de mu, sigma et du réseau complet reste à développer.
 
@@ -100,7 +104,7 @@ SciPy 1.17.0, expérience construite le 25/10/2026) :
   le sampler **ne peut pas** produire ces événements en pratique.
 - k=+-4000 possède une log-probabilité finie même quand la masse
   arrondie en float64 serait égale à zéro.
-- Quatorze tests synthétiques passent localement. Les tests ne
+- Quinze tests synthétiques passent localement. Les tests ne
   constituent **aucune** mesure de prédiction boursière.
 
 **Résultat négatif important :** support infini *mathématique*
@@ -164,7 +168,7 @@ trajectoire synthétique séparée servant de pseudo-observation.
 Ce seul tirage n'est **pas** une preuve de supériorité de la tête sur
 la persistance. Tous les nombres sont construits, dans les mêmes
 conditions par le même simulateur ; aucune valeur de marché n'y entre.
-Les tests comptent désormais 14 cas.
+Les tests comptent désormais 15 cas.
 
 ## Limites et portes de sortie
 
