@@ -55,3 +55,11 @@ la PR #2) ajoute les gradients complets de la tête en PyTorch, les
 stress tests de queues, les métriques de calibration et les mesures de
 CPU. Lire [l'avis Go/No-Go et les sous-étapes 2.1–2.7](research/p1b0_numerics/STAGE1_DECISION_20261025.md).
 **Go limité : premier mini-modèle sur données artificielles seulement**.
+
+## Étape 2 : mini-Transformer expérimental
+
+La branche `chatgpt/mini-transformer-synthetic-20261025` contient
+[le premier entraînement autoregressif synthétique](research/mini_gpt_synthetic/README.md)
+avec oracle exact, témoin linéaire entraîné sur train seulement,
+masque causal et ablations initiales BASE/HIER/FLAT.
+**Aucune prévision de marché ni classement de modèles financier.**
