@@ -53,3 +53,14 @@ pas changer cet état sans preuve d'utilisation/licence, d'horodatage
 point-in-time et de provenance de téléchargement. Les fixtures
 sont 100 % construites, sans prix réel. Ne pas confondre
 `observed_at` et `available_at`.
+
+## Etape 4 : pas de réinterprétation des pseudo-performances
+
+Branche `chatgpt/paired-benchmark-sandbox-20261025` basée sur
+`chatgpt/point-in-time-data-contract-20261025`. Lire
+`research/benchmark_synthetic/STAGE4_REPORT_20261025.md`.
+Un gain apparié synthétique ou son intervalle bootstrap
+**n'est pas** un p-value confirmatoire et ne permet ni
+fusionner des prix en devises différentes ni choisir un modèle
+après consultation d'un holdout. Conserver le projet comme
+laboratoire d'études tant que sources réelles non approuvées.
