@@ -7,10 +7,7 @@ calibrated real-market forecasts. Those are future controlled experiments.
 import torch
 from torch import nn
 
-try:
-    from ..p1b0_numerics.torch_head import bounds_transform, log_interval_mass, logit_for_sigma
-except ImportError:
-    from torch_head import bounds_transform, log_interval_mass, logit_for_sigma
+from research.p1b0_numerics.torch_head import bounds_transform, log_interval_mass, logit_for_sigma
 
 
 class MiniTRAME(nn.Module):
