@@ -3,19 +3,15 @@
 **Date : 25 octobre 2026. Nouvelle consigne utilisateur : comparer en parallèle
 les approches classiques et les familles des LLM récents.**
 
-## État de reprise / pause
+## Reprise active du chantier multi-architectures
 
-**25 octobre 2026 : aucune nouvelle expérience à exécuter avant ordre
-explicite de reprise.** Le plan de passation faisant autorité est
-[`docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md`](../../docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md).
-A1/A2 sont réalisés en synthétique, A3a est un alignement *approximatif*
-du nombre de paramètres, A3b est un premier diagnostic de latence CPU.
-**La prochaine sous-étape est A3c.1** : pré-définir une véritable
-comparaison compute-fair, puis mesurer FLOPs, mémoire et latence avec
-contrôle des contextes et du budget. **A4 Mamba-2/Mamba-3 n'est pas
-commencée** ; les phases A5–A8 et produit ne sont pas autorisées
-par l'existence de cette roadmap. Ne pas confondre accès aux fichiers
-BTC et preuve d'un avantage prédictif.
+Le propriétaire a levé la pause et demandé de continuer en mode
+chercheur + ingénieur. [Tableau des travaux pour Codex](../../docs/CODEX_EXECUTION_BOARD_20261025.md).
+Le [protocole A3c](A3C_PROTOCOL_20261025.md) dirige la comparaison
+de coûts, les extensions de contexte et le pilote de budgets.
+A4 Mamba-2/3 suit A3c ; ne jamais assimiler les FLOPs partiellement
+comptabilisés à des FLOPs complets. Les comparaisons actuelles
+restent **entièrement synthétiques**.
 
 ## Clarification technique
 
