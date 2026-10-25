@@ -267,3 +267,35 @@ téléchargé, installé ni évalué sur de vrais cours.
   gaps et volumes nuls. Aucun audit de provenance effectué ni demandé.
 - Consignes détaillées pour Codex dans research/btc_h1_m1/README.md
   et AGENTS.md ; CI avec archives fictives, sans accès au repo privé.
+
+## 2026-10-25 — Fin de la parenthèse BTC, rappel de la roadmap et PAUSE
+
+**Utilisateur (verbatim, heure locale non enregistrée)** :
+> ok maintenant que c'est fait on peut reprendre là où on en était avant tout ce tintouin sur l'historique btc. C'était quoi déjà ? Liste moi les prochaines étapes. Ne les reprends pas pour l'instant. On va stopper l'execution temporairement.
+
+**Assistant (résumé non verbatim)** : identifie le point d'arrêt
+sur le chantier multi-architectures : A1/A2 achevés en synthétique,
+A3a (rapprochement de paramètres) terminé, A3b (diagnostic CPU)
+partiel, **A3c compute-fair** prochaine sous-étape, puis A4 Mamba-2
+et Mamba-3, A5 hybrides, A6 séries temporelles préentraînées,
+A7 validations financières, A8 Research Lab. Projette ensuite des
+phases de produit P1 sélection/entraînement, P2 robustesse,
+P3 évaluation économique, P4 TRAME Predictive v1. Rappelle que les
+releases BTC existent mais qu'aucun avantage prédictif réel n'est
+établi. **Aucune reprise ni merge autorisés pendant cette pause.**
+
+**Utilisateur (verbatim, heure locale non enregistrée)** :
+> Documente tout ça correctement dans le repo pour quand codex reprendra le relai.
+
+**Assistant (résumé non verbatim, intervention documentaire)** :
+crée `docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md`, référence cet
+état dans `AGENTS.md`, le README racine et les documents des
+architectures/données, puis consigne ces échanges. Seules des
+modifications documentaires sont demandées. Aucun entraînement,
+téléchargement d'assets, ouverture du holdout, travail Mamba, merge
+ou opération sur le bot n'est effectué à cette occasion.
+
+**Instruction prioritaire pour Codex** : ne pas interpréter la
+feuille de route comme une autorisation de continuer. Attendre
+une demande explicite de reprise, puis commencer par **A3c.1**
+avec garde-fous et compte rendu de chaque baby step.
