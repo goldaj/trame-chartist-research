@@ -26,12 +26,12 @@ la même tâche et une comptabilité transparente du coût.
 - [x] **A3c.3 : diversité de tailles/contextes** ; mesurer des contextes
   courts à la limite actuelle 20. Une séquence plus longue nécessite
   d'abord une évolution des trois implémentations et tests causaux.
-- [ ] **A3c.4 : budgets équivalents** sur plusieurs graines, choix de
+- [x] **A3c.4 : pilote à budget proxy uniquement** sur plusieurs graines, choix de
   configurations piloté par les coûts mesurés sans sélectionner sur le
   développement du test réservé ; vérifier les mêmes cibles et
   le coût du tuning. Deux comparaisons séparées : mêmes pas de
   gradient (diagnostic) et budgets compute/tuning (analyse).
-- [ ] **A3c.5 : publier les résultats et limites** dans artefacts
+- [x] **A3c.5 : publier les résultats et limites** dans artefacts
   JSON et Research Lab, avec `environment`, commit, seeds, exclure
   les faux classements de marchés ; comparer contre baselines
   classiques lors de l'étape financière.
@@ -81,3 +81,15 @@ financières exploratoires ultérieures, non à calibrer ce micro-benchmark.
 - Tests unitaires/CI CPU sans secrets ni données BTC réelles.
 - Documenter code, versions, tailles, vitesses et limites dans la PR
   et `docs/CHATGPT_PROJECT_HISTORY.md`.
+
+
+## Résultat d'A3c : GO exploratoire / NO-GO compute-fair conclusif
+
+Voir [`A3C_RESULTS_20261025.md`](A3C_RESULTS_20261025.md) :
+A3c.1–3 livrés ; A3c.4 est **un pilote à budget d'opérations
+incomplètement comptées**, pas une égalisation intégrale FLOPs;
+A3c.5 documente les résultats et le **No-Go** pour tout classement
+scientifique ou financier. Les critères plus ambitieux de la
+« Définition de terminé » restent **ouverts** avant une comparaison
+compute-fair validée. A4 peut démarrer en tant que voie expérimentale,
+pas comme exploitation d'un résultat définitif.
