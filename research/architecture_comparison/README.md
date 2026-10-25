@@ -25,7 +25,7 @@ sur un protocole commun**, tout en gardant les contrôles statistiques.
 | Transformer causal 2017–2024 | `MiniTRAME` | fonctionnel synthétique | 1 couche, 16 dimensions |
 | Décodeur GPT-style modernisé | `ModernGPTMini` | fonctionnel synthétique | RoPE, RMSNorm, GQA, SwiGLU miniatures ; non préentraîné |
 | Récurrent traditionnel | `GRUMini` | fonctionnel synthétique | GRU n'est **pas** Mamba ni xLSTM |
-| SSM sélectifs | Mamba-2 | **prévu, pas implémenté** | vérifier kernels, CPU/GPU, causalité |
+| SSM sélectifs | Mamba-2 **et Mamba-3 (2026)** | **prévus, pas implémentés** | vérifier kernels, CPU/GPU, causalité |
 | Hybride SSM + attention / attention linéaire | Qwen3-Next / Jet-Nemotron inspirés | **prévu, pas implémenté** | ne pas déclarer fidèle sans implémentation validée |
 | Time-series foundation models | TimesFM-3, Chronos-2, Moirai-2 | **évaluation prospective** | licence de poids, contexte, fréquence, données d'entraînement inconnues et contamination |
 | Modèles probabilistes alternatifs | mixture, quantiles, flows / diffusion | **à étudier** | rendre comparables densités, CRPS et calibration |
@@ -191,3 +191,14 @@ ni une mesure de latence de production ni une preuve de meilleur
 backbone. Il restera à caractériser mémoire GPU/CPU, FLOPs
 par couche et vitesse sous différentes longueurs de contexte
 avant une comparaison compute-fair crédible.
+
+
+## Actualisation des candidats (25 octobre 2026)
+
+Lire également [la fiche de qualification des modèles externes](EXTERNAL_MODELS_ADMISSIBILITY_20261025.md).
+Le programme SSM doit inclure **Mamba-3** (papier de mars 2026),
+en plus de Mamba-2. Vérification des licences : code TimesFM 3.0
+Apache-2.0, **poids TimesFM 3.0 non commerciaux/non production** selon
+Google Research. Ne jamais inclure ces poids dans une offre
+commerciale sans autorisation différente. Chronos-2 et Moirai-2
+restent des candidats à qualifier précisément, non téléchargés.
