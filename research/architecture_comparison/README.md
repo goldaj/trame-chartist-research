@@ -129,3 +129,23 @@ architecture financière ».
 Lire les publications et licences sources **à la date de toute intégration** ;
 la popularité en NLP ou sur séries généralistes n'est pas une preuve
 de qualité pour des cours financiers ni d'une propriété de long terme.
+
+
+## Intégration effective au livrable
+
+Depuis cette même branche, `research/trame_lab/cli.py`
+ajoute désormais les trois architectures et **trois graines par bras**
+à chaque génération HTML/JSON : le rapport fournit un tableau sémantique
+avec `architecture`, `seed`, nombre de paramètres et NLL de
+développement, et rappelle explicitement l'absence d'égalité FLOPs
+ou paramètres. Le validateur du rapport refuse les prétentions
+`compute_matched=True`, `parameter_matched=True`, une
+origine non synthétique, des métadonnées d'ouverture du holdout,
+un nombre de bras/graines incompatible ou une NLL non finie.
+
+Les tests précédents du laboratoire sont adaptés ; pas d'utilisation
+réelle de données financières. Dans `run_lab`, les deux entraînements
+de diagnostic (mini modèle original et nouvelle comparaison à trois
+graines) sont **indépendants** : ne pas interpréter les différences
+de NLL par rapport au premier panneau comme un effet pur d'architecture
+sans aligner précisément seeds/budgets.
