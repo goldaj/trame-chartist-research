@@ -164,3 +164,37 @@ remplacement, nettoyage systématique et test d'injection d'erreur
 pré-publication qui protège la paire préexistante. Ne pas annoncer
 une atomicité complète de deux chemins distincts : panne entre les
 `replace`, exécution concurrente et `fsync` restent ouverts.
+
+
+## 2026-10-25 — Utilisateur : généraliser la comparaison des architectures
+
+**Utilisateur (verbatim, heure locale non enregistrée)** :
+> Je te coupe vite fait pour te faire par d'une de mes craintes : Est-ce
+> qu'on est sûrs que le transformer auto-régressif soit la bonne approche
+> technique ? Je crois que c'est la techno qui était utilisée avant
+> celle des LLM actuels. J'aimerais bien quand même la comparée en
+> parallèle (sur tout ce qu'on va faire à partir de maintenant) à la
+> techno des LLM actuels. Pour être sûr de ne pas rater quelque chose.
+>
+> Tu peux reprendre là où je t'ai coupé, en prenant en compte ces
+> nouveaux éléments et en les documentant pour codex, comme tout le
+> reste d'ailleurs.
+
+**Assistant (résumé non verbatim)** :
+- Clarification : l'autorégression n'est pas une famille d'architectures
+  révolue ; les LLM GPT restent généralement décodeurs causaux.
+  Mais le mini-Transformer initial de TRAME ne recouvre pas l'évolution
+  des décodeurs et des familles SSM/hybrides.
+- Instaure un programme multi-architectures permanent, sans hypothèse
+  privilégiant les Transformers : `research/architecture_comparison/README.md`.
+- Implémente une première comparaison **uniquement synthétique** entre
+  `MiniTRAME` (attention classique), `ModernGPTMini` (mini décodeur
+  RoPE/RMSNorm/GQA/SwiGLU), et `GRUMini` (témoin récurrent).
+- Tests causaux, backprop, même mini-lots par seed, même sortie gaussienne
+  et métrique NLL de développement ; **pas** de FLOPs/capacités égales,
+  ni entraînement d'un LLM réel, ni Mamba.
+- Prévoit Mamba-2, hybrides, modèles de fondation chronologiques
+  et comparaisons compute-fair dès que le périmètre de recherche
+  et les licences le permettent.
+- Aucune modification des expériences scellées ni du bot Hyperliquid ;
+  CI de la branche à vérifier avant toute affirmation de succès GitHub.
