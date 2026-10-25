@@ -76,4 +76,6 @@ def empirical_crps(forecast_prices, true_price):
     out = unit * (mean_error - pair_sum / (n*n))
     if not math.isfinite(out):
         raise OverflowError('CRPS not representable')
-    return max(out, 0.0) if out > -1e-12 * unit else out
+    if out < -1e-12 * unit:
+        raise ArithmeticError("CRPS became materially negative")
+    return max(out, 0.0)
