@@ -15,7 +15,8 @@ et [le protocole A3c](research/architecture_comparison/A3C_PROTOCOL_20261025.md)
 Le document `docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md` est conservé pour
 l'historique, **pas** comme ordre d'arrêt actuel.
 
-Première phase : A3c.1 à A3c.5, puis A4 Mamba-2/Mamba-3 ; feuille
+Première phase A3c documentée ; A4 Mamba-2/Mamba-3 possède des adaptateurs
+optionnels dans PR #11 mais **aucune validation GPU** ; feuille
 de route A5–A8 et P1–P4 dans le tableau actif. Chaque sous-étape doit
 avoir hypothèse, code, tests, preuves et limites. Ne jamais
 déclarer « tout fini » lorsque des campagnes matérielles ou financières
