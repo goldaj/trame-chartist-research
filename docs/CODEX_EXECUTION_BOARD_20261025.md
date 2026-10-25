@@ -22,7 +22,7 @@ des secrets non fournis ou de fusionner implicitement les PR.
 | A5 hybrides | 1. hypothèses ; 2. bras d'architecture ; 3. ablations ; 4. équité/rapport | À faire |
 | A6 fondations temporelles | 1. versions/licences ; 2. contamination ; 3. adapteurs ; 4. test zéro-shot ; 5. comparaison | À faire |
 | A7 données réelles | 1. reprise cache BTC ; 2. horizons/splits ; 3. témoins ; 4. campagne multibras ; 5. évaluation robuste ; 6. gel hors-échantillon ; 7. extension multi-actifs | Infrastructure de la release BTC prête ; campagne réelle non exécutée |
-| A8 Research Lab | 1. export résultats ; 2. visualisation ; 3. traçabilité ; 4. qualité/packaging ; 5. évaluation utilisabilité | Démonstrateur synthétique préexistant ; ajouts à faire |
+| A8 Research Lab | 1. export résultats ; 2. visualisation ; 3. traçabilité ; 4. qualité/packaging ; 5. évaluation utilisabilité | A8.1–A8.5 livrées pour outillage exploratoire, contrôle statique et CI Win/Linux ; audit UX réel ouvert |
 | P1 modèles | 1. sélection justifiée ; 2. représentations ; 3. entraînement/tuning ; 4. checkpoints | À faire |
 | P2 robustesse | 1. stress ; 2. calibration ; 3. dérive ; 4. test indépendant ; 5. limites et Go/No-Go | À faire |
 | P3 économie | 1. contrat de simulation ; 2. frais/spread/slippage ; 3. comparateurs ; 4. intervalles ; 5. analyse de risque | À faire |
@@ -100,3 +100,20 @@ artefacts JSON du run #40219261965 sont la preuve reproductible.
 La recherche multi-architectures se poursuit par A4 sous statut
 exploratoire, **sans** classement de modèle, FLOPs réels alignés
 ou campagne sur historiques BTC.
+
+## Point de reprise après interruption : A8
+
+[PR #15](https://github.com/goldaj/trame-chartist-research/pull/15)
+empilée sur #10. Deux moteurs de compte rendu hors ligne
+(`evidence_report.py` et `evidence.py`) sont **complémentaires** :
+l'un agrège exclusivement les NLL synthétiques par protocole ;
+l'autre importe des métriques individuelles, dont les témoins BTC
+exploratoires, sans les classer. Les suites de tests passent
+sur Windows/Linux au commit contenant le correctif de test
+de métadonnée hostile, Actions run #40222427770.
+
+**GO** : rapport HTML/JSON exploratoire hors ligne.
+**NO-GO** : validation financière ou UX/WCAG indépendante,
+livraison d'un modèle Predictive v1.
+Les phases P1–P4 exigent toujours des modèles réels,
+un holdout indépendant et des contrats de simulation.
