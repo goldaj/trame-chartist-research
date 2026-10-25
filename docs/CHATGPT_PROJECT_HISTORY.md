@@ -62,3 +62,25 @@ Les conversations complètes, toutes les réponses exactes de l'assistant et les
 - 1.7 : décision de passage limité vers étape 2 **synthétique**, jamais marché réel.
 - Aucune donnée financière réelle nouvelle, aucun réseau métier, compte ou transaction.
 - Relever les runs CI de la branche avant d'affirmer qu'un commit particulier est vert.
+
+## 2026-10-25 — Étape 2, poursuivie sans nouvelle validation utilisateur
+
+**Utilisateur, instruction verbatim dans le bloc précédent de ce journal** :
+continuer sans attendre à chaque jalon, documenter pour Codex.
+
+**Assistant, résumé non verbatim et vérifiable :**
+- Branche `chatgpt/mini-transformer-synthetic-20261025` à base de la
+  branche de qualification de l'étape 1 ; aucun merge.
+- Générateur de codes gaussiens arrondis AR(1) avec oracle connu,
+  graines distinctes train/développement/test réservé, dernier verrouillé.
+- Backbone Transformer minimal en f64, entrée de codes strictement antérieurs,
+  masque causal vérifié par perturbation des futures entrées.
+- Entraînement CPU de développement à budget fixé, comparaison oracle,
+  sigma de persistance ajusté uniquement sur train, témoin régression
+  linéaire ajusté seulement sur train ; tous les chiffres dans JSON CI.
+- Préliminaire HIER et FLAT avec normaliseur 4096 complet, six
+  mises à jour comparables en pas mais pas en capacité/compute.
+- Sous-étapes 3.1 à 3.7 décrites dans
+  `research/mini_gpt_synthetic/README.md` ; corpus réel qualifié absent.
+- Pas de trading, d'API payante, de holdout ouvert ni de revendication
+  de prévision financière.
