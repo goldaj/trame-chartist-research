@@ -18,15 +18,15 @@ une implementation SSM sélective.
 ## Sous-tâches
 
 - [x] **A5.1** : hypothèses, témoins et objectifs mesurables.
-- [ ] **A5.2** : contrat modulaire des vrais hybrides SSM/attention
+- [x] **A5.2** : contrat modulaire des vrais hybrides SSM/attention
   (API, dépendances, masque, causalité, interface probabiliste),
   sans simuler des kernels Mamba ; attente d'A4.4 pour validation.
-- [ ] **A5.3** : implémenter un témoin hybride CPU attention GQA
+- [x] **A5.3** : implémenter un témoin hybride CPU attention GQA
   causale + GRU, avec même tête BASE que les autres.
-- [ ] **A5.4** : expériences synthétiques appariées, causalité,
+- [x] **A5.4** : expériences synthétiques appariées, causalité,
   rétropropagation, même mini-lots, mesures de paramètres,
   temps et trois graines au moins.
-- [ ] **A5.5** : ablations, rapport Go/No-Go, exclusion de toute
+- [x] **A5.5** : ablations, rapport Go/No-Go, exclusion de toute
   déclaration de supériorité financière. Une étude compute-fair
   définitive ne pourra pas réutiliser aveuglément des proxies A3c.
 
@@ -51,3 +51,14 @@ insuffisants pour départager les capacités à longue
 mémoire, extrapolation, volatilité et dérive des marchés.
 Une éventuelle meilleure NLL sur ce jeu ne présage
 ni performance Bitcoin ni avantage économique.
+
+
+## Résultat vérifié
+
+Voir [`A5_RESULTS_20261025.md`](A5_RESULTS_20261025.md) et
+GitHub Actions run #40220598879. Les cinq livrables
+A5.1–A5.5 sont produits **pour le témoin attention+GRU** ;
+la vérification de véritables hybrides attention+SSM reste
+**No-Go matériel tant qu'A4.4 n'a pas tourné sur GPU**.
+L'absence de gain du témoin synthétique n'autorise aucune
+extrapolation à Mamba ni au Bitcoin.
