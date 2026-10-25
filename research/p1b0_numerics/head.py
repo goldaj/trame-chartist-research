@@ -119,10 +119,17 @@ class Head:
         right = math.exp(self.log_right_q - self.log_z)
         core = float(np.exp(self.log_core_q + self.correction - self.log_z).sum())
         return {"core": core, "left": left, "right": right,
-                "sum": core + left + right, "log_z": self.log_z}
+                "sum": core + left + right, "log_z": self.log_z,
+                "left_tail_underflow": left == 0.0,
+                "right_tail_underflow": right == 0.0}
 
     def sample(self, rng):
-        """Sample k including exact truncated-normal tails (not clipped)."""
+        """Sample core/tails when their masses are representable in float64.
+
+        The mathematical distribution has infinite support but a tiny tail
+        can underflow to zero in this sampler. log_prob stays finite in
+        the tails. Do not use this sampler as a tail-calibration proof.
+        """
         probs = np.exp(np.r_[self.log_core_q + self.correction,
                              self.log_left_q, self.log_right_q] - self.log_z)
         probs /= probs.sum()  # remove last few float64 ULPs for choice
