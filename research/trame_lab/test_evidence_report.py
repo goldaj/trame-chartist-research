@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from research.trame_lab.evidence_report import read_report, render, write_output
 
@@ -63,8 +64,13 @@ class EvidenceDashboardTests(unittest.TestCase):
         self.assertIn("protocoles différents", html)
 
     def test_html_escapes_untrusted_filename(self):
-        bad = self._write("evil-<script>alert(1)</script>.json".replace("/", "_"), fixture_a5())
-        _, html = render([bad])
+        # Windows forbids < and > in filenames, so inject the adversarial
+        # metadata after reading a valid path. This tests the HTML boundary.
+        source = self._write("portable.json", fixture_a5())
+        hostile = read_report(source)
+        hostile["origin_file"] = "evil-<script>alert(1)</script>.json"
+        with patch("research.trame_lab.evidence_report.read_report", return_value=hostile):
+            _, html = render([source])
         self.assertNotIn("<script>", html)
         self.assertIn("&lt;script&gt;", html)
 
