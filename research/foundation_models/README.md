@@ -32,11 +32,11 @@ Sources officielles à cette date :
 
 - [x] **A6.1** : registre des checkpoints et licences
   avec exclusion produit des poids non commerciaux.
-- [ ] **A6.2** : recenser les ensembles de préentraînement
+- [x] **A6.2** : recenser les ensembles de préentraînement
   et tests de contamination potentielle au niveau de la date,
   du dataset et des identifiants ; **inconnu = non résolu**,
   jamais interprété comme « absence de contamination ».
-- [ ] **A6.3** : contrat causal de séries et de prévision
+- [x] **A6.3** : contrat causal de séries et de prévision
   (contextes observés, covariables temporellement disponibles,
   horizon/prix natifs, impossibilité d'utiliser des cibles
   futures comme features), format de sortie comparable.
@@ -74,3 +74,15 @@ l'intégration future de Chronos-2 dans un environnement isolé.
 contamination évaluée, origines gelées et checkpoints réellement
 chargés. **NO-GO commercial** pour TimesFM-3 et Moirai-2
 sous les licences de poids indiquées.
+
+
+## Jalon A6 confirmé en CI
+
+`registry.py` conserve `contamination_status=unknown`
+pour **tous** les checkpoints ; l'audit réel n'a PAS été
+réalisé. `forecast_contract.py` bloque les dates futures,
+les covariables indisponibles et les quantiles croisés.
+Les tests CPU `test_foundations.py` sont verts.
+A6.4/A6.5 restent **No-Go** tant que les poids authentiques
+ne sont pas chargés dans un environnement compatible et que
+le risque de contamination du benchmark n'est pas traité.
