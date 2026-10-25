@@ -54,8 +54,17 @@ class Case:
 
 
 def files_for(interval: str, folder: Path = ROOT) -> tuple[Path, ...]:
-    """Resolve a pinned private Release's local cache; no implicit network."""
-    return ensure_assets(interval, directory=folder)
+    """Use pinned cache in production; allow explicit test-fixture directories."""
+    if Path(folder).expanduser() == DEFAULT_CACHE:
+        return ensure_assets(interval, directory=folder)
+    if interval not in INTERVALS:
+        raise ValueError("interval must be H1 or M1")
+    names = (H1_FILE,) if interval == "H1" else M1_FILES
+    paths = tuple(Path(folder) / name for name in names)
+    for path in paths:
+        if not path.is_file() or path.is_symlink():
+            raise FileNotFoundError(f"missing local BTC archive {path.name}")
+    return paths
 
 
 def read_bars(interval: str, folder: Path = ROOT):
