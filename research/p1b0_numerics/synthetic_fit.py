@@ -27,7 +27,10 @@ def nll(head, targets):
 def train_arm(targets, arm, *, iterations=100, learning_rate=1.0):
     if arm not in ('FLAT', 'HIER'):
         raise ValueError('only corrected arms are trainable in this probe')
-    counts=np.bincount(targets + 2048,minlength=CORE_N) / len(targets)
+    # A rare outside-core label still trains the normalizer (logZ).
+    # Never clip it to the last bin or silently delete it.
+    inside=targets[(targets >= -2048) & (targets <= 2047)]
+    counts=np.bincount(inside + 2048,minlength=CORE_N) / len(targets)
     coarse=np.zeros(512)
     bits=np.zeros((3,2))
     flat=np.zeros(CORE_N)
