@@ -47,3 +47,11 @@ Ceci **n'entraîne pas de GPT sur un marché**, ne valide aucune prévision
 boursière et ne déverrouille aucun jeu de test. Les documents scellés
 des éditions précédentes sont inchangés. Voir le README du laboratoire
 pour les commandes, chiffres, hypothèses et limites.
+
+## Étape 1 P1-B0 : qualification de la différentiabilité
+
+La branche `chatgpt/p1b0-stage1-validation-20261025` (superposée à
+la PR #2) ajoute les gradients complets de la tête en PyTorch, les
+stress tests de queues, les métriques de calibration et les mesures de
+CPU. Lire [l'avis Go/No-Go et les sous-étapes 2.1–2.7](research/p1b0_numerics/STAGE1_DECISION_20261025.md).
+**Go limité : premier mini-modèle sur données artificielles seulement**.
