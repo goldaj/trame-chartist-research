@@ -107,3 +107,13 @@ restent développement **artificiel**. Avant publication d'une
 conclusion comparative, achever A3b (budget computationnel),
 examiner plusieurs graines et valider sur des marchés admis
 avec évaluation indépendante.
+
+
+## A3b — audit CPU multi-tailles
+
+Consulter `research/architecture_comparison/cost_audit.py`
+et `test_cost_audit.py`. Les durées sur un CPU et petit corpus
+synthétique ne sont **pas** des FLOPs, des latences trading,
+ni des métriques de performance financière. L'étude de coût
+inférence longue séquence, mémoire et égalité de FLOPs
+reste à développer.
