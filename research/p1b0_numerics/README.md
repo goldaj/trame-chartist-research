@@ -69,6 +69,7 @@ python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
 python -m unittest discover -s research/p1b0_numerics -p 'test_*.py' -v
 python research/p1b0_numerics/preflight.py > preflight.json
 python research/p1b0_numerics/synthetic_fit.py > synthetic-fit.json
+python research/p1b0_numerics/rollout_study.py > toy-rollout.json
 ~~~
 
 La CI crée automatiquement ces rapports **synthétiques** en artefacts
@@ -99,7 +100,7 @@ SciPy 1.17.0, expérience construite le 25/10/2026) :
   le sampler **ne peut pas** produire ces événements en pratique.
 - k=+-4000 possède une log-probabilité finie même quand la masse
   arrondie en float64 serait égale à zéro.
-- Onze tests synthétiques passent localement. Les tests ne
+- Quatorze tests synthétiques passent localement. Les tests ne
   constituent **aucune** mesure de prédiction boursière.
 
 **Résultat négatif important :** support infini *mathématique*
@@ -133,6 +134,37 @@ ni recherche d'hyperparamètres. Aucun classement scientifique des
 têtes de TRAME ni généralisation au marché n'en découle.
 La réutilisation de cette fixture comme « test indépendant » serait
 incorrecte après ces observations.
+
+### Expérience C : simulation causale à 20 pas et CRPS en prix fictifs
+
+Le nouveau module `rollout.py` prend seulement le numéro de pas et
+le cumul des codes **déjà générés**. La loi qui fournit la tête n'a
+aucune interface permettant de recevoir des prix futurs ; le même
+contrat permet un calcul de log-vraisemblance en teacher forcing, où
+la cible n'est intégrée à l'état qu'**après** sa notation.
+
+`empirical_crps` calcule le CRPS d'une distribution empirique
+sur les **prix natifs**, avec une formule O(n log n) vérifiée contre
+le double calcul par paires. Il s'agit du score de l'**ensemble fini**
+et non d'un estimateur sans biais de la loi sous-jacente.
+
+Smoke test construit : origine fictive 100, échelle 0.02, 20 pas,
+512 trajectoires BASE indépendantes (graine 20261025), puis une
+trajectoire synthétique séparée servant de pseudo-observation.
+
+| Grandeur purement fictive | Résultat |
+| --- | ---: |
+| Médiane de l'ensemble à 20 pas | 99.875 |
+| Quantile empirique 10 % | 88.692 |
+| Quantile empirique 90 % | 111.907 |
+| Pseudo-prix réalisé (artificiel) | 117.058 |
+| CRPS de l'ensemble (unité de prix fictive) | 12.1823 |
+| Erreur absolue de persistance (même cas) | 17.0581 |
+
+Ce seul tirage n'est **pas** une preuve de supériorité de la tête sur
+la persistance. Tous les nombres sont construits, dans les mêmes
+conditions par le même simulateur ; aucune valeur de marché n'y entre.
+Les tests comptent désormais 14 cas.
 
 ## Limites et portes de sortie
 
