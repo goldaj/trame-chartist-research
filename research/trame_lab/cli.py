@@ -9,6 +9,7 @@ import html
 import json
 import math
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 from research.mini_gpt_synthetic.experiment import run as run_gpt
 from research.p1b0_numerics.rollout_study import run as run_rollout
@@ -194,9 +195,24 @@ def write_reports(report,output,*,overwrite=False):
             raise FileNotFoundError(f'parent directory does not exist: {path.parent}')
     htmltext=render_html(report)
     jsontext=json.dumps(report,indent=2,ensure_ascii=False,allow_nan=False)+'\n'
-    # Write JSON first; HTML is the user entrypoint.
-    jsonpath.write_text(jsontext,encoding='utf-8')
-    htmlpath.write_text(htmltext,encoding='utf-8')
+    # Stage BOTH complete outputs in the destination directory before replacing
+    # either one. This guards staging errors, NOT cross-file atomicity.
+    staged=[]
+    try:
+        for path,body in ((jsonpath,jsontext),(htmlpath,htmltext)):
+            with NamedTemporaryFile(
+                mode='w',encoding='utf-8',dir=path.parent,
+                prefix=f'.{path.name}.',suffix='.tmp',delete=False,
+            ) as tmp:
+                staged.append(Path(tmp.name))
+                tmp.write(body)
+        # HTML is the entrypoint: place it last so an interrupted pair is
+        # less likely to appear complete. A two-file transaction is NOT atomic.
+        staged[0].replace(jsonpath)
+        staged[1].replace(htmlpath)
+    finally:
+        for path in staged:
+            path.unlink(missing_ok=True)
     return str(htmlpath),str(jsonpath)
 
 
