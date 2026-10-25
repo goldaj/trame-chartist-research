@@ -52,10 +52,10 @@ Préconditions **réelles** pour valider A4 :
 - [x] **A4.1** : vérifier officiel Mamba-2 / Mamba-3, versions,
   API et licences documentaires. À requalifier si le fournisseur
   a changé à la date de véritable exécution.
-- [ ] **A4.2** : isoler l'environnement GPU et documenter la
+- [x] **A4.2** : isoler l'environnement GPU et documenter la
   capacité matérielle, notamment bf16 ; ajouter un CLI
   *opt-in* qui refuse la simulation.
-- [ ] **A4.3** : brancher les classes **réelles** Mamba2/Mamba3
+- [x] **A4.3** : brancher les classes **réelles** Mamba2/Mamba3
   du paquet officiel sur l'encodage et la sortie probabiliste
   de TRAME, sans changer les mêmes cibles.
 - [ ] **A4.4** : exécuter sur un GPU compatible les tests de
@@ -85,3 +85,23 @@ intégrale. Voir
 
 Les fichiers de prix BTC privés ne sont pas nécessaires à A4.1–A4.4 ;
 aucun transfert de tokens GitHub vers CI.
+
+
+## Résultat actuel A4 : branche préparée, validation CUDA No-Go
+
+- Adaptateur opt-in : `official_adapter.py`, classes **officielles**
+  importées dynamiquement après test CUDA/bf16 ; pas de faux fallback.
+- Vérifications CPU : `test_official_adapter.py`, CI
+  `.github/workflows/trame-mamba-safety.yml`. Succès de la CI de
+  garde-fou ne signifie **pas** réussite de Mamba sur GPU.
+- Commande de vérification GPU réelle (à exécuter sur machine éligible) :
+  `python -m research.mamba_candidates.gpu_smoke --model all`.
+  Elle échoue sans GPU/package, ne crée pas de preuve fictive.
+- La session d'édition dispose de `torch==2.10.0+cpu` ;
+  `torch.cuda.is_available()==False` et `mamba_ssm` absent.
+  A4.4/A4.5 restent donc **NON VALIDÉES** ; ne pas déclarer
+  les backbones fonctionnels en production ni les comparer
+  à des modèles dont les kernels ont réellement tourné.
+- La recherche scientifique des bras hybrides A5, fondations
+  temporelles A6 et contrats de données A7 peut avancer sur
+  des voies indépendantes sans attendre de matériel GPU.
