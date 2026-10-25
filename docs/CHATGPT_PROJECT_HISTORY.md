@@ -105,3 +105,21 @@ plus haut, sans nouvelle demande de fusion ou d'exécution de trading.
   méthodologique d'un benchmark synthétique.
 - Prochaines sous-étapes 4.1–4.7 détaillées dans
   `research/market_data_contract/STAGE3_REPORT_20261025.md`.
+
+## 2026-10-25 — Étape 4 scores appariés et arrêts explicites
+
+**Utilisateur** : poursuivre TRAME sans attendre une validation
+à chaque baby step, documenter pour Codex, commande verbatim plus haut.
+
+**Assistant, résumé non verbatim et vérifiable :**
+- Branche `chatgpt/paired-benchmark-sandbox-20261025`, basée sur
+  la branche de qualification des sources étape 3.
+- `research/benchmark_synthetic/bootstrap.py` : score MAE natif
+  apparié par actif/horizon, horizon cohérent, interdiction des
+  doublons de même origine, bootstrap par blocs déterministe.
+- Tests synthétiques sans marché ; baseline persistance et
+  témoins linéaires/oracle de l'étape 2 sont conservés.
+- Étape 4 **incomplète** sur témoin financier réel et gel confirmatoire :
+  aucune source qualifiée; étapes 5–7 sont explicitement No-Go.
+- Ébauche autorisée d'un outil offline research-only étape 8,
+  pas de produit financier prétendument prédictif.
