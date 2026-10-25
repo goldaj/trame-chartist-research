@@ -22,6 +22,22 @@ déclarer « tout fini » lorsque des campagnes matérielles ou financières
 n'ont pas réellement été exécutées. Pas de merge automatique,
 pas d'ordre, pas d'accès aux secrets ni de modification du bot.
 
+## Sous-projets actifs et gates produit (25/10/2026)
+
+PR #10 réalise le protocole A3c exploratoire ; les PR #11–#16
+sont des **branches sœurs**. Lire
+`docs/CODEX_EXECUTION_BOARD_20261025.md` pour les dépendances.
+Les résultats A3c/A5/A6/A7/A8, même CI verts, ne démontrent
+**aucune performance financière réelle** et n'autorisent
+ni déploiement, ni ordres.
+
+Pour toute évolution de produit lire impérativement
+`research/predictive_product/RELEASE_GATES_20261025.md`
+sur PR #16. Le préflight ne peut jamais auto-déclarer
+`ready_for_launch=True`. P1/P2 confirmatoires, P3
+économique réelle et P4 Predictive v1 sont **No-Go**
+en l'absence des preuves concrètes détaillées.
+
 ## Contexte conversationnel ChatGPT / passation Codex
 
 Lire aussi **`docs/CHATGPT_PROJECT_HISTORY.md`** pour les échanges et décisions retrouvés. Ce journal est explicitement partiel ; ne jamais présenter un résumé comme un verbatim. À chaque changement de projet, ajouter les nouveaux échanges pertinents avec rôles Utilisateur/Assistant, texte exact et horodatages uniquement lorsqu'ils sont disponibles ; sinon noter la lacune. Préserver l'ensemble des règles et documents existants de ce dépôt et ne publier aucun secret.
