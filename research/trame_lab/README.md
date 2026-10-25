@@ -146,3 +146,13 @@ modèles de séries temporelles). La première comparaison automatique
 entre ancien Transformer, mini décodeur GPT-style et GRU est
 **purement synthétique, de développement et non compute-fair**.
 Elle ne fournit aucun résultat de marché ni classement final.
+
+
+### Sortie multi-architectures incluse dans le rapport
+
+La commande existante `python -m research.trame_lab.cli --steps 20
+--output trame_research_lab.html` produit aussi une section
+**3 architectures × 3 graines**, reproductible dans le JSON
+sous `architecture_comparison`. Ces nombres sont uniquement
+des NLL de développement d'un processus AR(1) fabriqué ;
+l'écart de taille/compute est signalé dans le rapport.
