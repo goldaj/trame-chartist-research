@@ -128,3 +128,35 @@ Mamba-3 (2026) rejoint Mamba-2. Les poids TimesFM 3.0 sont
 vérifiées le 25/10/2026, distinctes de la licence du code.
 Pas de package GPU dans la CI CPU commune et pas de sélection
 d'un modèle zero-shot comme s'il avait été entraîné from scratch.
+
+
+## BTC H1/M1 : nouvelle référence imposée par l'utilisateur (25/10/2026)
+
+Lire research/btc_h1_m1/README.md avant tout travail de données BTC.
+Le corpus de référence est désormais Bitstamp BTC/USD H1 et M1
+(2012–juin2026), sous deux artefacts du run GitHub Actions
+40208291215 du bot Hyperliquid. Il remplace le projet d'adaptateur
+D1 précédent, branche chatgpt/btc-history-bridge-20261025, qui
+n'est PAS à fusionner ici. Aucune série réelle n'est encore
+transférée dans TRAME : seule l'interface offline a été codée.
+
+L'utilisateur accepte les archives telles quelles pour ses travaux
+et ne demande pas un nouvel audit de provenance. Conserver leurs
+octets, leurs noms et leurs attributions existantes. La plateforme
+a bloqué les tentatives de copie directe d'un dépôt privé vers un
+dépôt public. L'utilisateur peut copier les deux artefacts
+manuellement, sans modifier les .csv.gz.
+
+La nouvelle expérimentation utilise les données en streaming,
+ignore les bougies à volume nul et les ruptures temporelles,
+préserve la quarantaine 2026 et compare exactement les mêmes cas
+pour Transformer causal, mini-GPT-style et GRU. Il faut toujours
+bien distinguer le forecast à une minute du forecast à une heure.
+Ne pas entraîner une seule architecture puis prétendre que la
+comparaison multi-modèles demandée est faite. Mamba-2/Mamba-3
+et fondations chronologiques restent prévus mais non implémentés.
+
+Le CSV synthétique de CI ne compte pas comme une vraie donnée.
+Ne pas annoncer des scores financiers réels avant la copie
+effective et une campagne exécutée sur les archives. Aucun
+déploiement ni lien au moteur de trading Hyperliquid.
