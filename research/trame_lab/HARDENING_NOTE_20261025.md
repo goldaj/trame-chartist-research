@@ -73,3 +73,20 @@ de capacité prédictive sur marchés.
    entièrement terminée.
 4. Ne pas ouvrir de corpus financier non qualifié et ne pas exploiter
    le test synthétique réservé pour ajuster le modèle.
+
+## Baby step 8.6b — préparation des deux sorties
+
+Avant toute publication, les deux sorties (JSON et HTML) sont maintenant
+sérialisées puis écrites **intégralement dans des fichiers temporaires du
+répertoire cible**, nettoyés dans un bloc `finally`. Elles ne sont
+remplacées par leurs noms définitifs qu'une fois cette préparation
+achevée. Un test injecte une erreur lors de la seconde préparation et
+vérifie que les deux rapports préexistants restent byte-identiques,
+avec absence de fichier temporaire résiduel.
+
+**Ce n'est pas une transaction atomique à deux fichiers** : une
+interruption entre les deux appels à `Path.replace`, un concurrent
+écrivant les mêmes chemins ou une défaillance au remplacement peut
+encore créer un état intermédiaire. Le durcissement protège
+spécifiquement les erreurs **avant publication** ; ne pas prétendre
+résoudre la durabilité en cas de panne machine ou de disque.
