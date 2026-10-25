@@ -9,8 +9,9 @@ class ComputeAuditTests(unittest.TestCase):
     def test_three_families_same_synthetic_workload(self):
         result = compute_audit(widths=(8,), contexts=(8,), repeats=3,
                                batch_size=3)
-        self.assertEqual(result["data_origin"], "ARTIFICIAL_TRAIN_ONLY")
+        self.assertEqual(result["data_origin"], "ARTIFICIAL_COST_ONLY")
         self.assertFalse(result["reserved_synthetic_test_opened"])
+        self.assertTrue(result["cost_only_inputs_generated_from_seed"])
         self.assertFalse(result["financial_holdout_opened"])
         self.assertFalse(result["compute_matched"])
         self.assertFalse(result["flops_matched"])
@@ -32,11 +33,31 @@ class ComputeAuditTests(unittest.TestCase):
                 self.assertGreaterEqual(p["accounted_flops_lower_bound"], 0)
         json.dumps(result, allow_nan=False)
 
+    def test_long_context_all_families(self):
+        import torch
+        from research.architecture_comparison.experiment import ARMS
+        for name, factory in ARMS.items():
+            with self.subTest(architecture=name):
+                model = factory(width=8, length=64).eval()
+                x = torch.arange(64, dtype=torch.float64).remainder(7)[None]
+                mutated = x.clone()
+                mutated[:, 32:] += 50
+                with torch.no_grad():
+                    before = model(x)
+                    after = model(mutated)
+                for a, b in zip(before, after):
+                    torch.testing.assert_close(a[:, :32], b[:, :32],
+                                               atol=1e-10, rtol=1e-10)
+                model.train()
+                model.nll(x, x).backward()
+                self.assertTrue(all(p.grad is not None and bool(torch.isfinite(p.grad).all())
+                                    for p in model.parameters()))
+
     def test_invalid_choices(self):
         cases = [
             {"widths": ()}, {"widths": (8, 8)}, {"widths": (7,)},
             {"widths": (8.0,)}, {"contexts": ()}, {"contexts": (8, 8)},
-            {"contexts": (21,)}, {"repeats": 2}, {"repeats": True},
+            {"contexts": (21,)}, {"contexts": (256,)}, {"repeats": 2}, {"repeats": True},
             {"seed": True}, {"batch_size": 1}, {"batch_size": True},
         ]
         for kwargs in cases:
