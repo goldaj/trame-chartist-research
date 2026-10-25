@@ -23,10 +23,10 @@ jobs:
         run: python -m unittest research.architecture_comparison.test_compute_audit -v
       - name: Audit a small matrix of sizes and contexts
         run: |
-          python -m research.architecture_comparison.compute_audit --widths 8 16 --contexts 8 16 20 --repeats 3 > synthetic_a3c_cpu.json
+          python -m research.architecture_comparison.compute_audit --widths 8 16 --contexts 8 16 20 64 --repeats 3 > synthetic_a3c_cpu.json
       - name: Refuse misleading compute-fair or financial claims
         run: |
-          python -c "import json; d=json.load(open('synthetic_a3c_cpu.json')); assert d['data_origin']=='ARTIFICIAL_TRAIN_ONLY'; assert d['reserved_synthetic_test_opened'] is False; assert d['compute_matched'] is False; assert d['flops_coverage_complete'] is False; assert len(d['results'])==18"
+          python -c "import json; d=json.load(open('synthetic_a3c_cpu.json')); assert d['data_origin']=='ARTIFICIAL_COST_ONLY'; assert d['reserved_synthetic_test_opened'] is False; assert d['compute_matched'] is False; assert d['flops_coverage_complete'] is False; assert len(d['results'])==24"
       - name: Archive partial accounting by commit
         uses: actions/upload-artifact@v4
         with:
