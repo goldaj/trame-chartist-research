@@ -1,0 +1,20 @@
+name: TRAME stage 4 paired synthetic benchmarks
+on:
+  push:
+    branches: [chatgpt/paired-benchmark-sandbox-20261025]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned NumPy
+        run: python -m pip install 'numpy==2.3.5'
+      - name: Validate baseline-score and block uncertainty contracts
+        run: python -m unittest discover -s research/benchmark_synthetic -p 'test_*.py' -v
