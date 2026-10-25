@@ -169,3 +169,25 @@ les largeurs, les paramètres et les trois graines. Le caractère
 strictement exploratoire persiste ; A3b sera une étude
 de coût et sensibilité aux budgets, indépendante des chiffres
 financiers.
+
+
+## A3b — premier profil CPU multi-tailles (diagnostic, pas égalité FLOPs)
+
+`cost_audit.py` profile sans téléchargement ni modèle financier
+le forward et le forward+backward des trois familles,
+aux largeurs 8 / 16 / 32. Entrée commune : huit trajectoires
+artificielles de huit codes (train, pas le test), CPU float64,
+un thread, trois itérations de chauffe et médiane de dix mesures.
+
+```bash
+python -m research.architecture_comparison.cost_audit --repeats 10 --widths 8 16 32 > synthetic_architecture_costs.json
+```
+
+La CI archive ce JSON avec les scores NLL : les durées mesurées
+sont **spécifiques à la machine**, et les opérations internes
+(matrice d'attention, GRU et attention groupée) ne sont pas
+strictement équivalentes. Ce n'est PAS une égalisation FLOPs,
+ni une mesure de latence de production ni une preuve de meilleur
+backbone. Il restera à caractériser mémoire GPU/CPU, FLOPs
+par couche et vitesse sous différentes longueurs de contexte
+avant une comparaison compute-fair crédible.
