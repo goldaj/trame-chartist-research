@@ -119,8 +119,8 @@ def render_html(report):
     if len({r['seed'] for r in records})!=3:
         raise ValueError('three distinct paired seeds required')
     archrows='\n'.join(
-        '<tr><th scope="row">{}</th><td>{}</td><td>{:.4f}</td></tr>'.format(
-            html.escape(r['architecture']),int(r['parameter_count']),r['end_development_nll']
+        '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{:.4f}</td></tr>'.format(
+            html.escape(r['architecture']),int(r['seed']),int(r['parameter_count']),r['end_development_nll']
         ) for r in sorted(records,key=lambda x:(x['architecture'],x['seed']))
     )
     maxv=max(v for _,v in nll)*1.15
@@ -198,7 +198,7 @@ Trois graines sur les mêmes données de développement artificielles, même nom
 de mises à jour, mais <strong>paramètres et FLOPs inégaux</strong>.
 Ce tableau ne classe pas les méthodes sur les marchés réels.</p>
 <table><caption>NLL de développement artificiel par bras et par graine</caption>
-<thead><tr><th scope="col">Architecture</th><th scope="col">Paramètres</th>
+<thead><tr><th scope="col">Architecture</th><th scope="col">Graine</th><th scope="col">Paramètres</th>
 <th scope="col">NLL</th></tr></thead><tbody>{archrows}</tbody></table></section>
 <section><h2>Test logiciel de comparaison appariée</h2>
 <p>Gain fabriqué volontairement en faveur du modèle :
