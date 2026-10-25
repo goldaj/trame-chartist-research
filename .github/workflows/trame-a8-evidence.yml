@@ -1,0 +1,19 @@
+name: TRAME A8 offline synthetic evidence dashboard
+on:
+  push:
+    branches:
+      - chatgpt/trame-research-lab-evidence-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  offline-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test synthetic-only evidence contract and export
+        run: python -m unittest research.trame_lab.test_evidence_report -v
