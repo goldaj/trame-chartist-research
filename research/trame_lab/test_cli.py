@@ -24,7 +24,21 @@ def toy():
             'empirical_CRPS_price_units':9.4
         },
         'paired_benchmark':{'toy_gain_native':0.8,'toy_ci_block95':[0.8,0.8],
-                            'manufactured_gain_by_construction':True}
+                            'manufactured_gain_by_construction':True},
+        'architecture_comparison':{
+            'data_origin':'ARTIFICIAL_ONLY',
+            'reserved_synthetic_test_opened':False,
+            'financial_holdout_opened':False,
+            'compute_matched':False,
+            'parameter_matched':False,
+            'results':[
+                {'architecture':name,'seed':seed,
+                 'parameter_count':1000,'end_development_nll':2.9}
+                for name in ('legacy_causal_transformer','modern_gpt_style_mini',
+                             'recurrent_gru_control')
+                for seed in (1,2,3)
+            ]
+        }
     }
 
 
@@ -40,6 +54,9 @@ class DemoTests(unittest.TestCase):
         self.assertIn('<th scope="row">TRAME mini-Transformer</th><td>2.8000</td>',html)
         self.assertIn('aria-hidden="true"',html)
         self.assertIn('href="#results"',html)
+        self.assertIn('Trois architectures comparées en parallèle',html)
+        self.assertIn('mini décodeur GPT-style',html)
+        self.assertIn('NLL de développement artificiel par bras et par graine',html)
 
     def test_pair_of_files_and_no_unintentional_overwrite(self):
         with tempfile.TemporaryDirectory() as td:
@@ -75,6 +92,25 @@ class DemoTests(unittest.TestCase):
             self.assertEqual(dest.with_suffix('.json').read_bytes(),json_before)
             self.assertEqual(sorted(p.name for p in Path(td).iterdir()),
                              ['report.html','report.json'])
+
+    def test_reject_misleading_architecture_comparisons(self):
+        cases=[
+            ('data_origin','REAL'),
+            ('reserved_synthetic_test_opened',True),
+            ('financial_holdout_opened',True),
+            ('compute_matched',True),
+            ('parameter_matched',True),
+        ]
+        for field,invalid in cases:
+            with self.subTest(field=field):
+                payload=copy.deepcopy(toy())
+                payload['architecture_comparison'][field]=invalid
+                with self.assertRaises(ValueError):
+                    render_html(payload)
+        payload=toy()
+        payload['architecture_comparison']['results'][0]['end_development_nll']=float('nan')
+        with self.assertRaises(ValueError):
+            render_html(payload)
 
     def test_reject_invalid_steps_without_training(self):
         for steps in (-1,0,201,1.5,True):
