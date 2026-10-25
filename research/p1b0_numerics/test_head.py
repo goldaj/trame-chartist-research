@@ -128,3 +128,50 @@ class ConstructedTrainingFixtureTests(unittest.TestCase):
         self.assertLess(scores['HIER']['test_nll'], scores['BASE']['test_nll'])
         self.assertFalse(report['market_data_read'])
         self.assertFalse(report['trained_gpt'])
+
+
+class CausalPathTests(unittest.TestCase):
+    def test_path_inputs_are_only_prior_generated_states(self):
+        try:
+            from rollout import rollout
+        except ImportError:
+            from .rollout import rollout
+        seen=[]
+        def policy(h, previous):
+            seen.append((h,previous))
+            return Head()
+        path=rollout(100.,.05,policy,np.random.default_rng(10))
+        self.assertEqual(len(path.prices),20)
+        self.assertEqual(seen[0],(1,0))
+        self.assertEqual([old for _,old in seen[1:]],list(path.cumulative_codes[:-1]))
+        self.assertEqual(tuple(np.cumsum(path.codes)),path.cumulative_codes)
+        self.assertTrue(all(math.isfinite(p) and p>0 for p in path.prices))
+
+    def test_teacher_forcing_uses_realized_codes_only_after_scoring(self):
+        try:
+            from rollout import teacher_forced_log_likelihood
+        except ImportError:
+            from .rollout import teacher_forced_log_likelihood
+        observed=[]
+        def policy(h, prev):
+            observed.append((h, prev))
+            return Head()
+        loglik=teacher_forced_log_likelihood([3, -2, 4],policy)
+        self.assertEqual(observed,[(1,0),(2,3),(3,1)])
+        self.assertAlmostEqual(loglik,sum(Head().log_prob(k) for k in (3,-2,4)))
+
+    def test_empirical_crps_matches_pairwise_definition(self):
+        try:
+            from rollout import empirical_crps
+        except ImportError:
+            from .rollout import empirical_crps
+        def brute(vals,y):
+            n=len(vals)
+            return (sum(abs(v-y) for v in vals)/n -
+                    sum(abs(a-b) for a in vals for b in vals)/(2*n*n))
+        for values,y in [([1,3],2),([1,2,4],3),([4],2),([99,101,150],102)]:
+            self.assertAlmostEqual(empirical_crps(values,y),brute(values,y),delta=1e-11)
+        with self.assertRaises(ValueError):
+            empirical_crps([float('nan')],100.)
+        with self.assertRaises(ValueError):
+            empirical_crps([],100.)
