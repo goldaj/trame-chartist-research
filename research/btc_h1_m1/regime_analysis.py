@@ -47,8 +47,8 @@ def _scores(cases, config):
 
 
 def group_report(train, development, *, min_group=32):
-    if type(min_group) is not int or not 10 <= min_group <= 1000:
-        raise ValueError("minimum group 10..1000")
+    if type(min_group) is not int or not 32 <= min_group <= 1000:
+        raise ValueError("minimum group 32..1000")
     config=fit_baselines(train)
     if any(not 2022 <= c.target_open.year < 2026 for c in development):
         raise ValueError("2026 and outside-development labels forbidden")
