@@ -1,0 +1,33 @@
+name: TRAME P3-P4 synthetic risk and release gates
+on:
+  push:
+    branches:
+      - chatgpt/trame-predictive-delivery-gates-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  product-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test offline synthetic cost controls and permanent launch guard
+        run: python -m unittest research.predictive_product.test_safety -v
+      - name: Report release status without claiming product ready
+        run: |
+          python -m research.predictive_product.release_preflight > predictive_release_preflight.json
+          python -c "import json;d=json.load(open('predictive_release_preflight.json'));assert d['ready_for_launch'] is False;assert d['trading_enabled'] is False;assert d['status']=='BLOCKED'"
+      - name: Test artificial economic simulation, not backtest
+        run: |
+          python -m research.predictive_product.transaction_sandbox > synthetic_p3_costs.json
+          python -c "import json;d=json.load(open('synthetic_p3_costs.json'));assert d['input_provenance']=='ARTIFICIAL_ONLY'; assert d['real_execution_validated'] is False; assert d['approved_for_live_trading'] is False"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-p3-p4-synthetic-safety-gates
+          path: |
+            predictive_release_preflight.json
+            synthetic_p3_costs.json
