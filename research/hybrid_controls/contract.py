@@ -19,14 +19,18 @@ def verify_sequence_backbone(backbone, x, *, atol=1e-10, rtol=1e-10):
     midpoint = x.shape[1] // 2
     moved = x.clone()
     moved[:, midpoint:] += 100.0
-    was_training = backbone.training
-    backbone.eval()
+    # Accept either an nn.Module or a bound encode() method. Only a Module
+    # has a training-mode API; callers must supply deterministic functions.
+    was_training = getattr(backbone, "training", None)
+    if was_training is not None:
+        backbone.eval()
     try:
         with torch.no_grad():
             original = backbone(x)
             changed = backbone(moved)
     finally:
-        backbone.train(was_training)
+        if was_training is not None:
+            backbone.train(was_training)
     if not (isinstance(original, torch.Tensor)
             and isinstance(changed, torch.Tensor)
             and original.shape == x.shape and changed.shape == x.shape
