@@ -2,6 +2,19 @@
 
 Projet scientifique indépendant du bot BTC-PERP Hyperliquid. TRAME étudie comment représenter des courbes de marché comme un langage causal, puis comparer des architectures génératives de type GPT sur la prédiction de prix bruts. L'étude concerne plusieurs marchés et ne constitue pas une stratégie de trading déployée.
 
+## État de reprise au 25 octobre 2026 : travail suspendu
+
+**La recherche est temporairement en pause sur décision de l'utilisateur.**
+[Passation pour Codex : point d'arrêt, backlog A3c–A8 et phases P1–P4](docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md).
+À la reprise, terminer les comparaisons de coûts équitables (**A3c**),
+puis intégrer réellement Mamba-2/Mamba-3 (**A4**). Les comparaisons
+précédentes entre Transformer, mini GPT-style et GRU sont synthétiques ;
+les historiques BTC sont référencés dans une release privée sans copie
+publique. Aucune phase suivante n'est autorisée tant que l'utilisateur
+n'a pas explicitement levé la pause. Les rubriques datées plus bas
+conservent leurs constats historiques ; ne pas les lire comme l'état
+le plus récent.
+
 ## État réel au 16 octobre 2026
 
 Édition 2.4 : quatorze documents et un dossier consolidé de 102 pages. La conception du langage et les audits de données réelles sont engagés. Aucun modèle génératif n'a été entraîné et aucun avantage prédictif n'est démontré. Les tests synthétiques vérifient les outils de mesure ; ils ne sont pas des observations de marché.
