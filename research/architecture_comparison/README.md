@@ -212,3 +212,14 @@ Apache-2.0, **poids TimesFM 3.0 non commerciaux/non production** selon
 Google Research. Ne jamais inclure ces poids dans une offre
 commerciale sans autorisation différente. Chronos-2 et Moirai-2
 restent des candidats à qualifier précisément, non téléchargés.
+
+
+## Jalon A3c — résultats observés
+
+Le [rapport scientifique A3c](A3C_RESULTS_20261025.md) documente
+les mesures CPU sur plusieurs contextes et un pilote de budget proxy
+sur trois graines, avec artefacts GitHub Actions. Les opérations
+comptées sont **partielles**, l'égalité FLOPs/mémoire/tuning
+reste **non démontrée**, et il n'existe toujours **aucun résultat
+prédictif Bitcoin**. A4 Mamba-2/Mamba-3 est la prochaine voie
+expérimentale, jamais un classement automatique.
