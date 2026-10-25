@@ -3,6 +3,20 @@
 **Date : 25 octobre 2026. Nouvelle consigne utilisateur : comparer en parallèle
 les approches classiques et les familles des LLM récents.**
 
+## État de reprise / pause
+
+**25 octobre 2026 : aucune nouvelle expérience à exécuter avant ordre
+explicite de reprise.** Le plan de passation faisant autorité est
+[`docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md`](../../docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md).
+A1/A2 sont réalisés en synthétique, A3a est un alignement *approximatif*
+du nombre de paramètres, A3b est un premier diagnostic de latence CPU.
+**La prochaine sous-étape est A3c.1** : pré-définir une véritable
+comparaison compute-fair, puis mesurer FLOPs, mémoire et latence avec
+contrôle des contextes et du budget. **A4 Mamba-2/Mamba-3 n'est pas
+commencée** ; les phases A5–A8 et produit ne sont pas autorisées
+par l'existence de cette roadmap. Ne pas confondre accès aux fichiers
+BTC et preuve d'un avantage prédictif.
+
 ## Clarification technique
 
 « Autorégressif » est un **objectif/factorisation de prévision** (le prochain
