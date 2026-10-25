@@ -29,3 +29,15 @@ Les conversations complètes, toutes les réponses exactes de l'assistant et les
 **Assistant (résumé reconstruit, non verbatim)** : revue des gros dépôts et amélioration isolée sur `chatgpt/review-20261024`. Ajout d'une CI strictement synthétique sur les tests de l'appareil de mesure déjà présents ; documentation distinguant validation de code et preuve financière. Aucun protocole gelé modifié.
 
 **Validation et confiance** : confiance moyenne sur la portée du changement ; aucune exécution locale des tests ne peut être attestée depuis l'accès GitHub disponible. Consulter les statuts GitHub Actions de la PR avant intégration. Aucune modification de `main`/`develop`, aucun déploiement. Codex doit inspecter le diff, relancer les tests et choisir les commits à intégrer sans écraser son travail.
+
+## 2026-10-25 — Protocole de comparaison prévisionnelle (heure indisponible)
+
+**Utilisateur (verbatim, contexte projet Incubator) :**
+> Est-ce que dans le pool de projets dans mon repo projects-incubator tu verrais des choses sur lesquelles avancer ? Prends en priorité ceux qui ont le plus de matière déjà aujourd'hui. Puis ensuite même consigne qu'avec tout le reste. D'ailleurs si jamais tu arrives à avancer assez pour en faire de vrais projets, tu peux me le dire, je te créerais un repo dédié au nom que tu veux et on fera tout ça sur un vrai repo de projet en le sortant de l'incubator. Analyse bien avant de te lancer dans quoique ce soit. Là il faudra que tu regardes plus ces sujets comme un chercheur qu'un ingénieur, à mon avis (à confirmer).
+
+**Assistant (résumé non verbatim) :** TRAME retenu comme piste déjà dotée
+d'un dépôt et d'un dossier scientifique étendu. Ajout en **branche isolée**
+d'un protocole prospectif candidat et d'un scoreur numérique sans dépendances
+calculant des comparaisons appariées avec persistance sur JSONL explicite.
+Pas de modèle entraîné, données réelles lues, jeu de test révélé, changement
+d'un protocole gelé ou opération de trading.
