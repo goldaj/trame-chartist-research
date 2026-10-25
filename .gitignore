@@ -21,3 +21,11 @@ tmp/
 *.zip
 output/versions/
 output/travail_en_cours/
+
+# Owner-approved BTC/USD reference snapshots may be published in TRAME.
+# This exception is limited to the three user-selected historical CSV files;
+# retain source attribution and do not expose account data.
+!research/btc_real_data/raw/
+!research/btc_real_data/raw/btcusd-indicative-close-d1-2010-2011.csv
+!research/btc_real_data/raw/btcusd-bitstamp-d1-2011H2.csv
+!research/btc_real_data/raw/btcusd-bitstamp-d1-2012-2026H1.csv
