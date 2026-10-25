@@ -26,6 +26,8 @@ jobs:
         run: python research/p1b0_numerics/preflight.py > p1b0_preflight.json
       - name: Run constructed bimodal learning experiment
         run: python research/p1b0_numerics/synthetic_fit.py > p1b0_synthetic_fit.json
+      - name: Run constructed 20-step price evaluation
+        run: python research/p1b0_numerics/rollout_study.py > p1b0_rollout_study.json
       - name: Upload reproducible synthetic reports
         uses: actions/upload-artifact@v4
         with:
@@ -33,3 +35,4 @@ jobs:
           path: |
             p1b0_preflight.json
             p1b0_synthetic_fit.json
+            p1b0_rollout_study.json
