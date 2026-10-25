@@ -38,6 +38,8 @@ def make_example_benchmark():
 
 
 def run_lab(*,train_steps=40):
+    if type(train_steps) is not int or not 1 <= train_steps <= 200:
+        raise ValueError('train_steps must be an integer between 1 and 200')
     return {
         'lab_version':'0.1-research-only',
         'data_origin':'ARTIFICIAL GENERATED LOCALLY',
@@ -72,6 +74,26 @@ def render_html(report):
     for _,v in nll:
         if not isinstance(v,(float,int)) or not math.isfinite(v) or v<=0:
             raise ValueError('invalid synthetic development NLL')
+    for key in ('optimization_steps','model_parameters','development_paths'):
+        if type(exp[key]) is not int or exp[key] < 1:
+            raise ValueError(f'invalid experiment counter: {key}')
+    sim=report['toy_forecast']
+    for key in ('price_median','price_q10','price_q90','empirical_CRPS_price_units'):
+        value=sim[key]
+        if type(value) not in (float,int) or not math.isfinite(value):
+            raise ValueError(f'invalid simulated result: {key}')
+    if not (0 < sim['price_q10'] <= sim['price_median'] <= sim['price_q90']):
+        raise ValueError('inconsistent simulated quantiles')
+    if sim['empirical_CRPS_price_units'] < 0:
+        raise ValueError('negative CRPS is impossible')
+    b=report['paired_benchmark']
+    if b.get('manufactured_gain_by_construction') is not True:
+        raise ValueError('benchmark must be marked as manufactured')
+    for value in (b['toy_gain_native'], *b['toy_ci_block95']):
+        if type(value) not in (float,int) or not math.isfinite(value):
+            raise ValueError('invalid fabricated benchmark result')
+    if len(b['toy_ci_block95']) != 2 or b['toy_ci_block95'][0] > b['toy_ci_block95'][1]:
+        raise ValueError('invalid interval order')
     maxv=max(v for _,v in nll)*1.15
     lines=[]
     for label,value in nll:
@@ -85,8 +107,11 @@ def render_html(report):
             '</g>'.format(y=len(lines)*41,label=safe,width=width,
                           end=271+width,value=value))
     chart='\n'.join(lines)
-    sim=report['toy_forecast']
-    b=report['paired_benchmark']
+    accessible_rows='\n'.join(
+        '<tr><th scope="row">{}</th><td>{:.4f}</td></tr>'.format(
+            html.escape(label), value
+        ) for label,value in nll
+    )
     def decimal(v):
         return html.escape(f'{float(v):.4f}')
     return f"""<!doctype html>
@@ -106,7 +131,13 @@ section{{border:1px solid #2a415b;background:#13223a;border-radius:11px;padding:
 .stat{{font-size:26px;font-weight:700;color:#97e2ff}}.stats{{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}}
 svg{{width:100%;height:auto;overflow:visible}}
 ul{{padding-left:20px}}.foot{{border-top:1px solid #293e55;margin-top:28px;padding-top:18px;color:#abc0d5}}
-</style></head><body><main>
+table{{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin-top:14px}}
+caption{{text-align:left;font-weight:600;color:#e8f0f8;margin-bottom:6px}}
+th,td{{padding:8px;border-bottom:1px solid #40536c;text-align:left}}
+td{{text-align:right}}thead th{{font-weight:700;color:#cde7fc}}
+.skip-link{{position:absolute;left:-9999px;top:6px;background:#fff;color:#000;padding:8px}}
+.skip-link:focus{{left:8px;z-index:10}}
+</style></head><body><a class="skip-link" href="#results">Aller aux résultats</a><main id="results" tabindex="-1">
 <p class="eyebrow">TRAME / LABORATOIRE DE RECHERCHE LOCAL</p>
 <h1>Expériences probabilistes synthétiques</h1>
 <p class="muted">Version 0.1 · aucune connexion marché, aucun ordre, aucune prédiction financière mesurée.</p>
@@ -117,7 +148,10 @@ Les scores ne démontrent ni avantage financier, ni rendement potentiel.</div>
 <section><h2>Mini-Transformer vs témoins</h2>
 <p class="muted">NLL moyenne sur le développement artificiel (plus petit = meilleur).
 La comparaison reflète un seul budget d'optimisation exploratoire.</p>
-<svg viewBox="0 0 750 185" role="img" aria-label="Quatre pertes de vraisemblance synthétiques">{chart}</svg>
+<svg viewBox="0 0 750 185" aria-hidden="true" focusable="false">{chart}</svg>
+<table><caption>NLL de développement sur données artificielles (plus petit = meilleur)</caption>
+<thead><tr><th scope="col">Méthode</th><th scope="col">NLL</th></tr></thead>
+<tbody>{accessible_rows}</tbody></table>
 <p><small>{int(exp['optimization_steps'])} mises à jour, {int(exp['model_parameters'])}
 paramètres, {int(exp['development_paths'])} chemins de développement.</small></p></section>
 <section><h2>Simulation artificielle à 20 pas</h2>
@@ -172,6 +206,8 @@ def main(argv=None):
     ap.add_argument('--steps',type=int,default=40,help='toy optimizer updates, 1 to 200')
     ap.add_argument('--overwrite',action='store_true')
     args=ap.parse_args(argv)
+    if not 1 <= args.steps <= 200:
+        ap.error('--steps must be between 1 and 200')
     # Fail fast before expensive synthetic training if destination is invalid.
     outfile=Path(args.output)
     if outfile.suffix.lower()!='.html':
