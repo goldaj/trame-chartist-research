@@ -31,3 +31,18 @@ jobs:
           path: |
             predictive_release_preflight.json
             synthetic_p3_costs.json
+
+  manifest-and-calibration:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify P1 checkpoint manifest and P2 anti-leak diagnostics
+        run: python -m unittest research.predictive_product.test_manifest_diagnostics -v
