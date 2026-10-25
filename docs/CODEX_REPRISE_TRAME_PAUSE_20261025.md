@@ -1,3 +1,11 @@
+> **ARCHIVE HISTORIQUE : PAUSE LEVÉE LE 25 OCTOBRE 2026.**
+> L'ordre utilisateur ultérieur demande de **reprendre** TRAME et
+> d'avancer sous-tâche par sous-tâche. L'instruction active figure dans
+> [`CODEX_EXECUTION_BOARD_20261025.md`](CODEX_EXECUTION_BOARD_20261025.md)
+> et `AGENTS.md` sur la branche de PR #10. Les mentions d'arrêt
+> ci-dessous sont conservées comme preuve historique, non comme
+> consigne en vigueur.
+
 # TRAME — point d'arrêt et feuille de route pour Codex
 
 **Décision utilisateur du 25 octobre 2026 : EXÉCUTION EN PAUSE.**  
