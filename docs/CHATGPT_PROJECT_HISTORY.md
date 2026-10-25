@@ -33,7 +33,7 @@ Les conversations complètes, toutes les réponses exactes de l'assistant et les
 - Implémentation d'une loi numérique et de ses corrections BASE/FLAT/HIER,
   calcul log-domain, deux queues, gradient sur logit de correction,
   échantillonnage avec limites du sous-flux explicitement documentées.
-- **Expérience construite** : 15 configurations de stress, 14 contrôles,
+- **Expérience construite** : 15 configurations de stress, 15 contrôles,
   amélioration de NLL sur une loi bimodale artificielle avec corrections
   entraînées, rejouabilité de 20 pas et score CRPS sur prix fictifs.
 - Aucun accès aux données de marchés réservées, téléchargement,
