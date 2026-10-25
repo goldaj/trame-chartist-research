@@ -37,7 +37,7 @@ normalisateur BASE/FLAT/HIER sur 4096 codes, dérivées des corrections,
 échantillonnage et garde-fous de valeurs extrêmes.
 
 **Résultats observés uniquement sur objets mathématiques construits :**
-15 cas de stress normalisés (erreur max 3,33 × 10^-16), 14 tests,
+15 cas de stress normalisés (erreur max 3,33 × 10^-16), 15 tests,
 entraînement de corrections sur mélange artificiel et simulation causale
 de 20 pas avec CRPS en prix fictifs. Le laboratoire a aussi mis en
 évidence une limite réelle de float64 : une probabilité de queue
