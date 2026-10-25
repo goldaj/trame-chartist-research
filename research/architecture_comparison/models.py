@@ -71,8 +71,8 @@ class CausalGaussianModel(nn.Module):
     """Common likelihood and input check for competing causal backbones."""
     def __init__(self, width=16, length=20):
         super().__init__()
-        if type(width) is not int or width < 4 or width % 4 or type(length) is not int or not 1 <= length <= 20:
-            raise ValueError('width multiple of 4 >=4 and length 1..20 required')
+        if type(width) is not int or width < 4 or width % 4 or type(length) is not int or not 1 <= length <= 128:
+            raise ValueError('width multiple of 4 >=4 and length 1..128 required')
         self.length = length
         self.input_proj = nn.Linear(1, width, dtype=torch.float64)
         self.output = nn.Linear(width, 2, dtype=torch.float64)
@@ -83,7 +83,7 @@ class CausalGaussianModel(nn.Module):
 
     def _validate(self, prior_codes):
         if prior_codes.ndim != 2 or not 1 <= prior_codes.shape[1] <= self.length:
-            raise ValueError('batch x context length 1..20 required')
+            raise ValueError('context outside configured model limit')
         if prior_codes.dtype != torch.float64 or not bool(torch.isfinite(prior_codes).all()):
             raise ValueError('finite float64 contexts required')
 
