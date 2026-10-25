@@ -79,3 +79,14 @@ décrit les comparaisons de prix natifs **sur fixtures synthétiques**,
 avec bootstrap par blocs et séparation stricte actif/horizon.
 **Go** pour un atelier de recherche offline ; **No-Go** pour
 les étapes financières réelles 5–7 sans source, benchmark et holdout qualifiés.
+
+
+## Décision du 25 octobre 2026 — TRAME multi-architectures
+
+Ne pas présupposer que le Transformer original est le meilleur pour
+la prévision de prix : tous les futurs travaux doivent suivre
+[le protocole multi-architectures](research/architecture_comparison/README.md).
+Première étude de câblage : Transformer causal, GPT-style miniature,
+GRU, mêmes données synthétiques et mêmes mini-lots ; **aucun bras
+Mamba/LLM pré-entraîné** encore exécuté. Les conclusions restent
+strictement exploratoires et hors finance réelle.
