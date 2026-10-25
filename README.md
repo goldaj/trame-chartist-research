@@ -27,3 +27,23 @@ Tests du premier appareil de mesure : depuis `research/trame_poc0`, exécuter `p
 [hyperliquid-btc-pilot](https://github.com/goldaj/hyperliquid-btc-pilot) reste un projet distinct. Aucune intégration au bot, aucun déploiement ni aucune transaction ne découle de cette publication.
 
 Les fichiers d'origine sont conservés dans leur ancien dossier pour préserver les liens des conversations existantes. Pour la suite, utiliser ce dépôt comme source de vérité TRAME ; ne pas développer les deux copies en parallèle.
+
+## P1-B0 : premiers développements scientifiques, 25 octobre 2026
+
+La branche expérimentale `chatgpt/p1b0-numerical-lab-20261025`
+contient un [véritable laboratoire numérique](research/p1b0_numerics/README.md)
+reproductible : probabilités de cellules gaussiennes en **log-espace**,
+normalisateur BASE/FLAT/HIER sur 4096 codes, dérivées des corrections,
+échantillonnage et garde-fous de valeurs extrêmes.
+
+**Résultats observés uniquement sur objets mathématiques construits :**
+15 cas de stress normalisés (erreur max 3,33 × 10^-16), 14 tests,
+entraînement de corrections sur mélange artificiel et simulation causale
+de 20 pas avec CRPS en prix fictifs. Le laboratoire a aussi mis en
+évidence une limite réelle de float64 : une probabilité de queue
+non nulle en log-espace peut devenir nulle lors du tirage.
+
+Ceci **n'entraîne pas de GPT sur un marché**, ne valide aucune prévision
+boursière et ne déverrouille aucun jeu de test. Les documents scellés
+des éditions précédentes sont inchangés. Voir le README du laboratoire
+pour les commandes, chiffres, hypothèses et limites.
