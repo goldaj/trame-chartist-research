@@ -55,6 +55,7 @@ class EvidenceDashboardTests(unittest.TestCase):
         b = self._write("b.json", fixture_a5())
         report, html = render([a, b])
         self.assertEqual(len(report["panels"]), 2)
+        self.assertEqual(len(report["panels"][0]["source_sha256"]), 64)
         self.assertTrue(report["no_cross_protocol_ranking"])
         self.assertTrue(report["source_files_not_cryptographically_verified"])
         self.assertFalse(report["panels"][1]["full_compute_fairness_proven"])
@@ -94,6 +95,16 @@ class EvidenceDashboardTests(unittest.TestCase):
         data["flops_coverage_complete"] = True
         with self.assertRaises(ValueError):
             read_report(self._write("false_flops.json", data))
+
+    def test_unhashable_experiment_and_arm_rejected(self):
+        data = fixture_a5()
+        data["experiment"] = []
+        with self.assertRaises(ValueError):
+            read_report(self._write("bad_experiment.json", data))
+        data = fixture_a5()
+        data["results"][0]["architecture"] = []
+        with self.assertRaises(ValueError):
+            read_report(self._write("bad_architecture.json", data))
 
     def test_reject_wrong_schema_nan_and_unbalanced_arms(self):
         data = fixture_a3c()
