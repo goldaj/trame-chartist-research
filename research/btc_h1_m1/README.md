@@ -25,14 +25,15 @@ continuent à respecter les plages temporelles réservées, les trous,
 les volumes nuls et les limites liées à la résolution des bougies.
 La provenance n'est pas requalifiée ici.
 
-## Point d'arrêt documentaire
+## État courant de la recherche
 
-La création de l'interface vers la release BTC est achevée pour le
-périmètre actuel. **L'utilisateur a demandé la suspension temporaire
-de l'exécution.** Ne pas télécharger de nouveaux assets ni lancer les
-campagnes H1/M1 ci-dessous sans nouvelle autorisation. Le plan général
-pour Codex, avec reprise prévue par A3c puis A4, est dans
-[`docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md`](../../docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md).
+La pause historique du 25 octobre est levée pour TRAME,
+voir [le tableau de bord actif](../../docs/CODEX_EXECUTION_BOARD_20261025.md).
+La priorité actuelle reste **A3c/A4**, et les campagnes sur
+cours réels restent **non exécutées**. Les commandes de téléchargement
+et les exemples ci-dessous ne s'exécutent que si une campagne
+autorisée en a besoin ; aucune nouvelle vérification de provenance
+des fichiers BTC n'est demandée.
 
 ## Accéder aux données sans alourdir TRAME
 
