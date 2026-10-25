@@ -5,7 +5,6 @@ Writes explicit standalone HTML and machine JSON reports, with opt-in
 overwrite. Never labels synthetic training as financial prediction.
 """
 import argparse
-from datetime import datetime, timezone
 import html
 import json
 import math
@@ -173,6 +172,14 @@ def main(argv=None):
     ap.add_argument('--steps',type=int,default=40,help='toy optimizer updates, 1 to 200')
     ap.add_argument('--overwrite',action='store_true')
     args=ap.parse_args(argv)
+    # Fail fast before expensive synthetic training if destination is invalid.
+    outfile=Path(args.output)
+    if outfile.suffix.lower()!='.html':
+        ap.error('--output must end in .html')
+    if not outfile.parent.is_dir():
+        ap.error('--output parent directory must already exist')
+    if not args.overwrite and (outfile.exists() or outfile.with_suffix('.json').exists()):
+        ap.error('output already exists; use --overwrite explicitly')
     result=run_lab(train_steps=args.steps)
     htmlfile,jsonfile=write_reports(result,args.output,overwrite=args.overwrite)
     print('TRAME Research Lab: artificial experiments only')
