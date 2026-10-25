@@ -13,8 +13,8 @@ from research.p1b0_numerics.torch_head import bounds_transform, log_interval_mas
 class MiniTRAME(nn.Module):
     def __init__(self, *, length=20, width=16):
         super().__init__()
-        if not (1<=length<=20 and width%2==0):
-            raise ValueError('length 1..20, width multiple of 2')
+        if not (1<=length<=128 and width%2==0):
+            raise ValueError('length 1..128, width multiple of 2')
         self.length=length
         self.input_proj=nn.Linear(1,width,dtype=torch.float64)
         self.position=nn.Embedding(length,width,dtype=torch.float64)
@@ -31,7 +31,7 @@ class MiniTRAME(nn.Module):
 
     def forward(self, prior_codes):
         if prior_codes.ndim!=2 or prior_codes.shape[1]>self.length or prior_codes.shape[1]<1:
-            raise ValueError('batch x context length 1..20 required')
+            raise ValueError('context length outside configured model limit')
         if prior_codes.dtype!=torch.float64:
             raise TypeError('double precision required during research qualification')
         if not torch.isfinite(prior_codes).all():
