@@ -25,12 +25,17 @@ jobs:
         run: |
           python -m research.predictive_product.transaction_sandbox > synthetic_p3_costs.json
           python -c "import json;d=json.load(open('synthetic_p3_costs.json'));assert d['input_provenance']=='ARTIFICIAL_ONLY'; assert d['real_execution_validated'] is False; assert d['approved_for_live_trading'] is False"
+      - name: Sensitivity cases and cash comparator stay artificial
+        run: |
+          python -m research.predictive_product.transaction_sandbox --sensitivity > synthetic_p3_sensitivity.json
+          python -c "import json;d=json.load(open('synthetic_p3_sensitivity.json'));assert len(d['scenarios'])==3;assert d['model_has_financial_edge'] is False;assert d['allowed_for_live_trading'] is False"
       - uses: actions/upload-artifact@v4
         with:
           name: trame-p3-p4-synthetic-safety-gates
           path: |
             predictive_release_preflight.json
             synthetic_p3_costs.json
+            synthetic_p3_sensitivity.json
 
   manifest-and-calibration:
     strategy:
