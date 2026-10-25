@@ -31,9 +31,10 @@ def toy():
             'financial_holdout_opened':False,
             'compute_matched':False,
             'parameter_matched':False,
+            'approx_parameter_matched_10pct':True,
             'results':[
                 {'architecture':name,'seed':seed,
-                 'parameter_count':1000,'end_development_nll':2.9}
+                 'parameter_count':1000,'width':16,'end_development_nll':2.9}
                 for name in ('legacy_causal_transformer','modern_gpt_style_mini',
                              'recurrent_gru_control')
                 for seed in (1,2,3)
@@ -100,6 +101,7 @@ class DemoTests(unittest.TestCase):
             ('financial_holdout_opened',True),
             ('compute_matched',True),
             ('parameter_matched',True),
+            ('approx_parameter_matched_10pct',False),
         ]
         for field,invalid in cases:
             with self.subTest(field=field):
