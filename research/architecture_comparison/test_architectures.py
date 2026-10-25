@@ -3,7 +3,7 @@ import unittest
 
 import torch
 
-from research.architecture_comparison.experiment import ARMS, compare
+from research.architecture_comparison.experiment import ARMS, compare, choose_widths
 
 
 class ComparisonTests(unittest.TestCase):
@@ -45,6 +45,13 @@ class ComparisonTests(unittest.TestCase):
             self.assertEqual(a['architecture'], b['architecture'])
             self.assertAlmostEqual(a['end_development_nll'], b['end_development_nll'], places=9)
             self.assertGreater(a['parameter_count'], 0)
+
+    def test_nearest_parameter_capacity_is_not_compute_fair(self):
+        info=choose_widths()
+        self.assertTrue(info['all_within_10_percent'])
+        self.assertFalse(info['compute_matched'])
+        self.assertEqual(info['selected']['legacy_causal_transformer']['width'],16)
+        self.assertEqual(info['selected']['recurrent_gru_control']['width'],20)
 
     def test_invalid_compare_settings(self):
         for kwargs in ({'steps':0}, {'steps':201}, {'steps':True},
