@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from research.trame_lab.cli import render_html,write_reports,run_lab,main
 
@@ -50,6 +51,30 @@ class DemoTests(unittest.TestCase):
             with self.assertRaises(FileExistsError):
                 write_reports(toy(),dest)
             write_reports(toy(),dest,overwrite=True)
+
+    def test_staging_error_preserves_existing_pair(self):
+        # On an injected failure to create the second staging file, the
+        # existing HTML+JSON remain untouched even when overwrite=True.
+        with tempfile.TemporaryDirectory() as td:
+            dest=Path(td)/'report.html'
+            write_reports(toy(),dest)
+            html_before=dest.read_bytes()
+            json_before=dest.with_suffix('.json').read_bytes()
+            real_temp=tempfile.NamedTemporaryFile
+            calls=0
+            def fail_second_stage(**kwargs):
+                nonlocal calls
+                calls+=1
+                if calls==2:
+                    raise OSError('simulated temp write preparation failure')
+                return real_temp(**kwargs)
+            with patch('research.trame_lab.cli.NamedTemporaryFile',side_effect=fail_second_stage):
+                with self.assertRaisesRegex(OSError,'simulated'):
+                    write_reports(toy(),dest,overwrite=True)
+            self.assertEqual(dest.read_bytes(),html_before)
+            self.assertEqual(dest.with_suffix('.json').read_bytes(),json_before)
+            self.assertEqual(sorted(p.name for p in Path(td).iterdir()),
+                             ['report.html','report.json'])
 
     def test_reject_invalid_steps_without_training(self):
         for steps in (-1,0,201,1.5,True):
