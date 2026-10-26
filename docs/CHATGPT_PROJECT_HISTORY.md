@@ -864,3 +864,79 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   réellement appris**, coût/paramètres
   appariés, protocole distinct ;
   nouveau modèle non traité dans S3.1A.
+
+
+## 26/10/2026 — Reprise après crash, S3.1B embeddings (texte utilisateur VERBATIM)
+**Utilisateur** :
+> t'as crash, continue
+
+**Assistant, description factuelle NON verbatim des actions effectivement réalisées :**
+- Reprise à la clôture de **S3.1A**, [288 modèles réels](https://github.com/goldaj/trame-chartist-research/actions/runs/40300156418) et PR #24, pas de prétendu résultat non vérifié.
+- Crée branche `chatgpt/trame-s3-learned-embeddings-20261026`,
+  **[PR #25](https://github.com/goldaj/trame-chartist-research/pull/25)** DRAFT
+  empilée sur PR #24 S3.1A.
+- **Avant tout test BTC S3.1B**, préenregistre
+  `research/token_grammar/S3_1B_PROTOCOL_20261026.md` :
+  G1 signée fixe/G2 quantiles magnitude TRAIN-only,
+  trois bras `decoded`, `embedding_ordered`
+  et `embedding_random`. Les tables `nn.Embedding(11,1)`
+  apprenables ajoutent **+11 paramètres** vs
+  `decoded`; ordered-v-random égalise
+  exactement capacité et architecture.
+  Cibles, split, mini-lots, backbone initial
+  SHA, normalisation TRAIN, objectifs maintenus.
+- Implémente `learned_embeddings.py`,
+  `learned_embeddings_panel.py`, tests
+  `test_learned_embeddings.py` et `test_learned_embeddings_panel.py`.
+  Vérifie sur fixtures artificielles que
+  l'embedding ordonné donne exactement
+  les mêmes sorties que decoded **avant**
+  entraînement, et que decoded reproduit
+  S3.1A après mêmes mises à jour.
+  Le branchement temporel refuse dev 2026
+  et les quantiles G2 sont calculés sur
+  TRAIN uniquement. CI publique verte.
+- Pilote réel **36 fits** D1/H1/M1 sur Bitstamp
+  source publique, [Actions #40305840861](https://github.com/goldaj/trame-chartist-research/actions/runs/40305840861)
+  **3 jobs réussis**, 40 updates 1 seed :
+  notes + hashes et tableau
+  `research/token_grammar/S3_1B_REAL_PILOT_RESULTS_20261026.md`.
+  Ordered semble parfois légèrement améliorer
+  l'accuracy directionnelle mais pas
+  systématiquement le montant ; random
+  provoque souvent une sortie monoclasse.
+- Corrige **avant la campagne complète** une
+  erreur du produit cartésien de paramètres :
+  3 horizons ×2 grammaires ×3 bras ×2 losses
+  ×2 widths ×2 depths ×3 seeds = **432 fits**
+  (144 par horizon), et non « 216 ».
+  Corrige le protocole, handoff Codex,
+  PR et contrôles correspondants.
+- Lance la véritable campagne **432 fits**
+  [GitHub Actions #40306642813](https://github.com/goldaj/trame-chartist-research/actions/runs/40306642813) :
+  **4 jobs sur 4 réussis** (D1/H1/M1 + panel),
+  200 mises à jour, trois graines,
+  144 groupes appariés trois bras.
+  Archive les résultats scientifiques détaillés
+  dans `research/token_grammar/S3_1B_REAL_432_RESULTS_20261026.md`
+  (SHA256 des cinq rapports et limites).
+  Une archive contenant les cinq fichiers
+  JSON/MD est créée dans la conversation.
+- Conclusion : **pas de supériorité robuste**
+  des embeddings scalaire appris sur les
+  centres numériques fixes en direction
+  ET amplitude ; random augmente fortement
+  le collapse monoclasse (H1 G2 Joint 11/12
+  random vs 0/12 ordered et decoded).
+  Scores BA proches du hasard et dev 2022–25
+  trop sollicité pour être une validation
+  indépendante. Test 2026 jamais utilisé.
+- Actualise Codex (`AGENTS.md`,
+  `docs/CODEX_S3_1B_HANDOFF_20261026.md`),
+  PR #25, backlog issue #20.
+  Priorité future **S3.1C** : audit de
+  convergence et fonctions de perte
+  avant augmentation lourde d'embeddings.
+  Aucun ordre/compte/clé Hyperliquid,
+  aucun PnL composé, frais toujours ignorés
+  à la demande propriétaire.
