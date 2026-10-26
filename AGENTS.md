@@ -1,3 +1,13 @@
+# ARRÊT VALIDÉ DU PROJET TRAME — 26/10/2026 : S3.1G TERMINÉE
+
+**Point de reprise prioritaire pour Codex :** S3.1F terminée (PR #29 ; [run #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917) 4/4 success). **S3.1G terminée scientifiquement** (PR #30 DRAFT ; [run #40329836255](https://github.com/goldaj/trame-chartist-research/actions/runs/40329836255) 4/4 success ; 9 modèles, 108 cellules de scores sur mêmes poids). L'issue #20 et `docs/CODEX_S3_1G_HANDOFF_20261026.md` sont à consulter AVANT tout changement.
+
+**Rapport officiel ajouté :** `research/token_grammar/S3_1G_REAL_108_RESULTS_20261026.md`, avec tableau de justesse directionnelle + MAE prix et amplitude + persistance sur mêmes cas + source SHA, analyse et prochaine roadmap. Résultat NO-GO pour edge : les seuils q90 de magnitude prédite ne rendent pas le sens plus juste (BA D1 50,00%, H1 50,39%, M1 52,50%) malgré une couverture très faible 7,3/11,2/4,3%. SOFT peut diminuer MAE prix en contractant l'amplitude, mais ne prédit pas mieux le signe et dégrade la précision de magnitude.
+
+**ARRÊT DEMANDÉ PAR LE PROPRIÉTAIRE** : achever documentation, lister suites, ne PAS relancer de campagne, ne PAS merger les PR draft, ne PAS ouvrir l'ancien dev 2022–25 ni holdout 2026. Les prochains jalons sont S3.1H audit calibration/robustesse, contrôle sampling M1, protocole confirmatoire figé, S3.2 nouvelles grammaires, S4 tailles × couches si justifié. Ne PAS agir sur Hyperliquid ni exposer secrets. Frais ignorés sur instruction, aucun PnL validé.
+
+---
+
 # TRAME S3.1G — sélection par grandeur prévue, PR #30 DRAFT (26/10/2026)
 
 **Référence technique** :
