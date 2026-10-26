@@ -97,13 +97,19 @@ def run_cases(train, development, *, interval,
               representations=REPRESENTATIONS, modes=MODES,
               widths=(16,32), depths=(1,2),
               seeds=(20261025,20261026,20261027),
-              steps=200, batch_size=16, data_origin="ARTIFICIAL_FIXTURE"):
+              steps=200, batch_size=16, data_origin="ARTIFICIAL_FIXTURE",
+              feature_provider=None):
     if interval not in ("D1","H1","M1"):
         raise ValueError("D1/H1/M1 only")
     if data_origin not in ("ARTIFICIAL_FIXTURE","BTC_PRIVATE_REAL","BTC_PUBLIC_REAL"):
         raise ValueError("invalid origin")
+    grammar_names=REPRESENTATIONS + ("signed_uniform_g1","signed_quantile_g2")
+    if feature_provider is not None and not callable(feature_provider):
+        raise ValueError("feature provider must be callable")
+    feature_fn=features if feature_provider is None else feature_provider
     for name,values,allowed in (
-        ("representations",representations,REPRESENTATIONS),
+        ("representations",representations,
+         REPRESENTATIONS if feature_provider is None else grammar_names),
         ("modes",modes,MODES),("depths",depths,(1,2))):
         if not values or any(v not in allowed for v in values) or len(set(values))!=len(values):
             raise ValueError("invalid or duplicate "+name)
@@ -132,7 +138,7 @@ def run_cases(train, development, *, interval,
 
     prepared={}
     for representation in representations:
-        input_train=features(train,representation)
+        input_train=feature_fn(train,representation)
         observed_std=float(np.std(input_train))
         information_degenerate=(not math.isfinite(observed_std) or
                                 observed_std<=1.e-8)
@@ -184,7 +190,7 @@ def run_cases(train, development, *, interval,
                         # Evaluate the matched representation with the SAME
                         # target de-normalizer on precisely the same dev labels.
                         from research.continuous_direction.models import forecast_prices
-                        input_dev=features(development,representation)
+                        input_dev=feature_fn(development,representation)
                         forecast=[]
                         probabilities=[]
                         regression=[]
