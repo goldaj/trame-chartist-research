@@ -86,7 +86,7 @@ une expérimentation distincte ultérieure.
    distribution des 11 identités de tokens.
    Les scores sont développement seulement.
 2. Après les trois canaries verts,
-   créer et exécuter le workflow **216 fits**
+   créer et exécuter le workflow **432 fits**
    = D1/H1/M1 × G1/G2 × 3 bras ×2 losses
    ×2 widths ×2 depths ×3 seeds, 200 updates.
    Conserver source SHA, rapports et
