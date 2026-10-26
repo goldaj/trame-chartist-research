@@ -36,9 +36,9 @@ def validate(report):
             or report.get("same_input_normalization_all_representations") is not True
             or report.get("compute_matched") is not False
             or report.get("common_batch_indices_per_seed") is not True
-            or report.get("data_origin") not in ("BTC_PRIVATE_REAL","ARTIFICIAL_FIXTURE")):
+            or report.get("data_origin") not in ("BTC_PRIVATE_REAL","BTC_PUBLIC_REAL","ARTIFICIAL_FIXTURE")):
         raise ValueError("invalid chronology or comparison contract")
-    if report.get("data_origin")=="BTC_PRIVATE_REAL":
+    if report.get("data_origin") in ("BTC_PRIVATE_REAL","BTC_PUBLIC_REAL"):
         code=report.get("model_source_commit","")
         if len(code)!=40 or any(c not in "0123456789abcdef" for c in code):
             raise ValueError("model source SHA missing")
