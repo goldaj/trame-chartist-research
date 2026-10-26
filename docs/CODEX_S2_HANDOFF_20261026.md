@@ -1,3 +1,35 @@
+# NOUVELLE QUALIFICATION S2, REPRISE APRÈS CRASH (26/10/2026)
+
+- Tests CI / revue du rapport apparié : lire
+  `research/continuous_direction/test_diagnostics.py`
+  et `research/continuous_direction/test_panel.py`.
+- Les probabilités du bras `regression` ne sont pas formées et
+  sont déclarées *non disponibles*, pas interprétées.
+- Trois témoins directionnels : toujours-haussier,
+  toujours-baissier et a priori probabiliste haussier calculé
+  avec lissage Jeffreys sur train. Témoin d'amplitude :
+  **drift moyen train-only**, en plus de la persistance/Ridge.
+- `runner.py` sort `model_source_commit` séparé du commit
+  GitHub Actions de la CI privée, et les empreintes temporelles
+  `train_origins_sha256`, `development_origins_sha256`
+  ne contiennent pas de prix ni de label.
+- `panel.py` regroupe par résolution, modèle, largeur,
+  profondeur et graines ; affiche prix USD, amplitude bps,
+  justesse brute et balanced accuracy, biais des signes,
+  probabilité Brier vs a priori train-only et deltas
+  `joint - regression` à même seed.
+- `forecast_prices` **lève une erreur** si le résultat
+  représente un log-return extrême au lieu de tronquer
+  silencieusement la prévision.
+- **Statut S2.6 inchangé : pas de campagne BTC S2 réelle**.
+  Ne jamais affirmer « 72 entraînements terminés ».
+  La création automatisée du workflow privé a été bloquée.
+  Relecture des accès/politiques nécessaire, pas de
+  contournement du blocage. Le code doit rester dans
+  sa branche PR #19 draft ; aucun merge implicite.
+
+---
+
 # REPRISE APRÈS INTERRUPTION / AUDIT S2.1b (26/10/2026)
 
 Dernier message utilisateur, verbatim : « t'as crash, reprends ».
