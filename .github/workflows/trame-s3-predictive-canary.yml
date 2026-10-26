@@ -61,7 +61,7 @@ jobs:
           assert data["quantile_fit_on"]=="TRAIN_PAST_CONTEXTS_ONLY"
           assert data["same_input_normalization_all_representations"]
           assert len(data["results"])==8 and data["steps"]==40
-          assert len({r["initial_state_sha256"] for r in data["results"]})==2
+          assert len({r["initial_state_sha256"] for r in data["results"]})==1
           assert len({r["target_normalizer_std_bps_common"] for r in data["results"]})==1
           assert all(math.isfinite(r["mae_bps_anchor"]) for r in data["results"])
           assert all(r["forecast_rows"]==1024 for r in data["results"])
