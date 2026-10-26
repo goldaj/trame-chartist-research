@@ -1397,3 +1397,55 @@ dans `research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
   Aucun edge financier établi,
   2026 holdout gelé ; frais ignorés,
   aucune transaction Hyperliquid.
+
+
+### 2026-10-26 — S3.1G : hypothèse seuils de mouvements prévus (assistant, NON verbatim)
+- Suite à S3.1F véritablement terminée
+  ([run #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917)
+  4/4 jobs), le user privilégie une
+  IA exacte simultanément sur le sens
+  et le montant, et accepte qu'un trader
+  n'agisse que si la magnitude prévue
+  est suffisante ; frais ignorés.
+- Crée branche `chatgpt/trame-s3-selective-forecast-20261026`
+  et [PR #30 DRAFT](https://github.com/goldaj/trame-chartist-research/pull/30)
+  fille de #29, sans fusion.
+- **Préenregistre AVANT tous scores BTC S3.1G**
+  `research/token_grammar/S3_1G_SELECTIVE_PROTOCOL_20261026.md`
+  : mêmes neuf modèles legacy S3.1F,
+  seuils |magnitude HARD prévue| all/q50/
+  q75/q90 calculés uniquement sur TRAIN.
+  Appliquer sur MONITOR2020–21.
+  Évaluer trois règles HARD/direct/soft
+  sur les MÊMES bougies sélectionnées,
+  compter couverture/classes réelles,
+  afficher BA seulement si >=30 cas
+  ET au moins une hausse et une baisse.
+  Comparer prix/magnitude et persistance
+  sur sélection identique.
+- Implémente `selective_forecast.py`,
+  `selective_panel.py`, tests adversariaux
+  `test_selective_forecast.py`,
+  `test_selective_panel.py`, CI.
+  **9 modèles /108 cellules dépendantes**,
+  pas 108 fits.
+- CI artificielle [Actions #40329278603](https://github.com/goldaj/trame-chartist-research/actions/runs/40329278603)
+  verte, reproduit S3.1F all-case
+  sur mêmes seeds et vérifie que
+  modifier les labels MONITOR ne
+  change pas les seuils et masques.
+- Pilote vrais BTC D1/H1/M1
+  [#40329375986](https://github.com/goldaj/trame-chartist-research/actions/runs/40329375986)
+  3/3 jobs verts, une graine/40 updates.
+  Lance la vraie campagne
+  [#40329836255](https://github.com/goldaj/trame-chartist-research/actions/runs/40329836255)
+  avec 3 graines/2000 updates
+  et agrégateur 108 cases ;
+  **conclusion 4/4 à vérifier**.
+- Prépare Codex `docs/CODEX_S3_1G_HANDOFF_20261026.md`
+  et AGENTS.md, puis issue #20 ;
+  ne pas inventer de rentabilité.
+  TRAIN avant 2020, MONITOR2020–21,
+  dev externe 2022–25 et holdout
+  2026 non consultés, frais exclus,
+  aucune transaction Hyperliquid.
