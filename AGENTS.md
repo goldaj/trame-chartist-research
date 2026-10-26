@@ -1,3 +1,40 @@
+# ÉTAPE S3.0c : GRAMMAIRES, DIAGNOSTIC UNIQUEMENT (26/10/2026)
+
+Le propriétaire a demandé de poursuivre TRAME et de préparer
+différentes « grammaires de courbes », manière de convertir
+des mouvements BTC en tokens. La priorité de cette branche
+**S3.0c** est l'information **perdue avant tout entraînement**,
+et non la prédiction elle-même.
+
+- PR **#22** branche `chatgpt/trame-grammar-audit-20261026`,
+  **sur PR #21** S2b, elle-même sur PR #19 S2.
+- [Issue #20](https://github.com/goldaj/trame-chartist-research/issues/20)
+  = backlog complet G0a/G0b/G1/G2/G3–G8.
+- `research/token_grammar/ROADMAP_20261026.md`
+  = calendrier. S3.0 maintenant, **S3.1 prédictif réel
+  seulement APRÈS la première ablation S2/S2b réelle
+  autorisée**, AVANT gros scaling.
+- `research/token_grammar/audit.py` et `test_audit.py`
+  : diagnostics d'encodage sur 20 rendements passés
+  d'une Case, vocabulaire quantiles TRAIN-ONLY,
+  **aucun modèle entraîné**. Test CI synthétique
+  `.github/workflows/trame-s3-grammar-audit.yml`.
+- `docs/CODEX_S3_HANDOFF_20261026.md` est la passation
+  actuelle. Les stats de tokens sont fortement
+  **recouvrantes** ; les traiter comme 80k bougies
+  indépendantes serait une erreur méthodologique.
+- Aucun chiffre BTC réel S3 prétendu ; ancien blocage
+  de sécurité de workflow privé S2 **toujours appliqué**,
+  aucune tentative de contournement.
+- D1/H1/M1, train <2022, dev 2022–25,
+  2026 gelé, pas de fausses bougies OHLCV pour le
+  D1 indicatif, pas de données privées dans ce repo.
+  Les frais ne sont pas intégrés ; aucune simulation
+  de PnL validé ni transaction ou bot Hyperliquid.
+- Ne pas fusionner automatiquement les PR.
+
+---
+
 # S2b EN COURS — INSTRUCTION DU 26 OCTOBRE 2026
 
 Le propriétaire demande de **continuer** le travail TRAME ;
