@@ -1,4 +1,4 @@
-"""A7.5: descriptive BTC H1/M1 baseline stability by calendar year and ex-ante volatility.
+"""A7.5: descriptive BTC D1/H1/M1 baseline stability by calendar year and ex-ante volatility.
 
 Volatility groups use cutoffs fitted ONLY on train candles, not future outcomes.
 This is development-only research. Groups are descriptive, not independent
@@ -86,7 +86,7 @@ def group_report(train, development, *, min_group=32):
 
 def main(argv=None):
     p=argparse.ArgumentParser(description="Train-only BTC regime baselines, exploratory")
-    p.add_argument("--interval",choices=("H1","M1"),required=True)
+    p.add_argument("--interval",choices=("D1","H1","M1"),required=True)
     p.add_argument("--directory",type=Path,default=ROOT)
     p.add_argument("--output",type=Path,required=True)
     args=p.parse_args(argv)
