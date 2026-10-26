@@ -2,7 +2,28 @@
 
 Projet scientifique indépendant du bot BTC-PERP Hyperliquid. TRAME étudie comment représenter des courbes de marché comme un langage causal, puis comparer des architectures génératives de type GPT sur la prédiction de prix bruts. L'étude concerne plusieurs marchés et ne constitue pas une stratégie de trading déployée.
 
-## Reprise scientifique du 25 octobre 2026
+## Dernier état du chantier : clôture du 26 octobre 2026
+
+**La session de développement est arrêtée proprement à la demande du propriétaire.**
+Le [tableau de bord Codex](docs/CODEX_EXECUTION_BOARD_20261025.md)
+et l'[état A7 actuel](research/btc_h1_m1/A7_STATUS_20261025.md)
+décrivent les résultats exploratoires **réellement exécutés**
+sur Bitcoin H1 et M1. L'[analyse H1 par régimes
+et années](research/btc_h1_m1/A7_H1_REGIMES_REAL_RESULTS_20261025.md)
+a été vérifiée puis documentée dans la
+[PR #14 (draft)](https://github.com/goldaj/trame-chartist-research/pull/14).
+Les fichiers de prix restent dans la bibliothèque GitHub
+**privée** et les labels 2026 réservés restent exclus.
+
+Les parties A4 GPU Mamba, A6 modèles préentraînés,
+A7.5 complète, A7.6 test indépendant, A7.7 multi-actifs
+et P1–P4 vers TRAME Predictive v1 **ne sont pas terminées**.
+Aucun modèle gagnant, aucun avantage financier démontré,
+aucune fusion ni transaction. L'ordre de continuation du
+25 octobre est historique ; le plus récent est de
+**clore le travail après l'analyse H1 et la passation Codex**.
+
+## Historique : reprise scientifique du 25 octobre 2026
 
 **Exécution reprise sur instruction explicite de l'utilisateur.**
 [Tableau de bord actif pour Codex](docs/CODEX_EXECUTION_BOARD_20261025.md),
