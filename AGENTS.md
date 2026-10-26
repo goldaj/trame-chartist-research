@@ -1,3 +1,37 @@
+# S2b EN COURS — INSTRUCTION DU 26 OCTOBRE 2026
+
+Le propriétaire demande de **continuer** le travail TRAME ;
+la voie d'exécution privée S2 demeure non disponible après un
+refus de sécurité. Continuer scientifiquement sans contournement :
+**S2b ablation isolée de l'encodage d'entrée** compare
+`continuous_bps` à `legacy_quantized_bps` en gardant
+**cibles continues, loss, architecture, origine, graines,
+batches et normalisation de cible communes**.
+
+- PR #21, branche `chatgpt/trame-representation-ablation-20261026`,
+  **basée sur PR #19 S2** ; pas de fusion automatique.
+- Référence scientifique : `research/representation_ablation/PROTOCOL_20261026.md`.
+- Code/tests : `runner.py`, `panel.py`,
+  `test_ablation.py`, `test_panel.py`, `README.md`.
+- Consignes Codex : `docs/CODEX_S2B_HANDOFF_20261026.md`.
+- S3 grammaires toujours en
+  [issue #20](https://github.com/goldaj/trame-chartist-research/issues/20) ;
+  les résultats S2b doivent précéder le choix des grammaires
+  réelles, avant un nouveau scaling coûteux.
+- **144 fit BTC S2b ne sont PAS exécutés** ; les tests
+  synthétiques n'indiquent ni puissance prédictive ni PnL.
+  Le workflow privé S2 précédent a été bloqué par les
+  contrôles de sécurité ; ne pas détourner ce refus.
+- D1/H1/M1, train <2022, dev 2022–2025,
+  test 2026 strictement gelé. D1 indicatif ne fournit
+  aucune OHLCV fictive. Aucun accès/trade Hyperliquid.
+  Les frais restent ignorés selon la demande.
+- Vérifier CI au SHA courant AVANT de déclarer S2b
+  qualifié, puis observer uniquement les résultats
+  réellement disponibles.
+
+---
+
 # ROADMAP S3 / GRAMMAIRES — DEMANDE UTILISATEUR 26/10/2026
 
 L'utilisateur confirme **continuer S2** et ajoute une hypothèse
