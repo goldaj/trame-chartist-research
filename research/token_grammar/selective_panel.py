@@ -212,13 +212,6 @@ def markdown(panel):
         for r in a:
             v=lambda k:r[k]["mean"]
             fmt=lambda k,p=3: f"{v(k):.{p}f}" if v(k) is not None else "n/a"
-            rows.append(f"| {r['threshold']} | {r['rule']} | "
-                        f"{100*v('coverage'):.1f} | "
-                        f"{v('n_selected'):.0f} | "
-                        f"{r['n_informative_seeds']}/3 | "
-                        f"{100*v('balanced_direction_accuracy'):.2f}" if False else "")
-            # format explicitly to avoid mixing nullable BA and non-null metrics
-            rows.pop()
             ba=r["balanced_direction_accuracy"]["mean"]
             ba_str=f"{100*ba:.2f}" if ba is not None else "n/a"
             rows.append(f"| {r['threshold']} | {r['rule']} | "
