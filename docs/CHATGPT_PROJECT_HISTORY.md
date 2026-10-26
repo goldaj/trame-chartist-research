@@ -1305,3 +1305,50 @@ dans `research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
   les règles d'inférence hard joint,
   direct mu et soft joint. Protocole
   à écrire avant résultats réels.
+
+## 26 octobre 2026 — reprise après crash et expérimentation S3.1F
+**Utilisateur, VERBATIM** :
+> t'as crash, continue
+
+**Assistant, opérations vérifiables (résumé NON verbatim)** :
+- Reprend immédiatement après la création de
+  `research/token_grammar/inference_ablation.py`
+  et `test_inference_ablation.py`.
+- Le protocole S3.1F **avait été préenregistré**
+  dans `research/token_grammar/S3_1F_INFERENCE_PROTOCOL_20261026.md`
+  avant tout essai BTC réel, sur la branche
+  `chatgpt/trame-s3-postprocess-ablation-20261026`,
+  fille de #28 S3.1E.
+- Termine `research/token_grammar/inference_panel.py`,
+  ajoute `test_inference_panel.py` :
+  **9 vrais modèles**, 27 checkpoints,
+  81 évaluations dépendantes des 3 règles.
+  Tests de falsification refusant modèle,
+  SHA init ou tête probabiliste différents
+  sous prétexte de règle post-traitement.
+- CI synthétique
+  [#40326446195](https://github.com/goldaj/trame-chartist-research/actions/runs/40326446195)
+  réussie ; comparateur legacy vs S3.1E
+  sur même seed/past/targets exactement.
+- Pilote sur vrais historiques BTC spot
+  D1/H1/M1 [#40326446278](https://github.com/goldaj/trame-chartist-research/actions/runs/40326446278)
+  **3/3 jobs réussis**, un modèle par
+  horizon, 10/20/40 updates, moteur
+  hard historique parfaitement répliqué.
+- Ouvre [PR #29 DRAFT](https://github.com/goldaj/trame-chartist-research/pull/29)
+  fille de PR #28, sans merge auto ;
+  documente `docs/CODEX_S3_1F_HANDOFF_20261026.md`,
+  `AGENTS.md`.
+- Lance campagne vraie
+  [GitHub Actions #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917)
+  3 horizons ×3 graines à 2000 steps,
+  checkpoints 200/800/2000, 3 règles
+  à poids constants. Exiger 4/4 jobs
+  et panel complet avant conclure.
+- Causalité et données : TRAIN labels <2020,
+  MONITOR interne 2020–21 seulement,
+  dev externe 2022–25 non utilisé,
+  holdout 2026 réservé, quantiles/scale
+  train-only, tous artefacts SHA vérifiables.
+  Pas de trading, pas de PnL cumulé,
+  frais ignorés selon utilisateur.
