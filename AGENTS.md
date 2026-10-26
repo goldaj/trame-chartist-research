@@ -1,3 +1,38 @@
+# DERNIÈRE PREUVE TRAME, 26/10/2026 : 144 ESSAIS PUBLICS RÉELS FINIS
+
+**Contrôle réussi :** [GitHub Actions #40296933559](https://github.com/goldaj/trame-chartist-research/actions/runs/40296933559)
+a exécuté **144 entraînements S2b réels** sur les
+cours BTC/USD SPOT publics D1/H1/M1
+(3 résolutions × 2 encodages × 2 objectifs
+× 2 largeurs × 2 profondeurs × 3 seeds).
+**Trois jobs sur trois réussis**, 200
+mises à jour chacun ; modèle public SHA
+`2c9a3bab9d274852564abe6c70042a1145e6193c`.
+
+Détails scientifiques et SHA des JSON dans
+`research/data/S2B_REAL_PUBLIC_144_RESULTS_20261026.md`.
+**NO-GO** sur toute affirmation « l'encodage
+continu prédit mieux » : aucune supériorité
+constante, énormes biais de classe, environ
+50% balanced accuracy. Les pertes de signe
+D1/H1/M1 de G0a dans l'historique passé
+(2.86% / 13.74% / 64.26%) sont réelles
+mais ne prouvent aucun avantage de prévision.
+
+**NOUVELLE PRIORITÉ** : S3.1 issue #20,
+comparaison *prédictive* des grammaires G1/G2
+avec le retour continu G0b comme référence
+à protocole, architecture, loss, seed
+et fenêtre historique appariés.
+Préenregistrer AVANT tout résultat. Travail
+sur branche/PR distincte **sans merge automatique**.
+Pas d'utilisation de 2026 pour entraîner,
+tuner ou choisir un modèle. Pas de PnL
+composé, pas de frais selon propriétaire,
+aucune action Hyperliquid.
+
+---
+
 # AUTORISATION PUBLIC BTC / PR #23 — 26 OCTOBRE 2026
 
 **Nouvelle décision utilisateur, PRIORITAIRE sur les anciennes notes
