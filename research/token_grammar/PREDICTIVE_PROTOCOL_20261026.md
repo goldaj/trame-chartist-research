@@ -78,7 +78,8 @@ donc précisément le même nombre de paramètres.
   *mesuré*, FLOPs non équivalents garantis.
 - **Campagne** 3 horizons × 4 grammaires × 2 objectifs ×
   2 largeurs (16/32) × 2 profondeurs (1/2) × 3 seeds
-  = **192 fits**. Pré-campagne smoke sur D1/H1/M1
+  = **288 fits** (96 fits par horizon).
+  Calcul vérifiable : 3×4×2×2×2×3 = 288. Pré-campagne smoke sur D1/H1/M1
   avec 1 width, 1 depth, 1 seed, 40 updates = 24 fits.
 - Pour une comparaison en table, séparer horizons :
   MAE USD et distribution volatilité non comparables
@@ -125,7 +126,7 @@ Prioritaires **simultanément** :
   exacte des bras G0a/G0b de S2b.
 - **S3.1A.4** CI publique, vrai **pilote 24 fits**
   sur D1/H1/M1, puis examen de provenance.
-- **S3.1A.5** vrai benchmark **192 fits**, rapport
+- **S3.1A.5** vrai benchmark **288 fits**, rapport
   agrégé et tableau apparié ; critiquer ce qui
   est démontré et non démontré.
 - **S3.1B.0** préenregistrer tokens appris et
