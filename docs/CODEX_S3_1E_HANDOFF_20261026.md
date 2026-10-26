@@ -1,3 +1,62 @@
+# S3.1E TERMINÉE — 27 trajectoires BTC réelles / 81 checkpoints
+
+**Run officiel** [GitHub Actions #40318969005](https://github.com/goldaj/trame-chartist-research/actions/runs/40318969005)
+**4/4 jobs SUCCESS** ; Git SHA exécuté
+`73b56883dd09b3ad533aeeb4546eb1d402f2c003`.
+**SOURCE NUMÉRIQUE :**
+`research/token_grammar/S3_1E_REAL_81_RESULTS_20261026.md`,
+tableau 2000 updates, critères contradictoires,
+baselines, SHA256 des 3 JSON horizons +
+panel JSON et Markdown. Archive ZIP de
+5 fichiers + MANIFEST dans conversation.
+3×3×3 **27 vrais fits** de 2000 updates,
+3 checkpoints chacun = **81 mesures**
+non indépendantes, train avant 2020,
+monitor 2020–21 ; DEV externe 2022–25
+et holdout 2026 jamais ouverts pour tuning.
+
+**BA hard / MAE prix hard / erreur amplitude
+à 2000 steps (3 seeds, mean)** :
+- D1 legacy : 52,24% /282,704 /248,938 bps ;
+  reconciled_100 : 52,83% /285,563 /241,866.
+- H1 legacy : 51,93% /54,611 /48,955 ;
+  reconciled_100 : 50,52% /54,945 /47,561.
+- M1 legacy : 53,02% /8,368 /7,319 ;
+  reconciled_100 : 52,73% /8,398 /7,307.
+- Désaccord signe entre mu et logit
+  sur legacy : **D1 7,9% / H1 19,0% /
+  M1 26,7%**. Un gain BA/amplitude
+  isolé ne suffit pas à déclarer edge.
+- Même les modèles legacy échouent
+  légèrement face à la persistance simple
+  sur MAE prix à 2000 steps
+  (D1 281,037, H1 54,535, M1 8,347bps).
+- Le SOFT tanh surrogate a parfois un
+  MAE plus faible que le HARD réellement
+  servi, mais ce n'est **PAS** une
+  amélioration du produit : les sorties
+  ne sont pas interchangeables.
+- **Verdict : NO-GO** pour supériorité
+  direction et montant robuste, aucune
+  rentabilité/prédiction autonome validée.
+
+**S3.1F PROCHAINE PRIORITÉ** :
+préenregistrer un diagnostic **à poids
+de réseaux IDENTIQUES** des règles de
+post-traitement : hard joint historique,
+direct signed mu, soft joint tanh.
+Cela isole la source du conflit entre
+deux têtes sans changer loss/backbone/
+grammaire/quantiles/graines. Ne PAS
+analyser le monitor et sélectionner
+l'option gagnante comme si elle était
+validée indépendamment ; 2026 réservé.
+Tous les scores : BA sens, MAE prix
+USD/bps, magnitude, Brier, UP,
+monoclasse, écarts par horizon, persistance.
+
+---
+
 # Codex TRAME — S3.1E cohérence entre têtes et prix final, 26/10/2026
 
 **PR #28 DRAFT**, branche
