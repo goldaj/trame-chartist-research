@@ -1,5 +1,33 @@
 # TRAME — tableau de bord de la reprise scientifique
 
+## Point de clôture de session — 26 octobre 2026 (instruction la plus récente)
+
+**Reprise autonome de développement interrompue volontairement APRÈS clôture.**
+L'utilisateur a demandé de terminer trois opérations puis de
+**s'arrêter proprement** : (1) analyser le rapport réel H1
+par année et régime, (2) en documenter les résultats, (3)
+actualiser la passation Codex et vérifier l'état GitHub.
+**Ces trois opérations ont été effectuées dans la PR #14.**
+Ne pas interpréter l'ancien ordre « continuer sans s'arrêter »
+comme une autorisation de recommencer un chantier après
+cette clôture de session ; attendre de nouvelles consignes.
+
+**Données réelles désormais exécutées :** études exploratoires
+H1 et M1, puis témoins statistiques H1 par année/volatilité
+passée ; **2026 non ouvert**. Voir :
+- [A7 état consolidé](../research/btc_h1_m1/A7_STATUS_20261025.md)
+- [A7 résultats H1](../research/btc_h1_m1/A7_H1_REAL_RESULTS_20261025.md)
+- [A7 résultats M1](../research/btc_h1_m1/A7_M1_REAL_RESULTS_20261025.md)
+- [A7 résultats H1 par régimes](../research/btc_h1_m1/A7_H1_REGIMES_REAL_RESULTS_20261025.md)
+
+**Priorité à la prochaine vraie reprise :** A7.5 sur M1 et modèles
+neuronaux par régimes, intervalles appariés et stress. A4
+Mamba GPU, A6 fondations temporelles, A7.6 holdout indépendant,
+A7.7 multi-actifs et P1–P4 restent partiellement ou totalement ouverts.
+**TRAME Predictive v1 n'est pas livrable.**
+
+
+
 **25 octobre 2026. Statut courant : REPRISE AUTORISÉE.**
 Cette nouvelle instruction utilisateur **remplace la pause** notée dans
 `docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md` (qui reste comme archive
@@ -18,15 +46,15 @@ des secrets non fournis ou de fusionner implicitement les PR.
 | Phase | Sous-tâches livrables | Statut documenté |
 | --- | --- | --- |
 | A3c budget équitable | 1. Protocole ; 2. profil opérations/CPU ; 3. extensions contexte ; 4. pilote apparié à budget proxy ; 5. rapport et critères d'équité | 1–5 livrés en mode exploratoire ; **No-Go** pour vraie égalité des FLOPs, mémoire GPU et tuning |
-| A4 Mamba | 1. Versions/API officielles ; 2. isolation matériel/dépendances ; 3. backbones réels ; 4. causalité et gradients ; 5. benchmark multi-seed | Recherche préalable ; GPU/test de Mamba-3 à effectuer |
-| A5 hybrides | 1. hypothèses ; 2. bras d'architecture ; 3. ablations ; 4. équité/rapport | À faire |
-| A6 fondations temporelles | 1. versions/licences ; 2. contamination ; 3. adapteurs ; 4. test zéro-shot ; 5. comparaison | À faire |
-| A7 données réelles | 1. reprise cache BTC ; 2. horizons/splits ; 3. témoins ; 4. campagne multibras ; 5. évaluation robuste ; 6. gel hors-échantillon ; 7. extension multi-actifs | Infrastructure de la release BTC prête ; campagne réelle non exécutée |
-| A8 Research Lab | 1. export résultats ; 2. visualisation ; 3. traçabilité ; 4. qualité/packaging ; 5. évaluation utilisabilité | Démonstrateur synthétique préexistant ; ajouts à faire |
-| P1 modèles | 1. sélection justifiée ; 2. représentations ; 3. entraînement/tuning ; 4. checkpoints | À faire |
-| P2 robustesse | 1. stress ; 2. calibration ; 3. dérive ; 4. test indépendant ; 5. limites et Go/No-Go | À faire |
-| P3 économie | 1. contrat de simulation ; 2. frais/spread/slippage ; 3. comparateurs ; 4. intervalles ; 5. analyse de risque | À faire |
-| P4 produit | 1. API locale ; 2. interface ; 3. gestion de modèles ; 4. installation ; 5. audits ; 6. livraison et documentation | À faire |
+| A4 Mamba | 1. Versions/API officielles ; 2. isolation matériel/dépendances ; 3. backbones réels ; 4. causalité et gradients ; 5. benchmark multi-seed | PR #11 : adaptateurs officiels CPU-guardés ; **aucune validation GPU** (A4.4–5 ouvertes) |
+| A5 hybrides | 1. hypothèses ; 2. bras d'architecture ; 3. ablations ; 4. équité/rapport | PR #12 : témoin attention+GRU synthétique et résultats ; hybrides Mamba véritables non testés |
+| A6 fondations temporelles | 1. versions/licences ; 2. contamination ; 3. adapteurs ; 4. test zéro-shot ; 5. comparaison | PR #13 : licences et contrat temporel en CI ; poids réels/zéro-shot non testés |
+| A7 données réelles | 1. reprise cache BTC ; 2. horizons/splits ; 3. témoins ; 4. campagne multibras ; 5. évaluation robuste ; 6. gel hors-échantillon ; 7. extension multi-actifs | PR #14 : H1 et M1 réels exécutés ; régimes H1 témoins analysés ; A7.5 globale partielle, A7.6–7 non faits |
+| A8 Research Lab | 1. export résultats ; 2. visualisation ; 3. traçabilité ; 4. qualité/packaging ; 5. évaluation utilisabilité | PR #15 : evidence reports offline, CI Linux/Windows ; audit UX réel non fait |
+| P1 modèles | 1. sélection justifiée ; 2. représentations ; 3. entraînement/tuning ; 4. checkpoints | PR #16 : manifeste technique/checkpoints et contrat P1 ; sélection réelle P1.5 non faite |
+| P2 robustesse | 1. stress ; 2. calibration ; 3. dérive ; 4. test indépendant ; 5. limites et Go/No-Go | PR #16 : diagnostics calibration/abstention de dev ; holdout P2.5 non fait |
+| P3 économie | 1. contrat de simulation ; 2. frais/spread/slippage ; 3. comparateurs ; 4. intervalles ; 5. analyse de risque | PR #16 : simulation de coûts uniquement fictive ; P3.5 réel non fait |
+| P4 produit | 1. API locale ; 2. interface ; 3. gestion de modèles ; 4. installation ; 5. audits ; 6. livraison et documentation | PR #16 : garde-fou de livraison NO-GO ; pas de modèle produit |
 
 ## Périmètre de la nouvelle branche
 
@@ -36,8 +64,9 @@ des secrets non fournis ou de fusionner implicitement les PR.
   basée sur #9, travaux A3c).
 - Ni le dépôt `goldaj/hyperliquid-btc-pilot` ni les fichiers bruts
   de `goldaj/btc-historical-data` ne sont modifiés ici.
-- Les premières CI mesurent des données **inventées** ; aucun résultat
-  de prévision BTC ne peut être inventé à partir de celles-ci.
+- Les premières CI mesurent des données **inventées** ; **trois
+  campagnes séparées** ont ensuite été exécutées sur la release privée
+  en workflows privés, avec sorties agrégées documentées dans A7.
 
 ## Conventions de suivi des baby steps
 
@@ -99,4 +128,6 @@ un budget rapproché **sur compteurs partiels uniquement**. Les deux
 artefacts JSON du run #40219261965 sont la preuve reproductible.
 La recherche multi-architectures se poursuit par A4 sous statut
 exploratoire, **sans** classement de modèle, FLOPs réels alignés
-ou campagne sur historiques BTC.
+ou sélection d'un gagnant. Depuis cette étude A3c,
+**des campagnes exploratoires BTC H1/M1 ont été exécutées** ;
+voir le statut A7 ci-dessus.
