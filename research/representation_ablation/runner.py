@@ -272,7 +272,7 @@ def run_history(*,interval,directory=ROOT,steps=200,
                 widths=(16,32),depths=(1,2),
                 seeds=(20261025,20261026,20261027),
                 max_train=4096,max_dev=1024,
-                data_origin=data_origin):
+                data_origin="BTC_PRIVATE_REAL"):
     if interval not in ("D1","H1","M1"):
         raise ValueError("D1/H1/M1 only")
     stride=60 if interval=="M1" else 1
@@ -282,7 +282,7 @@ def run_history(*,interval,directory=ROOT,steps=200,
         pools["train"],pools["development"],
         interval=interval,representations=representations,modes=modes,
         widths=widths,depths=depths,seeds=seeds,steps=steps,
-        data_origin="BTC_PRIVATE_REAL")
+        data_origin=data_origin)
     report["scanned_candidates"]=scanned
     report["sampling_stride"]=stride
     return report
