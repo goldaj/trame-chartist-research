@@ -403,3 +403,45 @@ l'intégralité des échanges précédents.
 - La qualification CI doit être vérifiée ; ni vraie campagne 270 modèles ni
   validation indépendante 2026 annoncées sans run effectif.
 - Les données BTC brutes restent privées, le bot Hyperliquid inchangé.
+
+
+## 2026-10-26 — Instruction corrective D1, au cours de la séance S1
+**Heure exacte non fournie pour le message individuel.** La citation
+Utilisateur qui suit est **verbatim** de la conversation en cours.
+
+**Utilisateur** :
+> **dans tous nos calculs, là, on a H1 et M1, pourquoi on n'a pas D1 (en daily), c'était aussi dans le repo, même si c'était peut être dans une autre forme. Reprends TOUT depuis qu'on a utilisé les nouvelles données et inclus aussi D1. Fait ça avant de reprendre la suite. Tu me préviendras quand tu y seras (mais sans t'arrêter pour autant).**
+
+**Assistant, synthèse non verbatim de la mise en œuvre** :
+- Après audit, trouve que `research/btc_h1_m1/daily.py` savait déjà
+  lire les trois fichiers D1, mais qu'aucun des pipelines de prévision
+  A7/S1 n'acceptait D1. Réutilise ce lecteur unique sans fabriquer
+  de bougies de 2010–2011 (segment indicatif close-only).
+- Ajoute D1 à `stream.iter_cases`, modèles A7, témoins Ridge/persistance,
+  analyse par régimes et matrice de scaling 5 tailles × 3 profondeurs
+  × 3 familles ; D1/H1/M1 total théorique 405 fits avec 3 seeds.
+- PR #18 draft empilée sur PR #17 puis PR #14.
+- Réexécute réellement D1 A7/témoins/régimes/direction : privé
+  [#40280347574](https://github.com/goldaj/btc-historical-data/actions/runs/40280347574),
+  succès ; H1/M1 harmonisés : privé
+  [#40280464439](https://github.com/goldaj/btc-historical-data/actions/runs/40280464439),
+  succès des deux jobs ; test 5 tailles × 3 profondeurs sur les
+  trois résolutions : privé
+  [#40281223578](https://github.com/goldaj/btc-historical-data/actions/runs/40281223578),
+  6/6 jobs réussis, **mais une seule graine, et 8 updates pour
+  les grands modèles**.
+- La précision directionnelle est trompeuse si les modèles
+  prédisent toutes les observations en hausse. Ajoute des témoins
+  toujours-up/down et un résumé de la balanced accuracy. Aucun
+  « gagnant » ni avantage financier n'est déclaré.
+- Lance une expérience de convergence séparée 200 updates, 3 graines,
+  trois tailles de modèles, les trois profondeurs et trois
+  résolutions sur la branche privée
+  `chatgpt/trame-private-scaling-convergence-20261026`
+  (workflow #40281657954 ; vérifier l'état au moment de lecture).
+- Documente preuves et limites dans
+  `research/btc_h1_m1/D1_H1_M1_REAL_RESULTS_20261026.md`,
+  `research/scaling_study/S1_REAL_GRID_CANARY_20261026.md`
+  et `docs/CODEX_D1_HANDOFF_20261026.md`.
+- Les prix bruts restent privés ; jamais d'ouverture 2026,
+  pas de frais ni de trading exécuté ; H1/M1 historique conservé.
