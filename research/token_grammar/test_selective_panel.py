@@ -28,7 +28,7 @@ class ConditionalPanelTests(unittest.TestCase):
             ("external_2022_2025_used",True),
             ("holdout_2026_used",True),
             ("only_train_predictions_define_cutoffs",False),
-            ("same_rules_same_selected_subset",False),
+            ("all_rules_same_monitored_subset",False),
         ):
             if field not in self.experiment: continue
             changed=deepcopy(self.experiment)
