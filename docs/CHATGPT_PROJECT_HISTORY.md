@@ -1352,3 +1352,48 @@ dans `research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
   train-only, tous artefacts SHA vérifiables.
   Pas de trading, pas de PnL cumulé,
   frais ignorés selon utilisateur.
+
+
+### 2026-10-26 — clôture réelle S3.1F (assistant, NON verbatim)
+- [GitHub Actions #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917)
+  **4/4 jobs verts**, 3 horizons D1/H1/M1,
+  3 vrais modèles entraînés par horizon,
+  27 checkpoints aux 200/800/2000 updates,
+  81 évaluations prix HARD, direct mu,
+  tanh soft sur les mêmes poids (PAS
+  81 modèles). Code Git SHA
+  `58bc0f1e9425975a037ad2bf135943890a5b474b`.
+- Récupère quatre artefacts ZIP GitHub Actions,
+  en extrait D1/H1/M1 JSON + panneau JSON/MD,
+  inspecte tableau complet 27 lignes
+  et moyennes par graine, calcule SHA256.
+  Crée copie archive conversation
+  `trame_s3_1f_9_models_81_evaluations.zip`
+  et MANIFEST vérifiable.
+- Résultats à 2000 updates :
+  HARD BA 52,24/51,93/53,02% D1/H1/M1,
+  MAE prix 282,704/54,611/8,368bps.
+  SOFT BA égale par structure mais MAE
+  prix 280,707/54,511/8,337 et erreur
+  magnitude AGGRAVÉE de 9,86–12,24%.
+  DIRECT mu BA inférieure 51,24/51,26/
+  52,40%, MAE prix aussi plus élevé.
+  SOFT bat légèrement persistance
+  sur MAE prix de seulement ~0,04–0,12%
+  avec 3 graines non indépendantes,
+  monitor 2020–21 déjà très étudié.
+- Archive conclusions contradictoires
+  et SHA dans
+  `research/token_grammar/S3_1F_REAL_81_RESULTS_20261026.md`,
+  met à jour docs Codex AGENTS, PR #29
+  issue #20 et cet historique.
+- Décide du prochain sujet scientifique
+  S3.1G : mesurer la performance des
+  prédictions quand l'IA annonce
+  une AMPLITUDE suffisante, seuils
+  calculés TRAIN-only et couverture,
+  plutôt que créer 20 variantes
+  de modèles ajustées à monitor.
+  Aucun edge financier établi,
+  2026 holdout gelé ; frais ignorés,
+  aucune transaction Hyperliquid.
