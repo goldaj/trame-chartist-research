@@ -120,7 +120,7 @@ class DirectionTests(unittest.TestCase):
 
     def test_history_runner_fixture_origin_and_holdout_guard(self):
         train = [make_case(2018, i) for i in range(40)]
-        dev = [make_case(2023, i) for i in range(24)]
+        dev = [make_case(2023, i) for i in range(36)]
         r = run_cases(
             train, dev, interval="H1", targets=(2400,),
             depths=(1,), architectures=("modern_gpt_style_mini",),
@@ -131,7 +131,7 @@ class DirectionTests(unittest.TestCase):
         self.assertTrue(r["synthesized_or_mocked_data"])
         self.assertFalse(r["independent_test_used"])
         self.assertFalse(r["labels_2026_opened"])
-        self.assertEqual(r["development_cases"], 24)
+        self.assertEqual(r["development_cases"], 36)
         self.assertTrue(math.isfinite(r["results"][0]["development_nll"]))
         with self.assertRaises(ValueError):
             run_cases(train, [make_case(2026, i) for i in range(24)],
