@@ -1,3 +1,39 @@
+# ROADMAP S3 / GRAMMAIRES — DEMANDE UTILISATEUR 26/10/2026
+
+L'utilisateur confirme **continuer S2** et ajoute une hypothèse
+d'importance élevée : réétudier la transformation des courbes BTC
+en **tokens/grammaires**. Cette hypothèse est désormais suivie
+par [l'issue #20](https://github.com/goldaj/trame-chartist-research/issues/20)
+et documentée dans
+`research/token_grammar/ROADMAP_20261026.md`.
+
+**ORDRE FIXÉ** : S3.0 revue + diagnostic/reconstruction sur
+fixtures synthétiques **maintenant**, S3.1 benchmark causal
+des grammaires **après l'exécution réelle autorisée S2**
+sur D1/H1/M1, **avant** de recommencer le gros scaling
+ou d'autres architectures. Si S2 réel est bloqué par
+sécurité, seules S3.0/docs/fixtures peuvent progresser ;
+ne pas contourner un refus de sécurité, ni inventer
+des mesures financières. S3.2–S3.3 grammaires
+patch/OHLCV/événements/VQ/multirésolution seulement
+si l'ablation initiale le justifie.
+
+Le laboratoire `research/token_grammar/diagnostics.py`
+et `test_diagnostics.py` mesurent uniquement pertes
+de direction/magnitude et entropie de tokens sur nombres
+**inventés** ; jamais la performance de prévision BTC.
+Ne pas modifier le codec historique S1 ni remplacer les
+retours continus S2 clandestinement.
+
+Frais toujours ignorés sur décision utilisateur ;
+direction ET précision du montant sont deux dimensions
+obligatoires. Labels 2026 gelés, données privées séparées,
+aucune exécution d'ordres ou modification Hyperliquid.
+Codex doit consulter `docs/CODEX_S2_HANDOFF_20261026.md`
+et l'issue #20 avant de modifier une architecture.
+
+---
+
 # PRIORITÉ DE REPRISE S2 — APRÈS INTERRUPTION (26/10/2026)
 
 Consulter maintenant `docs/CODEX_S2_HANDOFF_20261026.md`
