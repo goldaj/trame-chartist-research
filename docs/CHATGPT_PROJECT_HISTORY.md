@@ -1015,3 +1015,69 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   clé, wallet, ordre Hyperliquid ou
   PnL capitalisé ; frais de simulation
   ignorés selon la consigne utilisateur.
+
+
+### 26 octobre 2026 — S3.1C vrai diagnostic d'optimisation terminé (assistant, non verbatim)
+- Le workflow GitHub Actions
+  [#40309653884](https://github.com/goldaj/trame-chartist-research/actions/runs/40309653884)
+  a **réussi 4 jobs sur 4** : D1,
+  H1, M1 et agrégateur final.
+- **27 trajectoires** de modèles
+  entraînées chacune pour 2000
+  optimizer updates et observées aux
+  checkpoints 200,800,2000
+  (**81 observations internes**).
+  Ne pas qualifier les checkpoints
+  de 81 entraînements distincts.
+- Source authentique BTC Bitstamp
+  public contrôlée SHA, jamais de
+  simulation Hyperliquid ou PnL.
+  Aucune réutilisation des cibles
+  dev externe 2022–25 pour choisir
+  les budgets, 2026 jamais ouvert.
+  Deux réservoirs indépendants :
+  TRAIN avant 2020 (D1 2876,
+  H1/M1 4096), MONITOR 2020–21
+  (D1 731, H1/M1 1024).
+- **Résultats précis et SHA des
+  cinq rapports** sont consignés
+  dans `research/token_grammar/S3_1C_REAL_81_RESULTS_20261026.md`
+  et archive ZIP jointe à la
+  conversation pour éviter la seule
+  dépendance aux artifacts GitHub.
+  Code exécuté SHA
+  `e0dae968998cb7f19c37b9f819e1de5d7524dd27`.
+- Résultats résumés :
+  D1 G2 decoded 53.20% BA /
+  280.78bps MAE à 200 updates,
+  52.24% /282.70bps à 2000
+  (dégradation) ; H1 49.02%
+  →51.93% BA, 54.80→54.61bps
+  (amélioration modeste).
+  M1 52.06%→53.02% BA,
+  8.599→8.368bps MAE prix,
+  MAIS amplitude 6.998→7.319bps
+  (dégradation). Random mono
+  H1 passe de 2/3 à 0/3,
+  alors que D1 reste 2/3.
+  Les gradients diminuent en
+  moyenne et Brier skill est
+  très proche du prior, souvent
+  négatif.
+- Décision recherche/ingénierie :
+  aucune durée d'entraînement
+  optimale universelle ; sous-
+  entraînement n'explique qu'une
+  partie des sorties monoclasse.
+  **NO-GO** sur modèle de trading
+  rentable; suite S3.1D = étudier
+  séparément les objectifs direction,
+  erreur du prix et magnitude,
+  avec mêmes cohortes et en
+  conservant 2026 comme test.
+- `AGENTS.md`, Codex handoff,
+  PR #26, issue #20 et historique
+  à jour. Aucun compte, wallet,
+  ordre réel ni clé publié ; les
+  frais restent exclus par
+  instruction de l'utilisateur.
