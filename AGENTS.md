@@ -6,7 +6,8 @@ refus de sécurité. Continuer scientifiquement sans contournement :
 **S2b ablation isolée de l'encodage d'entrée** compare
 `continuous_bps` à `legacy_quantized_bps` en gardant
 **cibles continues, loss, architecture, origine, graines,
-batches et normalisation de cible communes**.
+batches et normalisation des ENTRÉES ET CIBLES communes,
+fit sur les seuls retours continus du TRAIN**.
 
 - PR #21, branche `chatgpt/trame-representation-ablation-20261026`,
   **basée sur PR #19 S2** ; pas de fusion automatique.
