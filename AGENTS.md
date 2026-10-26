@@ -1,3 +1,59 @@
+# DERNIÈRE ÉTAPE : S3.1A GRAMMAIRES SUR BTC RÉEL (26/10/2026)
+
+**PR #24** `chatgpt/trame-s3-predictive-grammars-20261026`,
+base PR #23 source BTC publique. Voir
+`docs/CODEX_S3_1_HANDOFF_20261026.md`,
+`research/token_grammar/PREDICTIVE_PROTOCOL_20261026.md`
+et [issue #20](https://github.com/goldaj/trame-chartist-research/issues/20).
+
+- **S3.1A déjà testée sur cours réels** :
+  D1/H1/M1, 4 grammaires ×2 objectifs = **24 fits**
+  avec une graine, width16/depth1, 40 updates.
+  [Workflow #40299287171](https://github.com/goldaj/trame-chartist-research/actions/runs/40299287171),
+  3/3 jobs verts et SHA JSON dans
+  `research/token_grammar/S3_1_REAL_PILOT_RESULTS_20261026.md`.
+- **Campagne complète mathématiquement correcte :
+  288 fits, PAS 192** = 3 résolutions ×4 grammaires
+  ×2 losses ×2 widths ×2 depths ×3 seeds
+  = 96 / horizon. Workflow
+  `.github/workflows/trame-s3-predictive-288.yml`,
+  [run #40300156418](https://github.com/goldaj/trame-chartist-research/actions/runs/40300156418).
+  **NE PAS prétendre à la réussite tant que les 3 jobs
+  ET l'agrégateur final ne sont pas terminés.**
+  Ancien workflow mal dimensionné 192 retiré,
+  résultat inutilisable.
+- Code `research/token_grammar/predictive.py` :
+  G0b continu, G0a arrondi, G1 bins fixes signés,
+  G2 bacs quantiles fit sur TRAIN uniquement.
+  Les tokens G1/G2 sont **DÉCODÉS en scalar bps**
+  pour le même backbone S2b ; ceci **n'évalue PAS**
+  un embedding de token appris (S3.1B future).
+- Même seed, init SHA256, 20 pas passés, cible,
+  loss, mini-batches, échelles d'entrée et cible
+  TRAIN continu ; le tableau `predictive_panel.py`
+  rejette groupes incomplets/décalés.
+  Balanced direction accuracy, taux UP,
+  MAE USD et bps, erreur d'amplitude bps,
+  Brier skill des vrais logits entraînés,
+  monoclasse ≥99%, pas de PnL cumulé.
+- Les pilotes restent dominés par scores ~50%
+  et sorties monoclasse, notamment H1.
+  D1 G1 joint a BA 52.83% mais se dégrade
+  sur erreur de magnitude absolue vs continu ;
+  pas d'edge prouvé, encore moins de généralisation.
+- Source BTC Bitstamp spot publique versionnée/vérifiée
+  par SHA, 2026 GELÉ pour train/dev, D1 public 2012+,
+  aucune clé/compte/wallet. Frais ignorés selon
+  consigne, aucun ordre ni bot Hyperliquid modifié.
+- Prochaine étape S3.1B : véritables token embeddings
+  et décompositions signe/magnitude, après rapport
+  288 fits, **préenregistrer avant expérimentation**.
+- Tracer l'historique brut des demandes disponibles
+  dans `docs/CHATGPT_PROJECT_HISTORY.md`.
+  Pas de fusion automatique des PR empilées.
+
+---
+
 # DERNIÈRE PREUVE TRAME, 26/10/2026 : 144 ESSAIS PUBLICS RÉELS FINIS
 
 **Contrôle réussi :** [GitHub Actions #40296933559](https://github.com/goldaj/trame-chartist-research/actions/runs/40296933559)
