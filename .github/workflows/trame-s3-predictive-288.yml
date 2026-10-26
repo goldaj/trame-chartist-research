@@ -4,12 +4,12 @@ on:
     branches:
       - chatgpt/trame-s3-predictive-grammars-20261026
     paths:
-      - .github/workflows/trame-s3-predictive-192.yml
+      - .github/workflows/trame-s3-predictive-288.yml
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  grammar-192:
+  grammar-288:
     strategy:
       fail-fast: false
       matrix:
@@ -80,7 +80,7 @@ jobs:
           retention-days: 30
 
   summarise-288:
-    needs: grammar-192
+    needs: grammar-288
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
