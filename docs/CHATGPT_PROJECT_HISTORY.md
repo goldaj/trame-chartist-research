@@ -1081,3 +1081,68 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   ordre réel ni clé publié ; les
   frais restent exclus par
   instruction de l'utilisateur.
+
+
+## 2026-10-26 — Reprise après crash et correction de doublon S3.1C (VERBATIM utilisateur)
+> t'as crash, reprends
+
+**Assistant, synthèse NON verbatim des opérations constatables :**
+- Se replace à S3.1C.1 : préenregistrement convergence
+  200/800/2000 sur TRAIN<2020, MONITOR2020–21, dev
+  2022–25 et holdout 2026 exclus.
+- Introduit expérimentalement un second lecteur,
+  runner/panel et deux CI de convergence, puis constate
+  par lecture GitHub que **PR #26 S3.1C est DÉJÀ
+  TERMINÉE** et vérifie les **4 jobs succès**
+  [Actions #40309653884](https://github.com/goldaj/trame-chartist-research/actions/runs/40309653884).
+  27 véritables trajectoires et 81 checkpoints
+  déjà consignés dans
+  `research/token_grammar/S3_1C_REAL_81_RESULTS_20261026.md`.
+  Ne pas republier des résultats artificiels ou
+  créer des versions concurrentes.
+- **Supprime 8 fichiers de duplication**
+  non nécessaires et leurs workflows sur
+  PR #26 ; conserve l'implémentation canonique
+  `research/token_grammar/convergence.py`
+  et le rapport déjà vérifié. Améliore
+  `stream.iter_cases(stop_labels_before)` et
+  `read_bars(stop_before)` pour ne pas
+  parcourir les bougies 2022–2025 du tout,
+  et réutilise le mode `stop_labels_before`
+  dans `convergence.collect_internal`.
+  Ajoute un test régression du coupe-circuit.
+  Le code de référence du run historique
+  #40309653884 est antérieur à ce hardening,
+  ses résultats n'ont pas été remplacés.
+- **Prend S3.1D comme prochaine vraie étape** :
+  branche `chatgpt/trame-s3-objective-ablation-20261026`,
+  PR #27 DRAFT enfant de PR #26.
+  **Avant essai réel**, préenregistre
+  `research/token_grammar/S3_1D_LOSS_PROTOCOL_20261026.md`
+  : isoler 5 losses direction/amplitude à
+  backbone, cibles, données et réconciliation
+  identiques. Cinq variantes Huber+BCE de poids
+  0.25/0.5/1.0, et bonus d'erreur magnitude
+  0.25/1.0, en toujours JOINT pour ne pas
+  laisser la tête de direction non entraînée.
+- Code `loss_ablation.py`,
+  `loss_ablation_panel.py` et deux tests.
+  CI de fixtures [réussie](https://github.com/goldaj/trame-chartist-research/actions/runs/40312632397).
+- Un premier smoke réel D1/H1/M1 [#40312632612](https://github.com/goldaj/trame-chartist-research/actions/runs/40312632612)
+  a échoué **avant entraînement** sur
+  double déclaration CLI `--checkpoints`,
+  sans produire de résultat BTC.
+  Corrige la CLI, ajoute test `--help` en CI,
+  relance smoke [#40312924527](https://github.com/goldaj/trame-chartist-research/actions/runs/40312924527)
+  et campagne scientifique complète
+  [#40313075915](https://github.com/goldaj/trame-chartist-research/actions/runs/40313075915).
+  **Leurs conclusions doivent être vérifiées**
+  avant toute affirmation de résultat ;
+  45 trajectoires = D1/H1/M1×5 pertes×3
+  seeds, observées à 200/800/2000 updates
+  sur monitor INTERNE 2020–21 :
+  135 observations non indépendantes.
+- Documentation Codex `docs/CODEX_S3_1D_HANDOFF_20261026.md`
+  et `AGENTS.md`. Respect du gel
+  2022–25/2026, pas de profits inventés,
+  aucun trade Hyperliquid, frais ignorés.
