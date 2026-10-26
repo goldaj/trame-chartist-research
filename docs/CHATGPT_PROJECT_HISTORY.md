@@ -530,3 +530,39 @@ justesse directionnelle et à l'amplitude, aucun frais de trading.
 - Aucun nouveau workflow privé ni campagne réelle S2
   n'ont été lancés à cause du refus de sécurité précédent.
   Néanmoins, la suite a pu avancer en code/CI/tests/documentation.
+
+
+## 2026-10-26 — Demande « différentes grammaires » (verbatim)
+**Utilisateur (date connue, heure individuelle non attestée)** :
+> continue ce que tu propooes.
+> Par contre j'aimerais qu'on réfléchisse aussi à différente grammaires prochainement. C'est à dire la façon dont on converti les courbes en token. Peut être qu'il y a d'autres pistes à étudier que celle qu'on a testé. Faut documenter cette intuition et la caler dans les choses à faire un jour. Je te laisse trouver la bonne temporalité pour se lancer dans ce sujet.
+> Et comme d'hab, documente tout bien pour codex aussi.
+
+**Assistant (résumé non verbatim, étapes réalisées)** :
+- Confirme la poursuite de S2, mais S2 réel demeure bloqué par
+  le refus de création de workflow privé au tour précédent ;
+  pas de contournement ni faux résultats BTC S2.
+- Détermine un calendrier scientifique : S3.0 revue et tests
+  de perte d'information sur séries inventées **maintenant**,
+  S3.1 vraies ablations de grammaire **après S2 réel**, et
+  **avant** le retour à du scaling massif sur de nouveaux réseaux.
+- Etudie des références existantes Chronos (quantification),
+  PatchTST (patch tokens), TOTEM (codebooks/quantification
+  apprise), TimesFM (patch continu), et huit familles
+  supplémentaires de représentations possibles.
+- Consigne hypothèses, critères de validation, schémas D1/H1/M1,
+  train-only pour les seuils, risque de fuite de clôture H1/D1
+  dans `research/token_grammar/ROADMAP_20261026.md`.
+- Implémente PoC purement diagnostic
+  `research/token_grammar/diagnostics.py` et tests
+  `test_diagnostics.py` sur séries chiffrées **inventées** :
+  quantification ancienne, retour continu, bandes
+  signées fixes, quantiles de magnitude train-only.
+  Aucun entraînement ou benchmark BTC réel S3.
+- CI publique du module passée, intégrée à
+  `.github/workflows/trame-s2-continuous.yml`.
+- Crée issue de backlog dédiée
+  https://github.com/goldaj/trame-chartist-research/issues/20 ;
+  met à jour `AGENTS.md` et
+  `docs/CODEX_S2_HANDOFF_20261026.md` afin que Codex
+  priorise le chantier au bon moment.
