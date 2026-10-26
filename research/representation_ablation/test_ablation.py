@@ -49,6 +49,7 @@ class RepresentationAblationTests(unittest.TestCase):
         self.assertEqual(r["experiment"],"TRAME_S2B_REPRESENTATION_ABLATION_V1")
         self.assertFalse(r["labels_2026_opened"])
         self.assertTrue(r["same_target_normalization_all_representations"])
+        self.assertTrue(r["same_input_normalization_all_representations"])
         self.assertEqual(len(r["train_origins_sha256"]),64)
         self.assertTrue(r["common_batch_indices_per_seed"])
         self.assertEqual(r["quantization_input_train"]["past_quantized_to_zero_count"],
@@ -67,8 +68,12 @@ class RepresentationAblationTests(unittest.TestCase):
             self.assertEqual(pair[0]["parameter_count"],pair[1]["parameter_count"])
             self.assertEqual(pair[0]["target_normalizer_std_bps_common"],
                              pair[1]["target_normalizer_std_bps_common"])
-            self.assertNotEqual(pair[0]["input_scale_fallback"],
-                                pair[1]["input_scale_fallback"])
+            self.assertEqual(pair[0]["input_normalizer_std_bps"],
+                             pair[1]["input_normalizer_std_bps"])
+            self.assertEqual(pair[0]["input_scale_fallback"],
+                             pair[1]["input_scale_fallback"])
+            self.assertNotEqual(pair[0]["input_information_degenerate"],
+                                pair[1]["input_information_degenerate"])
         self.assertTrue(all(x["brier_nonflat"] is None
                             for x in same_modes["regression"]))
         self.assertTrue(all(isinstance(x["brier_nonflat"],float)
