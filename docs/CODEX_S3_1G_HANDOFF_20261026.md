@@ -1,3 +1,25 @@
+# POINT D'ARRÊT OFFICIEL — S3.1G TERMINÉE (26/10/2026)
+
+**Le propriétaire demande de finir proprement, documenter GitHub et LISTER LA SUITE ; il ne demande PAS de lancer un nouveau cycle de recherche maintenant. ARRÊT VOLONTAIRE APRÈS CETTE PASSATION.**
+
+**Vérification GitHub :** [run #40329836255](https://github.com/goldaj/trame-chartist-research/actions/runs/40329836255) **4/4 jobs SUCCESS**, SHA scientifique `d2db41a6cce09067e168ab4082c4c713b2d1d153`. Trois horizons D1/H1/M1, trois graines, **9 entraînements réels** et **108 cellules dépendantes** = 9×4 seuils×3 règles, avec tableau agrégé validé (36 lignes, 24 familles de deltas). Aucun nouveau modèle n'a été exécuté pour cette clôture. S3.1F était **déjà terminée** [run #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917), 9 modèles/27 checkpoints/81 mesures et PR #29 DRAFT. Ne PAS revenir à S3.1F.
+
+**Source de vérité résultats S3.1G :** `research/token_grammar/S3_1G_REAL_108_RESULTS_20261026.md` (chiffres détaillés, témoins mêmes cas, SHA source, limites, roadmap, artefacts). Observations : BA HARD q90 **50,00% D1**, **50,39% H1**, **52,50% M1** contre BA all **52,24/51,93/53,02%** ; couverture q90 MONITOR **7,3/11,2/4,3%**, n moyen **53/115/44** ; aucun gain directionnel et montant convaincant. Plusieurs MAE prix supérieurs à persistance sur le **même masque**. SOFT contracte prix mais détériore erreur amplitude. Aucune rentabilité, validation indépendante ou edge démontrés.
+
+**Causalité :** train labels <2020 ; monitor interne 2020–2021 déjà sur-utilisé ; ancien dev externe 2022–2025 et holdout 2026 NON OUVERTS, aucune réoptimisation des seuils sur monitor. Frais exclus à la demande propriétaire ; absence de frais ne prouve pas profit. Aucun ordre Hyperliquid, wallet, clé ou donnée de compte.
+
+**Backlog ordonné au point d'arrêt :**
+1. S3.1H : préenregistrer AUDIT de calibration et robustesse par magnitude et régimes, tester décalage train/monitor, dépendance des bougies, baselines comparables sans ouvrir test.
+2. Contrôler mécanique sampling M1 (stride60), cohortes temporelles et sortie signée/amplitude ; prioriser signaux non monoclasse.
+3. Gel de configuration confirmatoire et critères Go/No-Go AVANT tout holdout indépendant ; aucune affirmation à partir du monitor réutilisé.
+4. S3.2 : grammaires alternatives (patches 4/8/16, embeddings vectoriels, signe/magnitude), **une variable changée à la fois**, coûts et horizon contrôlés.
+5. S4 : scaling taille × profondeur (ex. 1/2/4 couches) seulement après diagnostic, contrôler params/compute, rapporter BA ET MAE du prix USD/bps ET erreur amplitude.
+6. Livrable seulement après validation indépendante et conformité/sécurité ; pas de trade live.
+
+**Gestion GitHub :** conserver PR #30 DRAFT (fille de #29), autres PRs empilées en brouillon ; NE PAS merger ni lancer de CI/entraînement additionnel automatiquement. Une prochaine séance part de **ce fichier, AGENTS.md, l'issue #20 et le rapport S3.1G**.
+
+---
+
 # Codex — TRAME S3.1G : fiabilité des signaux de mouvement prévu (26/10/2026)
 
 ## Résultats et obligations hérités
