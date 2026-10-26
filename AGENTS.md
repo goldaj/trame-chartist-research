@@ -1,3 +1,32 @@
+# S3.1A CONFIRMÉE (26/10/2026) — 288 FITS TERMINÉS
+
+Le [run #40300156418](https://github.com/goldaj/trame-chartist-research/actions/runs/40300156418)
+a officiellement **réussi 4/4 jobs** :
+3 ×96 vrais entraînements BTC Bitstamp
+D1/H1/M1 (3 graines, 200 steps) et panneau
+comparatif complet (**288 fits, 72 groupes
+appariés, 24 lignes de synthèse**).
+
+**RECHERCHE** : pas de gain directionnel
+et d'amplitude robuste simultané,
+beaucoup de modèles monoclasse ;
+H1 Joint G2 51.40% BA / 34.154 bps
+MAE vs continu 51.14% /34.490,
+mais amplitude absolue G2 30.136
+vs continu 28.753. Aucun edge prouvé.
+
+**Passation S3.1A** :
+`research/token_grammar/S3_1A_REAL_288_RESULTS_20261026.md`,
+`docs/CODEX_S3_1_HANDOFF_20261026.md` ;
+PR #24 draft. Le prochain travail S3.1B
+doit évaluer de **vrais embeddings appris**
+avec budget modèle apparié, protocole
+nouveau préenregistré, CI et 2026 gelé.
+Aucun frais selon consigne, pas de
+transactions live ni Hyperliquid.
+
+---
+
 # DERNIÈRE ÉTAPE : S3.1A GRAMMAIRES SUR BTC RÉEL (26/10/2026)
 
 **PR #24** `chatgpt/trame-s3-predictive-grammars-20261026`,
