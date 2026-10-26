@@ -156,10 +156,12 @@ def panel(reports,*,seeds=(20261025,20261026,20261027),
             ref=variants["joint_hard"]
             for rule,r in variants.items():
                 grouped[(iv,q,rule)].append(r)
-                if rule!="joint_hard" and r["n_selected"]>0:
-                    diffs[(iv,q,rule)].append({
-                        m:r[m]-ref[m] for m in METRICS
-                    })
+                if rule!="joint_hard":
+                    bucket=diffs[(iv,q,rule)]
+                    if r["n_selected"]>0:
+                        bucket.append({
+                            m:r[m]-ref[m] for m in METRICS
+                        })
     rows=[]
     for (iv,q,rule),items in sorted(grouped.items()):
         rec={"interval":iv,"threshold":q,"rule":rule,
