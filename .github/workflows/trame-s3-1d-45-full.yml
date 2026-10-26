@@ -1,0 +1,119 @@
+name: TRAME S3.1D 45 real loss trajectories and 135 checkpoints
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-objective-ablation-20261026
+    paths:
+      - .github/workflows/trame-s3-1d-45-full.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-loss-15:
+    strategy:
+      fail-fast: false
+      matrix:
+        interval: [D1,H1,M1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      INTERVAL: ${{ matrix.interval }}
+      TRAME_BTC_CACHE_DIR: /tmp/trame-btc-pre2022
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU-only research libraries
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Download original public Bitstamp series and verify original blob IDs
+        run: |
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR"
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR" --check-only
+      - name: 15 real objective trajectories to 2000 updates / internal 2020-2021 monitor
+        run: |
+          mkdir -p out
+          if [ "$INTERVAL" = D1 ]; then DATA_DIR=research/data/reference; else DATA_DIR="$TRAME_BTC_CACHE_DIR"; fi
+          python -m research.token_grammar.loss_ablation \
+            --interval "$INTERVAL" --directory "$DATA_DIR" \
+            --seeds 20261025 20261026 20261027 \
+            --checkpoints 200 800 2000 \
+            --output "out/${INTERVAL}_S3_1D_five_losses_15trajectories.json"
+      - name: Validate full five-objective matched SHA, identical capacity and strict 2022 cutoff
+        run: |
+          python - <<'PY'
+          import json,hashlib,math,os
+          from pathlib import Path
+          from research.token_grammar.loss_ablation_panel import validate
+          iv=os.environ["INTERVAL"]
+          p=Path(f"out/{iv}_S3_1D_five_losses_15trajectories.json")
+          r=json.loads(p.read_text())
+          validate(r)
+          assert r["interval"]==iv and r["data_origin"]=="BTC_PUBLIC_REAL"
+          assert r["engineering_canary_not_scientific_selection"] is False
+          assert r["external_2022_2025_used"] is False
+          assert r["holdout_2026_used"] is False
+          assert r["train_count"]>=200 and r["monitor_count"]>=200
+          assert len(r["results"])==45
+          assert all(math.isfinite(x["mae_bps_anchor"]) for x in r["results"])
+          print("AUTHENTIC BTC PRE2022 LOSS ABLATION",iv,
+                "15 trajectories, 45 checkpoints",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1D-${{ matrix.interval }}-15-real-trajectories
+          path: out/*.json
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate-135:
+    needs: real-loss-15
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Pin report toolchain
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: trame-s3-1D-*-15-real-trajectories
+          path: evidence
+          merge-multiple: true
+      - name: Produce paired direction+amount+calibration table
+        run: |
+          mkdir -p combined
+          python -m research.token_grammar.loss_ablation_panel \
+            --inputs evidence/D1_S3_1D_five_losses_15trajectories.json evidence/H1_S3_1D_five_losses_15trajectories.json evidence/M1_S3_1D_five_losses_15trajectories.json \
+            --output combined/S3_1D_45trajectories_135checkpoints.json \
+            --markdown combined/S3_1D_45trajectories_135checkpoints.md
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path("combined/S3_1D_45trajectories_135checkpoints.json")
+          r=json.loads(p.read_text())
+          assert r["n_distinct_trajectories"]==45
+          assert r["n_checkpoint_observations"]==135
+          assert len(r["summary"])==45 and len(r["contrasts"])==36
+          assert r["external_dev_2022_2025_used"] is False
+          assert r["holdout_2026_used"] is False
+          assert r["same_capacity_all_loss_arms"] is True
+          print(Path("combined/S3_1D_45trajectories_135checkpoints.md").read_text())
+          print("AGGREGATE SHA256:",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1D-135-final-conclusions
+          path: combined/*
+          if-no-files-found: error
+          retention-days: 30
