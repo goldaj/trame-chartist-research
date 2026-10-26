@@ -107,7 +107,7 @@ def _source_code_commit(data_origin):
     except (OSError,subprocess.TimeoutExpired):
         sha=""
     if not sha or len(sha)!=40 or any(ch not in "0123456789abcdef" for ch in sha):
-        if data_origin=="BTC_PRIVATE_REAL":
+        if data_origin in ("BTC_PRIVATE_REAL","BTC_PUBLIC_REAL"):
             raise RuntimeError("real research requires a traceable Git model checkout")
         return "unavailable_fixture_only"
     return sha
