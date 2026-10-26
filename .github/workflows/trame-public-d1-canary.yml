@@ -1,0 +1,71 @@
+name: TRAME public D1 real data scientific canary
+on:
+  push:
+    branches:
+      - chatgpt/trame-public-btc-data-import-20261026
+permissions:
+  contents: read
+jobs:
+  real-public-d1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned research CPU dependencies
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify real D1 source Git blob WITHOUT any private downloader
+        run: |
+          python -m research.data.public_data --resolution D1 --check-only --directory /tmp/trame-public-btc
+      - name: Run genuine D1 S2b 2-codec x 2-loss canary (40 updates)
+        run: |
+          mkdir -p out
+          python -m research.representation_ablation.runner \
+            --interval D1 \
+            --directory research/data/reference \
+            --data-origin BTC_PUBLIC_REAL \
+            --representations continuous_bps legacy_quantized_bps \
+            --modes regression joint \
+            --widths 16 --depths 1 --steps 40 \
+            --seeds 20261026 \
+            --output out/d1_s2b_public_canary.json
+      - name: Genuine D1 grammar audit (information loss, not prediction)
+        run: |
+          python -m research.token_grammar.audit \
+            --interval D1 \
+            --directory research/data/reference \
+            --data-origin BTC_PUBLIC_REAL \
+            --output out/d1_token_information_public.json
+      - name: Validate BOTH real reports and frozen 2026 labels
+        run: |
+          python - <<'PY'
+          import json, hashlib, math
+          from pathlib import Path
+          root=Path('out')
+          ab=json.loads((root/'d1_s2b_public_canary.json').read_text())
+          grammar=json.loads((root/'d1_token_information_public.json').read_text())
+          assert ab['data_origin']==grammar['data_origin']=='BTC_PUBLIC_REAL'
+          assert ab['interval']==grammar['interval']=='D1'
+          assert not ab['labels_2026_opened'] and not grammar['labels_2026_opened']
+          assert not ab['independent_test_used'] and not grammar['independent_test_used']
+          assert len(ab['results'])==4 and len(ab['seeds'])==1 and ab['steps']==40
+          assert all(math.isfinite(x['mae_bps_anchor']) for x in ab['results'])
+          assert not grammar['model_trained'] and not grammar['price_prediction_performed']
+          assert ab['development_origins_sha256']==grammar['development_origins_sha256']
+          for p in sorted(root.glob('*.json')):
+              print('CONFIRMED REAL PUBLIC D1:', p.name, 'sha256',hashlib.sha256(p.read_bytes()).hexdigest())
+          print('PUBLIC D1 REAL CANARY, not independent validation, not H1/M1.')
+          PY
+      - name: Store aggregate research reports only (public, user authorised)
+        uses: actions/upload-artifact@v4
+        with:
+          name: trame-public-d1-real-canary
+          path: out/*.json
+          if-no-files-found: error
+          retention-days: 21
