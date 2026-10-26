@@ -87,7 +87,7 @@ sur observations temporelles indépendantes.
   courant, ne PAS déclarer « succès » avant
   conclusion officielle des 3 jobs**.
 - Campagne visée :
-  **192 fits** D1/H1/M1×4 grammaires×2
+  **288 fits** (96 par horizon) D1/H1/M1×4 grammaires×2
   objectifs×2 largeurs×2 profondeurs×3 seeds,
   200 updates. Ne pas prétendre exécutée
   sans preuve des trois jobs et de leurs
