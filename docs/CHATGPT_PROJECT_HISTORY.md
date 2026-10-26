@@ -566,3 +566,51 @@ justesse directionnelle et à l'amplitude, aucun frais de trading.
   met à jour `AGENTS.md` et
   `docs/CODEX_S2_HANDOFF_20261026.md` afin que Codex
   priorise le chantier au bon moment.
+
+
+## 2026-10-26 — Demande de poursuite S2/S3 (verbatim)
+**Utilisateur** :
+> continue
+
+**Assistant, résumé non verbatim du travail autorisé en conséquence** :
+- Avant une campagne BTC réelle S2 (toujours bloquée par une
+  précédente décision de sécurité sur le workflow privé),
+  examine le protocole : S1 changeait à la fois codec de
+  rendement, cible, tête/objectif et architecture ;
+  comparer S1 à S2 ne permet pas d'attribuer un gain
+  éventuel à la « grammaire » des tokens.
+- Crée une **nouvelle branche / PR #21** S2b, basée sur
+  PR #19 S2 : `chatgpt/trame-representation-ablation-20261026`.
+- Préenregistre `research/representation_ablation/PROTOCOL_20261026.md`
+  avant mesure BTC réelle : ablation entrée arrondie
+  vs entrée continue, toutes deux prédites sur les
+  **mêmes vraies cibles continues**, à loss Huber
+  ou Huber+BCE identique, mêmes minibatches,
+  graines, initialisation et contexte causal de 20 bougies,
+  normalisation des entrées train-only et échelle
+  de cible commune train-only.
+- Matrice potentielle : 2 codecs × 2 losses × 2 largeurs
+  × 2 profondeurs × 3 horizons (D1/H1/M1) × 3 graines =
+  **144 entraînements réels prévus, non lancés**.
+- Implémente `runner.py` avec SHA256 des poids initiaux,
+  contrôle des rendements arrondis nuls, traces de
+  modèles et origines, refus de 2026, sans transaction.
+- Implémente `panel.py` avec différences appariées
+  `continuous - quantized`, erreur d'amplitude en
+  bps/USD et balanced accuracy, contrôle de l'intégrité
+  des SHA d'initialisation. Tests sur données inventées
+  `test_ablation.py`, `test_panel.py`, et ajout
+  d'un test de réplication numérique exact de S2
+  pour le bras continu.
+- La CI publique `.github/workflows/trame-s2b-representation.yml`
+  qualifie uniquement des fixtures synthétiques et les
+  anciens tests S2/S3. La passation détaillée Codex
+  est `docs/CODEX_S2B_HANDOFF_20261026.md`.
+- L'issue S3
+  https://github.com/goldaj/trame-chartist-research/issues/20
+  reste la priorité **après** une première évaluation
+  réelle de S2/S2b et **avant** les grands modèles.
+- Aucune donnée ni clé privée publiée, aucune cible 2026
+  ouverte, aucun ordre de trading ou changement Hyperliquid.
+  Le refus précédent de créer un nouveau workflow
+  privé S2 **n'a pas été contourné**.
