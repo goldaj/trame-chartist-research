@@ -9,7 +9,7 @@ from collections import deque
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from research.btc_h1_m1.release_store import DEFAULT_CACHE, H1_FILES, M1_FILES, ensure_assets
+from research.btc_h1_m1.release_store import DEFAULT_CACHE, H1_FILES, M1_FILES, D1_FILES, ensure_assets
 import csv
 import gzip
 import math
@@ -19,7 +19,7 @@ ROOT = DEFAULT_CACHE
 CUTOFF = datetime(2026, 7, 1, tzinfo=timezone.utc)
 TRAIN_END_EXCLUSIVE = datetime(2022, 1, 1, tzinfo=timezone.utc)
 DEVELOPMENT_END_EXCLUSIVE = datetime(2026, 1, 1, tzinfo=timezone.utc)
-INTERVALS = {"H1": 3600, "M1": 60}
+INTERVALS = {"D1": 86400, "H1": 3600, "M1": 60}
 COLUMNS = ("datetime_utc", "open", "high", "low", "close", "volume")
 H1_FILE = H1_FILES[0]
 FIXED_SCALE = 1000.0  # fixed log-return encoder, not fit from test/future
@@ -58,8 +58,8 @@ def files_for(interval: str, folder: Path = ROOT) -> tuple[Path, ...]:
     if Path(folder).expanduser() == DEFAULT_CACHE:
         return ensure_assets(interval, directory=folder)
     if interval not in INTERVALS:
-        raise ValueError("interval must be H1 or M1")
-    names = (H1_FILE,) if interval == "H1" else M1_FILES
+        raise ValueError("interval must be D1, H1 or M1")
+    names = D1_FILES if interval == "D1" else (H1_FILE,) if interval == "H1" else M1_FILES
     paths = tuple(Path(folder) / name for name in names)
     for path in paths:
         if not path.is_file() or path.is_symlink():
@@ -72,6 +72,10 @@ def read_bars(interval: str, folder: Path = ROOT):
     seconds = INTERVALS.get(interval)
     if seconds is None:
         raise ValueError("interval must be H1 or M1")
+    if interval == "D1":
+        from research.btc_h1_m1.daily_stream import read_daily_bitstamp_bars
+        yield from read_daily_bitstamp_bars(folder)
+        return
     prev = None
     for path in files_for(interval, folder):
         with gzip.open(path, "rt", encoding="utf-8", newline="") as f:
@@ -116,6 +120,9 @@ def code_return(previous: float, current: float) -> int:
 def iter_cases(interval: str, folder: Path = ROOT, *, context: int = 20,
                step: int = 1, train_only: bool = False):
     """Generate causal next-candle samples from consecutive non-zero-volume bars.
+
+    D1 uses genuine 2011+ Bitstamp OHLCV; 2010-2011 indicative close-only
+    stays out of this trading-like training pipeline.
 
     A gap or volume=0 breaks the usable context. No artificial interpolation.
     Context contains only observed closes strictly earlier than the label.
