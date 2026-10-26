@@ -74,6 +74,25 @@ class RepresentationAblationTests(unittest.TestCase):
         self.assertTrue(all(isinstance(x["brier_nonflat"],float)
                             for x in same_modes["joint"]))
 
+    def test_continuous_arm_reproduces_original_S2_at_same_seed_and_loss(self):
+        from research.continuous_direction.runner import run_cases as s2_run_cases
+        train,dev=self.cohorts()
+        settings=dict(interval="H1",widths=(16,),depths=(1,),
+                      modes=("regression",),seeds=(29,),steps=2)
+        old=s2_run_cases(train,dev,**settings)
+        new=run_cases(train,dev,representations=("continuous_bps",),
+                      **settings)
+        left=old["results"][0]
+        right=new["results"][0]
+        for metric in ("direction_accuracy_all","balanced_direction_accuracy",
+                       "mae_native_usd","mae_bps_anchor",
+                       "absolute_magnitude_error_bps",
+                       "gross_signal_return_mean_bps_per_sample"):
+            self.assertAlmostEqual(left[metric],right[metric],places=10,
+                                   msg=f"continuous S2 numerical drift: {metric}")
+        self.assertEqual(left["parameter_count"],right["parameter_count"])
+        self.assertEqual(old["train_origins_sha256"],new["train_origins_sha256"])
+
     def test_development_2026_never_opened(self):
         train,dev=self.cohorts()
         dev_future=[fabricated_case(2026,i) for i in range(40)]
