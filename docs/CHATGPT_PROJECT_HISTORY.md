@@ -740,3 +740,34 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   Le consentement du propriétaire ne remplace pas
   des droits tiers. Gel 2026 toujours appliqué
   dans tous les runners ; frais de simulation ignorés.
+
+
+### 26/10/2026 — Comparaison réelle 144-fit achevée (non verbatim assistant)
+- À la suite de la permission explicite d'utiliser les
+  cours BTC en public, exécute les vrais modèles S2b,
+  sans workflow ni jeton du repo privé, sur Actions
+  [#40296933559](https://github.com/goldaj/trame-chartist-research/actions/runs/40296933559),
+  **3/3 jobs réussis**.
+- 144 fits = trois horizons D1/H1/M1 × 2 codecs
+  continu/arrondi × 2 losses Huber/joint ×
+  2 largeurs 16/32 × 2 profondeurs 1/2 ×
+  3 graines, **200 updates** chacun.
+- 2026 demeure hors train/dev ; train D1 3608,
+  H1/M1 4096, dev 1024 par résolution.
+  Source Git publique épinglée, octets validés,
+  aucune donnée de compte ou clé de trading.
+- Conserve les 3 rapports sources agrégés sur
+  Actions, SHA256 et tableau dans
+  `research/data/S2B_REAL_PUBLIC_144_RESULTS_20261026.md`.
+- Constate **absence de victoire récurrente**
+  de l'entrée continue sur l'entrée arrondie en
+  balanced accuracy et erreur amplitude/prix.
+  De nombreux modèles restent monoclasse.
+  L'information signée perdue par l'encodage
+  n'est **pas** automatiquement une information
+  prédictive utile.
+- Priorité documentaire donnée à S3.1
+  (grammaires token signés/magnitude,
+  patch tokens ensuite) avec protocole
+  apparié et 2026 réservé. Aucun ordre
+  Hyperliquid, aucun PnL validé.
