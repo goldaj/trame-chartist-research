@@ -33,20 +33,30 @@ class DailyClose:
 def read_daily(*, directory: Path = DEFAULT_CACHE):
     """Yield daily BTC/USD prices; exact archives, no provenance investigation."""
     root=Path(directory).expanduser()
-    if root == DEFAULT_CACHE:
+    candidates=tuple(root / name for name in D1_FILES)
+    if any(p.is_symlink() for p in candidates):
+        raise ValueError("symlinked D1 history is not allowed")
+    # A licensed 2012+ D1 reference is now available in public TRAME.
+    # Preserve the historical full three-segment reader when both older
+    # archives are available. Never invent missing 2010/2011 OHLCV.
+    if candidates[2].is_file():
+        if candidates[0].exists() and not candidates[1].exists():
+            raise FileNotFoundError("indicative D1 data exists without 2011 Bitstamp splice")
+        selected=tuple((i,p) for i,p in enumerate(candidates) if p.is_file())
+        if any(p.exists() and not p.is_file() for p in candidates):
+            raise ValueError("D1 archive must be a regular file")
+    elif root == DEFAULT_CACHE and not any(p.exists() for p in candidates):
         paths=ensure_assets("D1",directory=root)
+        selected=tuple(enumerate(paths))
     else:
-        paths=tuple(root / name for name in D1_FILES)
-        for p in paths:
-            if not p.is_file() or p.is_symlink():
-                raise FileNotFoundError(f"missing D1 history: {p.name}")
+        raise FileNotFoundError(f"missing 2012+ D1 reference: {candidates[2]}")
     schemas=(
         ("date_utc","close_indicative_usd"),
         ("date_utc","open","high","low","close","volume"),
         ("datetime_utc","open","high","low","close","volume"),
     )
     prev_day=None
-    for ix,path in enumerate(paths):
+    for ix,path in selected:
         with path.open("r",encoding="utf-8",newline="") as f:
             reader=csv.DictReader(f,strict=True)
             if tuple(reader.fieldnames or ())!=schemas[ix]:
