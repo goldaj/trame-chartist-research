@@ -1,3 +1,32 @@
+# RAPPORT S1 VÉRIFIÉ APRÈS CRASH / PASSATION FINALE DE QUALIFICATION
+
+Lire aussi `research/scaling_study/S1_SIGN_COLLAPSE_REAUDIT_20261026.md`
+avant de déclarer la moindre amélioration directionnelle. L'analyse
+des 81 runs par horizon à 200 updates identifie respectivement
+**72/81 D1**, **45/81 H1**, **34/81 M1** réseaux monoclasse
+(≥99 % de hausses ou ≥99 % de baisses prédites).
+Sur H1, la config Transformer 148k/4 couches donne balanced
+accuracy 52,10 % (moyenne 3 graines) mais MAE 34,34 bps,
+contre persistance 33,84 bps ; pas un gain conjoint
+direction ET montant, ni preuve confirmatoire.
+
+Pour S2 :
+- protocole S2.1b/S2.1c et tête classification
+  vs rendement continu inchangés,
+- calibration `diagnostics.py` vs train-only prior Jeffreys,
+- témoin d'amplitude `mean_log_return_train_only`,
+- empreinte SHA de la sélection temporelle (aucun prix/label),
+- vrai SHA du code `model_source_commit`,
+- vue appariée `panel.py` et tests `test_panel.py`,
+- refus des prédictions extrêmes tronquées implicitement.
+
+**Blocage restant** : S2.6 (72 entraînements sur vrais
+cours) non exécuté, ancien refus de création de workflow privé
+par les contrôles de sécurité du connecteur. Pas de
+contournement. Le résultat scientifique S2 reste **inconnu**.
+
+---
+
 # NOUVELLE QUALIFICATION S2, REPRISE APRÈS CRASH (26/10/2026)
 
 - Tests CI / revue du rapport apparié : lire
