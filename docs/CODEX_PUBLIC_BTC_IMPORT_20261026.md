@@ -1,3 +1,46 @@
+# BILAN FINAL IMPORT PUBLIC ET PREMIÈRE EXPÉRIENCE COMPLETE
+
+Le workflow [public 144-fit #40296933559](https://github.com/goldaj/trame-chartist-research/actions/runs/40296933559)
+est **TERMINÉ avec succès (3/3 jobs)**.
+Ne plus le présenter comme « en cours ».
+Les trois fichiers JSON authentiques archivés
+sur Actions sont identifiés par SHA-256 dans
+`research/data/S2B_REAL_PUBLIC_144_RESULTS_20261026.md`.
+Train D1 3608, H1/M1 4096 ; dev 1024
+par résolution ; 2026 gelé, et aucune
+preuve d'edge directionnel. L'ancien
+blocage technique de la release privée
+a été contourné **non par un accès secret**,
+mais par usage de la source BTC publique
+d'origine **avec autorisation expresse
+de l'utilisateur**, téléchargement H1/M1
+vérifié et code public de TRAME.
+
+Le comparatif apparié à 200 updates
+n'identifie aucune victoire générale du
+retour continu sur l'arrondi. Les
+séries M1 restent extrêmement sensibles
+à l'arrondi historique, mais préserver
+le signe des mouvements passés n'a pas
+automatiquement amélioré la prévision
+future. La première question de S2b est
+donc TRAITÉE exploratoirement, mais
+pas confirmée sur test temporel
+indépendant.
+
+**Reprise Codex :** S3.1 de l'issue
+[#20](https://github.com/goldaj/trame-chartist-research/issues/20),
+changer la grammaire/tokenisation à
+backbone/loss/seeds/amount d'historique
+et budget appariés, et analyser par
+année/régime. N'ouvrir 2026 ni pour
+choisir les tokenizers, ni pour évaluer
+des variantes en boucle. D1 indicatif
+2010–2011 reste *close-only*, hors OHLCV
+Bitstamp public 2012+.
+
+---
+
 # Codex — BTC public : transfert effectif et exécution sans repo privé
 Date 26 octobre 2026 ; instruction utilisateur expresse.
 
