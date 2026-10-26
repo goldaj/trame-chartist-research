@@ -60,6 +60,32 @@ class TestConvergence(unittest.TestCase):
         self.assertNotEqual(a["results"][0]["mae_native_usd"],
                             b["results"][0]["mae_native_usd"])
 
+    def test_hard_pre2022_reader_stop_before_external_price_rows(self):
+        from pathlib import Path
+        from unittest.mock import patch
+        from research.btc_h1_m1.stream import read_bars
+        from research.token_grammar.convergence import collect_internal,MONITOR_END
+        from research.btc_h1_m1 import stream
+
+        bars=list(read_bars("D1",Path("research/data/reference"),
+                            stop_before=MONITOR_END))
+        self.assertGreater(len(bars),3000)
+        self.assertLess(max(x.started_at for x in bars),MONITOR_END)
+
+        def only_early(interval,directory,*,step,train_only,stop_labels_before):
+            self.assertTrue(train_only)
+            self.assertEqual(stop_labels_before,MONITOR_END)
+            for c in cases(2018)+cases(2020):
+                yield "train",c
+
+        with patch("research.token_grammar.convergence.iter_cases",
+                   side_effect=only_early):
+            train,monitor,provenance=collect_internal(
+                "M1",Path("/fake"),max_cases=100,max_monitor=40)
+        self.assertEqual(len(train),40)
+        self.assertEqual(len(monitor),40)
+        self.assertTrue(provenance["train_reservoir_is_independent_of_monitor_counts"])
+
     def test_real_runs_reject_nonpreregistered_checkpoints(self):
         with self.assertRaises(ValueError):
             run_cases(cases(2018),cases(2020),interval="M1",
