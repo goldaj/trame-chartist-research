@@ -1,3 +1,57 @@
+# DERNIER ÉTAT TRAME : S3.1F TERMINÉE, S3.1G PROCHAINE (26/10/2026)
+
+**PR #29** `chatgpt/trame-s3-postprocess-ablation-20261026`
+DRAFT fille de #28, pas de merge automatique.
+[Actions #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917)
+**4/4 jobs SUCCESS**, 9 modèles BTC D1/H1/M1
+réels à 2000 updates, 27 checkpoints,
+**81 évaluations** de 3 règles de prix
+sur les MÊMES poids. Code exécuté SHA
+`58bc0f1e9425975a037ad2bf135943890a5b474b`.
+Bilan scientifique complet et SHA des
+rapports sources :
+`research/token_grammar/S3_1F_REAL_81_RESULTS_20261026.md`.
+Passation :
+`docs/CODEX_S3_1F_HANDOFF_20261026.md`.
+Archive des cinq JSON/MD + manifest
+dans `trame_s3_1f_9_models_81_evaluations.zip`
+disponible dans conversation.
+
+**SOFT tanh** réduit MAE du prix
+contre HARD (D1 282,704→280,707 ;
+H1 54,611→54,511 ; M1 8,368→8,337 bps)
+mais **aggrave l'erreur d'amplitude**
+de 9,86–12,24%. La BA SOFT = HARD
+PAR CONSTRUCTION, même signe logit.
+Le retour mu direct n'améliore pas
+le sens ni le prix. SOFT bat la
+persistance de ~0,04–0,12% de MAE
+mais sans test indépendant ni
+robustesse temporelle. **NO-GO EDGE**.
+
+**Nouvelle question S3.1G** :
+l'utilisateur privilégie simultanément
+justesse direction ET précision du
+montant, et suppose qu'un trader
+peut décider de ne pas agir si
+l'amplitude prédite est trop faible.
+Préenregistrer une étude **de
+sélection d'observations par
+magnitude prédite**, avec seuils
+calculés sur TRAIN uniquement,
+nombre/couverture, BA du sens,
+MAE prix USD/bps, erreur amplitude,
+Brier/monoclasse et persistance
+sur mêmes cas. Ne jamais choisir
+un seuil en fonction des résultats
+MONITOR 2020–21. **2022–25 vieux
+DEV déjà surexploré ; 2026 holdout
+réservé**. Aucune preuve de profit,
+pas d'ordres Hyperliquid, frais
+ignorés conformément aux instructions.
+
+---
+
 # TRAME S3.1F EN COURS — PR #29, 26 OCTOBRE 2026
 
 **Source de vérité** : [PR #29](https://github.com/goldaj/trame-chartist-research/pull/29)
