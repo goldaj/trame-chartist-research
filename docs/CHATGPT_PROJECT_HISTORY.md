@@ -1204,3 +1204,56 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   Hyperliquid ni clé/secret, frais
   volontairement ignorés.
 
+
+
+## 26/10/2026 — lancement S3.1E, hypothèse de cohérence deux têtes (assistant, NON verbatim)
+Suite à S3.1D 45 trajectoires/135 observations
+D1/H1/M1 réellement achevées (Actions #40313075915),
+une différence importante apparaît entre
+**loss retour signé de l'IA** et la règle
+d'inférence `hard_sign(logit)*abs(mu)`.
+Augmenter le poids de l'erreur amplitude
+favorise cette métrique mais détériore
+souvent prix final/BA, y compris contre
+la persistance simple. Les cinq vrais
+JSON/MD S3.1D et leur SHA sont consignés
+dans `research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
+
+- Crée branche
+  `chatgpt/trame-s3-reconciliation-loss-20261026`
+  et [PR #28 DRAFT](https://github.com/goldaj/trame-chartist-research/pull/28)
+  fille de la PR #27, sans merge.
+- **AVANT essais BTC réels** préenregistre
+  `research/token_grammar/S3_1E_RECONCILIATION_PROTOCOL_20261026.md`
+  : 3 pertes identiques à la référence
+  hormis ajout 0,25 /1.00 SmoothL1
+  sur surrogate `tanh(logit/2)*sqrt(mu²+1e-12)`.
+  Le surrogate différentiable SOFT n'est
+  PAS le prix HARD réellement prédit ;
+  tous les résultats économiques/BA
+  doivent scorer la règle HARD existante.
+- Crée `reconciliation_loss.py`,
+  `reconciliation_panel.py`,
+  `test_reconciliation_loss.py`,
+  `test_reconciliation_panel.py`.
+  Matrice fixée : trois horizons ×trois
+  losses ×trois graines = 27 trajectoires
+  réelles, 2000 steps par modèle, checkpoints
+  200/800/2000 = 81 observations NON
+  indépendantes.
+- Tests synthétiques
+  [Actions #40318703540](https://github.com/goldaj/trame-chartist-research/actions/runs/40318703540)
+  réussis. Pilotes ingénierie à 40 updates
+  [#40318703968](https://github.com/goldaj/trame-chartist-research/actions/runs/40318703968)
+  **3/3 jobs réussis**.
+- Lance vraie étude
+  [Actions #40318969005](https://github.com/goldaj/trame-chartist-research/actions/runs/40318969005)
+  et développe passation Codex
+  `docs/CODEX_S3_1E_HANDOFF_20261026.md`,
+  `AGENTS.md`. **Vérifier le run complet
+  avant toute revendication** de résultat.
+- Même TRAIN avant 2020 et MONITOR 2020–21,
+  externe DEV 2022–25 ET 2026 restent
+  non utilisés pour sélectionner.
+  Pas de frais sur demande, ni PnL cumulatif,
+  ni compte/trade Hyperliquid.
