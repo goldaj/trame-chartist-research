@@ -99,8 +99,8 @@ def run_cases(train, development, *, interval, targets=TARGET_PARAMETERS,
             or any(type(x) is not int for x in seeds) or len(set(seeds)) != len(seeds)):
         raise ValueError("invalid steps, batch or seed list")
     _validate_chronology(train, development)
-    if len(train) < 32 or len(development) < 16:
-        raise ValueError("minimum train/dev cases: 32/16")
+    if len(train) < 32 or len(development) < 32:
+        raise ValueError("minimum train/dev cases: 32/32")
     # No GPU claims: float64 CPU is the explicit initial backend.
     torch.set_num_threads(1)
     plan = capacity_grid(targets=tuple(targets), depths=tuple(depths),
