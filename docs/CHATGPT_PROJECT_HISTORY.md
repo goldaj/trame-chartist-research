@@ -1449,3 +1449,15 @@ dans `research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
   dev externe 2022–25 et holdout
   2026 non consultés, frais exclus,
   aucune transaction Hyperliquid.
+
+
+## 2026-10-26 — Clôture demandée après crashes successifs (message utilisateur VERBATIM)
+> t'as de nouveau crash. Fini proprement ce que tu faisais et liste les prochaines étapes. Documente aussi tout dans le guthub
+
+**Assistant (résumé factuel, NON verbatim)** :
+- Vérifie plutôt que de recommencer les expériences : la **PR #29 S3.1F** et [Actions #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917) sont déjà terminées, 9 véritables modèles/27 checkpoints/81 règles de prix, 4/4 jobs SUCCESS, rapport `S3_1F_REAL_81_RESULTS_20261026.md` et handoff Codex existants.
+- Découvre que **S3.1G, PR #30 DRAFT**, était elle aussi déjà préenregistrée et exécutée. [Run #40329836255](https://github.com/goldaj/trame-chartist-research/actions/runs/40329836255) terminé 4/4 jobs SUCCESS : 9 modèles BTC (D1/H1/M1, 3 graines), seuils `all/q50/q75/q90` estimés sur prédictions HARD du TRAIN seulement, 108 évaluations dépendantes HARD/DIRECT/SOFT sur MONITOR 2020–2021. SHA du code réellement exécuté `d2db41a6cce09067e168ab4082c4c713b2d1d153`. 2022–25 et 2026 non ouverts.
+- Récupère les tableaux complets depuis les logs du job agrégateur, leurs SHA des fichiers calculés dans les jobs et les liens GitHub Actions. **N'invente pas de nouveaux entraînements.**
+- Résultat : HARD q90 BA 50,00% D1, 50,39% H1, 52,50% M1, plutôt inférieur aux BA tous-signaux 52,24/51,93/53,02. Couverture q90 monitor 7,3/11,2/4,3% et N moyen 53/115/44. Gains de MAE prix SOFT parfois marginaux vs persistance sur mêmes cas mais erreur amplitude dégradée ; aucune preuve de meilleure direction ni PnL.
+- Publie `research/token_grammar/S3_1G_REAL_108_RESULTS_20261026.md`, document de clôture numérique/risques/provenance, met à jour `AGENTS.md`, `docs/CODEX_S3_1G_HANDOFF_20261026.md`, issue #20 et description PR #30.
+- **Pause volontaire désormais** : pas de nouvelle étude automatique. Prochaines étapes priorisées : S3.1H calibration & robustesse conditionnelle ; contrôles du sampling et des régimes ; gel confirmatoire ; S3.2 représentations/grammaires ; S4 scaling sizes × depths si hypothèse convaincante ; enfin livrable seulement après validation hors-échantillon. Préserver toutes les PR en brouillon, aucune fusion, aucun ordre Hyperliquid.
