@@ -1,3 +1,60 @@
+# S3.1B FERMÉE / 432 VRAIS FITS — 26 OCTOBRE 2026
+
+**Résultat officiel :** [GitHub Actions #40306642813](https://github.com/goldaj/trame-chartist-research/actions/runs/40306642813)
+**4/4 jobs réussis**, 432 fits réels (144 D1,
+144 H1, 144 M1 ; 3 graines, 200 updates),
+agrégateur 432/144 groupes appariés validé.
+L'évaluation utilise seulement dev 2022–25
+et **2026 n'a jamais été ouvert** pour le
+choix des modèles ou le fitting des quantiles.
+
+**Bilan et SHA des artefacts exacts :**
+`research/token_grammar/S3_1B_REAL_432_RESULTS_20261026.md`.
+D1/H1/M1 144-fit JSON et panel JSON/MD
+sont les cinq fichiers du run final, rétention
+GitHub Actions de 30 jours. Le rapport
+peut être réexécuté de façon déterministe
+par `learned_embeddings.py` et
+`learned_embeddings_panel.py`.
+
+**Conclusion scientifique NO-GO** :
+aucun avantage robuste des `embedding_ordered`
+sur les centres numériques décodés ; les
+modèles à initialisation random s'effondrent
+souvent sur une seule direction (H1 G2 Joint :
+**11/12 monoclasse random**, 0/12 ordered
+ET decoded). Score H1 G2 Joint BA
+**51,40% decoded**, **51,33% ordered**,
+**50,00% random**. Erreur prix H1 G2 Joint
+**34,154/34,186/34,600 bps** ;
+erreur amplitude H1 G2 Joint
+**30,136/30,111/28,744 bps**.
+Un meilleur score d'amplitude
+de random n'est PAS une prédiction
+directionnelle utile.
+
+**Différence irréductible** : modèle learned
+a **11 paramètres supplémentaires** vs
+numeric decoded. Comparaison random-ordered
+est exactement à capacités identiques.
+L'embedding est **scalaire**. On ne peut
+pas extrapoler ces résultats à des embeddings
+de dimension 16/32 ou à un LLM.
+
+**NOUVELLE PRIORITÉ APPROUVÉE PAR LE
+PROTOCOLE SCIENTIFIQUE** : S3.1C, audit
+des effets d'optimisation : comparer
+200, 800 et 2000 updates, diagnostiquer
+train/dev, gradients, fraction UP, BCE
+et Brier avec seeds et échantillons
+constants, avant gros scaling S4.
+Créer protocole séparé et branche/PR
+dédiées ; 2026 doit rester inaccessible
+au tuning. Pas de PnL cumulé ou ordre
+live, frais ignorés selon utilisateur.
+
+---
+
 # Codex — S3.1B embeddings de tokens BTC (26 octobre 2026)
 
 ## Origine et état vérifié
