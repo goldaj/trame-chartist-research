@@ -1,3 +1,29 @@
+# Mise à jour technique S2.1b (26/10/2026)
+
+Le module `diagnostics.py` ajoute Brier/CE et skill score
+**par rapport à la proportion de hausses apprise sur train**
+(données non-plates seulement), avec fiabilité par bandes.
+`panel.py` génère un comparatif direction/amplitude apparié
+par graine et horizon à partir de rapports agrégés **sans**
+relire les prix bruts.
+
+~~~bash
+python -m unittest research.continuous_direction.test_diagnostics research.continuous_direction.test_panel -v
+
+# Une fois des JSON S2 réels produits en environnement privé autorisé :
+python -m research.continuous_direction.panel \
+  --inputs /tmp/s2_d1_real.json /tmp/s2_h1_real.json /tmp/s2_m1_real.json \
+  --json /tmp/s2_summary.json --markdown /tmp/s2_summary.md
+~~~
+
+**Statut** : seuls les tests sur données fabriquées ont été
+qualifiés. Le workflow de campagne privée S2 a été refusé par
+les contrôles de sécurité du connecteur ; ce guide n'atteste pas
+que les 72 entraînements réels ont été exécutés. Le rapport S2
+intègre les témoins toujours-haussier et toujours-baissier.
+
+---
+
 # TRAME S2 — continuous-return causal direction laboratory
 Read [preregistered protocol](PROTOCOL_20261026.md) before using outputs.
 
