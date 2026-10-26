@@ -1,0 +1,72 @@
+name: TRAME S3.1D REAL BTC loss-ablation engineering smoke
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-objective-ablation-20261026
+    paths:
+      - .github/workflows/trame-s3-1d-real-canary.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  five-loss-smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        interval: [D1,H1,M1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    env:
+      INTERVAL: ${{ matrix.interval }}
+      TRAME_BTC_CACHE_DIR: /tmp/trame-btc-public
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pinned scientific CPU dependencies
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Install and verify public Bitstamp source identity
+        run: |
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR"
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR" --check-only
+      - name: Engineering ONLY five objective arms at 10 20 40 updates
+        run: |
+          mkdir -p reports
+          if [ "$INTERVAL" = D1 ]; then DATA_DIR=research/data/reference; else DATA_DIR="$TRAME_BTC_CACHE_DIR"; fi
+          python -m research.token_grammar.loss_ablation \
+            --interval "$INTERVAL" --directory "$DATA_DIR" \
+            --engineering-canary --checkpoints 10 20 40 \
+            --seeds 20261026 \
+            --output "reports/${INTERVAL}_S3_1D_5loss_40step_smoke.json"
+      - name: Verify five identical models, pre2022 split, 15 short checkpoints
+        run: |
+          python - <<'PY'
+          import json,os,hashlib,math
+          from pathlib import Path
+          iv=os.environ["INTERVAL"]
+          p=Path(f"reports/{iv}_S3_1D_5loss_40step_smoke.json")
+          d=json.loads(p.read_text())
+          assert d["data_origin"]=="BTC_PUBLIC_REAL" and d["interval"]==iv
+          assert d["engineering_canary_not_scientific_selection"] is True
+          assert d["external_2022_2025_used"] is False and d["holdout_2026_used"] is False
+          assert d["token_quantile_input_scale_prior_train_only"] is True
+          assert d["checkpoint_steps"]==[10,20,40]
+          assert d["train_count"]>=200 and d["monitor_count"]>=200
+          assert len(d["results"])==15
+          assert len({x["backbone_initial_sha256"] for x in d["results"]})==1
+          assert len({x["parameter_count"] for x in d["results"]})==1
+          assert all(math.isfinite(x["mae_bps_anchor"]) for x in d["results"])
+          print("REAL BTC OBJECTIVE PIPELINE SMOKE only",iv,
+                "sha256",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1D-${{ matrix.interval }}-engineering-smoke
+          path: reports/*.json
+          if-no-files-found: error
+          retention-days: 21
