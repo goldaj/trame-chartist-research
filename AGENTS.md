@@ -1,3 +1,47 @@
+# TRAME S3.1D TERMINÉE / S3.1E PROCHAINE (26/10/2026)
+
+Dernier état vérifié : **S3.1D 45 trajectoires
+BTC RÉELLES / 135 checkpoints et 4/4 jobs
+réussis**, [Actions #40313075915](https://github.com/goldaj/trame-chartist-research/actions/runs/40313075915),
+Git SHA réel `5726cb99c0bcfef59509bf2b4884a7e1bf7036cc`.
+**PR #27** draft fille de #26, aucun merge auto.
+
+**Bilan scientifique complet, sources JSON et SHA256** :
+`research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
+**Passation** :
+`docs/CODEX_S3_1D_HANDOFF_20261026.md`.
+**Historique échanges** :
+`docs/CHATGPT_PROJECT_HISTORY.md`.
+D1/H1/M1 ×5 losses ×3 seeds, modèle identique
+width16/depth1 2418 params, G2 signée, 2000 updates,
+checkpoints 200/800/2000. TRAIN labels <2020,
+MONITOR 2020–21, **ne pas toucher le dev
+externe 2022–25 ni le holdout 2026**.
+
+Résultats à 2000 updates : référence BA
+D1 52,24 / H1 51,93 / M1 53,02 % ;
+`magnitude_100` réduit l'erreur
+d'amplitude de 16–21% mais détériore le
+MAE prix final 6–10% et le sens.
+Aucun gain robuste conjoint, Brier
+skill faible, même le MAE référence
+moins bon que persistance simple à
+2000 sur D1/H1/M1. **NO-GO trading**.
+
+**Prochaine hypothèse : S3.1E cohérence des
+deux sorties** : étudier le désaccord
+direction de `mu` et `sigmoid(logit)`,
+puis tester loss alignée sur le **prix
+réellement reconstruit** sans modifier
+architecture, G2, splits ni budgets.
+Protocole préenregistré, tests d'abord
+artificiels, pas d'accès 2022–25/2026.
+Frais exclus par consigne, aucune
+transaction, secret, wallet ou
+modification du bot Hyperliquid.
+
+---
+
 # DERNIÈRE BRANCHE TRAME : S3.1D LOSS DIRECTION vs AMPLITUDE (26/10/2026)
 
 **PR #27 DRAFT** `chatgpt/trame-s3-objective-ablation-20261026`,
