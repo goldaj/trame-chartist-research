@@ -1,3 +1,35 @@
+# ÉTAT LE PLUS RÉCENT 26 OCTOBRE 2026 — D1 RÉTABLI AVANT S1
+
+**Ce bloc supersède l'ancienne clôture d'A7 pour le périmètre
+spécifiquement réautorisé par l'utilisateur.** Nouvelle priorité :
+réintégrer la résolution journalière D1 depuis la release
+historique, refaire les témoins, neurones, régimes et diagnostics
+directionnels pour D1/H1/M1, puis seulement reprendre le scaling.
+
+- PR #18 basée sur #17 basée sur #14. Aucun merge implicite.
+- Trois formats D1 : source indicative 2010–2011 conservée en
+  descriptif, Bitstamp OHLCV 2011H2 puis 2012–2026. Pas de faux OHLCV.
+- D1 A7 + direction réel réussi : privée #40280347574.
+- H1/M1 direction et régimes réévalués : privée #40280464439,
+  deux jobs réussis.
+- Première matrice scaling 5 tailles×3 couches×3 familles×3
+  horizons (135 essais 1 seed) : privée #40281223578, réussie.
+- Étude de convergence 3 tailles×3 profondeurs×3 familles×3 graines
+  ×3 horizons (243 fits, 200 updates) : privée #40281657954,
+  **vérifier son statut courant** ; ne jamais supposer une réussite.
+- **Aucune preuve d'avantage directionnel**. Les 1-couche GRU D1
+  prédisent tous "hausse", comme les modèles H1, plus proches
+  des naïfs que d'un discriminateur.
+- Documents de référence :
+  `docs/CODEX_D1_HANDOFF_20261026.md`,
+  `research/btc_h1_m1/D1_H1_M1_REAL_RESULTS_20261026.md` et
+  `research/scaling_study/S1_REAL_GRID_CANARY_20261026.md`.
+- Codes/perfs réels sont exploratoires, et les prix demeurent
+  dans `goldaj/btc-historical-data` PRIVÉ. 2026 gelé.
+  Frais ignorés par demande explicite de l'utilisateur.
+
+---
+
 # TRAME — tableau de bord de la reprise scientifique
 
 ## Point de clôture de session — 26 octobre 2026 (instruction la plus récente)
