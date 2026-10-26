@@ -103,6 +103,17 @@ class S2Tests(unittest.TestCase):
             else:
                 self.assertTrue(np.all(predicted>anchors))
 
+    def test_extreme_model_output_is_rejected_not_silently_clipped(self):
+        # Deliberately malfunctioning regression head: no invented capped price.
+        model=ContinuousDirectionModel(width=16,mode="regression")
+        with torch.no_grad():
+            model.return_head.weight.zero_()
+            model.return_head.bias.fill_(20000.0)
+        with self.assertRaisesRegex(ArithmeticError,"do not clip"):
+            forecast_prices(
+                model,torch.zeros((2,20),dtype=torch.float64),
+                np.asarray([100.0,200.0]),scale_bps=10.0)
+
     def test_two_modes_replay_same_fixture_without_2026(self):
         train=[fabricated_case(2018,i) for i in range(40)]
         dev=[fabricated_case(2023,i) for i in range(40)]
