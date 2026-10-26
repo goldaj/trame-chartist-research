@@ -81,7 +81,7 @@ def _fixed_loss(model,x,y,arm):
 def run_cases(train,monitor,*,interval,
               arms=ARMS,seeds=(20261025,20261026,20261027),
               checkpoints=CHECKPOINTS,batch_size=16,
-              data_origin="ARTIFICIAL_FIXTURE"):
+              data_origin="ARTIFICIAL_FIXTURE",engineering_canary=False):
     if interval not in ("D1","H1","M1"):
         raise ValueError("D1/H1/M1 only")
     if data_origin not in ("ARTIFICIAL_FIXTURE","BTC_PUBLIC_REAL"):
@@ -95,8 +95,9 @@ def run_cases(train,monitor,*,interval,
             or not 1<=batch_size<=256 or type(batch_size)!=int):
         raise ValueError("invalid objective ablation matrix")
     if (data_origin=="BTC_PUBLIC_REAL"
-            and tuple(checkpoints)!=CHECKPOINTS):
-        raise ValueError("real BTC needs 200/800/2000 preregistered checkpoints")
+            and tuple(checkpoints)!=CHECKPOINTS
+            and not (engineering_canary and tuple(checkpoints)==(10,20,40))):
+        raise ValueError("real BTC study requires 200/800/2000 (engineering smoke 10/20/40 only)")
     a,b=split_internal_pre2022(train+monitor)
     if len(a)!=len(train) or len(b)!=len(monitor):
         raise ValueError("internal train and monitor must be in correct partitions")
@@ -182,6 +183,7 @@ def run_cases(train,monitor,*,interval,
                 })
     return {
         "experiment":"TRAME_S3_1D_DIRECTION_MAGNITUDE_LOSS_ABLATION_V1",
+        "engineering_canary_not_scientific_selection":bool(engineering_canary),
         "created_at_utc":datetime.now(timezone.utc).isoformat(),
         "data_origin":data_origin,"interval":interval,
         "train_label_cutoff_exclusive":"2020-01-01",
@@ -220,11 +222,12 @@ def run_cases(train,monitor,*,interval,
 def run_history(*,interval,directory=ROOT,
                 seeds=(20261025,20261026,20261027),
                 checkpoints=CHECKPOINTS,
-                data_origin="BTC_PUBLIC_REAL"):
+                data_origin="BTC_PUBLIC_REAL",engineering_canary=False):
     train,monitor,inventory=collect_internal(interval,directory)
     result=run_cases(train,monitor,interval=interval,
                      seeds=seeds,checkpoints=checkpoints,
-                     data_origin=data_origin)
+                     data_origin=data_origin,
+                     engineering_canary=engineering_canary)
     result["sampling_information"]=inventory
     return result
 
@@ -237,12 +240,16 @@ def main(argv=None):
                    default=[20261025,20261026,20261027])
     p.add_argument("--checkpoints",nargs="+",type=int,
                    default=list(CHECKPOINTS))
+    p.add_argument("--engineering-canary",action="store_true",
+                   help="10/20/40 step smoke; not a scientific model comparison")
+    p.add_argument("--checkpoints",nargs="+",type=int,default=list(CHECKPOINTS))
     p.add_argument("--output",type=Path,required=True)
     a=p.parse_args(argv)
     if a.output.exists():p.error("refuse overwriting research evidence")
     report=run_history(interval=a.interval,directory=a.directory,
                        seeds=tuple(a.seeds),
-                       checkpoints=tuple(a.checkpoints))
+                       checkpoints=tuple(a.checkpoints),
+                       engineering_canary=a.engineering_canary)
     a.output.write_text(json.dumps(report,indent=2,
                         allow_nan=False)+"\n",encoding="utf-8")
     print("S3.1D: internal pre2022 only; no trading or holdout validation")
