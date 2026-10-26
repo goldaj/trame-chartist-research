@@ -29,7 +29,7 @@ class RepresentationAblationTests(unittest.TestCase):
         self.assertEqual(stat["past_nonzero_observations"],
                          stat["past_sign_lost_or_changed_count"])
         self.assertGreater(stat["past_reconstruction_mae_bps"],0)
-        self.assertFalse(stat["diagnostics_only_not_prediction_skill"])
+        self.assertTrue(stat["diagnostics_only_not_prediction_skill"])
         with self.assertRaises(ValueError):
             features(train,"future_target")
         changed=[replace(x,target_usd=x.target_usd*1.15,
