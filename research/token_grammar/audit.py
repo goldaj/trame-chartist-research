@@ -33,7 +33,7 @@ def run_cases(train, development, *, interval, data_origin="ARTIFICIAL_FIXTURE",
               quantile_bins=5):
     if interval not in ("D1","H1","M1"):
         raise ValueError("expected D1/H1/M1 resolution")
-    if data_origin not in ("ARTIFICIAL_FIXTURE","BTC_PRIVATE_REAL"):
+    if data_origin not in ("ARTIFICIAL_FIXTURE","BTC_PRIVATE_REAL","BTC_PUBLIC_REAL"):
         raise ValueError("unrecognised provenance")
     if type(quantile_bins) is not int or not 2<=quantile_bins<=16:
         raise ValueError("2..16 quantile magnitude buckets required")
@@ -81,7 +81,7 @@ def run_cases(train, development, *, interval, data_origin="ARTIFICIAL_FIXTURE",
 
 
 def run_history(*,interval,directory=ROOT,max_train=4096,max_dev=1024,
-                quantile_bins=5):
+                quantile_bins=5,data_origin="BTC_PRIVATE_REAL"):
     if interval not in ("D1","H1","M1"):
         raise ValueError("expected D1/H1/M1")
     stride=60 if interval=="M1" else 1
@@ -90,7 +90,7 @@ def run_history(*,interval,directory=ROOT,max_train=4096,max_dev=1024,
         stride=stride)
     result=run_cases(
         pools["train"],pools["development"],interval=interval,
-        data_origin="BTC_PRIVATE_REAL",quantile_bins=quantile_bins)
+        data_origin=data_origin,quantile_bins=quantile_bins)
     result["scanned_candidate_origins"]=scanned
     result["sampling_stride"]=stride
     return result
@@ -101,13 +101,15 @@ def main(argv=None):
     p.add_argument("--interval",choices=("D1","H1","M1"),required=True)
     p.add_argument("--directory",type=Path,default=ROOT)
     p.add_argument("--quantile-bins",type=int,default=5)
+    p.add_argument("--data-origin",choices=("BTC_PRIVATE_REAL","BTC_PUBLIC_REAL"),
+                   default="BTC_PRIVATE_REAL")
     p.add_argument("--output",type=Path,required=True)
     args=p.parse_args(argv)
     if args.output.exists():
         p.error("refusing to overwrite research result")
     result=run_history(
         interval=args.interval,directory=args.directory,
-        quantile_bins=args.quantile_bins)
+        quantile_bins=args.quantile_bins,data_origin=args.data_origin)
     args.output.write_text(json.dumps(
         result,indent=2,ensure_ascii=False,allow_nan=False)+"\n",
         encoding="utf-8")
