@@ -1,3 +1,68 @@
+# AUTORISATION PUBLIC BTC / PR #23 — 26 OCTOBRE 2026
+
+**Nouvelle décision utilisateur, PRIORITAIRE sur les anciennes notes
+« pas de données BTC brutes dans TRAME » :** publier/intégrer les
+**seules données historiques de prix Bitcoin** dans le dépôt TRAME
+est autorisé. Citation utilisateur :
+« si si tu peux les considérer publics, si tu prends les données
+historiques btc c'est rien de grave ». Cette permission
+**n'inclut aucun secret, portefeuille, clé, identifiant**
+ou autre historique sensible ; respecter les
+licences des tiers (voir `research/data/PUBLIC_DATA_README_20261026.md`).
+
+**Preuve réelle :** D1 Bitstamp 2012–2026H1
+(372096 octets, SHA Git identique) effectivement
+committé sous `research/data/reference/`.
+H1/M1 original gzip téléchargeable SANS jeton privé
+depuis le GitHub amont public, SHA Git blob
+vérifié par `python -m research.data.public_data`,
+dans cache local (110+ Mo, non commit pour
+éviter le gonflement du dépôt Git).
+
+Les vrais workflows publics D1/H1/M1 ont
+réussi [D1 #40295846917](https://github.com/goldaj/trame-chartist-research/actions/runs/40295846917)
+et [H1/M1 #40296158821](https://github.com/goldaj/trame-chartist-research/actions/runs/40296158821).
+Il existe **12 bras réels** (4 par horizon,
+40 steps, 1 seed) de S2b et trois audits de
+grammaires réels, aucun test de prédiction
+indépendant, 2026 gelé. Voir
+`research/data/REAL_PUBLIC_BTC_RESULTS_20261026.md`.
+Un nouveau protocole 144 fits, 3 seeds, 200
+updates est lancé (run #40296933559), vérifier
+sa conclusion avant de déclarer terminé.
+
+**Branche/PR :** `chatgpt/trame-public-btc-data-import-20261026`,
+PR #23 basée sur PR #22 S3 → #21 S2b →
+#19 S2 → #18 D1 → #17 S1. Aucune fusion
+automatique. Anciennes limitations d'une
+action GitHub privée ne sont **pas** une
+interdiction scientifique de lire des
+cours publics ; ne pas déduire l'absence
+de résultats des restrictions de transport.
+
+Limites : D1 2010–2011 indicatif et Bitstamp
+2011H2 restent non committés pour licence
+de redistribution insuffisamment établie ;
+ils sont disponibles dans l'ancien cache
+privé mais ne doivent pas être fabricés en
+OHLCV. Comparer D1 2012+ vs ancien
+D1 2011H2+ avec prudence (cohortes distinctes).
+Aucun ordre Hyperliquid, frais de simulation
+toujours ignorés sur décision utilisateur,
+aucun score de portefeuille composé
+présenté comme validé, année 2026
+strictement hors sélection des modèles.
+
+Codex doit commencer par
+`docs/CODEX_PUBLIC_BTC_IMPORT_20261026.md`,
+puis lire `research/data/REAL_PUBLIC_BTC_RESULTS_20261026.md`,
+`research/representation_ablation/PROTOCOL_20261026.md`
+et [issue #20](https://github.com/goldaj/trame-chartist-research/issues/20)
+pour la future étude des grammaires, avant nouveau
+gros scaling.
+
+---
+
 # ÉTAPE S3.0c : GRAMMAIRES, DIAGNOSTIC UNIQUEMENT (26/10/2026)
 
 Le propriétaire a demandé de poursuivre TRAME et de préparer
