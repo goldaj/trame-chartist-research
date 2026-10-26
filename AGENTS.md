@@ -1,3 +1,42 @@
+# S3.1B RÉSULTATS OFFICIELS — 26/10/2026
+
+PR **#25** `chatgpt/trame-s3-learned-embeddings-20261026`,
+sur PR #24 S3.1A. **432 vrais fits
+D1/H1/M1 TERMINÉS** [Actions #40306642813](https://github.com/goldaj/trame-chartist-research/actions/runs/40306642813),
+**4/4 jobs verts**, modèle Git SHA
+`5ac86805aceec952d92424fb1cf679355773de99`.
+**Rapport complet direction + précision montants
+USD/bps + amplitude + biais monoclasse**
+dans `research/token_grammar/S3_1B_REAL_432_RESULTS_20261026.md`
+avec hashes des 5 fichiers JSON/MD.
+
+Protocole préenregistré `S3_1B_PROTOCOL_20261026.md`.
+Les embeddings **scalar trainables** 11 catégories
+G1/G2 ajoutent +11 paramètres vs decoded :
+capacité NON égalisée sur learned-v-numeric ;
+ordered-v-random strictement mêmes paramètres.
+**Conclusion NO-GO** sur supériorité nette.
+Random init donne souvent monoclasse H1 G2
+joint 11/12 vs ordered/decoded 0/12,
+la BA reste ~50%, erreurs prix/amplitude
+donnent compromis, pas de gain de trading.
+
+**Prochaine étape S3.1C** (issue #20) :
+préenregistrer tests de convergence
+200/800/2000 updates, gradient/loss
+sur mêmes cohortes, trois horizons,
+stabilité du sens et de l'amplitude,
+sans ouvrir 2026. Ne pas lancer de grands
+embeddings avant de diagnostiquer la
+dynamique d'entraînement.
+Lire `docs/CODEX_S3_1B_HANDOFF_20261026.md`,
+`docs/CHATGPT_PROJECT_HISTORY.md`,
+`research/data/PUBLIC_DATA_README_20261026.md`.
+Pas de merge automatique, pas de clé/compte,
+aucun ordre Hyperliquid, frais ignorés.
+
+---
+
 # S3.1A CONFIRMÉE (26/10/2026) — 288 FITS TERMINÉS
 
 Le [run #40300156418](https://github.com/goldaj/trame-chartist-research/actions/runs/40300156418)
