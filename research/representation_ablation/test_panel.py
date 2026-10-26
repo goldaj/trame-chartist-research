@@ -41,6 +41,10 @@ class PanelTests(unittest.TestCase):
         sample["results"][1]["initial_state_sha256"]="a"*64
         with self.assertRaisesRegex(ValueError,"matched initialization"):
             build_panel([sample])
+        sample=copy.deepcopy(self.sample)
+        sample["results"][1]["input_normalizer_std_bps"] *= 1.01
+        with self.assertRaisesRegex(ValueError,"matched initialization"):
+            build_panel([sample])
 
     def test_rejects_tampering_holdout_and_duplicate_seed(self):
         sample=copy.deepcopy(self.sample)
