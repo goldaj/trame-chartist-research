@@ -445,3 +445,49 @@ Utilisateur qui suit est **verbatim** de la conversation en cours.
   et `docs/CODEX_D1_HANDOFF_20261026.md`.
 - Les prix bruts restent privés ; jamais d'ouverture 2026,
   pas de frais ni de trading exécuté ; H1/M1 historique conservé.
+
+
+## 2026-10-26 — Poursuite S1 scientifique, puis branche S2 (résumé)
+**Horodatage du message utilisateur individuel non disponible.**
+Les réponses/étapes ci-dessous sont un relevé d'activités,
+**pas un verbatim assistant**.
+
+**Instruction utilisateur applicable (présente dans les échanges
+précédents de cette séance)** : inclure D1 avant toute suite,
+chercher et ingénierie par sous-étapes, profondeur 1/2/4
+pour chaque taille, donner une importance majeure à la
+justesse directionnelle et à l'amplitude, aucun frais de trading.
+
+**Assistant — preuves finalisées avant S2 :**
+- Reprend D1 depuis la release originale, données réelles D1/H1/M1,
+  inclut tous les rapports A7, régimes, témoins statistiques,
+  justesse directionnelle et montant.
+- Exécute sur la vraie release privée 135 fits (5 tailles × 3
+  profondeurs × 3 familles × 3 horizons, une graine / 40 steps
+  petits modèles ou 8 grands), GitHub Actions
+  [#40281223578](https://github.com/goldaj/btc-historical-data/actions/runs/40281223578),
+  6 jobs réussis, param count réel ~1.7k–2.39M.
+- Exécute ensuite 243 fits (3 tailles × 3 profondeurs × 3 familles
+  × 3 graines × 3 horizons, 200 steps), GitHub Actions
+  [#40281657954](https://github.com/goldaj/btc-historical-data/actions/runs/40281657954),
+  3 jobs réussis. Balanced accuracy pratiquement à 50 % sur
+  beaucoup de bras ; malgré l'entraînement plus long aucun
+  « plus gros = mieux » validé.
+- Publie uniquement les rapports chiffrés agrégés et SHA sur
+  les branches PR #18, conserve les JSON complets dans les
+  artefacts du dépôt de données **privé**. Aucune label 2026
+  ouverte, jamais d'ordre ni de bots modifiés.
+
+**Assistant — nouvelle expérimentation, sans résultat BTC réel :**
+- Pré-enregistre S2 : `research/continuous_direction/PROTOCOL_20261026.md`.
+- Développe une entrée bps continue causale, régression Huber
+  et double objectif Huber+BCE du sens, 2 profondeurs/2 largeurs,
+  3 graines sur les trois horizons.
+- Crée la PR draft #19, tests CI publics synthétiques réussis,
+  documentation et passation Codex.
+- Tentative de créer la CI privée d'exécution S2 **refusée
+  par contrôle de sécurité du connecteur** ; la branche privée
+  dédiée existe mais ne comporte aucun workflow S2 exécutable,
+  aucune campagne S2 réelle lancée. Pas de contournement tenté.
+- Statut scientifique : résultats S1 A7 réels acquis,
+  S2 implémenté et testé **sur cas fabriqués uniquement**.
