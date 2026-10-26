@@ -1,0 +1,29 @@
+name: TRAME S3.1C causal internal convergence fixtures
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-training-dynamics-20261026
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  early-train-monitor-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: CPU-only research packages
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Synthetic pre2020 TRAIN and 2020-21 monitor fail-closed tests
+        run: |
+          python -m unittest research.token_grammar.test_convergence research.token_grammar.test_learned_embeddings research.token_grammar.test_learned_embeddings_panel -v
+      - name: Original S3.1A and source identity sanity
+        run: |
+          python -m unittest research.token_grammar.test_predictive research.data.test_public_data -v
