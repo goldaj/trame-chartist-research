@@ -21,4 +21,4 @@ jobs:
           python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
       - name: S2 causal and objective fixture tests
         run: |
-          python -m unittest research.continuous_direction.test_continuous research.continuous_direction.test_diagnostics research.btc_h1_m1.test_d1_parity research.scaling_study.test_panel -v
+          python -m unittest research.continuous_direction.test_continuous research.continuous_direction.test_diagnostics research.continuous_direction.test_panel research.btc_h1_m1.test_d1_parity research.scaling_study.test_panel -v
