@@ -7,6 +7,7 @@ This is not a trading strategy or an independently validated backtest.
 from __future__ import annotations
 
 import argparse
+import hashlib
 from datetime import datetime, timezone
 import json
 import math
@@ -22,7 +23,7 @@ from research.btc_h1_m1.experiment import collect
 from research.btc_h1_m1.stream import ROOT
 from research.continuous_direction.models import ContinuousDirectionModel
 from research.continuous_direction.runner import (
-    _arrays, _evaluate, _origin_digest, _source_code_commit, _ridge_forecasts,
+    _arrays, _origin_digest, _source_code_commit, _ridge_forecasts,
 )
 from research.continuous_direction.diagnostics import prior_from_train
 from research.scaling_study.runner import _validate_chronology
@@ -156,6 +157,9 @@ def run_cases(train, development, *, interval,
                         torch.manual_seed(seed)
                         model=ContinuousDirectionModel(
                             width=width,depth=depth,context=20,mode=mode)
+                        initial_state_sha256=hashlib.sha256(b''.join(
+                            p.detach().cpu().contiguous().numpy().tobytes()
+                            for p in model.parameters())).hexdigest()
                         optimizer=torch.optim.AdamW(
                             model.parameters(),lr=.003,weight_decay=.001)
                         xt=prepared[representation]["train_tensor"]
@@ -217,6 +221,7 @@ def run_cases(train, development, *, interval,
                             "mode":mode,"width":width,"depth":depth,"seed":seed,
                             "steps":steps,"batch_size":batch_size,
                             "parameter_count":sum(p.numel() for p in model.parameters()),
+                            "initial_state_sha256":initial_state_sha256,
                             "input_normalizer_std_bps":prepared[representation]["train_std_bps"],
                             "input_scale_fallback":prepared[representation]["std_degenerate_fallback"],
                             "target_normalizer_std_bps_common":scale_target,
