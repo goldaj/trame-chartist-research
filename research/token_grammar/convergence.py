@@ -82,7 +82,8 @@ def collect_internal(interval, directory=ROOT, *, max_cases=4096,
     held=[]
     scanned={"train_pre2020":0,"monitor_2020_2021":0}
     for group,c in iter_cases(interval,Path(directory),
-                              step=stride,train_only=True):
+                              step=stride,train_only=True,
+                              stop_labels_before=MONITOR_END):
         if group!="train":
             raise AssertionError("train_only reader leaked external cohort")
         if c.label_available_time==MONITOR_END:
