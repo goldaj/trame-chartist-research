@@ -78,11 +78,20 @@ def selected_metrics(anchors,actuals,price,mask,*,train_thresholds,
     if n==0:
         return {"n_selected":0,"n_monitor":total,"coverage":0.,
                 "status":"NO_COVERAGE","balanced_direction_accuracy":None,
+                "n_actual_up":0,"n_actual_down":0,"n_actual_flat":0,
+                "n_predicted_up":0,"n_predicted_down":0,"n_predicted_flat":0,
+                "direction_accuracy_all":None,
+                "direction_accuracy_nonflat_truth":None,
                 "mae_native_usd":None,"mae_bps_anchor":None,
                 "absolute_magnitude_error_bps":None,
+                "signed_forecast_bias_bps":None,
+                "mean_abs_predicted_move_bps":None,
+                "mean_abs_actual_move_bps":None,
+                "magnitude_ratio_predicted_over_realized":None,
                 "persistence_mae_native_usd":None,
                 "persistence_mae_bps_anchor":None,
-                "brier_skill_vs_train_prior_head_diagnostic":None}
+                "brier_skill_vs_train_prior_head_diagnostic":None,
+                "n_nonflat_probability_cases":0}
     a=np.asarray(anchors,dtype=float)[mask]
     y=np.asarray(actuals,dtype=float)[mask]
     p=np.asarray(price,dtype=float)[mask]
