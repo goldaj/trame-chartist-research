@@ -242,7 +242,6 @@ def main(argv=None):
                    default=list(CHECKPOINTS))
     p.add_argument("--engineering-canary",action="store_true",
                    help="10/20/40 step smoke; not a scientific model comparison")
-    p.add_argument("--checkpoints",nargs="+",type=int,default=list(CHECKPOINTS))
     p.add_argument("--output",type=Path,required=True)
     a=p.parse_args(argv)
     if a.output.exists():p.error("refuse overwriting research evidence")
