@@ -1,3 +1,70 @@
+# S3.1F TERMINÉE : 9 vrais modèles BTC, 27 checkpoints, 81 prédictions appariées (26/10/2026)
+
+**Run COMPLET** [Actions #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917)
+**4/4 jobs SUCCESS** D1/H1/M1 + panel.
+Source Git SHA exécuté
+`58bc0f1e9425975a037ad2bf135943890a5b474b`.
+
+**Résultats scientifiques complets et SHA des 5 fichiers** :
+`research/token_grammar/S3_1F_REAL_81_RESULTS_20261026.md`.
+5 fichiers JSON/MD réels + MANIFEST archivés
+dans la conversation au nom
+`trame_s3_1f_9_models_81_evaluations.zip`.
+Le job final a vérifié 9 FITS distincts,
+27 checkpoints de poids, **81 scores
+dépendants**. Contrainte de parité
+`joint_hard` vs S3.1E legacy sur
+mêmes seeds/cas prouvée en tests ;
+sur BTC réel, les scores historiques
+à 2000 sont identiques aux bilans S3.1E.
+
+**Résultat à 2000 updates (3 seeds,
+moyennes monitor 2020–21)** :
+- D1 HARD BA52,24%, MAE prix282,704bps,
+  AMP248,938 ; DIRECT BA51,24%/282,897/
+  248,938 ; SOFT BA52,24%/280,707/273,477.
+- H1 HARD BA51,93%/54,611/48,955 ;
+  DIRECT 51,26%/54,642/48,955 ;
+  SOFT 51,93%/54,511/53,856.
+- M1 HARD BA53,02%/8,368/7,319 ;
+  DIRECT 52,40%/8,377/7,319 ;
+  SOFT 53,02%/8,337/8,215.
+
+**SOFT meilleure erreur prix** vs HARD
+de −1,997bps D1, −0,100bps H1,
+−0,031bps M1 mais **amplitude
+pire** +9,86%, +10,01%, +12,24%.
+BA SOFT = HARD **PAR CONSTRUCTION**,
+même signe logit, pas nouveau signal.
+Persistance MAE D1 281,037bps,
+H1 54,535, M1 8,347 ; SOFT bat
+très légèrement la persistance par
+0,118%/0,044%/0,115% de MAE,
+mais les 3 seeds PARTAGENT le même
+monitor, déjà surexploré en S3.1C/D/E.
+AUCUN EDGE confirmé.
+
+**Prochaine priorité S3.1G** : audit
+de prédiction sélective à magnitude
+prédite, conformément au besoin
+utilisateur « sens et montant pour
+décider s'il faut agir, frais ignorés ».
+Établir **seuils de magnitude
+ENTIÈREMENT sur TRAIN**, évaluer
+couverture/BA sens et erreur montant
+conditionnellement à prédiction
+mouvement significatif, comparer
+persistance sur LE MÊME sous-échantillon.
+Définir préalablement les contrôles
+pour éviter que la sélection du seuil
+sur monitor 2020–21 (déjà étudié)
+fabrique un edge. 2022–25 non
+recyclé en validation indépendante,
+2026 toujours réservé. Pas
+d'ordre, PnL cumulé ou portefeuille.
+
+---
+
 # Codex — S3.1F, isoler trois règles de prévision sur les MÊMES poids
 26 octobre 2026. Branche `chatgpt/trame-s3-postprocess-ablation-20261026`,
 [PR #29 DRAFT](https://github.com/goldaj/trame-chartist-research/pull/29),
