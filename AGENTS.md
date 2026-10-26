@@ -1,3 +1,59 @@
+# DERNIÈRE BRANCHE TRAME : S3.1D LOSS DIRECTION vs AMPLITUDE (26/10/2026)
+
+**PR #27 DRAFT** `chatgpt/trame-s3-objective-ablation-20261026`,
+enfant de PR #26 S3.1C **déjà terminée et documentée**.
+Ne pas fusionner automatiquement.
+
+**SOURCE DE VÉRITÉ** :
+`research/token_grammar/S3_1D_LOSS_PROTOCOL_20261026.md`,
+`docs/CODEX_S3_1D_HANDOFF_20261026.md`,
+`research/token_grammar/loss_ablation.py`,
+`research/token_grammar/loss_ablation_panel.py`,
+tests `test_loss_ablation*.py`.
+
+- S3.1C initialement « interrompue » était en fait
+  **DÉJÀ TERMINÉE** :
+  [Actions #40309653884](https://github.com/goldaj/trame-chartist-research/actions/runs/40309653884),
+  4/4 jobs, 27 trajectoires, 81 mesures.
+  Ne plus rouvrir ou dupliquer cette expérience.
+  Les fichiers de duplication ont été supprimés.
+- Le lecteur S3.1C emploie maintenant
+  `stop_labels_before` pour **arrêter avant
+  toute bougie de 2022**, au lieu d'ignorer
+  simplement les labels, sans changement
+  des anciennes sorties par défaut.
+- S3.1D teste cinq coefficients de loss
+  strictement **sur le même modèle/grammaire
+  G2/20 retours passés, même SHA initial**
+  sur D1/H1/M1. Labels TRAIN connus avant 2020,
+  MONITOR seulement 2020–21. Ancien dev externe
+  2022–25 **interdit** ; 2026 gelé.
+- Matrice : 3 horizons ×5 losses ×3 seeds =
+  **45 trajectoires**, mêmes optimisateurs
+  continus jusqu'à 2000 updates, observés
+  à 200/800/2000 = **135 checkpoints**.
+  Direction BA, MAE prix USD/bps, erreur
+  amplitude bps, Brier et monoclasse sont
+  des critères SIMULTANÉS.
+- Ancien smoke a échoué sur **argparse
+  doublon --checkpoints** AVANT l'apprentissage.
+  Bug corrigé, test CLI --help ajouté.
+  Relance [smoke #40312924527](https://github.com/goldaj/trame-chartist-research/actions/runs/40312924527),
+  complet [#40313075915](https://github.com/goldaj/trame-chartist-research/actions/runs/40313075915).
+  **Vérifier leur succès effectif avant de
+  prétendre disposer de résultats S3.1D**.
+- Aucune validation indépendante ni
+  stratégie profitable, aucun PnL composé
+  et aucun ordre Hyperliquid. Frais
+  volontairement ignorés sur instruction.
+  BTC spot historiques publiables avec
+  attribution et SHA ; aucun secret/compte.
+- Historique des demandes du propriétaire
+  et opérations réelles :
+  `docs/CHATGPT_PROJECT_HISTORY.md`.
+
+---
+
 # S3.1C COMPLET — OBSERVER LA CONVERGENCE AVANT NOUVEAU SCALING
 
 PR #26 `chatgpt/trame-s3-training-dynamics-20261026`,
