@@ -122,8 +122,8 @@ def score_baselines(train, development, *, ridge_alpha=1.0):
 
 def run(*, interval, folder=ROOT, max_train=4096, max_dev=1024,
         stride=None):
-    if interval not in ("H1", "M1"):
-        raise ValueError("H1 or M1 required")
+    if interval not in ("D1", "H1", "M1"):
+        raise ValueError("D1, H1 or M1 required")
     step = 60 if interval == "M1" else 1
     if stride is not None:
         step = stride
@@ -139,7 +139,7 @@ def run(*, interval, folder=ROOT, max_train=4096, max_dev=1024,
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="BTC train-only statistical controls, no trades")
-    ap.add_argument("--interval", choices=("H1", "M1"), required=True)
+    ap.add_argument("--interval", choices=("D1", "H1", "M1"), required=True)
     ap.add_argument("--directory", type=Path, default=ROOT)
     ap.add_argument("--output", type=Path, required=True)
     args = ap.parse_args(argv)
