@@ -636,3 +636,45 @@ justesse directionnelle et à l'amplitude, aucun frais de trading.
 - Aucun workflow privé créé, pas de contournement du
   blocage précédent de la campagne S2, pas de résultats
   de direction BTC S2b calculés ou inférés.
+
+
+## 2026-10-26 — Poursuite « continue » : S3.0c diagnostic de grammaires
+**Instruction utilisateur appliquée (verbatim du message le plus
+récent ; aucune nouvelle instruction utilisateur depuis)** :
+> continue
+
+**Assistant, activité non verbatim réellement effectuée** :
+- Après S2b PR #21 (input quantifié/continu à loss/cible
+  et échelles d'entrée/sortie communes, CI synthétique
+  réussie), poursuit la partie S3.0 de la demande
+  « différentes grammaires » formulée précédemment.
+- Crée une branche enfant **PR #22**
+  `chatgpt/trame-grammar-audit-20261026`, base PR #21,
+  sans fusionner ni modifier les branches sœurs.
+- Implémente `research/token_grammar/audit.py` :
+  diagnostic **strictement NON prédictif** sur les
+  20 returns passés de chaque `Case`, des
+  quatre grammaires initiales G0a (entier historique),
+  G0b (continu), G1 (magnitudes signées fixes),
+  G2 (magnitudes signées quantiles fit TRAIN ONLY).
+  Tests `test_audit.py` sur données inventées.
+- Les chiffres de tokens sont calculés sur contextes
+  qui se recouvrent fortement ; la colonne
+  `context_token_observations_overlapping=true`
+  doit empêcher toute fausse interprétation
+  d'indépendance statistique.
+- Prépare les commandes éventuelles de diagnostic
+  D1/H1/M1 sur les archives **privées**
+  dans `research/token_grammar/AUDIT_README_20261026.md`,
+  mais **aucune exécution BTC réelle ni téléchargement
+  privé n'a été réalisé** pour S3.
+- CI publique `.github/workflows/trame-s3-grammar-audit.yml`
+  sur fixtures uniquement. Documentation Codex dans
+  `docs/CODEX_S3_HANDOFF_20261026.md` et `AGENTS.md`,
+  issue #20 comme backlog de S3.1+.
+- Conservé : train avant 2022, développement 2022–2025,
+  2026 non ouvert, prix indicatifs D1 2010–2011 non
+  transformés en fausses OHLCV, aucun ordre ou trading.
+  Précédent blocage sécurité sur workflow privé
+  S2/S2b non contourné ; les sorties S3 ne
+  sont pas des résultats de prévision financière.
