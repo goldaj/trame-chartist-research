@@ -377,3 +377,29 @@ et la vérification GitHub, puis **s'arrêter**.
 **Dernière décision** : arrêt propre à la fin de cette
 passation. Une prochaine session pourra suivre les tâches
 encore ouvertes uniquement sur nouvelle instruction explicite.
+
+
+## 2026-10-26 — Nouvelle séance S1 : mise à l'échelle et justesse directionnelle
+
+**Horodatage** : date connue, heure exacte non attestée. Le texte utilisateur
+ci-dessous provient de la conversation courante, sans prétendre reproduire
+l'intégralité des échanges précédents.
+
+**Utilisateur, demande initiale (verbatim)** :
+> Faisons ça. D'ailleurs tu parlais de models 1 couche, peut être qu'il faudra aussi en parallèle tester des models multi-couches (3 niveau de couches différents ? A appliquer sur chacune des tailles de model qu'on veut tester ?). Documente bien tout, puis prépare tout le nécessaire pour lancer tout ce que tu viens de dire. Et oui ton intuition est importante ; la justesse directionnelle est hyper importante et doit aussi faire partie des résultats qu'on étudiera dans le tableau final. Continue en tant que chercheur ET qu'ingénieur vers ces solutions. Liste les étapes, réfléchi aux sous étapes avant d'avance sur la prochaine étape. Puis annonce moi chaque sous étape terminée, avant de continuer automatiquement.
+
+**Utilisateur, précision intervenant pendant le développement (verbatim)** :
+> ne te soucis pas des frais dans ces simulations. On extrapole que si le sens est bon, un trader saura si ça vaut le coup d'acheter ou pas. C'est là où la précision du montant déduit fait son importance
+
+**Assistant, synthèse de décisions et travail réel (NON verbatim)** :
+- Matrice 5 cibles de paramètres × 3 profondeurs 1/2/4 × 3 familles de modèles ;
+  2 horizons H1/M1 × 3 seeds soit 270 entraînements envisagés.
+- Justesse directionnelle, couverture du signal et erreur d'amplitude prévues
+  au même niveau que MAE et NLL. Illustration de rendement brut par bougie
+  sans frais, **jamais** confondue avec capitalisation ou PnL validé.
+- Nouveau protocole, modèles multicouches, métriques, orchestrateur,
+  tests et documentation sur la branche
+  `chatgpt/trame-scaling-depth-direction-20261026`, basée sur PR #14.
+- La qualification CI doit être vérifiée ; ni vraie campagne 270 modèles ni
+  validation indépendante 2026 annoncées sans run effectif.
+- Les données BTC brutes restent privées, le bot Hyperliquid inchangé.
