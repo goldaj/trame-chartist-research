@@ -1,3 +1,52 @@
+# TRAME DERNIÈRE BRANCHE S3.1E : PR #28 DRAFT, 26/10/2026
+
+**Précédent S3.1D TERMINÉ** [run #40313075915](https://github.com/goldaj/trame-chartist-research/actions/runs/40313075915)
+4/4 jobs OK, 45 trajectoires /135 checkpoints
+BTC spot D1/H1/M1. Bilan et SHA :
+`research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
+L'erreur amplitude s'améliore si on renforce la
+loss magnitude mais l'erreur **du prix réellement
+prédit** et souvent la BA se détériorent.
+Aucun edge direction/prix/AMP simultané.
+Ne pas réexécuter S3.1D inutilement.
+
+**NOUVELLE QUESTION S3.1E**, [PR #28](https://github.com/goldaj/trame-chartist-research/pull/28),
+branche `chatgpt/trame-s3-reconciliation-loss-20261026`
+empilée sur PR #27, pas de merge auto :
+comparer sur backbone **identique 2418 params**
+la loss S3.1D historique et 0,25/1,00
+de Huber supplémentaire sur un surrogate
+`tanh(logit/2)*sqrt(mu²+1e-12)`.
+L'inférence conserve le HARD sign(logit)*abs(mu).
+**Le SOFT est seulement différentiable et
+n'est PAS le cours réellement prédit**.
+
+**Protocole PRÉENREGISTRÉ** :
+`research/token_grammar/S3_1E_RECONCILIATION_PROTOCOL_20261026.md`,
+passation `docs/CODEX_S3_1E_HANDOFF_20261026.md`.
+CI synthétique [run #40318703540](https://github.com/goldaj/trame-chartist-research/actions/runs/40318703540)
+vert, pilote vrai 9 trajectoires
+[run #40318703968](https://github.com/goldaj/trame-chartist-research/actions/runs/40318703968)
+3/3 jobs verts. **Campagne complète**
+[run #40318969005](https://github.com/goldaj/trame-chartist-research/actions/runs/40318969005),
+27 véritables trajectoires/81 observations,
+NE PAS déclarer réussie avant 4/4 jobs
+et analyse des SHA/artefacts.
+
+TRAIN BTC labels connus avant 2020,
+MONITOR interne 2020–21, dev externe
+2022–25 **interdit** pour tuning,
+2026 holdout **fermé** ; pas d'ordres,
+transactions, API Hyperliquid ni PnL
+composé. L'utilisateur ignore les frais.
+Toutes conclusions doivent fournir
+BA sens, MAE USD/bps du prix HARD
+réellement servi, erreur amplitude,
+Brier, monoclasse, désaccord des têtes
+et baseline persistance.
+
+---
+
 # TRAME S3.1D TERMINÉE / S3.1E PROCHAINE (26/10/2026)
 
 Dernier état vérifié : **S3.1D 45 trajectoires
