@@ -1,3 +1,39 @@
+# BILAN CONFIRMÉ DE S3.1A (26/10/2026)
+
+**TERMINE** : [run public #40300156418](https://github.com/goldaj/trame-chartist-research/actions/runs/40300156418),
+**4 jobs réussis**, 288 entraînements réels
+(96 D1 +96 H1 +96 M1), trois graines,
+200 mises à jour, 20 rendements historiques,
+2026 jamais exploité pour l'entraînement/dev.
+
+**Source de vérité numérique :**
+`research/token_grammar/S3_1A_REAL_288_RESULTS_20261026.md`.
+Les rapports JSON 96 fits/horizon et panel agrégé
+sont disponibles en artifacts (rétention 30j),
+SHA256 enregistrés dans ce rapport, possibilité de
+reproduire via `predictive.py`.
+Paramètre étudié = grammaire décodée en bps,
+**PAS embeddings appris**.
+
+**Conclusion NO-GO** : pas de preuve d'edge
+ou amélioration conjointe du sens ET montant.
+H1 Joint G2 réduit les sorties monoclasse de
+6/12 à 0/12, BA 51.40 contre 51.14 %,
+MAE prix 34.154 vs 34.490 bps MAIS erreur
+amplitude 30.136 vs 28.753 bps.
+D1 et M1 montrent eux aussi des compromis.
+
+**SUITE** : S3.1B, préenregistrer apprentissage
+des **vrais embeddings de catégories** et
+leurs contrôles à nombre exact de paramètres
+constant, puis CI artificielle, pilote BTC
+réel autorisé, résultat agrégé avec BA,
+amplitude et Brier. Ne pas supposer que
+S3.1A démontre la supériorité des tokens ;
+2026 reste réservé et pas de trading.
+
+---
+
 # Passation Codex TRAME S3.1A : quatre grammaires prédictives
 Date : 26 octobre 2026. Branch
 `chatgpt/trame-s3-predictive-grammars-20261026`,
