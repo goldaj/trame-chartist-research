@@ -1,3 +1,64 @@
+# S3.1C CONVERGENCE INTERNE — PRIORITÉ ACTUELLE 26/10/2026
+
+Branche `chatgpt/trame-s3-training-dynamics-20261026`,
+**PR #26 DRAFT**, enfant de #25 (S3.1B 432 fits).
+Avant modification lire
+`docs/CODEX_S3_1C_HANDOFF_20261026.md`,
+`research/token_grammar/S3_1C_CONVERGENCE_PROTOCOL_20261026.md`,
+`research/token_grammar/S3_1B_REAL_432_RESULTS_20261026.md`
+et issue GitHub #20. Aucune fusion automatique.
+
+**Objectif scientifique** : comprendre les sorties
+monoclasse et la convergence des prédictions de
+direction ET amplitude avant d'investir dans
+gros modèles/vector embeddings. L'ancien
+DEV 2022–2025 a été sur-exploré :
+**NE PAS le réutiliser pour choisir 200/800/2000 updates.**
+
+S3.1C sépare le seul TRAIN PRÉ-2022 historique
+en réservoirs indépendants :
+- TRAIN label disponible <2020-01-01,
+  seule source gradients, normalisation
+  et quantiles signés G2, prior et baselines ;
+- MONITOR label disponible 2020–21,
+  aucune mise à jour ni fitting ;
+- 2022–25 dev externe **non consulté** ;
+  2026 holdout **jamais ouvert**.
+
+Pour les trois horizons BTC Bitstamp public
+D1/H1/M1, G2 quantiles signés,
+3 bras decoded/embedding_ordered/random,
+3 seeds, width16/depth1, loss Joint,
+**27 vraies trajectoires** évaluées à
+**200/800/2000 updates** = 81 observations.
+Le même optimiseur continue après chaque
+checkpoint ; ne pas prétendre 81 entraînements
+indépendants. Instrumenter gradients préclip,
+loss TRAIN/monitor, BA accuracy direction,
+%UP et monoclasse, MAE USD/bps, erreur
+amplitude bps, Brier vs prior train-only.
++11 paramètres pour learned vs decoded,
+ordered-v-random égalité de capacité.
+
+Code `research/token_grammar/convergence.py`,
+`convergence_panel.py`, tests adversariaux.
+CI synthétique verte et run réel
+[Actions #40309653884](https://github.com/goldaj/trame-chartist-research/actions/runs/40309653884).
+**Vérifier les 3 jobs et l'agrégateur**
+avant de déclarer le travail fini. Les
+résultats D1/H1 en interne 2020–21
+montrent déjà que prolonger l'entraînement
+n'a pas d'effet uniforme ; rien de
+confirmatoire sur 2026 ni d'edge financier.
+
+Les historiques BTC spot sont publics
+avec attribution source; aucune clé,
+wallet ou compte. Frais ignorés par
+l'utilisateur ; aucun trade ni PnL
+cumulé validé, aucun bot Hyperliquid touché.
+
+---
+
 # S3.1B RÉSULTATS OFFICIELS — 26/10/2026
 
 PR **#25** `chatgpt/trame-s3-learned-embeddings-20261026`,
