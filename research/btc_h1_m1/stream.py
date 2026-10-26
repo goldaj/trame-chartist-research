@@ -73,8 +73,15 @@ def read_bars(interval: str, folder: Path = ROOT):
     if seconds is None:
         raise ValueError("interval must be H1 or M1")
     if interval == "D1":
-        from research.btc_h1_m1.daily_stream import read_daily_bitstamp_bars
-        yield from read_daily_bitstamp_bars(folder)
+        from research.btc_h1_m1.daily import read_daily
+        for daily in read_daily(directory=folder):
+            if daily.day >= DEVELOPMENT_END_EXCLUSIVE.date():
+                break  # never construct any 2026 target or candle for training
+            if daily.grade != "bitstamp_spot_ohlcv":
+                continue  # 2010-2011 indicative close-only is non-OHLCV
+            stamp = datetime.combine(daily.day, datetime.min.time(), tzinfo=timezone.utc)
+            yield Candle(stamp, daily.open_usd, daily.high_usd,
+                         daily.low_usd, daily.close_usd, daily.volume_btc)
         return
     prev = None
     for path in files_for(interval, folder):
