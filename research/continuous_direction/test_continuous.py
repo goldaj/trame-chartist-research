@@ -34,6 +34,28 @@ def fabricated_case(year,index):
 
 
 class S2Tests(unittest.TestCase):
+    def test_real_reader_contract_on_three_fabricated_time_grids(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from research.btc_h1_m1.test_daily import make_fake_d1
+        from research.btc_h1_m1.test_history import artificial_files
+        from research.btc_h1_m1.stream import iter_cases
+        with TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            make_fake_d1(root)
+            artificial_files(root)
+            for interval in ("D1","H1","M1"):
+                with self.subTest(interval=interval):
+                    cases=[c for _split,c in iter_cases(interval,root,step=1)]
+                    self.assertGreater(len(cases),2)
+                    for c in cases[:20]:
+                        self.assertEqual(len(c.continuous_past_bps),20)
+                        self.assertEqual(len(c.encoded_past),20)
+                        for val,encoded in zip(c.continuous_past_bps,c.encoded_past):
+                            self.assertEqual(math.floor(val/10+0.5),encoded)
+                        self.assertLess(c.decision_time,c.label_available_time)
+                        self.assertLess(c.target_open.year,2026)
+
     def test_discrete_zero_can_mask_true_direction(self):
         c=fabricated_case(2018,0)
         self.assertEqual(c.encoded_target,0)
