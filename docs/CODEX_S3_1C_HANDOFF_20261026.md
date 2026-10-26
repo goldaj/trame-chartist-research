@@ -1,3 +1,65 @@
+# S3.1C TERMINÉE : 27 TRAJECTOIRES / 81 CHECKPOINTS, BTC RÉEL PRÉ-2022
+
+[GitHub Actions #40309653884](https://github.com/goldaj/trame-chartist-research/actions/runs/40309653884)
+**4/4 jobs réussis** : D1/H1/M1 et panel final.
+Modèle commit Git
+`e0dae968998cb7f19c37b9f819e1de5d7524dd27`.
+**Source numérique / SHA des 5 rapports** :
+`research/token_grammar/S3_1C_REAL_81_RESULTS_20261026.md`.
+Résultats détaillés disponibles dans
+les artifacts du workflow, rétention 30j,
+et l'archive ZIP jointe à la conversation.
+
+**Cohortes sans réutilisation du DEV externe**
+D1 TRAIN avant 2020 = 2876 cas,
+MONITOR 2020–21 = 731.
+H1/M1 = 4096 TRAIN et1024 MONITOR
+chacun. Développement 2022–25
+**NON CONSULTÉ** par le protocole
+d'optimisation, 2026 **JAMAIS OUVERT**.
+Les labels ont été séparés par
+`label_available_time` avec réservoirs
+et RNG distincts.
+
+**Résumé** sur MONITOR interne 2020–21 :
+- D1 G2 decoded BA **53.20→52.24 %**
+  de 200 à 2000 updates, MAE prix
+  **280.78→282.70 bps** (dégradation).
+  Random reste 2/3 monoclasse,
+  BA 48.77 % à 2000.
+- H1 G2 decoded BA **49.02→51.93 %**,
+  MAE **54.80→54.61 bps** ;
+  random mono 2/3→0/3 mais Brier
+  skill reste négatif.
+- M1 G2 decoded BA **52.06→53.02 %**,
+  MAE **8.599→8.368 bps** MAIS
+  erreur amplitude **6.998→7.319 bps**,
+  un compromis important à présenter.
+- Normes de gradient pré-clipping
+  tendent à diminuer, pas de preuve
+  de divergence commune.
+- **Conclusion** : pas de budget
+  d'updates universel, le sous-entraînement
+  contribue au collapse mais
+  n'explique PAS tout ; aucune stratégie
+  ni profit indépendant validé.
+
+**Suite recommandée S3.1D** : ablation
+isolée de la **fonction de perte**
+directionnelle / montant / amplitude
+sur mêmes cohortes internes,
+mêmes graines et capacité, train-only.
+Préenregistrer avant toute mesure.
+Ne jamais réutiliser 2022–25/2026
+pour sélectionner des paramètres.
+Éviter le scaling lourd avant d'avoir
+compris l'optimiseur et les sorties
+monoclasse. Frais de transaction
+exclus par instruction utilisateur ;
+aucun ordre ni bot Hyperliquid modifié.
+
+---
+
 # Codex TRAME S3.1C — dynamique de convergence et prédictions monoclasse
 26 octobre 2026. **PR #26 en brouillon**, branche
 `chatgpt/trame-s3-training-dynamics-20261026`
