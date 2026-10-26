@@ -100,7 +100,7 @@ def run_cases(train, development, *, interval,
               steps=200, batch_size=16, data_origin="ARTIFICIAL_FIXTURE"):
     if interval not in ("D1","H1","M1"):
         raise ValueError("D1/H1/M1 only")
-    if data_origin not in ("ARTIFICIAL_FIXTURE","BTC_PRIVATE_REAL"):
+    if data_origin not in ("ARTIFICIAL_FIXTURE","BTC_PRIVATE_REAL","BTC_PUBLIC_REAL"):
         raise ValueError("invalid origin")
     for name,values,allowed in (
         ("representations",representations,REPRESENTATIONS),
@@ -271,7 +271,8 @@ def run_history(*,interval,directory=ROOT,steps=200,
                 representations=REPRESENTATIONS,modes=MODES,
                 widths=(16,32),depths=(1,2),
                 seeds=(20261025,20261026,20261027),
-                max_train=4096,max_dev=1024):
+                max_train=4096,max_dev=1024,
+                data_origin=data_origin):
     if interval not in ("D1","H1","M1"):
         raise ValueError("D1/H1/M1 only")
     stride=60 if interval=="M1" else 1
@@ -299,6 +300,8 @@ def main(argv=None):
     p.add_argument("--steps",type=int,default=200)
     p.add_argument("--seeds",type=int,nargs="+",
                    default=[20261025,20261026,20261027])
+    p.add_argument("--data-origin",choices=("BTC_PRIVATE_REAL","BTC_PUBLIC_REAL"),
+                   default="BTC_PRIVATE_REAL")
     p.add_argument("--output",type=Path,required=True)
     ns=p.parse_args(argv)
     if ns.output.exists():
@@ -306,7 +309,8 @@ def main(argv=None):
     result=run_history(
         interval=ns.interval,directory=ns.directory,steps=ns.steps,
         representations=tuple(ns.representations),modes=tuple(ns.modes),
-        widths=tuple(ns.widths),depths=tuple(ns.depths),seeds=tuple(ns.seeds))
+        widths=tuple(ns.widths),depths=tuple(ns.depths),seeds=tuple(ns.seeds),
+        data_origin=ns.data_origin)
     ns.output.write_text(json.dumps(
         result,indent=2,ensure_ascii=False,allow_nan=False)+"\n",encoding="utf-8")
     print("Exploratory S2b analysis saved; 2026 unopened; no trades")
