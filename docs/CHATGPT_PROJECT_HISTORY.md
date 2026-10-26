@@ -678,3 +678,65 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   Précédent blocage sécurité sur workflow privé
   S2/S2b non contourné ; les sorties S3 ne
   sont pas des résultats de prévision financière.
+
+
+## 2026-10-26 — Demande d'utiliser directement les données BTC et autorisation de publication
+**Utilisateur (verbatim, horodatage individuel non attesté)** :
+> et qu'est-ce qui te bloque pour accéder aux données du repo privé ? Tu peux juste les dl et les intégrer dans ton repo en fait
+
+**Utilisateur, précision intervenant immédiatement après (verbatim)** :
+> si si tu peux les considérer publics, si tu prends les données historiques btc c'est rien de grave
+
+**Assistant (synthèse non verbatim, actions réellement observées)** :
+- Vérifie les permissions GitHub : accès en lecture **et**
+  écriture confirmé sur `goldaj/btc-historical-data`.
+  L'ancienne difficulté venait de la création d'un
+  workflow GitHub Actions privé, puis de l'absence de
+  transfert binaire direct des gzip dans le runtime,
+  et non d'une impossibilité d'accéder à l'information.
+- Constate que les 16 archives H1/M1 d'origine
+  proviennent du dépôt **public** `alessiostomeo/btc-cycle-data`,
+  commit `b57f460fab1afb82705eb813cee2ef4afb1f6848`.
+  Conserve SHA Git blob et taille de chaque archive.
+- Nouvelle branche **PR #23**
+  `chatgpt/trame-public-btc-data-import-20261026`.
+  Copie effectivement le CSV D1 2012–2026H1 dans
+  **le repo public** TRAME (372096 octets,
+  Git blob SHA `a8f2da91cb00fce75117ba5bf000384f240abd56`,
+  preuve d'identité avec l'original privé).
+  Adaptation du lecteur D1 pour travailler avec 2012+
+  seulement **ou** avec les trois anciens fichiers,
+  sans fabriquer de fausses bougies 2010/2011.
+- Ajoute `research/data/public_data.py` pour télécharger
+  les gzip H1/M1 depuis le dépôt public amont, vérifier
+  octets et SHA Git, utiliser le même cache existant
+  `TRAME_BTC_CACHE_DIR`, **sans aucun jeton privé**.
+  Ne commit pas les ~113 Mo compressés directement dans
+  Git pour éviter le gonflement de l'historique ;
+  les téléchargements ont bien lieu sur runner GitHub
+  au moment des expériences.
+- Vérifie la source D1 en CI [#40295478147](https://github.com/goldaj/trame-chartist-research/actions/runs/40295478147).
+  Puis exécute de vraies expériences BTC :
+  D1 [#40295846917](https://github.com/goldaj/trame-chartist-research/actions/runs/40295846917),
+  H1/M1 [#40296158821](https://github.com/goldaj/trame-chartist-research/actions/runs/40296158821),
+  **trois jobs scientifiques authentiques réussis** ;
+  4 bras S2b par horizon, 1 graine / 40 steps.
+  Les résultats et SHA sont publiés dans
+  `research/data/REAL_PUBLIC_BTC_RESULTS_20261026.md`.
+- Audit information S3 sur vrais historiques :
+  l'encodage entier historique perd le signe de
+  ~2.86 % de rendements non nuls D1, 13.74 % H1,
+  **64.26 % M1** dans les contextes dev étudiés.
+  Ce n'est PAS une mesure de prédiction du futur.
+- Lancement du protocole S2b complet à 144 fits
+  3 graines/200 updates, workflow public
+  [#40296933559](https://github.com/goldaj/trame-chartist-research/actions/runs/40296933559) ;
+  **vérifier son résultat final** avant toute
+  déclaration de réussite. Aucun ordre ni backtest
+  de portefeuille exécuté.
+- Préserve les attributions CC BY-SA/CC BY pour
+  l'historique Bitstamp, et conserve D1 2010/2011
+  hors repo public lorsque licence externe incertaine.
+  Le consentement du propriétaire ne remplace pas
+  des droits tiers. Gel 2026 toujours appliqué
+  dans tous les runners ; frais de simulation ignorés.
