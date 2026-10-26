@@ -1,3 +1,25 @@
+# URGENCE REPRISE D1 — NOUVELLE CONSIGNE UTILISATEUR (26/10/2026)
+
+**Cette instruction supersède la priorité S1 qui suit** jusqu'à
+complétion des étapes D1.1–D1.7 : inclure **D1** dans toute la recherche
+basée sur la nouvelle release BTC, y compris les témoins Ridge/persistance,
+trois architectures, régimes, justesse directionnelle/amplitude et matrice
+S1 5 tailles×3 profondeurs. Conserver H1/M1 et les comparer à D1
+à horizons explicites ; ne PAS comparer leurs NLL entre horizons.
+Branche `chatgpt/trame-d1-parity-20261026` et PR #18 basée sur #17 ;
+base initiale A7 #14 inchangée, pas de merge automatique.
+Lire `research/btc_h1_m1/D1_RECOVERY_PLAN_20261026.md` et
+`docs/CODEX_D1_HANDOFF_20261026.md`.
+
+Le D1 2010–2011 est **indicatif close-only** ; ne jamais inventer de
+bougies, de volume ou d'ordres. La cohorte OHLCV utilise le vrai
+Bitstamp D1, le cut-off 2026 et train/dev historiques inchangés.
+**Frais ignorés** sur décision du propriétaire ; direction et
+ampleur restent métriques de premier plan. Ne jamais baptiser « edge
+directionnel » le fait de toujours prédire la classe majoritaire.
+
+---
+
 # REPRISE AUTORISÉE S1 — NOUVELLE CONSIGNE UTILISATEUR 26/10/2026
 
 **La pause/arrêt propre ci-dessous reste une archive de la session A7.**
