@@ -1,3 +1,47 @@
+# TRAME S3.1F EN COURS — PR #29, 26 OCTOBRE 2026
+
+**Source de vérité** : [PR #29](https://github.com/goldaj/trame-chartist-research/pull/29)
+`chatgpt/trame-s3-postprocess-ablation-20261026`
+enfant de #28 S3.1E, pas de merge automatique.
+`research/token_grammar/S3_1F_INFERENCE_PROTOCOL_20261026.md`
+**PRÉENREGISTRÉ avant tout BTC réel**, et
+`docs/CODEX_S3_1F_HANDOFF_20261026.md`.
+Étude S3.1E précédente COMPLETÉE :
+[27 fits et 81 observations, 4/4 jobs réussis](https://github.com/goldaj/trame-chartist-research/actions/runs/40318969005).
+S3.1E avait révélé des désaccords entre les deux têtes
+D1 7,9%, H1 19%, M1 26,7%, sans gain hard-price robuste.
+
+**S3.1F isole le PRICING POST-PROCESSING**
+sur un **SEUL modèle par seed/horizon** :
+`joint_hard` (historique, signe logit×abs(mu)),
+`signed_direct_mu`, `joint_soft_tanh`.
+Nombre RÉEL d'entraînements **9** =
+D1/H1/M1 ×3 seeds, checkpoints
+200/800/2000 = **27 modèles-en-checkpoint**,
+trois règles = **81 évaluations DÉPENDANTES**.
+D1/H1/M1 spot Bitstamp public versionné ;
+TRAIN labels avant 2020, MONITOR 2020–21,
+ancien DEV 2022–25 et 2026 non consultés.
+Même backbone, mêmes poids, G2 et loss legacy
+que S3.1E ; tests exacts contre legacy et
+`forecast_prices` historique.
+BA direction ET MAE prix USD/bps ET amplitude
+comme critères centraux, persistance témoin.
+Brier est la qualité du logit, PAS la probabilité
+de direction de la règle direct_mu.
+
+**CI fixtures verte** [#40326446195](https://github.com/goldaj/trame-chartist-research/actions/runs/40326446195),
+smoke réel [#40326446278](https://github.com/goldaj/trame-chartist-research/actions/runs/40326446278)
+3/3 jobs verts.
+Campagne complète [#40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917)
+**lancée, pas encore vérifiée 4/4** au moment
+de cette mise à jour ; ne déclarer résultat
+qu'après panel final et SHA des artefacts.
+Aucun ordre ou trading Hyperliquid, pas
+de PnL inventé, frais ignorés selon user.
+
+---
+
 # ACTUALITÉ TRAME S3.1E TERMINÉE → S3.1F NEXT (26/10/2026)
 
 **S3.1E complète** [Actions #40318969005](https://github.com/goldaj/trame-chartist-research/actions/runs/40318969005)
