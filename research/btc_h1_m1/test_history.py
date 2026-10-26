@@ -90,7 +90,9 @@ class SyntheticCompressedHistoryTests(unittest.TestCase):
                 list(iter_cases("M1",folder,context=21))
             with self.assertRaises(ValueError):
                 list(iter_cases("M1",folder,step=0))
-            with self.assertRaises(ValueError):
+            # D1 is now a valid resolution; this fixture only creates H1/M1.
+            # Missing local D1 reference must fail closed, not report invalid horizon.
+            with self.assertRaises(FileNotFoundError):
                 list(read_bars("D1",folder))
             with self.assertRaises(ValueError):
                 compare_history(interval="H1",folder=folder,steps=0)
