@@ -1,3 +1,49 @@
+# S3.1C COMPLET — OBSERVER LA CONVERGENCE AVANT NOUVEAU SCALING
+
+PR #26 `chatgpt/trame-s3-training-dynamics-20261026`,
+base PR #25. Run officiel
+[Actions #40309653884](https://github.com/goldaj/trame-chartist-research/actions/runs/40309653884)
+**4/4 jobs réussis** : 27 trajectoires
+réelles BTC D1/H1/M1, 3 checkpoints
+200/800/2000 chacune = 81 évaluations
+internes, et panel validé.
+
+**SOURCE** :
+`research/token_grammar/S3_1C_REAL_81_RESULTS_20261026.md`
+contient les 27 groupes de scores direction,
+MAE USD/bps, erreur amplitude, %UP,
+monoclasse, Brier et provenance SHA des
+JSON ; `docs/CODEX_S3_1C_HANDOFF_20261026.md`
+contient le protocole/références.
+
+**NOUVELLE RÈGLE DE RECHERCHE**
+S3.1C évite le dev externe 2022–25
+déjà surutilisé. Ajuster avec uniquement
+TRAIN interne <2020 et monitor interne
+2020–21, 2026 TOUJOURS gelé. Les
+moniteurs ne participent JAMAIS aux
+gradients, quantiles ou normalisateurs.
+
+**OBSERVATION** : prolonger 200→2000
+updates améliore H1/M1 sur certaines
+métriques directionnelles, mais
+dégrade D1 et/ou l'erreur d'amplitude
+M1 ; random mono s'améliore H1/M1
+mais reste 2/3 mono sur D1. Pas
+de budget ni tokenizer gagnant
+universel, pas d'edge financier.
+
+**PROCHAINE ÉTAPE S3.1D (backlog #20)** :
+étude indépendante préenregistrée de la
+loss direction vs magnitude. Ne PAS
+changer loss, taille, horizon et grammaire
+simultanément. Toujours BA ET montant
+USD/bps et Brier, pas de PnL cumulé.
+Aucun merge auto, aucun secret/trading,
+frais ignorés selon utilisateur.
+
+---
+
 # S3.1C CONVERGENCE INTERNE — PRIORITÉ ACTUELLE 26/10/2026
 
 Branche `chatgpt/trame-s3-training-dynamics-20261026`,
