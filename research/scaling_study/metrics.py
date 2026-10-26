@@ -145,5 +145,7 @@ def baseline_forecasts(dev_cases):
     direction = np.sign(last_code)
     return {
         "persistence_flat": anchor.copy(),
+        "always_up_1bp": anchor * (1.0 + 1.0 / 10000.0),
+        "always_down_1bp": anchor * (1.0 - 1.0 / 10000.0),
         "last_quantized_momentum_1bp": anchor * (1.0 + direction / 10000.0),
     }
