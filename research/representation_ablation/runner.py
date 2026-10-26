@@ -133,14 +133,18 @@ def run_cases(train, development, *, interval,
     prepared={}
     for representation in representations:
         input_train=features(train,representation)
-        scale=float(np.std(input_train))
-        fallback=not math.isfinite(scale) or scale<=1.e-8
-        if fallback:
-            scale=1.0
+        observed_std=float(np.std(input_train))
+        information_degenerate=(not math.isfinite(observed_std) or
+                                observed_std<=1.e-8)
+        # CRITICAL: both arms use the SAME input denominator learned from
+        # continuous TRAIN features. Different denominators would confound
+        # the measured effect of rounding with an implicit rescaling.
         prepared[representation]={
-            "train_tensor":torch.as_tensor(input_train/scale,dtype=torch.float64),
-            "train_std_bps":scale,
-            "std_degenerate_fallback":fallback,
+            "train_tensor":torch.as_tensor(
+                input_train/scale_target,dtype=torch.float64),
+            "train_std_bps":scale_target,
+            "observed_input_train_std_bps":observed_std,
+            "information_degenerate":information_degenerate,
             "train_diagnostics":quantization_diagnostics(train)
             if representation=="legacy_quantized_bps" else None,
         }
@@ -223,7 +227,9 @@ def run_cases(train, development, *, interval,
                             "parameter_count":sum(p.numel() for p in model.parameters()),
                             "initial_state_sha256":initial_state_sha256,
                             "input_normalizer_std_bps":prepared[representation]["train_std_bps"],
-                            "input_scale_fallback":prepared[representation]["std_degenerate_fallback"],
+                            "observed_input_train_std_bps":prepared[representation]["observed_input_train_std_bps"],
+                            "input_information_degenerate":prepared[representation]["information_degenerate"],
+                            "input_scale_fallback":target_scale_fallback,
                             "target_normalizer_std_bps_common":scale_target,
                             "observed_cpu_train_seconds":elapsed,
                             "last_minibatch_loss":float(loss.detach()),
@@ -240,6 +246,8 @@ def run_cases(train, development, *, interval,
         "not_cumulative_portfolio_return":True,
         "compute_matched":False,
         "same_target_normalization_all_representations":True,
+        "same_input_normalization_all_representations":True,
+        "shared_input_normalizer_train_continuous_std_bps":scale_target,
         "target_train_std_bps":scale_target,
         "target_scale_degenerate_fallback":target_scale_fallback,
         "quantization_input_train":quantization_diagnostics(train),
