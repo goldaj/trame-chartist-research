@@ -771,3 +771,64 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   patch tokens ensuite) avec protocole
   apparié et 2026 réservé. Aucun ordre
   Hyperliquid, aucun PnL validé.
+
+
+## 2026-10-26 — Reprise explicite après interruption (message utilisateur VERBATIM)
+> continue, t'as crash
+
+**Assistant, opérations effectivement réalisées (résumé, NON verbatim)** :
+- Reprend au point exact après S2b, où 144 fits
+  BTC PUBLICS D1/H1/M1 avaient réellement été
+  exécutés et où la roadmap grammaires #20
+  restait à transformer en expérience prédictive.
+- Crée [PR #24](https://github.com/goldaj/trame-chartist-research/pull/24)
+  enfant de #23 BTC public : projet S3.1A
+  de comparaison **G0b continu, G0a arrondi,
+  G1 magnitude à bins fixes signés et G2
+  magnitude à quantiles estimés TRAIN ONLY**.
+- Préenregistre `research/token_grammar/PREDICTIVE_PROTOCOL_20261026.md`,
+  **AVANT tout nouvel essai BTC réel S3.1A**.
+  Les tokens sont **reconstruits en scalaires**
+  afin que l'architecture S2b, initialisation,
+  cibles vraies, losses, mini-batches, échelles
+  de normalisation restent appariés.
+  Les embeddings catégoriels appris restent
+  une étape S3.1B séparée.
+- Étend le runner S2b par `feature_provider`
+  *optionnel et rétrocompatible*, crée
+  `research/token_grammar/predictive.py`,
+  `predictive_panel.py`, tests pour train-only
+  et réplication numérique stricte G0a/G0b.
+- Corrige un YAML CI initial contenant un
+  nom d'étape avec un deux-points non guillemeté.
+  La CI devient verte sur fixtures inventées.
+- Lance un pilote S3.1A BTC public D1/H1/M1,
+  quatre grammaires × deux losses =
+  **24 fits réels**, 40 mises à jour, une
+  graine ; [workflow #40299287171](https://github.com/goldaj/trame-chartist-research/actions/runs/40299287171),
+  trois jobs réussis et rapports SHA
+  dans `research/token_grammar/S3_1_REAL_PILOT_RESULTS_20261026.md`.
+  Le premier run avait échoué sur une assertion
+  d'intégrité erronée exigeant deux SHA initiaux,
+  corrigée : tous les bras de même width/depth/seed
+  DOIVENT partir des mêmes poids.
+- Corrige **une erreur arithmétique de planification
+  de campagne** détectée avant publication
+  du résultat final : quatre grammaires ×2
+  objectifs ×2 largeurs ×2 profondeurs ×3
+  seeds ×3 horizons font **288**, NON 192,
+  soit 96 fits par horizon. Retire l'ancien
+  workflow mal nommé 192, crée le nouveau
+  `.github/workflows/trame-s3-predictive-288.yml`,
+  et corrige la validation des 96/288 fits.
+- [Run #40300156418](https://github.com/goldaj/trame-chartist-research/actions/runs/40300156418)
+  lancé sur les trois historiques BTC publics
+  originaux; **ne pas prétendre réussite totale
+  sans vérifier les 3 jobs + job agrégateur**.
+  Les résultats seront sur les labels DEV
+  2022–2025 uniquement, 2026 strictement réservé.
+- Documentation Codex dans
+  `docs/CODEX_S3_1_HANDOFF_20261026.md`,
+  `AGENTS.md`, protocole, PR et issue #20.
+  Aucun modèle en prod, aucun trade, aucune
+  transaction/frais simulés, pas d'edge prouvé.
