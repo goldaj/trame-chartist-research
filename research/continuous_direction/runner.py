@@ -157,6 +157,12 @@ def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
     baselines["ridge_train_only"]=score_forecasts(
         anchor,actual,_ridge_forecasts(train,development),
         train_thresholds=thresholds)
+    # Constant drift is fitted only on the training targets. It tests
+    # whether learned architectures beat a naive signed magnitude.
+    train_mean_log_return_bps=float(np.mean(ytrain))
+    drift_forecast=anchor*np.exp(train_mean_log_return_bps/10000.0)
+    baselines["mean_log_return_train_only"]=score_forecasts(
+        anchor,actual,drift_forecast,train_thresholds=thresholds)
     rows=[]
     for seed in seeds:
         rng=np.random.default_rng(seed)
@@ -207,6 +213,7 @@ def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
         "train_only_normalization":True,"train_normalizer_std_bps":scale,
         "continuous_past_input_len":20,
         "direction_class_prior_train_only":train_prior,
+        "train_only_mean_log_return_bps":train_mean_log_return_bps,
         "quantized_target_zero_fraction_train":float(np.mean(
             np.asarray([c.encoded_target for c in train])==0)),
         "true_target_flat_fraction_train":float(np.mean(ytrain==0)),
