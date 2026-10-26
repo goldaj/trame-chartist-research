@@ -1,3 +1,38 @@
+# REPRISE APRÈS INTERRUPTION / AUDIT S2.1b (26/10/2026)
+
+Dernier message utilisateur, verbatim : « t'as crash, reprends ».
+Travail repris sur PR #19, branche
+`chatgpt/trame-continuous-direction-20261026`.
+Ne pas relancer aveuglément les 378 entraînements réels S1,
+leurs runs privés et rapports sont déjà documentés dans PR #18.
+
+Améliorations en cours de qualification CI :
+- `continuous_direction/diagnostics.py` : a priori signe
+  hausse train-only à lissage Jeffreys, Brier/CE/skill vs témoin,
+  calibration fixe, refus du score d'un logit non entraîné.
+- `continuous_direction/runner.py` : distincts
+  `model_source_commit` (véritable checkout TRAME) et
+  `github_workflow_commit` ; aucune prétention de sortie réelle
+  si SHA modèle indisponible.
+- `continuous_direction/models.py` : erreur explicite sur
+  amplitude extrême au lieu d'une prévision modifiée en silence.
+- `continuous_direction/panel.py` et tests : consolidation
+  appariée 2 objectifs `joint` vs `regression` à même
+  largeur/depth/seed, direction+amplitude, sans classements
+  entre D1/H1/M1 ni valorisation PnL.
+- `PROTOCOL_20261026.md` : addendum avant toute campagne
+  de résultats réels S2, préservant les 72 bras et splits.
+
+Le point bloquant S2.6 est INCHANGÉ : refus du connecteur
+lors de la création du workflow privé, pas d'exécution sur
+BTC S2, ne pas contourner. Seuls les tests synthétiques
+s'exécutent en CI publique. Prérequis scientifique pour
+un lancement autorisé : CI verte au dernier SHA, revue de
+l'accès privé, identité du checkout, train/dev 2022–2025,
+exclusion 2026, provenance et artefacts agrégés.
+
+---
+
 # Codex handoff : S2 direction continue, 26/10/2026
 
 ## D'abord : statut des preuves
