@@ -89,9 +89,11 @@ def forecast_prices(model, normalized_histories, anchors, *, scale_bps):
         raise ArithmeticError("nonfinite predictions")
     if len(reconciled_bps) != len(a):
         raise ValueError("context/anchor count mismatch")
-    forecast = a * np.exp(np.clip(reconciled_bps, -100000, 100000) / 10000.0)
-    # Clip exponent only as a crash guard. A saturated prediction is
-    # scientifically invalid and must not be silently presented as usable.
+    # Reject extreme outputs instead of silently clipping them. Clipping
+    # would fabricate a different forecast and bias MAE/directional scores.
+    if np.any(np.abs(reconciled_bps) > 100000):
+        raise ArithmeticError("implausible predicted log-return: do not clip forecasts")
+    forecast = a * np.exp(reconciled_bps / 10000.0)
     if not np.isfinite(forecast).all() or np.any(forecast <= 0):
         raise ArithmeticError("forecast overflow/underflow")
     return forecast, p_up, mu_bps
