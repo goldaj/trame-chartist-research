@@ -76,8 +76,8 @@ def evaluate(model, cases, *, chunk_size=96):
 def compare_history(*, interval, folder=ROOT, steps=40,
                     seeds=(20261025,20261026,20261027),
                     max_train=4096,max_dev=1024,stride=None):
-    if interval not in ("H1","M1"):
-        raise ValueError("supported horizons: H1/M1")
+    if interval not in ("D1","H1","M1"):
+        raise ValueError("supported horizons: D1/H1/M1")
     if type(steps) is not int or not 1<=steps<=200:
         raise ValueError("steps 1..200")
     if (not isinstance(seeds,(tuple,list)) or not seeds or
@@ -122,7 +122,7 @@ def compare_history(*, interval, folder=ROOT, steps=40,
     last_true=np.array([c.target_usd for c in dev],dtype=float)
     last_anchor=np.array([c.anchor_usd for c in dev],dtype=float)
     baseline={"persistence_mae_usd":float(np.mean(np.abs(last_anchor-last_true)))}
-    return {"experiment":"btc_bitstamp_h1_m1_exploratory_three_architectures",
+    return {"experiment":"btc_bitstamp_d1_h1_m1_exploratory_three_architectures",
         "interval":interval,"source":"user-approved unchanged Bitstamp compressed archives",
         "not_hyperliquid_history":True,
         "train_target_before":"2022-01-01T00:00:00Z",
@@ -145,7 +145,7 @@ def compare_history(*, interval, folder=ROOT, steps=40,
 
 def main(argv=None):
     p=argparse.ArgumentParser(description="TRAME offline Bitstamp H1/M1 development comparison")
-    p.add_argument("--interval",choices=("H1","M1"),required=True)
+    p.add_argument("--interval",choices=("D1","H1","M1"),required=True)
     p.add_argument("--directory",type=Path,default=ROOT)
     p.add_argument("--steps",type=int,default=40)
     p.add_argument("--seeds",type=int,nargs="+",default=[20261025,20261026,20261027])
