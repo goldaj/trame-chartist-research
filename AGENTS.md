@@ -1,3 +1,48 @@
+# ACTUALITÉ TRAME S3.1E TERMINÉE → S3.1F NEXT (26/10/2026)
+
+**S3.1E complète** [Actions #40318969005](https://github.com/goldaj/trame-chartist-research/actions/runs/40318969005)
+4/4 jobs SUCCESS, 27 vrais BTC fits /81
+checkpoints, D1/H1/M1. Code SHA :
+`73b56883dd09b3ad533aeeb4546eb1d402f2c003`.
+Bilan scientifique et SHA256 des 5
+fichiers de recherche :
+`research/token_grammar/S3_1E_REAL_81_RESULTS_20261026.md`.
+Passation `docs/CODEX_S3_1E_HANDOFF_20261026.md`.
+**PR #28 DRAFT** fille de PR #27,
+aucun merge automatique.
+
+**La méthode SOFT ne prouve aucun gain
+du cours HARD réellement servi.**
+À 2000 updates legacy D1 BA52,24%
+MAE prix282,704bps, H1 BA51,93%
+MAE54,611bps, M1 BA53,02%
+MAE8,368bps. Sur `reconciled_100`,
+un petit gain BA/amplitude D1 est payé
+par une hausse MAE prix à 285,563bps.
+H1/M1 BA ou MAE prix se détériorent.
+Désaccord entre signes des têtes
+sur legacy D1 7,9%, H1 19% et M1 26,7%.
+
+**Priorité S3.1F : isoler le postprocessing**
+à poids exacts constants entre
+`joint_hard`, `signed_direct_mu`,
+`joint_soft_tanh` afin de savoir si
+la combinaison des deux têtes est
+la source du mauvais MAE final.
+Préenregistrer avant les résultats,
+ne pas choisir un « gagnant » sur
+2020–21 comme confirmation indépendante.
+BTC spot Bitstamp historique public
+SHA contrôlé, TRAIN avant 2020,
+MONITOR 2020–21, dev externe
+2022–25 non consulté, 2026 gelé.
+Tous tableaux sens ET montant et
+amplitude ; aucune transaction,
+aucun wallet, aucun PnL composé,
+frais ignorés selon utilisateur.
+
+---
+
 # TRAME DERNIÈRE BRANCHE S3.1E : PR #28 DRAFT, 26/10/2026
 
 **Précédent S3.1D TERMINÉ** [run #40313075915](https://github.com/goldaj/trame-chartist-research/actions/runs/40313075915)
