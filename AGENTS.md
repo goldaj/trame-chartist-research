@@ -1,3 +1,56 @@
+# TRAME S3.1G — sélection par grandeur prévue, PR #30 DRAFT (26/10/2026)
+
+**Référence technique** :
+`research/token_grammar/S3_1G_SELECTIVE_PROTOCOL_20261026.md`,
+`research/token_grammar/selective_forecast.py`,
+`research/token_grammar/selective_panel.py`,
+`docs/CODEX_S3_1G_HANDOFF_20261026.md`.
+[PR #30](https://github.com/goldaj/trame-chartist-research/pull/30)
+enfant de #29 S3.1F. Aucune fusion automatique.
+
+**S3.1F TERMINÉE** [Actions #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917)
+4/4 jobs, 9 vrais modèles BTC et 81
+évaluations de règles sur mêmes poids ;
+bilan/SHA dans `research/token_grammar/S3_1F_REAL_81_RESULTS_20261026.md`.
+SOFT réduit très faiblement MAE du prix final
+mais dégrade magnitude de 9,86–12,24%.
+BA SOFT identique à HARD par construction.
+Aucun edge ni profit prouvé.
+
+**Question S3.1G** : à quelle fréquence
+prédictions de forte amplitude sont-elles
+mieux directionnellement et monétairement
+calibrées ? Seuils 0/q50/q75/q90
+estimés sur |prédiction HARD| TRAIN
+seulement (retours labels connus avant
+2020), puis appliqués MONITOR2020–21.
+Score HARD/DIRECT/SOFT sur les MÊMES
+cas sélectionnés ; couverture N
+et classe vraie requises. Si N<30
+ou classe manquante, BA=null.
+Témoin persistance sur mêmes cases.
+9 modèles réels D1/H1/M1×3 seeds
+à 2000 updates, 4×3×9 =
+108 cellules de mesure dépendantes,
+pas 108 fits.
+
+**Causalité** : ne pas réutiliser
+ancien dev externe 2022–25 et
+ne pas ouvrir test 2026 ; seuils
+in-sample TRAIN (pas OOF) donc
+toute conclusion exploratoire.
+CI fixtures [vert #40329278603](https://github.com/goldaj/trame-chartist-research/actions/runs/40329278603),
+smoke BTC [3/3 verts #40329375986](https://github.com/goldaj/trame-chartist-research/actions/runs/40329375986).
+Campagne [#40329836255](https://github.com/goldaj/trame-chartist-research/actions/runs/40329836255)
+en cours : NE PAS déclarer terminée
+avant 4/4 jobs, panel, SHA archives.
+Pas d'ordres Hyperliquid/PNL composé ;
+frais ignorés par consigne utilisateur.
+**Après S3.1G, arrêter de multiplier
+les hypothèses sur MONITOR 2020–21.**
+
+---
+
 # DERNIER ÉTAT TRAME : S3.1F TERMINÉE, S3.1G PROCHAINE (26/10/2026)
 
 **PR #29** `chatgpt/trame-s3-postprocess-ablation-20261026`
