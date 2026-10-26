@@ -1,0 +1,27 @@
+name: TRAME S2b representation ablation artificial fixtures
+on:
+  push:
+    branches:
+      - chatgpt/trame-representation-ablation-20261026
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  paired-representation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU research environment
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Check paired encoders, true targets, same initialisation, no holdout
+        run: |
+          python -m unittest research.representation_ablation.test_ablation -v
+      - name: Check legacy S2 and S3 fixtures are unchanged
+        run: |
+          python -m unittest research.continuous_direction.test_continuous research.continuous_direction.test_diagnostics research.token_grammar.test_diagnostics -v
