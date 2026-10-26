@@ -68,14 +68,19 @@ def files_for(interval: str, folder: Path = ROOT) -> tuple[Path, ...]:
     return paths
 
 
-def read_bars(interval: str, folder: Path = ROOT):
+def read_bars(interval: str, folder: Path = ROOT, *, stop_before=None):
     """Yield from gzip, never materialize the full multi-million-candle archive."""
     seconds = INTERVALS.get(interval)
     if seconds is None:
-        raise ValueError("interval must be H1 or M1")
+        raise ValueError("interval must be D1, H1 or M1")
+    if (stop_before is not None and (not isinstance(stop_before,datetime)
+            or stop_before.tzinfo is None or stop_before.utcoffset().total_seconds()!=0)):
+        raise ValueError("stop_before must be a timezone-aware UTC datetime")
     if interval == "D1":
         from research.btc_h1_m1.daily import read_daily
         for daily in read_daily(directory=folder):
+            if stop_before is not None and daily.day >= stop_before.date():
+                return  # do not even emit post-cutoff candles
             if daily.day >= DEVELOPMENT_END_EXCLUSIVE.date():
                 break  # never construct any 2026 target or candle for training
             if daily.grade != "bitstamp_spot_ohlcv":
@@ -99,6 +104,8 @@ def read_bars(interval: str, folder: Path = ROOT):
                 stamp = datetime.fromisoformat(row["datetime_utc"])
                 if stamp.tzinfo is None or stamp.utcoffset().total_seconds() != 0:
                     raise ValueError("history must contain UTC timestamps")
+                if stop_before is not None and stamp >= stop_before:
+                    return  # no parsing or yielding post-cutoff OHLCV
                 if stamp >= CUTOFF:
                     # Entire quarantined period is excluded before reading prices.
                     continue
@@ -126,7 +133,8 @@ def code_return(previous: float, current: float) -> int:
 
 
 def iter_cases(interval: str, folder: Path = ROOT, *, context: int = 20,
-               step: int = 1, train_only: bool = False):
+               step: int = 1, train_only: bool = False,
+               stop_labels_before=None):
     """Generate causal next-candle samples from consecutive non-zero-volume bars.
 
     D1 uses genuine 2011+ Bitstamp OHLCV; 2010-2011 indicative close-only
@@ -142,11 +150,17 @@ def iter_cases(interval: str, folder: Path = ROOT, *, context: int = 20,
     seconds=INTERVALS.get(interval)
     if seconds is None:
         raise ValueError("interval must be H1 or M1")
+    if stop_labels_before is not None and (
+            not isinstance(stop_labels_before,datetime)
+            or stop_labels_before.tzinfo is None
+            or stop_labels_before.utcoffset().total_seconds()!=0
+            or stop_labels_before > TRAIN_END_EXCLUSIVE):
+        raise ValueError("pretrain label stop must be UTC and <=2022-01-01")
     previous=None
     returns=deque(maxlen=context)
     exact_returns=deque(maxlen=context)
     since=0
-    for bar in read_bars(interval, folder):
+    for bar in read_bars(interval, folder,stop_before=stop_labels_before):
         if bar.started_at >= DEVELOPMENT_END_EXCLUSIVE:
             # Do not even calculate 2026 target labels.
             break
@@ -160,6 +174,9 @@ def iter_cases(interval: str, folder: Path = ROOT, *, context: int = 20,
         continuous_bps=10_000.0*math.log(bar.close/previous.close)
         # Train/dev partition based on completed target time.
         target_completed=bar.started_at.timestamp()+seconds
+        if (stop_labels_before is not None
+                and target_completed >= stop_labels_before.timestamp()):
+            break  # boundary targets excluded before constructing labels
         split="train" if target_completed <= TRAIN_END_EXCLUSIVE.timestamp() else "development"
         if len(returns)==context and since % step == 0 and (
             not train_only or split=="train"
