@@ -1,3 +1,17 @@
+# Extension D1 effective (26/10/2026)
+
+Cette branche de reprise empilée sur PR #17 inclut désormais **D1** en plus
+de H1/M1. Le traitement D1 réutilise le module `daily.py` existant, avec
+filtrage du segment « indicative close-only » de 2010–2011 ; détails dans
+[`D1_RECOVERY_PLAN_20261026.md`](../btc_h1_m1/D1_RECOVERY_PLAN_20261026.md).
+La matrice 5×3×3×3 horizons×3 seeds = **405 fits**.
+Exemples : `python -m research.scaling_study.runner --interval D1 --plan-only`.
+Aucun modèle D1 de 2.36 M paramètres n'est déclaré entraîné
+sans rapport authentifié. Les guides plus anciens H1/M1 ci-dessous
+restent des archives historiques de la phase S1 initiale.
+
+---
+
 # TRAME S1 — size × depth × direction and magnitude
 Start here: [full scientific protocol](PROTOCOL_20261026.md).
 
