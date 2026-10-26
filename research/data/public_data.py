@@ -41,7 +41,7 @@ def digest(path: Path) -> tuple[str, str, int]:
     if path.is_symlink() or not path.is_file():
         raise IntegrityError("not a regular file")
     length = path.stat().st_size
-    git = hashlib.sha1(f"blob {length}\\0".encode("ascii"))
+    git = hashlib.sha1(f"blob {length}\0".encode("ascii"))
     sha256 = hashlib.sha256()
     with path.open("rb") as src:
         for block in iter(lambda: src.read(1024 * 1024), b""):
