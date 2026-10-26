@@ -7,7 +7,7 @@ import numpy as np
 
 from research.continuous_direction.diagnostics import prior_from_train, probability_report
 from research.continuous_direction.test_continuous import fabricated_case
-from research.continuous_direction.runner import run_cases
+from research.continuous_direction.runner import run_cases, _origin_digest
 
 
 class DiagnosticTests(unittest.TestCase):
@@ -47,6 +47,14 @@ class DiagnosticTests(unittest.TestCase):
             probability_report([100],[101],[0.8],
                                train_prior={"p_up":0.6})
 
+    def test_case_origin_digest_is_label_blind_and_order_sensitive(self):
+        values=[fabricated_case(2018,i) for i in range(40)]
+        canonical=_origin_digest(values)
+        changed_labels=[replace(x,target_usd=x.target_usd*1.01) for x in values]
+        self.assertEqual(_origin_digest(changed_labels),canonical)
+        self.assertNotEqual(_origin_digest(list(reversed(values))),canonical)
+        self.assertEqual(len(canonical),64)
+
     def test_runner_reports_untrained_regression_logit_as_unavailable(self):
         train=[fabricated_case(2018,i) for i in range(40)]
         dev=[fabricated_case(2023,i) for i in range(40)]
@@ -56,6 +64,8 @@ class DiagnosticTests(unittest.TestCase):
         self.assertTrue(report["direction_class_prior_train_only"]
                         ["prior_fit_on_training_only"])
         self.assertIn("model_source_commit",report)
+        self.assertEqual(len(report["development_origins_sha256"]),64)
+        self.assertIsNone(report["approved_private_release_tag"])
         by_mode={row["mode"]:row for row in report["results"]}
         self.assertIsNone(by_mode["regression"]["brier_nonflat"])
         self.assertFalse(by_mode["regression"]
