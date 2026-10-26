@@ -115,7 +115,7 @@ def expected_parameters(family, *, width, depth, length=20):
     if family == "legacy_causal_transformer":
         return depth * (8 * width * width + 11 * width) + (length + 4) * width + 2
     if family == "modern_gpt_style_mini":
-        return depth * (9 * width * width + 2 * width) + 4 * width + 2
+        return depth * (9 * width * width + 2 * width) + 5 * width + 2
     if family == "recurrent_gru_control":
         return depth * (6 * width * width + 6 * width) + 4 * width + 2
     raise ValueError("unknown family")
