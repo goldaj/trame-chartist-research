@@ -1,0 +1,76 @@
+name: TRAME S3.1A REAL BTC 4-grammar pilot
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-predictive-grammars-20261026
+    paths:
+      - .github/workflows/trame-s3-predictive-canary.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  predictive-grammar-real:
+    strategy:
+      fail-fast: false
+      matrix:
+        interval: [D1, H1, M1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    env:
+      INTERVAL: ${{ matrix.interval }}
+      TRAME_BTC_CACHE_DIR: /tmp/trame-btc-pinned-public
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU-only research dependencies
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Load only public origin-verified BTC data
+        run: |
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR" --check-only || test "$INTERVAL" != D1
+          if [ "$INTERVAL" != D1 ]; then
+            python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR"
+            python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR" --check-only
+          fi
+      - name: Real 4-grammar paired 40-update pilot
+        run: |
+          mkdir -p out
+          if [ "$INTERVAL" = D1 ]; then DATA_DIR=research/data/reference; else DATA_DIR="$TRAME_BTC_CACHE_DIR"; fi
+          python -m research.token_grammar.predictive \
+            --interval "$INTERVAL" --directory "$DATA_DIR" \
+            --data-origin BTC_PUBLIC_REAL \
+            --grammars continuous_bps legacy_quantized_bps signed_uniform_g1 signed_quantile_g2 \
+            --modes regression joint \
+            --widths 16 --depths 1 --seeds 20261026 --steps 40 \
+            --output "out/${INTERVAL}_s3_4grammars_real_pilot.json"
+      - name: Check all paired arms and frozen 2026 independent test
+        run: |
+          python - <<'PY'
+          import os,json,math,hashlib
+          from pathlib import Path
+          interval=os.environ["INTERVAL"]
+          path=Path(f"out/{interval}_s3_4grammars_real_pilot.json")
+          data=json.loads(path.read_text(encoding="utf-8"))
+          assert data["interval"]==interval and data["data_origin"]=="BTC_PUBLIC_REAL"
+          assert not data["labels_2026_opened"] and not data["independent_test_used"]
+          assert data["quantile_fit_on"]=="TRAIN_PAST_CONTEXTS_ONLY"
+          assert data["same_input_normalization_all_representations"]
+          assert len(data["results"])==8 and data["steps"]==40
+          assert len({r["initial_state_sha256"] for r in data["results"]})==2
+          assert len({r["target_normalizer_std_bps_common"] for r in data["results"]})==1
+          assert all(math.isfinite(r["mae_bps_anchor"]) for r in data["results"])
+          assert all(r["forecast_rows"]==1024 for r in data["results"])
+          print("REAL BTC S3 GRAMMAR PILOT",interval,hashlib.sha256(path.read_bytes()).hexdigest())
+          PY
+      - name: Save aggregate pilot evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-real-grammar-pilot-${{ matrix.interval }}
+          path: out/*.json
+          if-no-files-found: error
+          retention-days: 30
