@@ -1,3 +1,30 @@
+# S2 ACTIF / ÉTAT EXACT — 26 OCTOBRE 2026
+
+Après restauration et exécution vérifiée de D1/H1/M1, l'expérimentation
+S1 a effectué 135 fits de scaling à une graine + 243 fits
+à 200 updates/trois graines. Les résultats NE prouvent PAS de
+gain directionnel : voir `research/scaling_study/S1_REAL_200UPDATES_20261026.md`.
+L'absence de qualité n'autorise pas l'ouverture de 2026.
+
+Branche S2 `chatgpt/trame-continuous-direction-20261026` (PR #19)
+basée sur D1 PR #18. Objectif : distinguer l'effet d'un retour
+d'entrée CONTINU de l'encodeur historique quantifié, avec régression
+Huber seule contre régression Huber+BCE du sens. Lire obligatoirement
+`research/continuous_direction/PROTOCOL_20261026.md`,
+`research/continuous_direction/README.md`, et
+`docs/CODEX_S2_HANDOFF_20261026.md`.
+
+S2 **tests synthétiques verts**, mais **AUCUNE campagne réelle S2**
+n'est encore exécutée. La création d'un workflow GitHub Actions
+privé a été BLOQUÉE par des contrôles de sécurité. Ne jamais annoncer
+de performances S2 réelles, contourner un blocage, copier des
+cours privés dans TRAME ou intervenir sur Hyperliquid.
+Frais de trading ignorés explicitement par l'utilisateur ;
+aucune simulation de PnL de portefeuille ou passage d'ordre.
+Aucun merge automatique des PR, et les labels 2026 restent exclus.
+
+---
+
 # URGENCE REPRISE D1 — NOUVELLE CONSIGNE UTILISATEUR (26/10/2026)
 
 **Cette instruction supersède la priorité S1 qui suit** jusqu'à
