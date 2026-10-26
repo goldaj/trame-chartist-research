@@ -1,0 +1,44 @@
+name: TRAME S3.1C pre2022 leakage and convergence fixture tests
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-training-dynamics-20261026
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  unit-and-real-d1-reader:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU-only research tools
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Synthetic S3.1C time boundary and checkpoint pairing
+        run: |
+          python -m unittest research.token_grammar.test_training_dynamics research.token_grammar.test_learned_embeddings -v
+      - name: Regression earlier streams and direct D1 public integrity
+        run: |
+          python -m unittest research.btc_h1_m1.test_daily research.data.test_public_data -v
+      - name: Hard-stop real D1 in 2021, never request public external development
+        run: |
+          python - <<'PY'
+          from research.token_grammar.internal_cohorts import collect_pre2022,TRAIN_END,MONITOR_END
+          from pathlib import Path
+          s,p=collect_pre2022("D1",Path("research/data/reference"))
+          assert len(s["train"])>=2000
+          assert len(s["monitor"])>=500
+          assert p["all_labels_before_2022"]
+          assert p["first_monitor_label"].startswith("2020")
+          assert all(c.label_available_time<TRAIN_END for c in s["train"])
+          assert all(TRAIN_END<=c.label_available_time<MONITOR_END for c in s["monitor"])
+          print("PRE2022 D1 ONLY:",p["train_count"],p["monitor_count"],
+                p["train_origins_sha256"],p["monitor_origins_sha256"])
+          PY
