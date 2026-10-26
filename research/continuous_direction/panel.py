@@ -47,7 +47,8 @@ def validate(source):
         raise ValueError("missing train-only direction prior")
     if not isinstance(source.get("results"), list) or not source["results"]:
         raise ValueError("no model results")
-    for control in ("always_up_1bp", "always_down_1bp", "persistence_flat"):
+    for control in ("always_up_1bp", "always_down_1bp", "persistence_flat",
+                    "mean_log_return_train_only"):
         if not isinstance(source.get("baselines", {}).get(control), dict):
             raise ValueError("missing no-skill control " + control)
     for r in source["results"]:
@@ -182,6 +183,8 @@ def build_panel(sources):
                 "always_up_accuracy":bs["always_up_1bp"]["direction_accuracy_all"],
                 "always_down_accuracy":bs["always_down_1bp"]["direction_accuracy_all"],
                 "persistence_mae_usd":bs["persistence_flat"]["mae_native_usd"],
+                "train_mean_drift_mae_bps":bs["mean_log_return_train_only"]["mae_bps_anchor"],
+                "train_mean_drift_direction_accuracy":bs["mean_log_return_train_only"]["direction_accuracy_all"],
             }
             for ident,bs in sorted(baselines.items())],
         "n_model_fits":len(all_rows),"n_groups":len(summary),
@@ -208,7 +211,8 @@ def to_markdown(panel):
             "## "+horizon,
             "",
             f"Témoin toujours hausse : {base['always_up_accuracy']*100:.2f} % ; "
-            f"toujours baisse : {base['always_down_accuracy']*100:.2f} %.",
+            f"toujours baisse : {base['always_down_accuracy']*100:.2f} % ; "
+            f"drift train-only : {base['train_mean_drift_direction_accuracy']*100:.2f} %.",
             "",
             "| Mode | Width | Layers | Steps | Seeds | Direction % | Balanced % | "
             "Up predictions % | MAE USD | MAE bps | Magnitude err. bps | "
