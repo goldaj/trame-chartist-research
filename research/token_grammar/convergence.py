@@ -66,35 +66,49 @@ def split_internal_pre2022(cases):
     return train,monitor
 
 
-def collect_internal(interval, directory=ROOT, *, max_cases=4096, sampling_seed=20261025):
+def collect_internal(interval, directory=ROOT, *, max_cases=4096,
+                     max_monitor=1024,sampling_seed=20261025):
     if interval not in ("D1","H1","M1"):
         raise ValueError("resolution D1/H1/M1 required")
-    if type(max_cases)!=int or not 100<=max_cases<=50000:
-        raise ValueError("invalid train-only reservoir size")
-    rng=np.random.default_rng(sampling_seed)
+    if (type(max_cases)!=int or not 100<=max_cases<=50000
+            or type(max_monitor)!=int or not 32<=max_monitor<=10000):
+        raise ValueError("invalid chronological reservoir size")
+    # CRITICAL: separate RNGs and separate reservoirs. Later 2020-21
+    # monitor counts/values CANNOT affect which pre-2020 rows are TRAIN.
+    rng_train=np.random.default_rng(sampling_seed)
+    rng_monitor=np.random.default_rng(sampling_seed+1)
     stride=60 if interval=="M1" else 1
-    pool=[]
-    scanned=0
-    # train_only=True yields NO external 2022-25 cases, even though the source
-    # reader streams through older files for chronological integrity.
+    early=[]
+    held=[]
+    scanned={"train_pre2020":0,"monitor_2020_2021":0}
     for group,c in iter_cases(interval,Path(directory),
                               step=stride,train_only=True):
         if group!="train":
             raise AssertionError("train_only reader leaked external cohort")
         if c.label_available_time>=MONITOR_END:
             raise ValueError("reader unexpectedly yielded 2022+ label")
-        scanned+=1
-        if len(pool)<max_cases:
+        is_early=c.label_available_time<TRAIN_CUTOFF
+        key="train_pre2020" if is_early else "monitor_2020_2021"
+        scanned[key]+=1
+        pool=early if is_early else held
+        cap=max_cases if is_early else max_monitor
+        rng=rng_train if is_early else rng_monitor
+        if len(pool)<cap:
             pool.append(c)
         else:
-            k=int(rng.integers(0,scanned))
-            if k<max_cases:
+            k=int(rng.integers(0,scanned[key]))
+            if k<cap:
                 pool[k]=c
-    early,monitor=split_internal_pre2022(pool)
-    return early,monitor,{"scanned_pre2022":scanned,
-                         "reservoir_cases":len(pool),"sampling_stride":stride,
-                         "external_2022_2025_cases_accessed":False}
-
+    train,monitor=split_internal_pre2022(early+held)
+    return train,monitor,{
+        "scanned_pre2020_train":scanned["train_pre2020"],
+        "scanned_2020_2021_monitor":scanned["monitor_2020_2021"],
+        "train_reservoir_cases":len(train),
+        "monitor_reservoir_cases":len(monitor),
+        "sampling_stride":stride,
+        "train_reservoir_is_independent_of_monitor_counts":True,
+        "external_2022_2025_cases_accessed":False,
+    }
 
 def _monitor_loss(model,x,y):
     model.eval()
