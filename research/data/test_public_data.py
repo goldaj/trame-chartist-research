@@ -83,10 +83,12 @@ class PublicBTCDataTests(unittest.TestCase):
         changed={"repo":data["repo"],"commit":data["commit"],
                  "files":[dict(x) for x in data["files"]]}
         changed["files"][0]["relative_path"]="../unsafe.csv.gz"
-        with patch.object(public_data.MANIFEST,"read_text",
-                          return_value=__import__("json").dumps(changed)):
-            with self.assertRaises(public_data.IntegrityError):
-                public_data.load_manifest()
+        with TemporaryDirectory() as folder:
+            changed_path=Path(folder)/"bad_manifest.json"
+            changed_path.write_text(__import__("json").dumps(changed),encoding="utf-8")
+            with patch.object(public_data,"MANIFEST",changed_path):
+                with self.assertRaises(public_data.IntegrityError):
+                    public_data.load_manifest()
 
 
 if __name__=="__main__":
