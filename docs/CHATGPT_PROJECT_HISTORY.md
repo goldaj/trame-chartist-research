@@ -491,3 +491,42 @@ justesse directionnelle et à l'amplitude, aucun frais de trading.
   aucune campagne S2 réelle lancée. Pas de contournement tenté.
 - Statut scientifique : résultats S1 A7 réels acquis,
   S2 implémenté et testé **sur cas fabriqués uniquement**.
+
+
+## 2026-10-26 — Reprise après interruption (messages et état)
+**Utilisateur, citation textuelle (horodatage précis non disponible)** :
+> t'as crash, reprends
+
+**Assistant, activité réellement effectuée (résumé, non verbatim)** :
+- Relit l'état du dépôt GitHub TRAME PR #19 et la CI réussie
+  initiale. Conserve l'arrêt sécurité du workflow privé S2
+  et refuse d'inventer des résultats BTC S2.
+- Audite la calibration de la tête binaire : introduit
+  `research/continuous_direction/diagnostics.py` et ses
+  tests. Les probabilités du bras régression sont non entraînées :
+  elles sont explicitement non scorées. La classe haussière
+  train-only a un prior lissé Jeffreys, et Brier/entropie sont
+  comparés à ce prior.
+- Ajoute le témoin naïf du rendement moyen d'entraînement,
+  pour comparer le montant prévu et non seulement le signe.
+- Sépare le SHA de la version du code modèle et le SHA de
+  la CI privée ; ajoute un hash du calendrier d'origines
+  sans prix ni label, et refuse un SHA de code absent pour
+  tout résultat étiqueté BTC réel.
+- Corrige la conversion de prévisions extrêmes : rejet
+  explicite plutôt que plafond silencieux.
+- Crée `research/continuous_direction/panel.py`,
+  `test_panel.py`, et fait exécuter les tests sur fixtures
+  uniquement, pour un tableau apparié sign+amplitude+Brier.
+- Recalcule le diagnostic original de 243 entraînements réels
+  S1 (aucun nouvel entraînement) et constate monoclasse
+  ≥99 % : D1 72/81, H1 45/81, M1 34/81. L'architecture
+  H1 meilleure sur balanced accuracy moyenne (52,10 %)
+  ne bat pas la persistance sur MAE bps.
+- Place les preuves et limites dans
+  `research/scaling_study/S1_SIGN_COLLAPSE_REAUDIT_20261026.md`,
+  `research/continuous_direction/PROTOCOL_20261026.md`,
+  `docs/CODEX_S2_HANDOFF_20261026.md`, et la PR #19.
+- Aucun nouveau workflow privé ni campagne réelle S2
+  n'ont été lancés à cause du refus de sécurité précédent.
+  Néanmoins, la suite a pu avancer en code/CI/tests/documentation.
