@@ -24,6 +24,6 @@ jobs:
       - name: Synthetic S3.1 grammar leakage and strict S2b parity
         run: |
           python -m unittest research.token_grammar.test_predictive research.token_grammar.test_diagnostics research.token_grammar.test_audit -v
-      - name: Regression: prior S2b validation
+      - name: Regression checks for prior S2b validation
         run: |
           python -m unittest research.representation_ablation.test_ablation research.representation_ablation.test_panel -v
