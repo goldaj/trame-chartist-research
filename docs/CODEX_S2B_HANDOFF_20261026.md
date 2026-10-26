@@ -31,9 +31,10 @@ et l'issue [#20](https://github.com/goldaj/trame-chartist-research/issues/20).
    log-returns ex-ante en bps, soit les codes EXACTS
    `case.encoded_past * 10` bps ; mêmes **vraies**
    étiquettes cible continues entre bras.
-   Entrées normalisées séparément train-only ;
-   cible normalisée par UN ÉCART TYPE COMMUN calculé
-   sur le train des entrées continues. Même suite d'indices
+   **Entrées ET cibles normalisées par le MÊME écart-type**
+   calculé sur train des entrées continues (train-only).
+   L'écart-type de l'entrée quantifiée est calculé pour
+   DIAGNOSTIC seulement et ne modifie pas son échelle. Même suite d'indices
    de mini-batches et même graine avant construction du
    modèle ; `initial_state_sha256` prouve le même point
    de départ entre représentations.
@@ -54,11 +55,12 @@ et l'issue [#20](https://github.com/goldaj/trame-chartist-research/issues/20).
 - S1 vs S2 était confondu : nouveau label, loss,
   mode d'encodage. S2b isole l'**entrée** sans modifier
   la fonction de perte au sein d'une même paire.
-- Les échelles d'entrée `std(input_train)` sont
-  estimées indépendamment par grammaire ; cela reste
-  une chaîne de preprocessing non identique, explicitée
-  dans le protocole, pas un « effet isolé parfait ».
-  La cible, elle, est bien sur une échelle commune.
+- Les deux encodages partagent l'échelle d'entrée
+  **et** de cible `std(continuous_train_past_bps)`, fit
+  sur train seulement. Seul l'input arrondi change ;
+  cela renforce l'identification scientifique.
+  Les écarts-types natives distincts des inputs restent
+  disponibles en diagnostics de quantité d'information.
 - Si les codes quantifiés M1 sont presque tous à zéro,
   l'écart-type des inputs arrondis peut être nul :
   `std_degenerate_fallback=true` et scale 1,
