@@ -1,3 +1,27 @@
+# PRIORITÉ DE REPRISE S2 — APRÈS INTERRUPTION (26/10/2026)
+
+Consulter maintenant `docs/CODEX_S2_HANDOFF_20261026.md`
+et `research/continuous_direction/PROTOCOL_20261026.md`
+avec leurs addenda S2.1b/c. Le code a été renforcé :
+témoin de probabilité train-only, Brier skill,
+témoin d'amplitude drift train-only, empreintes des
+origines ex ante, identification fiable du commit TRAME,
+refus des sorties excessives, générateur de tableau
+apparié `continuous_direction/panel.py`.
+Les tests synthétiques sont vérifiés par
+`.github/workflows/trame-s2-continuous.yml` ; vérifier
+la **dernière** CI de PR #19 avant toute suite.
+
+Toujours respecter D1/H1/M1, le gel 2026, les
+frais ignorés sur demande, les résultats S1 archivés et
+l'absence de commande de trading. S2 sur BTC réel
+**n'a pas encore été exécuté** : ancien essai de
+workflow privé refusé par contrôle de sécurité,
+ne pas contourner ce refus. Les sorties S2
+synthétiques ne valent pas des scores financiers.
+
+---
+
 # S2 ACTIF / ÉTAT EXACT — 26 OCTOBRE 2026
 
 Après restauration et exécution vérifiée de D1/H1/M1, l'expérimentation
