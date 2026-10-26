@@ -33,6 +33,7 @@ def validate(report):
             or report.get("labels_2026_opened") is not False
             or report.get("independent_test_used") is not False
             or report.get("same_target_normalization_all_representations") is not True
+            or report.get("same_input_normalization_all_representations") is not True
             or report.get("compute_matched") is not False
             or report.get("common_batch_indices_per_seed") is not True
             or report.get("data_origin") not in ("BTC_PRIVATE_REAL","ARTIFICIAL_FIXTURE")):
@@ -114,6 +115,7 @@ def build_panel(reports):
         quantized=next(r for r in rows if r["representation"]=="legacy_quantized_bps")
         if (continuous["initial_state_sha256"]!=quantized["initial_state_sha256"]
                 or continuous["parameter_count"]!=quantized["parameter_count"]
+                or continuous["input_normalizer_std_bps"]!=quantized["input_normalizer_std_bps"]
                 or continuous["target_normalizer_std_bps_common"]!=quantized["target_normalizer_std_bps_common"]):
             raise ValueError("not matched initialization/model/target")
         delta={metric:continuous[metric]-quantized[metric] for metric in PAIRED}
