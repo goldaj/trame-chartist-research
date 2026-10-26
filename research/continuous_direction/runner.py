@@ -6,6 +6,7 @@ not-rounded past returns. No 2026 labels. Never trades.
 from __future__ import annotations
 
 import argparse
+import hashlib
 from datetime import datetime, timezone
 import json
 import math
@@ -20,6 +21,7 @@ import torch
 
 from research.btc_h1_m1.experiment import collect
 from research.btc_h1_m1.stream import ROOT
+from research.btc_h1_m1.release_store import REPOSITORY, TAG
 from research.scaling_study.metrics import (
     score_forecasts, training_magnitude_thresholds, baseline_forecasts,
 )
@@ -28,6 +30,17 @@ from research.continuous_direction.models import (
     ContinuousDirectionModel, forecast_prices,
 )
 from research.continuous_direction.diagnostics import prior_from_train, probability_report
+
+
+def _origin_digest(cases):
+    """SHA256 of ordered ex-ante case identifiers, never forecast prices/labels."""
+    identifiers = (
+        case.origin_open.isoformat() + "|" +
+        case.decision_time.isoformat() + "|" +
+        case.label_available_time.isoformat()
+        for case in cases
+    )
+    return hashlib.sha256(("\\n".join(identifiers)+"\\n").encode("utf-8")).hexdigest()
 
 
 def _arrays(cases):
@@ -123,6 +136,7 @@ def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
             or len(set(seeds))!=len(seeds)):
         raise ValueError("invalid training budget")
     _validate_chronology(train,development)
+    code_commit=_source_code_commit(data_origin)
     if len(train)<32 or len(development)<32:
         raise ValueError("train and dev need >=32 cases")
     torch.set_num_threads(1)
@@ -212,7 +226,11 @@ def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
         "python_version":platform.python_version(),
         "torch_version":torch.__version__,
         "github_workflow_commit":os.environ.get("GITHUB_SHA","not recorded outside CI"),
-        "model_source_commit":_source_code_commit(data_origin),
+        "model_source_commit":code_commit,
+        "train_origins_sha256":_origin_digest(train),
+        "development_origins_sha256":_origin_digest(development),
+        "approved_private_release_repo":REPOSITORY if data_origin=="BTC_PRIVATE_REAL" else None,
+        "approved_private_release_tag":TAG if data_origin=="BTC_PRIVATE_REAL" else None,
     }
 
 
