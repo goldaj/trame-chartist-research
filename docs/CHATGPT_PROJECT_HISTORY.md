@@ -832,3 +832,35 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   `AGENTS.md`, protocole, PR et issue #20.
   Aucun modèle en prod, aucun trade, aucune
   transaction/frais simulés, pas d'edge prouvé.
+
+
+### 26/10/2026 — clôture S3.1A 288 fits BTC réels (assistant, résumé non verbatim)
+- Le run [#40300156418](https://github.com/goldaj/trame-chartist-research/actions/runs/40300156418)
+  a **réussi 4/4 jobs**, dont D1/H1/M1
+  (96 modèles chacun) et agrégation finale
+  sur **288 fits /72 groupes appariés**.
+- Trois graines, 200 optimizer updates,
+  deux losses, deux widths/depths,
+  quatre grammaires **décodées en scalaires**,
+  Bitstamp SPOT 2012+/H1/M1 ; dev
+  2022–25, **2026 toujours non ouvert**.
+- Rapports de résultats et SHA256 dans
+  `research/token_grammar/S3_1A_REAL_288_RESULTS_20261026.md`.
+  Les cinq rapports complets (JSON D1/H1/M1,
+  panel JSON, tableau MD) sont également
+  regroupés en archive téléchargeable
+  depuis la conversation ; leur contenu
+  est reproductible via TRAME/GitHub Actions.
+- Analyse : H1 Joint G2 améliore
+  modestement BA et MAE du prix,
+  réduit le biais monoclasse (0/12 vs 6/12)
+  mais dégrade **l'erreur d'amplitude** ;
+  ailleurs les effets sont faibles,
+  variables ou contradictoires.
+  Brier skill proche de zéro.
+  Pas de preuve de gain conjoint ou PnL.
+- Consigne Codex et issue #20 à actualiser
+  vers S3.1B : **embeddings catégoriels
+  réellement appris**, coût/paramètres
+  appariés, protocole distinct ;
+  nouveau modèle non traité dans S3.1A.
