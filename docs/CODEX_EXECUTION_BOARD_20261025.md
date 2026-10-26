@@ -28,7 +28,7 @@ A7.7 multi-actifs et P1–P4 restent partiellement ou totalement ouverts.
 
 
 
-**25 octobre 2026. Statut courant : REPRISE AUTORISÉE.**
+**ARCHIVE DES INSTRUCTIONS DU 25/10 : REPRISE AUTORISÉE À CETTE DATE,\nREMPLACÉE PAR L'ARRÊT DE SESSION DU 26/10 CI-DESSUS.**
 Cette nouvelle instruction utilisateur **remplace la pause** notée dans
 `docs/CODEX_REPRISE_TRAME_PAUSE_20261025.md` (qui reste comme archive
 datée). L'utilisateur demande de poursuivre **sans demander une validation
