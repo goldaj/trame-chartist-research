@@ -51,6 +51,7 @@ class Case:
     anchor_usd: float
     target_usd: float
     grade: str
+    continuous_past_bps: tuple[float, ...] = ()  # additional causal ex-ante feature
 
 
 def files_for(interval: str, folder: Path = ROOT) -> tuple[Path, ...]:
@@ -143,6 +144,7 @@ def iter_cases(interval: str, folder: Path = ROOT, *, context: int = 20,
         raise ValueError("interval must be H1 or M1")
     previous=None
     returns=deque(maxlen=context)
+    exact_returns=deque(maxlen=context)
     since=0
     for bar in read_bars(interval, folder):
         if bar.started_at >= DEVELOPMENT_END_EXCLUSIVE:
@@ -150,10 +152,12 @@ def iter_cases(interval: str, folder: Path = ROOT, *, context: int = 20,
             break
         if previous is None or (bar.started_at-previous.started_at).total_seconds()!=seconds or bar.zero_volume or previous.zero_volume:
             returns.clear()
+            exact_returns.clear()
             previous=bar
             since=0
             continue
         current_code=code_return(previous.close,bar.close)
+        continuous_bps=10_000.0*math.log(bar.close/previous.close)
         # Train/dev partition based on completed target time.
         target_completed=bar.started_at.timestamp()+seconds
         split="train" if target_completed <= TRAIN_END_EXCLUSIVE.timestamp() else "development"
@@ -169,9 +173,11 @@ def iter_cases(interval: str, folder: Path = ROOT, *, context: int = 20,
                 encoded_target=current_code,
                 anchor_usd=previous.close,
                 target_usd=bar.close,
-                grade=f"bitstamp_{interval}_observed_nonzero_volume"
+                grade=f"bitstamp_{interval}_observed_nonzero_volume",
+                continuous_past_bps=tuple(exact_returns)
             )
         returns.append(current_code)
+        exact_returns.append(continuous_bps)
         since += 1
         previous=bar
 
