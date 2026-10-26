@@ -1,3 +1,44 @@
+# NOUVELLE PRIORITÉ AUTORISÉE : S3 « GRAMMAIRES DE COURBES » (26/10/2026)
+
+Le propriétaire demande de continuer S2, mais aussi de
+**documenter pour prochainement** les différentes façons de
+convertir les courbes en tokens. La priorisation choisie :
+**S3.0 maintenant (concepts, codec / fixtures synthétiques)**,
+**S3.1 après le premier vrai benchmark S2 D1/H1/M1**,
+**AVANT** de relancer le scaling coûteux à 5 tailles et
+3 profondeurs ou les modèles de fondation.
+
+- Issue visible et exploitable dans le backlog :
+  https://github.com/goldaj/trame-chartist-research/issues/20
+- Document de recherche et protocole séquencé :
+  `research/token_grammar/ROADMAP_20261026.md`.
+- PoC S3.0 purement diagnostique :
+  `research/token_grammar/diagnostics.py`,
+  `research/token_grammar/test_diagnostics.py`.
+  Compare G0a token entier historique (`round(log_return*1000)`),
+  G0b continu bps, G1 magnitude signée à seuils fixes,
+  G2 magnitude signée à quantiles **fit exclusivement sur train**.
+  Les analyses de reconstruction de signe et magnitude
+  ne sont **pas** des scores prédictifs BTC.
+- Futur G3–G8 : ordre de grandeur signé, patches,
+  vrais OHLCV, événements, VQ, alignement causal multirésolution.
+  Ne pas créer de fausses bougies OHLCV pour le D1
+  indicatif 2010–2011 ; volumes nuls/gaps jamais remplis.
+- S2.6 **toujours non exécutée** sur cours réels et ancien
+  workflow privé refusé par sécurité. **Ne pas contourner**,
+  ne pas marquer S3 réel démarré par défaut.
+- Les métriques primaires restent justesse directionnelle
+  brute ET balanced, part de prédictions up/down, couverture,
+  MAE USD et bps, erreur de magnitude bps et Brier skill
+  sur la tête entraînée. Aucun frais (choix propriétaire),
+  aucun PnL cumulé inféré, 2026 jamais pour tuning.
+- Si S2 réel est bloqué durablement, avancer seulement
+  S3.0 de façon reproductible sur données **inventées** ;
+  pas de comparaison sur le marché tant qu'un contexte
+  privé autorisé n'est pas disponible.
+
+---
+
 # RAPPORT S1 VÉRIFIÉ APRÈS CRASH / PASSATION FINALE DE QUALIFICATION
 
 Lire aussi `research/scaling_study/S1_SIGN_COLLAPSE_REAUDIT_20261026.md`
