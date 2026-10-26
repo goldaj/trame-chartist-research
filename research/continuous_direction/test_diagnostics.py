@@ -66,6 +66,8 @@ class DiagnosticTests(unittest.TestCase):
         self.assertIn("model_source_commit",report)
         self.assertEqual(len(report["development_origins_sha256"]),64)
         self.assertIsNone(report["approved_private_release_tag"])
+        self.assertIn("mean_log_return_train_only",report["baselines"])
+        self.assertTrue(math.isfinite(report["train_only_mean_log_return_bps"]))
         by_mode={row["mode"]:row for row in report["results"]}
         self.assertIsNone(by_mode["regression"]["brier_nonflat"])
         self.assertFalse(by_mode["regression"]
