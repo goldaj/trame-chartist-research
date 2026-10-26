@@ -85,7 +85,12 @@ def collect_internal(interval, directory=ROOT, *, max_cases=4096,
                               step=stride,train_only=True):
         if group!="train":
             raise AssertionError("train_only reader leaked external cohort")
-        if c.label_available_time>=MONITOR_END:
+        if c.label_available_time==MONITOR_END:
+            # The historic stream marks the very last 2021 candle TRAIN
+            # even though its label becomes available at the 2022 boundary.
+            # This origin is excluded from our strictly pre-2022 monitor.
+            continue
+        if c.label_available_time>MONITOR_END:
             raise ValueError("reader unexpectedly yielded 2022+ label")
         is_early=c.label_available_time<TRAIN_CUTOFF
         key="train_pre2020" if is_early else "monitor_2020_2021"
