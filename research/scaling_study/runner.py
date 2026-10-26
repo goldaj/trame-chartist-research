@@ -89,8 +89,8 @@ def run_cases(train, development, *, interval, targets=TARGET_PARAMETERS,
               seeds=(20261025, 20261026, 20261027),
               max_width=704, batch_size=16, data_origin="ARTIFICIAL_FIXTURE"):
     """Execute a paired *development-only* matrix from already-collected cases."""
-    if interval not in ("H1", "M1"):
-        raise ValueError("H1/M1 only")
+    if interval not in ("D1", "H1", "M1") :
+        raise ValueError("D1/H1/M1 only")
     if data_origin not in ("ARTIFICIAL_FIXTURE", "BTC_PRIVATE_REAL"):
         raise ValueError("unsupported data origin")
     if (type(steps) is not int or not 1 <= steps <= 2000
@@ -193,8 +193,8 @@ def run_history(*, interval, directory=ROOT, targets=TARGET_PARAMETERS,
                 depths=DEPTHS, architectures=tuple(FAMILIES), steps=40,
                 seeds=(20261025, 20261026, 20261027),
                 max_train=4096, max_dev=1024, stride=None):
-    if interval not in ("H1", "M1"):
-        raise ValueError("H1/M1 only")
+    if interval not in ("D1", "H1", "M1") :
+        raise ValueError("D1/H1/M1 only")
     step = (60 if interval == "M1" else 1) if stride is None else stride
     pools, scanned = collect(
         interval, Path(directory), max_train=max_train, max_dev=max_dev,
@@ -211,7 +211,7 @@ def run_history(*, interval, directory=ROOT, targets=TARGET_PARAMETERS,
 def main(argv=None):
     parser = argparse.ArgumentParser(
         description="TRAME S1 offline BTC development, no orders, no 2026 labels")
-    parser.add_argument("--interval", choices=("H1", "M1"), required=True)
+    parser.add_argument("--interval", choices=("D1", "H1", "M1"), required=True)
     parser.add_argument("--directory", type=Path, default=ROOT)
     parser.add_argument("--targets", type=int, nargs="+", default=list(TARGET_PARAMETERS))
     parser.add_argument("--depths", type=int, nargs="+", default=list(DEPTHS))
