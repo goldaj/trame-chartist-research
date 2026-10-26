@@ -1,3 +1,18 @@
+# Mise à jour D1 (26/10/2026)
+
+La mention plus bas indiquant que D1 était « réservé aux analyses
+ultérieures » est **devenue obsolète**. D1 est maintenant raccordé à
+`stream.iter_cases("D1")`, et les commandes
+`experiment`, `statistical_baselines`, `regime_analysis` et
+`scaling_study.runner` acceptent `--interval D1`.
+Le lecteur `daily.read_daily` est l'implémentation unique des trois CSV,
+avec conservation des grades indicatif vs Bitstamp. Cohorte neuronale
+exclusivement vrai OHLCV, disponibilité du close à J+1.
+Voir `D1_RECOVERY_PLAN_20261026.md`. Les résultats réels éventuels
+doivent être fondés sur run privé, et non sur CI fictive.
+
+---
+
 # BTC/USD historique : bibliothèque privée commune à TRAME
 
 **Décision définitive courante : 25 octobre 2026.**
