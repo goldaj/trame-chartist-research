@@ -327,3 +327,53 @@ branche dépendante de la PR #9 et ouvre la PR #10 (draft).
 **Prochain démarrage scientifique : A4** Mamba-2/Mamba-3 sur
 vraies implémentations GPU isolées, après qualification officielle.
 Les PR #8/#9/#10 restent en draft, aucune fusion automatique.
+
+
+## 2026-10-26 — Clôture A7.5-H1 après interruption, sur instruction utilisateur
+
+**Utilisateur (verbatim, heure locale exacte non enregistrée)** :
+> tu t'es arrêté en plein milieu de quelque chose je crois. Explique moi ce que tu dois continuer avant de t'arrêter proprement ou dit moi que c'est bon si t'as fini ce que tu voulais faire et que c'est juste l'arrêt qui a crash.
+
+**Assistant (résumé non verbatim)** : signale que l'analyse du rapport
+H1 réel par régimes n'a pas été lue/documentée, et liste trois
+opérations de clôture : (1) lire le JSON H1 par années et volatilité,
+(2) consigner les constats dans TRAME, (3) terminer la passation Codex
+et la vérification GitHub, puis **s'arrêter**.
+
+**Utilisateur (verbatim, heure locale exacte non enregistrée)** :
+> vas-y continue alors
+
+**Assistant (résumé non verbatim, travaux effectivement accomplis)** :
+- Récupère l'artefact **privé** issu du succès GitHub Actions
+  #40224149619 ; lit `btc_h1_real_regime_development.json`,
+  et vérifie ses champs et son SHA-256 :
+  `95be1bc04dd44aa6534ef298916f7ecb9802c27f0280199d92ca32783dfb9236`.
+  Aucune archive de prix brute copiée dans TRAME public.
+- Contrôle que les découpages H1 développement font chacun
+  **1 024** observations (années 2022/23/24/25 :
+  257/284/228/255 ; volatilité passée faible/moyenne/forte :
+  541/361/122). Les moyennes pondérées reconstituent la
+  persistance globale **MAE 183,51822265625 USD**,
+  Ridge **MAE 183,72069709370587 USD**,
+  couverture **95,3125 % / 95,5078 %**.
+- Constate que la MAE relative persistance en bps va de
+  **21,929** en faible volatilité à **71,785** en forte.
+  Les intervalles théoriques 80 % couvrent 99,261 % des
+  observations calmes et 83,607 % des plus volatiles.
+  Ces différences sont **descriptives**, aucune preuve
+  de généralisation ou avantage économique.
+- Crée
+  `research/btc_h1_m1/A7_H1_REGIMES_REAL_RESULTS_20261025.md`
+  dans la branche de [PR #14](https://github.com/goldaj/trame-chartist-research/pull/14),
+  puis met à jour `A7_STATUS_20261025.md`,
+  `docs/CODEX_EXECUTION_BOARD_20261025.md`,
+  `AGENTS.md` et ce journal.
+- **État réel** : A7.4 H1/M1 et A7.5-H1 témoins exécutés,
+  mais A7.5 complète, Mamba GPU, fondations zéro-shot,
+  tests indépendants et produit P4 non achevés. Aucun
+  merge, ordre de trading, usage du test 2026 ou
+  promesse de travaux asynchrones.
+
+**Dernière décision** : arrêt propre à la fin de cette
+passation. Une prochaine session pourra suivre les tâches
+encore ouvertes uniquement sur nouvelle instruction explicite.
