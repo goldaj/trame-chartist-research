@@ -1257,3 +1257,51 @@ dans `research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
   non utilisés pour sélectionner.
   Pas de frais sur demande, ni PnL cumulatif,
   ni compte/trade Hyperliquid.
+
+
+### 26/10/2026 — S3.1E BTC RÉELLE achevée (assistant, résumé non verbatim)
+- [GitHub Actions #40318969005](https://github.com/goldaj/trame-chartist-research/actions/runs/40318969005)
+  **4/4 jobs SUCCESS** D1/H1/M1 et panel,
+  code Git SHA
+  `73b56883dd09b3ad533aeeb4546eb1d402f2c003`.
+  27 trajectoires réellement entraînées,
+  81 checkpoints 200/800/2000 dépendants.
+- Les cinq rapports détaillés JSON/MD
+  sont récupérés depuis GitHub Actions,
+  identifiés par SHA256 dans
+  `research/token_grammar/S3_1E_REAL_81_RESULTS_20261026.md`
+  et une archive ZIP avec manifeste
+  `trame_s3_1e_27_81_resultats.zip`
+  est créée dans la conversation.
+- Analyse : vs `legacy`, la nouvelle
+  loss de réconciliation différentiable
+  améliore parfois BA OU magnitude,
+  mais **pas** de supériorité conjointe
+  du sens et MAE prix dur. Exemple
+  D1 BA 52,24→52,83 mais MAE prix
+  282,704→285,563 bps et Brier pire ;
+  H1 BA 51,93→50,52 et prix
+  54,611→54,945 ; M1 BA 53,02→52,73
+  et prix 8,368→8,398.
+- Le taux de désaccord `sign(mu)`
+  vs `sign(logit)` sur `legacy`
+  à 2000 updates est descriptivement
+  D1 7,9%, H1 19,0%, M1 26,7%.
+  Le soft proxy peut avoir un MAE
+  inférieur au hard, mais n'est PAS
+  la sortie du modèle réellement servi.
+- **NO-GO** trade/edge ; même la
+  persistance reste légèrement meilleure
+  en MAE prix. Dev 2022–25 déjà utilisé
+  par d'anciennes expériences n'est
+  pas rouvert, monitor 2020–21 reste
+  exploratoire, 2026 gelé. Aucun
+  PnL composé/frais/transactions.
+- Met à jour le rapport, Codex
+  `docs/CODEX_S3_1E_HANDOFF_20261026.md`,
+  `AGENTS.md`, PR #28 et issue #20.
+  Prochaine expérience projetée S3.1F :
+  comparer **à poids de modèle identiques**
+  les règles d'inférence hard joint,
+  direct mu et soft joint. Protocole
+  à écrire avant résultats réels.
