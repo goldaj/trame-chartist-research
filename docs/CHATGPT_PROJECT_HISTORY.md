@@ -940,3 +940,78 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   Aucun ordre/compte/clé Hyperliquid,
   aucun PnL composé, frais toujours ignorés
   à la demande propriétaire.
+
+
+### 26/10/2026 — Reprise automatique S3.1C après clôture des embeddings
+**Utilisateur (demande déclenchante de ce tour, verbatim)** :
+> t'as crash, continue
+
+**Assistant, synthèse des actions réellement engagées (pas un verbatim de réponse)** :
+- Après la conclusion S3.1B 432 fits réels [#40306642813](https://github.com/goldaj/trame-chartist-research/actions/runs/40306642813),
+  constate qu'aucune grammaire apprise ne
+  produit d'edge en direction et amplitude,
+  l'initialisation random déclenchant
+  souvent un modèle presque monoclasse.
+  Clôture PR #25 avec rapport complet
+  `research/token_grammar/S3_1B_REAL_432_RESULTS_20261026.md`,
+  Codex `AGENTS.md`, issue #20,
+  historique et archive ZIP des cinq
+  rapports complets disponible en conversation.
+- Décide comme chercheur ET ingénieur
+  de diagnostiquer d'abord **la convergence
+  du train** avant d'augmenter à nouveau
+  taille et profondeur des réseaux.
+- Crée **PR #26** branche
+  `chatgpt/trame-s3-training-dynamics-20261026`,
+  enfant PR #25. Préenregistre
+  `research/token_grammar/S3_1C_CONVERGENCE_PROTOCOL_20261026.md`
+  **avant la moindre mesure BTC réelle S3.1C**.
+- Contrôle causal fort : aucun usage du
+  DEV EXTERNE 2022–2025 pour régler la
+  durée d'entraînement. Seuls les
+  exemples historiquement TRAIN (<2022)
+  sont employés. Deux réservoirs distincts
+  et RNG indépendants :
+  TRAIN cible disponible avant 2020,
+  MONITOR interne 2020–2021,
+  labels 2026 toujours gelés.
+  Le cas limite label disponible
+  exactement au 1er janvier 2022
+  est exclu du moniteur.
+- Implémente `convergence.py` (27
+  trajectoires = 3 horizons×3 bras×3
+  graines; 3 checkpoints du même
+  optimiseur 200/800/2000 updates =
+  81 observations internes, pas 81
+  entraînements indépendants),
+  `convergence_panel.py`,
+  `test_convergence.py` et
+  `test_convergence_panel.py`.
+  Variables : loss train vs monitor,
+  grad norm avant clipping, BA direction,
+  %UP, monoclasse, MAE USD/bps,
+  erreur amplitude bps et Brier prior
+  train-only. CI synthétique réussie.
+- Lance vrai workflow public
+  [#40309653884](https://github.com/goldaj/trame-chartist-research/actions/runs/40309653884),
+  trois jobs D1/H1/M1 et panel.
+  **Au moment de la première rédaction,
+  D1 et H1 ont réussi, M1 restait à
+  vérifier.** Ne jamais inférer la
+  réussite du job restant.
+- Premiers chiffres monitor interne
+  (pas une validation indépendante) :
+  D1 G2 decoded BA 53.20% après 200
+  steps →52.24% à 2000, MAE prix
+  280.78→282.70 bps (dégradation) ;
+  H1 49.02→51.93% BA et MAE prix
+  54.80→54.61 bps (léger mieux).
+  Le Brier H1 reste négatif. La
+  durée idéale n'est pas universelle.
+- Codex passation dans
+  `docs/CODEX_S3_1C_HANDOFF_20261026.md`
+  et rappel `AGENTS.md`.
+  Aucun nouveau prix sensible, trade,
+  clé, wallet, ordre Hyperliquid ou
+  PnL capitalisé ; frais de simulation
+  ignorés selon la consigne utilisateur.
