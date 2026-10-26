@@ -1146,3 +1146,61 @@ récent ; aucune nouvelle instruction utilisateur depuis)** :
   et `AGENTS.md`. Respect du gel
   2022–25/2026, pas de profits inventés,
   aucun trade Hyperliquid, frais ignorés.
+
+
+### 26/10/2026 — nouvelle reprise après crash : S3.1D finalisée
+**Utilisateur (verbatim)** :
+> t'as crash, continue
+
+**Assistant, travaux réellement effectués (résumé NON verbatim) :**
+- Vérifie que la vraie étude S3.1D [#40313075915](https://github.com/goldaj/trame-chartist-research/actions/runs/40313075915)
+  est bien **terminée SUCCESS 4/4**, 3 horizons BTC
+  spot Bitstamp D1/H1/M1 + agrégation.
+  Code source réellement exécuté :
+  SHA `5726cb99c0bcfef59509bf2b4884a7e1bf7036cc`.
+- Récupère depuis les artefacts GitHub les JSON
+  individuels D1/H1/M1 (15 trajectoires et
+  45 observations par horizon), le panel complet
+  135 lignes et son Markdown. **Contrôle**
+  SHA256 des fichiers et cohérence
+  45 trajectoires, 135 checkpoints ;
+  consolide une archive ZIP avec MANIFEST.
+  Le calcul des deltas appariés par seed
+  vérifie qu'aucune variante de loss
+  ne bat la référence sur sens+prix final+
+  magnitude sur toutes les 3 graines.
+- **Résultat clé** au checkpoint 2000 :
+  augmenter le poids de l'amplitude à 1
+  améliore son erreur de 16,4% (D1),
+  21,3% (H1), 16,9% (M1), mais DÉGRADE
+  le MAE du prix final de 5,9%, 9,8%
+  et 7,1% et la BA de 0,88, 1,71
+  et 0,59 points respectivement.
+  La référence a même un MAE prix
+  supérieur à la persistance simple
+  aux trois horizons à 2000 updates.
+  Pas d'edge prouvé, Brier faible.
+- Crée
+  `research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`
+  avec 15 combinaisons horizon/loss à
+  2000 updates, détails scientifiques,
+  SHA256 des 5 rapports, liens vers
+  artifacts et question suivante.
+- Met à jour
+  `docs/CODEX_S3_1D_HANDOFF_20261026.md`,
+  `AGENTS.md`, la description de PR #27
+  et le backlog issue #20.
+- **Propose S3.1E** : mesurer le
+  désaccord entre sortie de régression
+  signée `mu` et probabilité de hausse
+  issue du logit, puis tester une
+  loss alignée sur le prix reconstruit
+  réellement utilisé, en gardant
+  architecture/données/graines fixes.
+  Préenregistrer protocole AVANT tout
+  résultat réel, ne pas consulter
+  2022–25/2026 pour sélection.
+- Aucun PnL cumulé, aucun ordre réel
+  Hyperliquid ni clé/secret, frais
+  volontairement ignorés.
+
