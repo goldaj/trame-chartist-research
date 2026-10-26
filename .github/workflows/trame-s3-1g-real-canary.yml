@@ -1,0 +1,72 @@
+name: TRAME S3.1G REAL BTC magnitude gate engineering canary
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-selective-forecast-20261026
+    paths:
+      - .github/workflows/trame-s3-1g-real-canary.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  selective-canary:
+    strategy:
+      fail-fast: false
+      matrix:
+        interval: [D1,H1,M1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      INTERVAL: ${{ matrix.interval }}
+      TRAME_BTC_CACHE_DIR: /tmp/trame-btc-public-pre2022
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU research toolchain
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Test causal thresholds and CLI before accessing actual BTC data
+        run: |
+          python -m research.token_grammar.selective_forecast --help >/dev/null
+          python -m unittest research.token_grammar.test_selective_forecast research.token_grammar.test_selective_panel -v
+      - name: Download publicly authorized historical BTC source and verify SHA
+        run: |
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR"
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR" --check-only
+      - name: Genuine 40-step BTC engineer smoke 1 fit and 12 threshold-rule scores
+        run: |
+          mkdir -p evidence
+          if [ "$INTERVAL" = D1 ]; then DATA_DIR=research/data/reference; else DATA_DIR="$TRAME_BTC_CACHE_DIR"; fi
+          python -m research.token_grammar.selective_forecast \
+            --interval "$INTERVAL" --directory "$DATA_DIR" \
+            --engineering-canary --steps 40 --seeds 20261026 \
+            --output "evidence/${INTERVAL}_S3_1G_1model_12gate_scores_smoke.json"
+      - name: Validate 2026 held out and all three arms use same monitor case indices
+        run: |
+          python - <<'PY'
+          import json,math,os,hashlib
+          from pathlib import Path
+          from research.token_grammar.selective_panel import validate
+          iv=os.environ["INTERVAL"]
+          p=Path(f"evidence/{iv}_S3_1G_1model_12gate_scores_smoke.json")
+          x=json.loads(p.read_text())
+          validate(x,seeds=(20261026,),steps=40,allow_canary=True)
+          assert x["interval"]==iv and x["data_origin"]=="BTC_PUBLIC_REAL"
+          assert x["external_2022_2025_used"] is False
+          assert x["holdout_2026_used"] is False
+          assert x["engineering_canary_not_scientific_selection"] is True
+          assert len(x["trajectories"])==1 and len(x["results"])==12
+          print("S3.1G REAL BTC ENGINEER SMOKE",iv,
+            "1 real fit, 12 dependent cells",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1G-${{ matrix.interval }}-engineer-canary
+          path: evidence/*.json
+          if-no-files-found: error
+          retention-days: 21
