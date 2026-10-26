@@ -97,6 +97,16 @@ class DirectionTests(unittest.TestCase):
         self.assertTrue(stats["not_cumulative_portfolio_return"])
         self.assertTrue(stats["no_trading_costs"])
 
+    def test_explicit_always_up_down_no_skill_baselines(self):
+        dev = [make_case(2023, i) for i in range(40)]
+        forecasts = baseline_forecasts(dev)
+        self.assertIn("always_up_1bp", forecasts)
+        self.assertIn("always_down_1bp", forecasts)
+        self.assertTrue(all(f > c.anchor_usd for f,c in
+                            zip(forecasts["always_up_1bp"], dev)))
+        self.assertTrue(all(f < c.anchor_usd for f,c in
+                            zip(forecasts["always_down_1bp"], dev)))
+
     def test_persistence_not_falsely_called_directional(self):
         t = training_magnitude_thresholds(
             [make_case(2018, i) for i in range(40)])
