@@ -1,3 +1,69 @@
+# S3.1D COMPLÈTEMENT TERMINÉE — 26/10/2026 (NE PAS RELANCER SANS NOUVELLE HYPOTHÈSE)
+
+**Campagne réelle finalisée** [GitHub Actions #40313075915](https://github.com/goldaj/trame-chartist-research/actions/runs/40313075915) :
+**4/4 jobs SUCCESS** (D1/H1/M1 + agrégation) sur
+Git SHA exact `5726cb99c0bcfef59509bf2b4884a7e1bf7036cc`.
+**45 trajectoires distinctes** de 2000 steps ;
+**135 observations à 200/800/2000** ;
+trois seeds, cinq losses, trois horizons.
+Échantillons pre-2020 TRAIN et 2020–21 MONITOR.
+**2022–2025 externe et holdout 2026 NON utilisés**.
+
+**SOURCE DE VÉRITÉ :**
+`research/token_grammar/S3_1D_REAL_135_RESULTS_20261026.md`.
+Il contient le tableau par loss/horizon à 2000 steps,
+les limites, baselines persistance, conclusions,
+SHA256 des **5 rapports** JSON/MD Actions.
+Une archive ZIP des 5 rapports complets est
+également disponible dans la conversation,
+au nom `trame_s3_1d_45_135_resultats.zip`,
+avec `MANIFEST.json`.
+
+**Conclusion chercheurs × ingénieurs** :
+renforcer la loss amplitude améliore son erreur
+relative de 16–21% mais détériore le MAE du
+PRIX FINAL de 6–10% et la BA directionnelle
+de ~0,6–1,7 points à 2000 updates :
+- D1 ref BA52,24% prix282,704 amplitude248,938bps ;
+  +1 loss amplitude BA51,37% prix299,413 amplitude208,023bps.
+- H1 ref BA51,93% prix54,611 amplitude48,955bps ;
+  +1 magnitude BA50,22% prix59,970 amplitude38,528bps.
+- M1 ref BA53,02% prix8,368 amplitude7,319bps ;
+  +1 magnitude BA52,42% prix8,959 amplitude6,083bps.
+
+Aucune perte alternative ne surpasse la référence
+sur BA/prix/amplitude **aux trois graines pour
+un même horizon**. La référence à 2000 steps
+reste même légèrement moins bonne que la
+simple persistance sur MAE prix D1/H1/M1.
+Les Brier skill sont faibles/négatifs sur
+D1/H1 : **pas d'edge directionnel prouvé**.
+Ce sont des retours spot BTC historiques
+échantillonnés, **pas un PnL composé**,
+pas de trading, frais ignorés selon user.
+
+**Dernier statut projet** :
+S3.1C [#26](https://github.com/goldaj/trame-chartist-research/pull/26)
+déjà terminée (27 trajectoires /81 mesures),
+S3.1D [PR #27](https://github.com/goldaj/trame-chartist-research/pull/27)
+terminée mais toujours **DRAFT**.
+Aucun merge automatique.
+
+**SUITE proposée S3.1E :** examiner
+le désaccord des deux sorties `sign(mu)`
+et `p_up=σ(logit)` et la reconstruction
+du prix. Préenregistrer ablation **de la
+cohérence perte-sortie** à backbone/paramètres,
+données, G2 et budgets inchangés. Faire
+des tests de causalité et de parité
+sur fixtures AVANT vraies campagnes.
+Ne pas modifier simultanément vocabulaire
+et modèle, et préserver 2022–25/2026
+contre sélection. Pas d'appel à un compte
+ou une clé Hyperliquid.
+
+---
+
 # Codex — TRAME S3.1D ablation pertes direction et amplitude
 26 octobre 2026. **PR #27 DRAFT**, branche
 `chatgpt/trame-s3-objective-ablation-20261026`
