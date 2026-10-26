@@ -87,10 +87,12 @@ def _ridge_forecasts(train, dev):
 def run_cases(train, development, *, interval, targets=TARGET_PARAMETERS,
               depths=DEPTHS, architectures=tuple(FAMILIES), steps=40,
               seeds=(20261025, 20261026, 20261027),
-              max_width=704, batch_size=16):
+              max_width=704, batch_size=16, data_origin="ARTIFICIAL_FIXTURE"):
     """Execute a paired *development-only* matrix from already-collected cases."""
     if interval not in ("H1", "M1"):
         raise ValueError("H1/M1 only")
+    if data_origin not in ("ARTIFICIAL_FIXTURE", "BTC_PRIVATE_REAL"):
+        raise ValueError("unsupported data origin")
     if (type(steps) is not int or not 1 <= steps <= 2000
             or type(batch_size) is not int or not 1 <= batch_size <= 256
             or not isinstance(seeds, (tuple, list)) or not 1 <= len(seeds) <= 10
@@ -161,13 +163,15 @@ def run_cases(train, development, *, interval, targets=TARGET_PARAMETERS,
         "experiment": "TRAME_S1_scaling_depth_direction_development_v1",
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "interval": interval,
-        "source": "private user-approved BTC Bitstamp release; no raw rows exported",
+        "source": ("private approved BTC Bitstamp release" if data_origin == "BTC_PRIVATE_REAL"
+                   else "artificial test fixtures only"),
+        "data_origin": data_origin,
         "split_train_targets_before": "2022-01-01",
         "split_development_targets": "2022-2025",
         "independent_test_used": False, "labels_2026_opened": False,
         "not_hyperliquid_execution": True,
         "financial_production_validated": False,
-        "synthesized_or_mocked_data": False,
+        "synthesized_or_mocked_data": data_origin != "BTC_PRIVATE_REAL",
         "not_cumulative_portfolio_return": True,
         "transaction_costs_ignored_on_user_instruction": True,
         "fixed_scale_integer_log_return_encoder": 1000,
@@ -198,7 +202,7 @@ def run_history(*, interval, directory=ROOT, targets=TARGET_PARAMETERS,
     result = run_cases(
         pools["train"], pools["development"], interval=interval,
         targets=targets, depths=depths, architectures=architectures,
-        steps=steps, seeds=seeds)
+        steps=steps, seeds=seeds, data_origin="BTC_PRIVATE_REAL")
     result["sampling_stride"] = step
     result["scanned_candidate_origins"] = scanned
     return result
