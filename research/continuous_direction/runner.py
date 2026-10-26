@@ -12,6 +12,7 @@ import math
 import os
 from pathlib import Path
 import platform
+import subprocess
 import time
 
 import numpy as np
@@ -26,6 +27,7 @@ from research.scaling_study.runner import _ridge_forecasts, _validate_chronology
 from research.continuous_direction.models import (
     ContinuousDirectionModel, forecast_prices,
 )
+from research.continuous_direction.diagnostics import prior_from_train, probability_report
 
 
 def _arrays(cases):
@@ -45,7 +47,7 @@ def _arrays(cases):
     return past,anchors,actual,target
 
 
-def _evaluate(model,cases,*,scale_bps):
+def _evaluate(model,cases,*,scale_bps,train_prior):
     history,anchors,actual,target=_arrays(cases)
     history_tensor=torch.as_tensor(history/scale_bps,dtype=torch.float64)
     forecasts=[]
@@ -64,19 +66,38 @@ def _evaluate(model,cases,*,scale_bps):
     valid=actual!=anchors
     classification={}
     if model.mode=="joint":
-        true_up=(actual[valid]>anchors[valid]).astype(float)
-        p=np.clip(probabilities[valid],1e-12,1-1e-12)
-        classification={
-            "brier_nonflat":float(np.mean((p-true_up)**2)) if len(p) else None,
-            "binary_ce_nonflat":float(np.mean(
-                -true_up*np.log(p)-(1-true_up)*np.log(1-p))) if len(p) else None,
-            "head_regression_sign_disagreement":float(np.mean(
-                (probabilities>=.5) != (regression>=0))),
-        }
+        classification=probability_report(
+            anchors,actual,probabilities,train_prior=train_prior)
+        classification["head_regression_sign_disagreement"]=float(np.mean(
+            (probabilities>=.5) != (regression>=0)))
     else:
-        classification={"brier_nonflat":None,"binary_ce_nonflat":None,
-                        "head_regression_sign_disagreement":None}
+        # Regression-only direction logits receive NO training gradients.
+        # Scoring them as calibrated binary probabilities would be fraudulent.
+        classification={
+            "binary_probabilities_from_trained_head":False,
+            "brier_nonflat":None,"binary_ce_nonflat":None,
+            "brier_train_prior_nonflat":None,"binary_ce_train_prior_nonflat":None,
+            "brier_skill_vs_train_prior":None,"binary_ce_delta_vs_train_prior":None,
+            "predicted_up_probability_mean":None, "reliability_bins":[],
+            "head_regression_sign_disagreement":None,
+        }
     return forecasts,classification
+
+
+def _source_code_commit(data_origin):
+    """Git SHA of model checkout, NOT the surrounding private workflow SHA."""
+    root=Path(__file__).resolve().parents[2]
+    try:
+        proc=subprocess.run(["git","-C",str(root),"rev-parse","HEAD"],
+                            check=False,text=True,capture_output=True,timeout=5)
+        sha=proc.stdout.strip()
+    except (OSError,subprocess.TimeoutExpired):
+        sha=""
+    if not sha or len(sha)!=40 or any(ch not in "0123456789abcdef" for ch in sha):
+        if data_origin=="BTC_PRIVATE_REAL":
+            raise RuntimeError("real research requires a traceable Git model checkout")
+        return "unavailable_fixture_only"
+    return sha
 
 
 def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
@@ -114,6 +135,7 @@ def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
     normalized_train=torch.as_tensor(xtrain/scale,dtype=torch.float64)
     targets_train=torch.as_tensor(ytrain/scale,dtype=torch.float64)
     thresholds=training_magnitude_thresholds(train)
+    train_prior=prior_from_train(train)
     baselines={}
     for name,forecast in baseline_forecasts(development).items():
         baselines[name]=score_forecasts(
@@ -147,7 +169,8 @@ def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
                             raise ArithmeticError("nonfinite gradients")
                         optimizer.step()
                     elapsed=time.perf_counter()-t0
-                    forecast,cls=_evaluate(model,development,scale_bps=scale)
+                    forecast,cls=_evaluate(model,development,scale_bps=scale,
+                                           train_prior=train_prior)
                     scored=score_forecasts(
                         anchor,actual,forecast,train_thresholds=thresholds)
                     rows.append({
@@ -169,6 +192,7 @@ def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
         "not_cumulative_portfolio_return":True,
         "train_only_normalization":True,"train_normalizer_std_bps":scale,
         "continuous_past_input_len":20,
+        "direction_class_prior_train_only":train_prior,
         "quantized_target_zero_fraction_train":float(np.mean(
             np.asarray([c.encoded_target for c in train])==0)),
         "true_target_flat_fraction_train":float(np.mean(ytrain==0)),
@@ -187,7 +211,8 @@ def run_cases(train,development,*,interval,widths=(16,32),depths=(1,2),
         "baselines":baselines,"results":rows,
         "python_version":platform.python_version(),
         "torch_version":torch.__version__,
-        "git_sha":os.environ.get("GITHUB_SHA","not recorded outside CI"),
+        "github_workflow_commit":os.environ.get("GITHUB_SHA","not recorded outside CI"),
+        "model_source_commit":_source_code_commit(data_origin),
     }
 
 
