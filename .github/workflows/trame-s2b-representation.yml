@@ -21,7 +21,7 @@ jobs:
           python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
       - name: Check paired encoders, true targets, same initialisation, no holdout
         run: |
-          python -m unittest research.representation_ablation.test_ablation -v
+          python -m unittest research.representation_ablation.test_ablation research.representation_ablation.test_panel -v
       - name: Check legacy S2 and S3 fixtures are unchanged
         run: |
           python -m unittest research.continuous_direction.test_continuous research.continuous_direction.test_diagnostics research.token_grammar.test_diagnostics -v
