@@ -3,7 +3,33 @@
 Cette recherche est séparée du bot Hyperliquid. Travailler ici pour les prochaines évolutions TRAME. Ne pas modifier, démarrer ni déployer le bot. Préserver protocoles gelés, versions et frontières train/validation/test. Aucun résultat prédictif ou modèle entraîné ne peut être déduit de la validation du codec. Ne pas ajouter de données brutes ou d'archives sans vérifier les droits de redistribution. Aucun secret ou journal de compte dans Git.
 
 
-## REPRISE AUTORISÉE — dernière consigne utilisateur (25/10/2026)
+## ARRÊT PROPRE DE SESSION — DERNIÈRE CONSIGNE (26/10/2026)
+
+**Ordre utilisateur le plus récent : terminer l'analyse H1 des régimes,
+mettre la recherche et la passation à jour, puis S'ARRÊTER.**
+La session est clôturée après ces opérations ; l'ancien ordre général
+de continuation permanente ne constitue **plus** une autorisation
+de lancer des étapes supplémentaires sans nouvelle sollicitation.
+
+L'état scientifique actuel est documenté dans
+[`docs/CODEX_EXECUTION_BOARD_20261025.md`](docs/CODEX_EXECUTION_BOARD_20261025.md)
+et dans
+[`research/btc_h1_m1/A7_STATUS_20261025.md`](research/btc_h1_m1/A7_STATUS_20261025.md).
+La [PR #14](https://github.com/goldaj/trame-chartist-research/pull/14)
+porte les résultats réels exploratoires H1/M1 et les découpes
+H1 par régime (développement 2022–2025 ; labels 2026 non ouverts).
+Ne pas confondre ces runs avec une validation indépendante, des
+FLOPs alignés ou une rentabilité financière ; ne pas modifier le
+bot Hyperliquid.
+
+**Règles Codex** : PR #8/#9/#10 forment la chaîne principale ;
+#11 à #16 sont des branches sœurs empilées sur #10, et leurs
+fichiers ne coexistent pas automatiquement. Deux PR privées
+et une branche de régimes séparée contiennent les workflows
+d'exécution sur les données privées. Ne jamais fusionner les
+branches ou exposer les cours privés implicitement.
+
+## REPRISE AUTORISÉE — consigne historique utilisateur (25/10/2026)
 
 L'utilisateur a **levé la pause précédente** et demandé la reprise autonome
 de TRAME comme programme de recherche et d'ingénierie, sous-tâche
