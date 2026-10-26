@@ -1,3 +1,30 @@
+# REPRISE AUTORISÉE S1 — NOUVELLE CONSIGNE UTILISATEUR 26/10/2026
+
+**La pause/arrêt propre ci-dessous reste une archive de la session A7.**
+Nouvelle instruction expresse : reprendre, documenter puis préparer et exécuter
+un protocole **scaling × profondeur × direction/amplitude** en baby steps ;
+continuer automatiquement après chaque sous-étape, annoncer chaque achèvement.
+Expériences 5 tailles × 3 profondeurs (1/2/4) × 3 familles, H1/M1,
+3 seeds minimum. Voir obligatoirement
+[`research/scaling_study/PROTOCOL_20261026.md`](research/scaling_study/PROTOCOL_20261026.md)
+et [`research/scaling_study/README.md`](research/scaling_study/README.md).
+**Consigne additionnelle du 26/10 : ignorer TOUS les frais dans les
+simulations ; importance majeure de la justesse directionnelle ET
+du montant/amplitude prévu(e). Le trader décide seul de l'intérêt d'acheter.**
+Ne pas présenter l'illustration brute par bougie comme PnL cumulé.
+Les résultats de synthèse doivent conserver une précision directionnelle avec
+couverture et erreurs d'amplitude en bps/dollars.
+
+Branche de travail `chatgpt/trame-scaling-depth-direction-20261026`
+**basée sur PR #14**. L'ancienne série #8/#9/#10/#14 et les branches
+sœurs #11–#16 restent distinctes. 2026 est gelé. Aucun merge automatique,
+aucun bot ni exécution live, aucun historique brut public.
+Sur CI publique, utiliser uniquement des **fixtures fabriquées**.
+Voir aussi `docs/CODEX_SCALING_HANDOFF_20261026.md`.
+Ne pas interpréter la reprise S1 comme autorisant d'autres chantiers.
+
+---
+
 # TRAME — périmètre indépendant
 
 Cette recherche est séparée du bot Hyperliquid. Travailler ici pour les prochaines évolutions TRAME. Ne pas modifier, démarrer ni déployer le bot. Préserver protocoles gelés, versions et frontières train/validation/test. Aucun résultat prédictif ou modèle entraîné ne peut être déduit de la validation du codec. Ne pas ajouter de données brutes ou d'archives sans vérifier les droits de redistribution. Aucun secret ou journal de compte dans Git.
