@@ -614,3 +614,25 @@ justesse directionnelle et à l'amplitude, aucun frais de trading.
   ouverte, aucun ordre de trading ou changement Hyperliquid.
   Le refus précédent de créer un nouveau workflow
   privé S2 **n'a pas été contourné**.
+
+
+### 26 octobre 2026 — S2b, correction méthodologique AVANT tout run BTC réel
+**Assistant, synthèse non verbatim** :
+- Après la création de PR #21 et un premier passage CI,
+  constate qu'une normalisation d'entrée différente par
+  représentation confondrait en partie l'effet du codec
+  et celui de l'échelle de ses entrées.
+- **Remplace** les normalisations d'entrée propres à chaque
+  bras par `std(continuous_train_past_bps)`, **unique pour
+  les deux bras**, calculée sur TRAIN exclusivement.
+  L'échelle des cibles reste la MÊME valeur train-only.
+  La variance native de l'entrée quantifiée est toujours
+  consignée uniquement comme diagnostic ; la valeur
+  d'un retour n'est jamais censurée ou « recréée ».
+- Les tests vérifient parité des échelles en plus des
+  SHA des poids initiaux, et l'analyse finale rejette
+  les couples non appariés. **Ce changement précède
+  toutes les mesures BTC réelles S2b.**
+- Aucun workflow privé créé, pas de contournement du
+  blocage précédent de la campagne S2, pas de résultats
+  de direction BTC S2b calculés ou inférés.
