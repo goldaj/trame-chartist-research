@@ -18,9 +18,12 @@ Même `Case` et même **vraie** cible continue pour les deux entrées.
 Les anciennes prédictions S1 étaient sur une cible quantifiée ;
 S2b garde volontairement la vraie cible pour n'isoler que l'entrée.
 
-Les deux entrées ont chacune un écart-type calculé **sur TRAIN seul**.
-L'échelle des **cibles**, `std(continuous_train_past_bps)`, est
-**commune aux deux bras**. La séquence des indices de mini-lots
+Les deux entrées utilisent **exactement le même écart-type**, calculé
+**sur TRAIN continu seul**. La même échelle `std(continuous_train_past_bps)`
+est aussi utilisée pour **les cibles**. L'écart-type de l'entrée
+quantifiée est enregistré en diagnostic mais ne sert pas de
+normalisation alternative : l'arrondi constitue ainsi la seule
+différence d'information. La séquence des indices de mini-lots
 est identique par graine, et le SHA256 des poids initialisés
 est conservé pour chaque entraînement afin de vérifier
 la parité des initialisations.
