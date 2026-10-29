@@ -1,0 +1,23 @@
+name: TRAME A7 statistical baseline causal fixtures
+on:
+  push:
+    branches:
+      - chatgpt/trame-btc-stat-baselines-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  baselines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned fixture-only research dependencies
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Run fabricated BTC-baseline chronology and score tests
+        run: python -m unittest research.btc_h1_m1.test_statistical_baselines research.btc_h1_m1.test_regime_analysis -v

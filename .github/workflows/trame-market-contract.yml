@@ -1,0 +1,20 @@
+name: TRAME stage 3 point-in-time data contract (synthetic)
+on:
+  push:
+    branches: [chatgpt/point-in-time-data-contract-20261025]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  asof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install minimal fixed scientific dependency
+        run: python -m pip install 'numpy==2.3.5'
+      - name: Verify no future availability, no unlicensed intake
+        run: python -m unittest discover -s research/market_data_contract -p 'test_*.py' -v

@@ -1,0 +1,124 @@
+name: TRAME S3.1F 9 REAL models 27 checkpoints 81 inference scores
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-postprocess-ablation-20261026
+    paths:
+      - .github/workflows/trame-s3-1f-9-full.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  same-weights-real:
+    strategy:
+      fail-fast: false
+      matrix:
+        interval: [D1,H1,M1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      INTERVAL: ${{ matrix.interval }}
+      TRAME_BTC_CACHE_DIR: /tmp/trame-btc-public-pre2022
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install fixed scientific CPU environment
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Check legacy exact parity and guarded report before BTC access
+        run: |
+          python -m research.token_grammar.inference_ablation --help >/dev/null
+          python -m research.token_grammar.inference_panel --help >/dev/null
+          python -m unittest research.token_grammar.test_inference_ablation research.token_grammar.test_inference_panel -v
+      - name: Download public original Bitstamp BTC candles and verify upstream SHA
+        run: |
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR"
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR" --check-only
+      - name: Train 3 actual 2000-update models and evaluate three pricing rules at 3 checkpoints
+        run: |
+          mkdir -p evidence
+          if [ "$INTERVAL" = D1 ]; then DATA_DIR=research/data/reference; else DATA_DIR="$TRAME_BTC_CACHE_DIR"; fi
+          python -m research.token_grammar.inference_ablation \
+            --interval "$INTERVAL" --directory "$DATA_DIR" \
+            --seeds 20261025 20261026 20261027 \
+            --checkpoints 200 800 2000 \
+            --output "evidence/${INTERVAL}_S3_1F_3models_27prices.json"
+      - name: Validate exactly 3 models 9 checkpoints 27 rule scores, 2026 unopened
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,math
+          from pathlib import Path
+          from research.token_grammar.inference_panel import validate
+          iv=os.environ["INTERVAL"]
+          p=Path(f"evidence/{iv}_S3_1F_3models_27prices.json")
+          x=json.loads(p.read_text())
+          validate(x)
+          assert x["data_origin"]=="BTC_PUBLIC_REAL" and x["interval"]==iv
+          assert x["engineering_canary_not_scientific_selection"] is False
+          assert x["external_dev_2022_2025_accessed"] is False
+          assert x["holdout_2026_accessed"] is False
+          assert len(x["trajectories"])==3 and len(x["results"])==27
+          assert x["train_count"]>=200 and x["monitor_count"]>=200
+          assert all(math.isfinite(r["mae_native_usd"]) for r in x["results"])
+          print("AUTHENTIC BTC S3.1F",iv,"3 trained models, 9 weight checkpoints, 27 dependent rule scores",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1F-${{ matrix.interval }}-3model-report
+          path: evidence/*.json
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate-81:
+    needs: same-weights-real
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install fixed scientific report stack
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: trame-s3-1F-*-3model-report
+          path: records
+          merge-multiple: true
+      - name: Assemble only nine models, 27 checkpoints, 81 dependent forecasts
+        run: |
+          mkdir -p final
+          python -m research.token_grammar.inference_panel \
+            --inputs records/D1_S3_1F_3models_27prices.json records/H1_S3_1F_3models_27prices.json records/M1_S3_1F_3models_27prices.json \
+            --output final/S3_1F_9models_27checkpoints_81prices.json \
+            --markdown final/S3_1F_9models_27checkpoints_81prices.md
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json
+          p=Path("final/S3_1F_9models_27checkpoints_81prices.json")
+          report=json.loads(p.read_text())
+          assert report["n_models_trained"]==9
+          assert report["n_distinct_checkpoints"]==27
+          assert report["n_rule_evaluations"]==81
+          assert len(report["summary"])==27 and len(report["paired_deltas"])==18
+          assert report["hard_rule_exactly_previous_served_model"] is True
+          assert report["external_2022_2025_used"] is False
+          assert report["holdout_2026_used"] is False
+          print(Path("final/S3_1F_9models_27checkpoints_81prices.md").read_text())
+          print("FINAL SHA256",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1F-final-81-price-evaluations
+          path: final/*
+          if-no-files-found: error
+          retention-days: 30

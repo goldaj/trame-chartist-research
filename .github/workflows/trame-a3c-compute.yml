@@ -1,0 +1,44 @@
+name: TRAME A3c partial compute accounting (synthetic)
+on:
+  push:
+    branches:
+      - chatgpt/trame-compute-fair-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  a3c-cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU dependencies, no private history
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Test A3c accounting, synthetic only
+        run: python -m unittest research.architecture_comparison.test_compute_audit -v
+      - name: Audit a small matrix of sizes and contexts
+        run: |
+          python -m research.architecture_comparison.compute_audit --widths 8 16 --contexts 8 16 20 64 --repeats 3 > synthetic_a3c_cpu.json
+      - name: Refuse misleading compute-fair or financial claims
+        run: |
+          python -c "import json; d=json.load(open('synthetic_a3c_cpu.json')); assert d['data_origin']=='ARTIFICIAL_COST_ONLY'; assert d['reserved_synthetic_test_opened'] is False; assert d['compute_matched'] is False; assert d['flops_coverage_complete'] is False; assert len(d['results'])==24"
+      - name: Test counted-op budget planner and 3-seed synthetic pilot
+        run: python -m unittest research.architecture_comparison.test_budget_pilot -v
+      - name: Three-seed paired partial-budget training pilot
+        run: |
+          python -m research.architecture_comparison.budget_pilot --reference-steps 12 --max-steps 120 --seeds 20261025 20261026 20261027 > synthetic_a3c_proxy_budget.json
+      - name: Reject misleading compute-equality claims
+        run: |
+          python -c "import json; d=json.load(open('synthetic_a3c_proxy_budget.json')); assert d['data_origin']=='ARTIFICIAL_TRAIN_AND_DEVELOPMENT'; assert d['true_compute_matched'] is False; assert d['tuning_compute_equalized'] is False; assert d['reserved_synthetic_test_opened'] is False; assert len(d['results'])==9"
+      - name: Archive partial accounting by commit
+        uses: actions/upload-artifact@v4
+        with:
+          name: trame-a3c-cpu-synthetic-partial-ops
+          path: |
+            synthetic_a3c_cpu.json
+            synthetic_a3c_proxy_budget.json

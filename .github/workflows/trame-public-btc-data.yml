@@ -1,0 +1,23 @@
+name: TRAME public BTC D1 data integration and integrity
+on:
+  push:
+    branches:
+      - chatgpt/trame-public-btc-data-import-20261026
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  public-data-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify vendored authentic 2012+ D1, no 2026 labels, and fake remote transfers
+        run: |
+          python -m unittest research.data.test_public_data research.btc_h1_m1.test_daily -v
+      - name: Offline D1 installer smoke (no private account, no internet)
+        run: |
+          python -m research.data.public_data --resolution D1 --check-only --directory /tmp/trame-public-btc

@@ -1,0 +1,212 @@
+# NOUVELLE PRIORITÉ AUTORISÉE : S3 « GRAMMAIRES DE COURBES » (26/10/2026)
+
+Le propriétaire demande de continuer S2, mais aussi de
+**documenter pour prochainement** les différentes façons de
+convertir les courbes en tokens. La priorisation choisie :
+**S3.0 maintenant (concepts, codec / fixtures synthétiques)**,
+**S3.1 après le premier vrai benchmark S2 D1/H1/M1**,
+**AVANT** de relancer le scaling coûteux à 5 tailles et
+3 profondeurs ou les modèles de fondation.
+
+- Issue visible et exploitable dans le backlog :
+  https://github.com/goldaj/trame-chartist-research/issues/20
+- Document de recherche et protocole séquencé :
+  `research/token_grammar/ROADMAP_20261026.md`.
+- PoC S3.0 purement diagnostique :
+  `research/token_grammar/diagnostics.py`,
+  `research/token_grammar/test_diagnostics.py`.
+  Compare G0a token entier historique (`round(log_return*1000)`),
+  G0b continu bps, G1 magnitude signée à seuils fixes,
+  G2 magnitude signée à quantiles **fit exclusivement sur train**.
+  Les analyses de reconstruction de signe et magnitude
+  ne sont **pas** des scores prédictifs BTC.
+- Futur G3–G8 : ordre de grandeur signé, patches,
+  vrais OHLCV, événements, VQ, alignement causal multirésolution.
+  Ne pas créer de fausses bougies OHLCV pour le D1
+  indicatif 2010–2011 ; volumes nuls/gaps jamais remplis.
+- S2.6 **toujours non exécutée** sur cours réels et ancien
+  workflow privé refusé par sécurité. **Ne pas contourner**,
+  ne pas marquer S3 réel démarré par défaut.
+- Les métriques primaires restent justesse directionnelle
+  brute ET balanced, part de prédictions up/down, couverture,
+  MAE USD et bps, erreur de magnitude bps et Brier skill
+  sur la tête entraînée. Aucun frais (choix propriétaire),
+  aucun PnL cumulé inféré, 2026 jamais pour tuning.
+- Si S2 réel est bloqué durablement, avancer seulement
+  S3.0 de façon reproductible sur données **inventées** ;
+  pas de comparaison sur le marché tant qu'un contexte
+  privé autorisé n'est pas disponible.
+
+---
+
+# RAPPORT S1 VÉRIFIÉ APRÈS CRASH / PASSATION FINALE DE QUALIFICATION
+
+Lire aussi `research/scaling_study/S1_SIGN_COLLAPSE_REAUDIT_20261026.md`
+avant de déclarer la moindre amélioration directionnelle. L'analyse
+des 81 runs par horizon à 200 updates identifie respectivement
+**72/81 D1**, **45/81 H1**, **34/81 M1** réseaux monoclasse
+(≥99 % de hausses ou ≥99 % de baisses prédites).
+Sur H1, la config Transformer 148k/4 couches donne balanced
+accuracy 52,10 % (moyenne 3 graines) mais MAE 34,34 bps,
+contre persistance 33,84 bps ; pas un gain conjoint
+direction ET montant, ni preuve confirmatoire.
+
+Pour S2 :
+- protocole S2.1b/S2.1c et tête classification
+  vs rendement continu inchangés,
+- calibration `diagnostics.py` vs train-only prior Jeffreys,
+- témoin d'amplitude `mean_log_return_train_only`,
+- empreinte SHA de la sélection temporelle (aucun prix/label),
+- vrai SHA du code `model_source_commit`,
+- vue appariée `panel.py` et tests `test_panel.py`,
+- refus des prédictions extrêmes tronquées implicitement.
+
+**Blocage restant** : S2.6 (72 entraînements sur vrais
+cours) non exécuté, ancien refus de création de workflow privé
+par les contrôles de sécurité du connecteur. Pas de
+contournement. Le résultat scientifique S2 reste **inconnu**.
+
+---
+
+# NOUVELLE QUALIFICATION S2, REPRISE APRÈS CRASH (26/10/2026)
+
+- Tests CI / revue du rapport apparié : lire
+  `research/continuous_direction/test_diagnostics.py`
+  et `research/continuous_direction/test_panel.py`.
+- Les probabilités du bras `regression` ne sont pas formées et
+  sont déclarées *non disponibles*, pas interprétées.
+- Trois témoins directionnels : toujours-haussier,
+  toujours-baissier et a priori probabiliste haussier calculé
+  avec lissage Jeffreys sur train. Témoin d'amplitude :
+  **drift moyen train-only**, en plus de la persistance/Ridge.
+- `runner.py` sort `model_source_commit` séparé du commit
+  GitHub Actions de la CI privée, et les empreintes temporelles
+  `train_origins_sha256`, `development_origins_sha256`
+  ne contiennent pas de prix ni de label.
+- `panel.py` regroupe par résolution, modèle, largeur,
+  profondeur et graines ; affiche prix USD, amplitude bps,
+  justesse brute et balanced accuracy, biais des signes,
+  probabilité Brier vs a priori train-only et deltas
+  `joint - regression` à même seed.
+- `forecast_prices` **lève une erreur** si le résultat
+  représente un log-return extrême au lieu de tronquer
+  silencieusement la prévision.
+- **Statut S2.6 inchangé : pas de campagne BTC S2 réelle**.
+  Ne jamais affirmer « 72 entraînements terminés ».
+  La création automatisée du workflow privé a été bloquée.
+  Relecture des accès/politiques nécessaire, pas de
+  contournement du blocage. Le code doit rester dans
+  sa branche PR #19 draft ; aucun merge implicite.
+
+---
+
+# REPRISE APRÈS INTERRUPTION / AUDIT S2.1b (26/10/2026)
+
+Dernier message utilisateur, verbatim : « t'as crash, reprends ».
+Travail repris sur PR #19, branche
+`chatgpt/trame-continuous-direction-20261026`.
+Ne pas relancer aveuglément les 378 entraînements réels S1,
+leurs runs privés et rapports sont déjà documentés dans PR #18.
+
+Améliorations en cours de qualification CI :
+- `continuous_direction/diagnostics.py` : a priori signe
+  hausse train-only à lissage Jeffreys, Brier/CE/skill vs témoin,
+  calibration fixe, refus du score d'un logit non entraîné.
+- `continuous_direction/runner.py` : distincts
+  `model_source_commit` (véritable checkout TRAME) et
+  `github_workflow_commit` ; aucune prétention de sortie réelle
+  si SHA modèle indisponible.
+- `continuous_direction/models.py` : erreur explicite sur
+  amplitude extrême au lieu d'une prévision modifiée en silence.
+- `continuous_direction/panel.py` et tests : consolidation
+  appariée 2 objectifs `joint` vs `regression` à même
+  largeur/depth/seed, direction+amplitude, sans classements
+  entre D1/H1/M1 ni valorisation PnL.
+- `PROTOCOL_20261026.md` : addendum avant toute campagne
+  de résultats réels S2, préservant les 72 bras et splits.
+
+Le point bloquant S2.6 est INCHANGÉ : refus du connecteur
+lors de la création du workflow privé, pas d'exécution sur
+BTC S2, ne pas contourner. Seuls les tests synthétiques
+s'exécutent en CI publique. Prérequis scientifique pour
+un lancement autorisé : CI verte au dernier SHA, revue de
+l'accès privé, identité du checkout, train/dev 2022–2025,
+exclusion 2026, provenance et artefacts agrégés.
+
+---
+
+# Codex handoff : S2 direction continue, 26/10/2026
+
+## D'abord : statut des preuves
+- L'utilisateur a demandé D1 **avant toute suite**. C'est achevé
+  en PR #18 (dépendance de cette PR #19), avec D1/H1/M1 réels
+  depuis la release privée approuvée, aucun label 2026 ouvert.
+- S1 a désormais trois séries réelles vérifiables :
+  1. A7 D1 et H1/M1 direction harmonisée :
+     privé [#40280347574](https://github.com/goldaj/btc-historical-data/actions/runs/40280347574)
+     et [#40280464439](https://github.com/goldaj/btc-historical-data/actions/runs/40280464439).
+  2. 135 fits de faisabilité 5 tailles×3 profondeurs×3 familles×3 horizons :
+     privé [#40281223578](https://github.com/goldaj/btc-historical-data/actions/runs/40281223578),
+     6/6 jobs **réussis**.
+  3. 243 fits 3 tailles×3 profondeurs×3 familles×3 seeds×3 horizons,
+     200 updates :
+     privé [#40281657954](https://github.com/goldaj/btc-historical-data/actions/runs/40281657954),
+     3/3 jobs **réussis**. Lire
+     `research/scaling_study/S1_REAL_200UPDATES_20261026.md`.
+- Aucun avantage directionnel validé malgré ces 378 entraînements.
+  D1 reste très fortement biaisé « toujours hausse », et des modèles
+  200 updates montrent balanced accuracy à 50 %.
+  Le codec quantifié peut expliquer une part de la perte de sens
+  mais ce n'est PAS encore prouvé causalement.
+
+## S2 prêt côté code, non exécuté sur cours réels
+- PR #19 : `chatgpt/trame-continuous-direction-20261026`,
+  base **PR #18**, puis #17/#14. Pas de fusion automatique.
+- **S2.1** protocole de recherche gelé :
+  `research/continuous_direction/PROTOCOL_20261026.md`.
+- **S2.2** `Case.continuous_past_bps` est rempli en parallèle
+  des anciens codes (ces derniers restent inchangés).
+- **S2.3** 2 modes même modèle causal GPT-style :
+  Huber sur return continu vs Huber + 0.5 BCE direction ; signe du
+  forecast joint = tête classification, amplitude = abs retour
+  prédit. Contrôle de cohérence ex ante.
+- **S2.4** runner avec normalisation **strictement train-only**,
+  mêmes splits et cas, métriques direction, balanced, amplitude,
+  Brier et comparaison aux témoins toujours-up/down.
+- **S2.5** tests adversariaux et CI publique verts sur
+  [GitHub Actions #40283099756](https://github.com/goldaj/trame-chartist-research/actions/runs/40283099756)
+  (code au SHA `72ca8fdbcc3270c364429029fd68bceb92c99376`).
+- **S2.6 NON EFFECTUÉ** : tentative de créer le workflow réel privé
+  dans `goldaj/btc-historical-data` sur la branche vide
+  `chatgpt/trame-private-s2-continuous-20261026` **bloquée
+  par l'outil avec un message de sécurité**. Aucun workflow
+  effectif ni run S2 réel, ne pas inférer de scores ou dire
+  « en cours d'entraînement ». Ne pas contourner ce blocage
+  par une écriture déguisée du même workflow.
+
+## Mode de reprise explicitement documenté
+Sur un environnement disposant **déjà** d'un accès autorisé
+au dépôt de données privé et suivant les politiques applicables :
+~~~bash
+python -m unittest research.continuous_direction.test_continuous -v
+python -m research.btc_h1_m1.release_store --resolution D1 --download
+python -m research.btc_h1_m1.release_store --resolution H1 --download
+python -m research.btc_h1_m1.release_store --resolution M1 --download
+python -m research.continuous_direction.runner --interval D1 --steps 200 --output /tmp/s2_d1_real.json
+python -m research.continuous_direction.runner --interval H1 --steps 200 --output /tmp/s2_h1_real.json
+python -m research.continuous_direction.runner --interval M1 --steps 200 --output /tmp/s2_m1_real.json
+~~~
+Ne pas exposer ces sorties ou les données brutes si elles deviennent
+sensibles ; les seuls artefacts publics admissibles sont des métriques
+agrégées accompagnées de code hash, source et limites.
+Le workflow et les politiques d'accès privé doivent être revus avant
+création. L'utilisateur a demandé **aucun frais** dans les simulations,
+mais les calculs bruts par bougie ne valent pas un PnL composé.
+
+## Hypothèse scientifique et No-Go
+Risque fort : direction = classe majoritaire et amplitude = faible,
+même avec meilleur score MAE. Les variantes S2 ne sont pas
+équivalentes en distribution de sortie ni en FLOPs à la vieille
+NLL ; ne pas comparer les scores Huber/BCE à NLL ou déclarer
+« plus gros = mieux ». D1 2010–2011 est close indicatif seulement,
+jamais une fausse bougie OHLCV. 2026 reste hors entraînement/dev.

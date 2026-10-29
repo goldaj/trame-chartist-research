@@ -1,0 +1,129 @@
+name: TRAME S3.1B 432 REAL BTC learned embedding fits
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-learned-embeddings-20261026
+    paths:
+      - .github/workflows/trame-s3-learned-embeddings-432.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-embedding-144:
+    strategy:
+      fail-fast: false
+      matrix:
+        interval: [D1,H1,M1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    env:
+      INTERVAL: ${{ matrix.interval }}
+      TRAME_BTC_CACHE_DIR: /tmp/trame-btc-public
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned research CPU dependencies
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Install original public Bitstamp data and validate all SHA fingerprints
+        run: |
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR"
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR" --check-only
+      - name: Train 144 real three-arm learned-v-decoded BTC models
+        run: |
+          mkdir -p evidence
+          if [ "$INTERVAL" = D1 ]; then DATA_DIR=research/data/reference; else DATA_DIR="$TRAME_BTC_CACHE_DIR"; fi
+          python -m research.token_grammar.learned_embeddings \
+            --interval "$INTERVAL" --directory "$DATA_DIR" \
+            --grammars signed_uniform_g1 signed_quantile_g2 \
+            --arms decoded embedding_ordered embedding_random \
+            --modes regression joint \
+            --widths 16 32 --depths 1 2 \
+            --seeds 20261025 20261026 20261027 \
+            --steps 200 --data-origin BTC_PUBLIC_REAL \
+            --output "evidence/${INTERVAL}_S3_1B_144_real.json"
+      - name: Validate 144 fits, strict backbone pairing, cost disclosure and 2026 holdout
+        run: |
+          python - <<'PY'
+          import json,os,hashlib,math
+          from pathlib import Path
+          from research.token_grammar.learned_embeddings_panel import panel
+          iv=os.environ["INTERVAL"]
+          f=Path(f"evidence/{iv}_S3_1B_144_real.json")
+          d=json.loads(f.read_text(encoding="utf-8"))
+          assert d["interval"]==iv and d["data_origin"]=="BTC_PUBLIC_REAL"
+          assert not d["labels_2026_opened"] and not d["independent_test_used"]
+          assert d["quantile_fit_on"]=="TRAIN_PAST_CONTEXTS_ONLY"
+          assert d["same_backbone_initialisation"] is True
+          assert d["same_target_and_input_scale_train_only"] is True
+          assert d["common_batch_indices_per_seed"] is True
+          assert d["steps"]==200 and d["seeds"]==[20261025,20261026,20261027]
+          assert len(d["results"])==144 and d["dev_count"]==1024
+          p=panel([d])
+          assert p["n_fits"]==144 and p["n_three_arm_groups"]==48
+          assert len(p["summary"])==12 and len(p["paired_deltas"])==12
+          assert p["learned_vs_numeric_parameter_confounded"]
+          assert p["ordered_vs_random_parameter_matched"]
+          assert all(math.isfinite(x["mae_native_usd"]) for x in d["results"])
+          print("REAL BTC LEARNED TOKEN STUDY",iv,"144 fits",
+                "code SHA",d["model_source_commit"],
+                "artifact SHA256",hashlib.sha256(f.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1B-${{ matrix.interval }}-144-real-fits
+          path: evidence/*.json
+          if-no-files-found: error
+          retention-days: 30
+
+  final-432:
+    needs: real-embedding-144
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned read-only reporting environment
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: trame-s3-1B-*-144-real-fits
+          path: inputs
+          merge-multiple: true
+      - name: Aggregate honest 432-fit direction and magnitude panel
+        run: |
+          mkdir -p aggregate
+          python -m research.token_grammar.learned_embeddings_panel \
+            --inputs inputs/D1_S3_1B_144_real.json inputs/H1_S3_1B_144_real.json inputs/M1_S3_1B_144_real.json \
+            --output aggregate/S3_1B_432_panel.json \
+            --markdown aggregate/S3_1B_432_panel.md
+          python - <<'PY'
+          from pathlib import Path
+          import json,hashlib
+          p=Path("aggregate/S3_1B_432_panel.json")
+          r=json.loads(p.read_text())
+          assert r["n_fits"]==432 and r["n_three_arm_groups"]==144
+          assert len(r["summary"])==36 and len(r["paired_deltas"])==36
+          assert r["independent_test"] is False and r["labels_2026_opened"] is False
+          assert r["learned_vs_numeric_parameter_confounded"] is True
+          assert r["ordered_vs_random_parameter_matched"] is True
+          print(Path("aggregate/S3_1B_432_panel.md").read_text())
+          print("FINAL 432-fit aggregate SHA256:",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1B-432-final-panel
+          path: aggregate/*
+          if-no-files-found: error
+          retention-days: 30

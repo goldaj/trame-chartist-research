@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "status": "source-list-confirmed_only_no_bulk_archives_in_repo",
+  "observed_at_utc": "2026-10-25",
+  "repo": "alessiostomeo/btc-cycle-data",
+  "commit": "b57f460fab1afb82705eb813cee2ef4afb1f6848",
+  "base_url": "https://raw.githubusercontent.com/alessiostomeo/btc-cycle-data/b57f460fab1afb82705eb813cee2ef4afb1f6848/",
+  "btc_market": "Bitstamp BTC/USD",
+  "data_type": "gzip text OHLCV",
+  "max_research_date_exclusive": "2026-07-01",
+  "license_review_required": true,
+  "notes": [
+    "Git SHA-1 uses Git blob framing; verify bytes against the pinned Git blob ID before promoting to research freeze.",
+    "For 2026, exclude all row values whose date starts at/after 2026-07-01, including revised or quarantined observations.",
+    "Flat zero-volume minute bars may have been forward-filled in upstream datasets: not authentic fills.",
+    "No universal upper cap on research compute/storage; download sizes here are integrity expectations, not imposed budgets.",
+    "External data provenance and rights review are required prior to public redistribution or live decisions."
+  ],
+  "files": [
+    {
+      "id": "hourly",
+      "relative_path": "bitstamp/1h/BTCUSD_bitstamp_hourly_2012-2026.csv.gz",
+      "size_bytes": 2727050,
+      "git_blob_sha1": "1015adef65092f48d3cabcda61dd13a28ad1d0e7",
+      "interval_seconds": 3600
+    },
+    {
+      "id": "minute_2012",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2012.csv.gz",
+      "size_bytes": 1542568,
+      "git_blob_sha1": "39ade7cebcf9e1f0455e8598cc24111d70533cd7",
+      "interval_seconds": 60,
+      "year": 2012
+    },
+    {
+      "id": "minute_2013",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2013.csv.gz",
+      "size_bytes": 4534716,
+      "git_blob_sha1": "702a919a687efa81d022a5dc263598568f613262",
+      "interval_seconds": 60,
+      "year": 2013
+    },
+    {
+      "id": "minute_2014",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2014.csv.gz",
+      "size_bytes": 5876556,
+      "git_blob_sha1": "1543afbd3038f76fea6a4f56a39d3e74d7268943",
+      "interval_seconds": 60,
+      "year": 2014
+    },
+    {
+      "id": "minute_2015",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2015.csv.gz",
+      "size_bytes": 5604297,
+      "git_blob_sha1": "bac49cf7a111520c729f325e0cd2f57233032ecc",
+      "interval_seconds": 60,
+      "year": 2015
+    },
+    {
+      "id": "minute_2016",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2016.csv.gz",
+      "size_bytes": 5151558,
+      "git_blob_sha1": "834ec1fc110bc037009a506b4b717de5326cdb89",
+      "interval_seconds": 60,
+      "year": 2016
+    },
+    {
+      "id": "minute_2017",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2017.csv.gz",
+      "size_bytes": 8310425,
+      "git_blob_sha1": "260c4e35a6c14e9bcfd67e62d45ce4bc0d613d63",
+      "interval_seconds": 60,
+      "year": 2017
+    },
+    {
+      "id": "minute_2018",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2018.csv.gz",
+      "size_bytes": 9354174,
+      "git_blob_sha1": "3da97ba750c6cd171dc65e9824ef472473f220dc",
+      "interval_seconds": 60,
+      "year": 2018
+    },
+    {
+      "id": "minute_2019",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2019.csv.gz",
+      "size_bytes": 9312143,
+      "git_blob_sha1": "a123713cbefeeea857e440bdf94d572bcd3899af",
+      "interval_seconds": 60,
+      "year": 2019
+    },
+    {
+      "id": "minute_2020",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2020.csv.gz",
+      "size_bytes": 9941171,
+      "git_blob_sha1": "374fd4cbab7cf261a2a050c6f8206ef419ddd273",
+      "interval_seconds": 60,
+      "year": 2020
+    },
+    {
+      "id": "minute_2021",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2021.csv.gz",
+      "size_bytes": 11064625,
+      "git_blob_sha1": "45472e11d5f1f56caf9ffe43add89fe35ad8cf22",
+      "interval_seconds": 60,
+      "year": 2021
+    },
+    {
+      "id": "minute_2022",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2022.csv.gz",
+      "size_bytes": 8830442,
+      "git_blob_sha1": "f73db5b00b4649de6aabf54cd0398f7c67459309",
+      "interval_seconds": 60,
+      "year": 2022
+    },
+    {
+      "id": "minute_2023",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2023.csv.gz",
+      "size_bytes": 7200642,
+      "git_blob_sha1": "befd6ac4bd4d7724660b91aee83bcb74ae798ad0",
+      "interval_seconds": 60,
+      "year": 2023
+    },
+    {
+      "id": "minute_2024",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2024.csv.gz",
+      "size_bytes": 8301488,
+      "git_blob_sha1": "405511afd809af71dffc58317558ccc90508b690",
+      "interval_seconds": 60,
+      "year": 2024
+    },
+    {
+      "id": "minute_2025",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2025.csv.gz",
+      "size_bytes": 8532805,
+      "git_blob_sha1": "4dc5b1e3c5e10f1eebdd889c1e8ec075d0b04679",
+      "interval_seconds": 60,
+      "year": 2025
+    },
+    {
+      "id": "minute_2026",
+      "relative_path": "bitstamp/1min/BTCUSD_bitstamp_1min_2026.csv.gz",
+      "size_bytes": 6447679,
+      "git_blob_sha1": "38fc4ae8b961deb13f54f4bfdbd4571e1f89b6a6",
+      "interval_seconds": 60,
+      "year": 2026
+    }
+  ]
+}

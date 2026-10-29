@@ -1,0 +1,119 @@
+name: TRAME S3.1C REAL pre2022 convergence diagnosis
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-training-dynamics-20261026
+    paths:
+      - .github/workflows/trame-s3-convergence-real.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  early-only:
+    strategy:
+      fail-fast: false
+      matrix:
+        interval: [D1,H1,M1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    env:
+      INTERVAL: ${{ matrix.interval }}
+      TRAME_BTC_CACHE_DIR: /tmp/trame-btc-public
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU-only research dependencies
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Validate unchanged public source files, no GitHub secrets required
+        run: |
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR"
+          python -m research.data.public_data --resolution "$INTERVAL" --directory "$TRAME_BTC_CACHE_DIR" --check-only
+      - name: Measure 9 pre2022 trajectories per horizon at 200,800,2000 updates
+        run: |
+          mkdir -p evidence
+          if [ "$INTERVAL" = D1 ]; then DATA_DIR=research/data/reference; else DATA_DIR="$TRAME_BTC_CACHE_DIR"; fi
+          python -m research.token_grammar.convergence \
+            --interval "$INTERVAL" --directory "$DATA_DIR" \
+            --seeds 20261025 20261026 20261027 \
+            --output "evidence/${INTERVAL}_S3_1C_pre2022_convergence.json"
+      - name: Assert internal chronological disjointness and three checkpoints per trajectory
+        run: |
+          python - <<'PY'
+          import json,os,hashlib,math
+          from pathlib import Path
+          from research.token_grammar.convergence_panel import build_panel
+          iv=os.environ["INTERVAL"];p=Path(f"evidence/{iv}_S3_1C_pre2022_convergence.json")
+          d=json.loads(p.read_text())
+          assert d["data_origin"]=="BTC_PUBLIC_REAL" and d["interval"]==iv
+          assert d["training_labels_before"]=="2020-01-01"
+          assert d["internal_monitor_labels"]=="2020-2021"
+          assert d["external_development_2022_2025_accessed"] is False
+          assert d["labels_2026_opened"] is False
+          assert d["only_train_fits_vocabulary_normalizer_and_prior"]
+          assert d["checkpoint_steps"]==[200,800,2000]
+          assert d["seeds"]==[20261025,20261026,20261027]
+          assert d["sampling_information"]["train_reservoir_is_independent_of_monitor_counts"]
+          assert len(d["results"])==27 and d["train_count"]>=32 and d["monitor_count"]>=32
+          assert all(math.isfinite(r["mae_bps_anchor"]) for r in d["results"])
+          dpan=build_panel([d])
+          assert dpan["n_trajectories"]==9 and dpan["n_checkpoint_rows"]==27
+          print("AUTHENTIC EARLY-TRAIN 2020-21 MONITOR",iv,
+                "SHA256",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1C-${{ matrix.interval }}-early-internal
+          path: evidence/*.json
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate-internal:
+    needs: early-only
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU-only reporting dependencies
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: trame-s3-1C-*-early-internal
+          path: all
+          merge-multiple: true
+      - name: Aggregate 27 non-independent trajectories and 81 checkpoints
+        run: |
+          mkdir -p summary
+          python -m research.token_grammar.convergence_panel \
+            --inputs all/D1_S3_1C_pre2022_convergence.json all/H1_S3_1C_pre2022_convergence.json all/M1_S3_1C_pre2022_convergence.json \
+            --output summary/S3_1C_81_internal_checkpoints.json \
+            --markdown summary/S3_1C_81_internal_checkpoints.md
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path("summary/S3_1C_81_internal_checkpoints.json")
+          r=json.loads(p.read_text())
+          assert r["n_trajectories"]==27 and r["n_checkpoint_rows"]==81
+          assert len(r["summary"])==27 and len(r["paired_deltas"])==18
+          assert r["external_2022_2025_used"] is False and r["holdout_2026_used"] is False
+          print(Path("summary/S3_1C_81_internal_checkpoints.md").read_text())
+          print("INTERNAL OPTIMIZATION DIAGNOSIS SHA256",hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trame-s3-1C-final-early-monitor-analysis
+          path: summary/*
+          if-no-files-found: error
+          retention-days: 30

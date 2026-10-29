@@ -1,0 +1,33 @@
+name: TRAME official Mamba CPU safety gates (NOT GPU validation)
+on:
+  push:
+    branches:
+      - chatgpt/trame-mamba-ssm-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  cpu-only-guards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install base CPU pinned dependencies only
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Test Mamba CUDA refusals, without installing Mamba
+        run: python -m unittest research.mamba_candidates.test_official_adapter -v
+      - name: Never fake a successful real GPU smoke
+        shell: bash
+        run: |
+          if python -m research.mamba_candidates.gpu_smoke --model all > gpu_success.json 2> gpu_error.log; then
+            echo "Unexpected successful GPU smoke in CPU-only CI" >&2
+            exit 1
+          fi
+          test ! -s gpu_success.json
+          grep -q 'requires CUDA' gpu_error.log
+          echo "Correctly refused to run Mamba CUDA kernels on a CPU runner"

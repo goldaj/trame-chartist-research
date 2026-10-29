@@ -1,0 +1,29 @@
+name: TRAME S3.1D loss weights isolated causal fixture tests
+on:
+  push:
+    branches:
+      - chatgpt/trame-s3-objective-ablation-20261026
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  loss-fixtures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU-only scientific packages
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Check exact joint-reference loss and five-way objective identity
+        run: |
+          python -m unittest research.token_grammar.test_loss_ablation research.token_grammar.test_loss_ablation_panel -v
+      - name: Preserve original pre2022 stream and S3.1C baseline
+        run: |
+          python -m unittest research.token_grammar.test_convergence research.token_grammar.test_convergence_panel research.data.test_public_data -v

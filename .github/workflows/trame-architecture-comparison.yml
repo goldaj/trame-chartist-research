@@ -1,0 +1,40 @@
+name: TRAME multi-architecture synthetic exploratory comparison
+on:
+  push:
+    branches:
+      - chatgpt/trame-multi-architecture-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  architectures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned synthetic-only CPU dependencies
+        run: |
+          python -m pip install 'numpy==2.3.5' 'scipy==1.17.0'
+          python -m pip install 'torch==2.10.0' --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify three architectures, causal mask and pair protocol
+        run: python -m unittest discover -s research/architecture_comparison -p 'test_*.py' -v
+      - name: Compare synthetic development seeds only
+        run: python -m research.architecture_comparison.experiment --steps 20 --seeds 20261025 20261026 20261027 > synthetic_architectures.json
+      - name: Guard against fake evidence and reserved-test use
+        run: |
+          python -c "import json; d=json.load(open('synthetic_architectures.json')); assert d['data_origin']=='ARTIFICIAL_ONLY'; assert d['reserved_synthetic_test_opened'] is False; assert d['financial_holdout_opened'] is False; assert d['parameter_matched'] is False; assert d['compute_matched'] is False; assert len(d['results'])==9"
+      - name: Diagnostic CPU cost by architecture and width
+        run: python -m research.architecture_comparison.cost_audit --repeats 10 --widths 8 16 32 > synthetic_architecture_costs.json
+      - name: Guard cost diagnostic against real-data claims
+        run: |
+          python -c "import json; d=json.load(open('synthetic_architecture_costs.json')); assert d['data_origin']=='ARTIFICIAL_ONLY'; assert d['reserved_synthetic_test_opened'] is False; assert d['not_fair_flops_comparison'] is True; assert len(d['results'])==9"
+      - name: Archive exploratory numbers by commit
+        uses: actions/upload-artifact@v4
+        with:
+          name: trame-architecture-synthetic-comparison
+          path: |
+            synthetic_architectures.json
+            synthetic_architecture_costs.json
