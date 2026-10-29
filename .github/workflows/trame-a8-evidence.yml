@@ -1,0 +1,25 @@
+name: TRAME A8 offline evidence dashboard and portability
+on:
+  push:
+    branches:
+      - chatgpt/trame-research-lab-evidence-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  offline-evidence:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run both synthetic-specific and generic evidence reader suites
+        run: python -m unittest research.trame_lab.test_evidence_report research.trame_lab.test_evidence -v
+      - name: Confirm generic reporter imports only standard library
+        run: python -c "from pathlib import Path; t=Path('research/trame_lab/evidence.py').read_text(); assert 'import requests' not in t and 'import ccxt' not in t and 'import web3' not in t"

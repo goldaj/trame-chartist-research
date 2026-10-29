@@ -166,3 +166,19 @@ autour du Transformer largeur 16, et rapproche le total à moins de
 explicitement le nombre de paramètres et la largeur de chaque bras.
 **Le coût réel d'entraînement, le budget de recherche et les FLOPs
 restent différents ; aucun classement compute-fair n'est revendiqué.**
+
+## Reprise A8 : Evidence Lab (25 octobre 2026)
+
+L'outillage de la [PR #15](https://github.com/goldaj/trame-chartist-research/pull/15)
+ajoute **deux vues séparées** plutôt que d'inventer une comparaison
+universelle :
+- `evidence_report.py`, avec tableaux **synthétiques uniquement**
+  A3c/A5 : voir [rapport détaillé](EVIDENCE_REPORT_20261025.md) ;
+- `evidence.py`, avec mesures exploratoires et empreintes
+  des fichiers fournis (A3c coûts, A3c entraînement, A5 contrôle,
+  témoins BTC exploratoires uniquement) :
+  [contrat d'entrée/sortie et tests](A8_EVIDENCE_20261025.md).
+
+Le workflow `trame-a8-evidence.yml` exécute les deux suites
+sur Windows et Linux Python 3.12. Ce n'est pas un certificat
+d'accessibilité WCAG ni un test de qualité prédictive.
