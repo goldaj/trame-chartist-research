@@ -1,0 +1,19 @@
+name: TRAME A6 foundation license and temporal contract
+on:
+  push:
+    branches:
+      - chatgpt/trame-forecast-foundations-20261025
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  model-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify rights and causal forecast contracts offline
+        run: python -m unittest research.foundation_models.test_foundations -v
