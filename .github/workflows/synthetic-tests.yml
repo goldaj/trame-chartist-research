@@ -1,0 +1,25 @@
+name: TRAME synthetic verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  measurement-fixtures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install only the test dependency
+        run: python -m pip install 'numpy>=1.26,<3'
+      - name: Verify measurement code on synthetic fixtures
+        working-directory: research/trame_poc0
+        run: python -m unittest -v test_research
+      - name: Verify native-price scorecard on constructed fixtures
+        run: python -m unittest discover -s research/evaluation_sandbox -p 'test_*.py' -v
