@@ -1,3 +1,5 @@
+> **Point de reprise unique au 29/10/2026 :** [PR #30](https://github.com/goldaj/trame-chartist-research/pull/30) et [docs/CONSOLIDATION_CODEX_20261029.md](docs/CONSOLIDATION_CODEX_20261029.md). Les pistes GPT6 A4/A5/A6/A8/P1-P4, CI initiale et S3.1A-G sont consolidées dans cette branche ; vérifier les CI du dernier SHA. Les archives des anciennes instructions conflictuelles sont dans `docs/merge-archive/`. Aucun modèle financier validé ni trading réel.
+
 # ARRÊT VALIDÉ DU PROJET TRAME — 26/10/2026 : S3.1G TERMINÉE
 
 **Point de reprise prioritaire pour Codex :** S3.1F terminée (PR #29 ; [run #40326818917](https://github.com/goldaj/trame-chartist-research/actions/runs/40326818917) 4/4 success). **S3.1G terminée scientifiquement** (PR #30 DRAFT ; [run #40329836255](https://github.com/goldaj/trame-chartist-research/actions/runs/40329836255) 4/4 success ; 9 modèles, 108 cellules de scores sur mêmes poids). L'issue #20 et `docs/CODEX_S3_1G_HANDOFF_20261026.md` sont à consulter AVANT tout changement.
