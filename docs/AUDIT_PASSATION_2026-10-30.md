@@ -122,3 +122,9 @@ AGENTS (extrait) : > **Point de reprise unique au 29/10/2026 :** [PR #30](https:
 7. **Passation** : rejouer la CI, vérifier suites et dépendances à partir de README/AGENTS, archiver les preuves avec hashes, environnement et commandes. Aucun résultat de performance nouveau n'a été généré par cet audit.
 
 Aucune fusion, suppression de branche, déplacement de corpus ou ordre d'exécution pendant cette passe documentaire.
+
+
+## Vérification CI distante (30 octobre 2026)
+- [TRAME synthetic verification](https://github.com/goldaj/trame-chartist-research/actions/runs/41047633323) : **success** sur commit documentaire `4127d2ea197c`.
+
+Ce résultat décrit uniquement le workflow cité, pas un test utilisateur, un playtest complet ni une validation de la production. Le prochain agent doit lire les jobs, confirmer la couverture des scénarios demandés et relancer après ses modifications.
